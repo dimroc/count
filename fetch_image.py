@@ -27,4 +27,4 @@ _source = "https://cdn.shakeshack.com/camera.jpg?{}".format(_now)
 _destination = sys.argv[1] if len(sys.argv) > 1 else "tmp/shakeshack-{}.jpg".format(_now)
 
 with fetch_image(_source) as data:
-    upload(data, "shakeshack/{}".format(basename(_destination)))
+    if len(data) > 0: upload(data, "shakeshack/{}".format(basename(_destination)))
