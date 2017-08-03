@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    interval=60
+else
+    interval=$1
+fi
+
+echo Saving Shake Cam every $interval seconds
+while true; do ./fetch_image.py ; sleep $interval; done
