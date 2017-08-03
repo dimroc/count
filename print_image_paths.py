@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import boto3
+import datetime
+
 s3 = boto3.resource('s3')
 bucket_name = 'dev.counting-company.com'
 bucket = s3.Bucket(bucket_name)
@@ -11,5 +13,10 @@ def public_url(s3object):
             bucket_name,
             s3object.key)
 
+def useful_time(entry):
+    t = datetime.datetime.fromtimestamp(int(entry.key[22:-4]))
+    return t.hour > 9 and entry.size > 0
+
+
 for entry in bucket.objects.filter(Prefix='shakeshack'):
-    print(public_url(entry))
+    if useful_time(entry): print(public_url(entry))
