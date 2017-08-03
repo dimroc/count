@@ -20,7 +20,7 @@ def fetch_image(source):
 def upload(data, key):
     print("Uploading {}...".format(key))
     s3 = boto3.resource('s3')
-    s3.Bucket('dev.counting-company.com').put_object(Key=key, Body=data)
+    s3.Bucket('dev.counting-company.com').put_object(ACL='public-read', Key=key, Body=data)
 
 _now = int(time())
 _source = "https://cdn.shakeshack.com/camera.jpg?{}".format(_now)
