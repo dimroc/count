@@ -3,6 +3,7 @@ botocore==1.5.86
 certifi==2017.4.17
 chardet==3.0.4
 docutils==0.13.1
+flake8=3.4.1
 idna==2.5
 jmespath==0.9.3
 python-dateutil==2.6.1
