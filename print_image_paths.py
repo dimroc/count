@@ -21,8 +21,8 @@ def public_url(s3object):
 
 def useful_time(entry):
     t = datetime.datetime.fromtimestamp(int(entry.key[22:-4]), eastern)
-    # After August 4th and after 9 AM
-    return t.hour > 9 and entry.size > 0 \
+    # After August 4th and only images after 7 AM
+    return t.hour > 7 and entry.size > 0 \
         and time.mktime(t.timetuple()) >= last_turk
 
 
