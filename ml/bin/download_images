@@ -1,0 +1,8 @@
+#!/bin/bash
+
+function download_to_data {
+    wget $1 -O data/images/$(basename $1) -nv
+}
+export -f download_to_data
+mkdir -p data/images
+./bin/print_image_paths | parallel download_to_data {}
