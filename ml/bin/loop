@@ -7,4 +7,4 @@ else
 fi
 
 echo Saving Shake Cam every $interval seconds
-while true; do ./fetch_image.py ; sleep $interval; done
+while true; do ./bin/fetch_image ; sleep $interval; done

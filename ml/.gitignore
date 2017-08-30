@@ -97,3 +97,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+## Mine
+
+/data/images

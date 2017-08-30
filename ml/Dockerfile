@@ -12,5 +12,5 @@ RUN pip install -r requirements.txt
 
 # Adding the whole repository to the container
 COPY . ./
-ENTRYPOINT ["./loop"]
+ENTRYPOINT ["./bin/loop"]
 CMD ["300"]
