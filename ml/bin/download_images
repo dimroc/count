@@ -6,7 +6,7 @@ function download_to_data {
 }
 export -f download_to_data
 mkdir -p data/shakecam
-./bin/print_image_paths | parallel download_to_data {}
+./manage.py print_shakecam_paths | parallel download_to_data {}
 
 ## UCF CC 50 dataset
 mkdir -p tmp
