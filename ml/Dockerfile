@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM continuumio/miniconda3:4.3.11
 
 WORKDIR /app
 
@@ -8,9 +8,7 @@ COPY requirements.txt ./
 RUN apt-get update -y && \
     apt-get install -y build-essential libssl-dev openssl libffi-dev python-dev
 
-RUN pip install -r requirements.txt
-
-# Adding the whole repository to the container
 COPY . ./
+RUN conda install --yes --file requirements.txt -c menpo
 ENTRYPOINT ["./bin/loop"]
 CMD ["300"]
