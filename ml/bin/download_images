@@ -7,3 +7,14 @@ function download_to_data {
 export -f download_to_data
 mkdir -p data/shakecam
 ./bin/print_image_paths | parallel download_to_data {}
+
+## UCF CC 50 dataset
+mkdir -p tmp
+wget http://crcv.ucf.edu/data/UCFCrowdCountingDataset_CVPR13.rar -O tmp/UCFCrowdCountingDataset.rar
+
+mkdir -p data/ucf
+unrar e -y tmp/UCFCrowdCountingDataset.rar data/ucf -nv
+
+## Mall dataset
+wget http://personal.ie.cuhk.edu.hk/~ccloy/files/datasets/mall_dataset.zip -O tmp/.
+unzip tmp/mall_dataset.zip -d data
