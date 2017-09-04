@@ -100,4 +100,6 @@ ENV/
 
 ## Mine
 
-/data/images
+/data/shakecam
+/data/ucf
+/data/mall_dataset

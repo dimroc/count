@@ -1,8 +1,9 @@
 #!/bin/bash
 
+## Shakecam dataset
 function download_to_data {
-    wget $1 -O data/images/$(basename $1) -nv
+    wget $1 -O data/shakecam/$(basename $1) -nv
 }
 export -f download_to_data
-mkdir -p data/images
+mkdir -p data/shakecam
 ./bin/print_image_paths | parallel download_to_data {}
