@@ -1,21 +1,17 @@
 #!/bin/bash
 
 ## Shakecam dataset
-function download_to_data {
-    wget $1 -O data/shakecam/$(basename $1) -nv
-}
-export -f download_to_data
-mkdir -p data/shakecam
-./manage.py print_shakecam_paths | parallel download_to_data {}
+wget https://dimroc-public.s3.amazonaws.com/shakecam.zip -O tmp/shakecam.zip
+unzip tmp/shakecam.zip -d data
 
-## UCF CC 50 dataset
+# UCF CC 50 dataset
 mkdir -p tmp
 wget http://crcv.ucf.edu/data/UCFCrowdCountingDataset_CVPR13.rar -O tmp/UCFCrowdCountingDataset.rar
 
 mkdir -p data/ucf
 unrar e -y tmp/UCFCrowdCountingDataset.rar data/ucf -nv
 
-## Mall dataset
+# Mall dataset
 wget http://personal.ie.cuhk.edu.hk/~ccloy/files/datasets/mall_dataset.zip -O tmp/.
 unzip tmp/mall_dataset.zip -d data
 mv data/mall_dataset data/mall

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+function download_to_data {
+  dest=data/shakecam/$(basename $1)
+  wget $1 -O $dest -nv
+}
+
+function crop_image {
+  dest=data/shakecam/$(basename $1)
+  echo Cropping $dest
+  ffmpeg -y -loglevel panic -i $dest -vf crop=720:720:0:0 $dest
+}
+
+export -f download_to_data
+export -f crop_image
+mkdir -p data/shakecam
+./manage.py print_shakecam_paths | parallel -j4 download_to_data {}
+ls data/shakecam | parallel crop_image {}
