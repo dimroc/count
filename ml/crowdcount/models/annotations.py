@@ -4,8 +4,6 @@ import numpy as np
 
 
 def get(key):
-    if key.startswith("data/shakecam"):
-        return np.array([[100, 100]])  # Stub until shakecam is done.
     return _annotations[key]
 
 
@@ -30,7 +28,8 @@ def _turk_points_to_annotations(payload):
 
 def _load():
     dic = {}
-    for path in ['data/annotations/ucf.json', 'data/annotations/mall.json']:
+    paths = ["data/annotations/{}.json".format(v) for v in ['ucf', 'mall', 'shakecam']]
+    for path in paths:
         with open(path) as infile:
             dic.update(json.load(infile))
 
