@@ -18,3 +18,4 @@ unrar e -y tmp/UCFCrowdCountingDataset.rar data/ucf -nv
 ## Mall dataset
 wget http://personal.ie.cuhk.edu.hk/~ccloy/files/datasets/mall_dataset.zip -O tmp/.
 unzip tmp/mall_dataset.zip -d data
+mv data/mall_dataset data/mall

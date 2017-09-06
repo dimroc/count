@@ -1,3 +1,4 @@
+from crowdcount.models import annotations
 from inflection import camelize
 from random import randint, choice
 import glob
@@ -19,6 +20,8 @@ class BasePreviewer():
         print("Displaying {}".format(path))
         img = mpimg.imread(path)
         plt.imshow(img, cmap=cmap)
+        labels = annotations.get(path)
+        plt.plot(labels[:, 0], labels[:, 1], 'r+')
         plt.show()
 
 
@@ -33,7 +36,7 @@ class MallPreviewer(BasePreviewer):
     def show(self, index=None):
         if not index:
             index = randint(1, 2000)
-        self.display("data/mall_dataset/frames/seq_00{:04}.jpg".format(index))
+        self.display("data/mall/frames/seq_00{:04}.jpg".format(index))
 
 
 class ShakecamPreviewer(BasePreviewer):

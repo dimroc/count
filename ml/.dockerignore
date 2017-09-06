@@ -98,7 +98,7 @@ ENV/
 # mypy
 .mypy_cache/
 
-## Mine
+## Custom
 data/
 __pycache__
 tmp
