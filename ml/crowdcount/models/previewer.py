@@ -15,9 +15,10 @@ class BasePreviewer():
     def show(self, index=None):
         raise RuntimeError()
 
-    def display(self, path):
+    def display(self, path, cmap=None):
+        print("Displaying {}".format(path))
         img = mpimg.imread(path)
-        plt.imshow(img)
+        plt.imshow(img, cmap=cmap)
         plt.show()
 
 
@@ -25,7 +26,7 @@ class UcfPreviewer(BasePreviewer):
     def show(self, index=None):
         if not index:
             index = randint(1, 50)
-        self.display("data/ucf/{}.jpg".format(index))
+        self.display("data/ucf/{}.jpg".format(index), "gray")
 
 
 class MallPreviewer(BasePreviewer):
