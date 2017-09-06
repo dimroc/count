@@ -17,7 +17,7 @@ class Command(BaseCommand):
         bucket_name = 'dimroc-public'
         bucket = s3.Bucket(bucket_name)
 
-        for entry in bucket.objects.filter(Prefix='shakecam'):
+        for entry in bucket.objects.filter(Prefix='shakecam/shakeshack'):
             self.stdout.write(_s3_url(bucket_name, entry))
 
     def private(self):
