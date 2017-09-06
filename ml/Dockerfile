@@ -9,6 +9,6 @@ RUN apt-get update -y && \
     apt-get install -y build-essential libssl-dev openssl libffi-dev python-dev
 
 COPY . ./
-RUN conda install --yes --file requirements.txt -c menpo
+RUN conda install --yes --file requirements.txt -c menpo -c conda-forge
 ENTRYPOINT ["./bin/loop"]
 CMD ["300"]
