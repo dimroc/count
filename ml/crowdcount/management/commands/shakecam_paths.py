@@ -6,16 +6,27 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
+    def add_arguments(self, parser):
+        parser.add_argument('--origin', type=str, default='public')
+
     def handle(self, *args, **kwargs):
+        getattr(self, kwargs['origin'])()
+
+    def public(self):
+        s3 = boto3.resource('s3')
+        bucket_name = 'dimroc-public'
+        bucket = s3.Bucket(bucket_name)
+
+        for entry in bucket.objects.filter(Prefix='shakecam'):
+            self.stdout.write(_s3_url(bucket_name, entry))
+
+    def private(self):
         s3 = boto3.resource('s3')
         bucket_name = 'dev.counting-company.com'
         bucket = s3.Bucket(bucket_name)
         eastern = pytz.timezone('US/Eastern')
         last_turk = 1501891200
         current_cutoff = 1504710712
-
-        def s3_dest(s3object):
-            return "https://s3.amazonaws.com/{0}/{1}".format(bucket_name, s3object.key)
 
         def useful_time(entry):
             t = datetime.datetime.fromtimestamp(int(entry.key[22:-4]), eastern)
@@ -26,4 +37,8 @@ class Command(BaseCommand):
 
         for entry in bucket.objects.filter(Prefix='shakeshack'):
             if useful_time(entry):
-                self.stdout.write(s3_dest(entry))
+                self.stdout.write(_s3_url(bucket_name, entry))
+
+
+def _s3_url(bucket_name, s3object):
+    return "https://s3.amazonaws.com/{0}/{1}".format(bucket_name, s3object.key)

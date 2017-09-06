@@ -14,5 +14,5 @@ function crop_image {
 export -f download_to_data
 export -f crop_image
 mkdir -p data/shakecam
-./manage.py print_shakecam_paths | parallel -j4 download_to_data {}
+./manage.py shakecam_paths | parallel -j4 download_to_data {}
 ls data/shakecam | parallel crop_image {}
