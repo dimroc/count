@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from crowdcount.models import density_heatmap
 from crowdcount.models.annotations import annotations
 from inflection import camelize
 from random import randint, choice
@@ -35,10 +36,17 @@ class BasePreviewer():
     @contextmanager
     def _create_plot(self, path):
         img = mpimg.imread(path)
-        plt.imshow(img, cmap=self.get_cmap())
-        labels = annotations.get(path)
-        if labels.any():
-            plt.plot(labels[:, 0], labels[:, 1], 'r+')
+        fig = plt.figure()
+
+        ax1 = fig.add_subplot(121)
+        ax1.imshow(img, cmap=self.get_cmap())
+        anns = annotations.get(path)
+        if anns.any():
+            ax1.plot(anns[:, 0], anns[:, 1], 'r+')
+
+        ax2 = fig.add_subplot(122)
+        ax2.imshow(density_heatmap.generate(path, anns))
+
         yield plt
         plt.close()
 
