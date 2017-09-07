@@ -37,15 +37,20 @@ class BasePreviewer():
     def _create_plot(self, path):
         img = mpimg.imread(path)
         fig = plt.figure()
+        fig.suptitle('Ground Truth')
 
         ax1 = fig.add_subplot(121)
         ax1.imshow(img, cmap=self.get_cmap())
         anns = annotations.get(path)
         if anns.any():
             ax1.plot(anns[:, 0], anns[:, 1], 'r+')
+            ax1.set_title("Annotations: {}".format(len(anns)))
 
         ax2 = fig.add_subplot(122)
-        ax2.imshow(density_map.generate(path, anns))
+        # Use diverging cmap: http://matplotlib.org/examples/color/colormaps_reference.html
+        dm = density_map.generate(path, anns)
+        ax2.imshow(dm, cmap='seismic')
+        ax2.set_title("Density Map: {}".format(dm.sum()))
 
         yield plt
         plt.close()
