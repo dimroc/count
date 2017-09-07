@@ -29,13 +29,13 @@ class Annotations():
             with open(path) as infile:
                 dic.update(json.load(infile))
 
-        return {k: np.array(v, ndmin=2) for k, v in dic.items()}
+        return {k: np.asarray(v) for k, v in dic.items()}
 
 
 groundtruth = Annotations().reload()
 
 
-def from_turk(self, path):
+def from_turk(path):
     dic = {}
     with open(path) as infile:
         reader = csv.DictReader(infile)

@@ -1,3 +1,4 @@
+from PIL import Image
 from contextlib import contextmanager
 from crowdcount.models import density_map
 from crowdcount.models.annotations import groundtruth
@@ -25,10 +26,13 @@ class BasePreviewer():
     def save(self, index):
         os.makedirs("tmp/previews/", exist_ok=True)
         path = self.get_path(index)
-        dest = "tmp/previews/{}.png".format(index)
+        dest = "tmp/previews/{}.jpg".format(index)
         print("Saving to {}".format(dest))
         with self._create_plot(path) as plt:
-            plt.savefig(dest)
+            png = "{}.png".format(dest[0:-4])
+            plt.savefig(png)  # matlabplot only supports png, so convert.
+            Image.open(png).save(dest, 'JPEG', quality=100)
+            os.remove(png)
 
     def get_cmap(self):
         return None
