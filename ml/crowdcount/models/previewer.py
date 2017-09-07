@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-from crowdcount.models import density_heatmap
+from crowdcount.models import density_map
 from crowdcount.models.annotations import annotations
 from inflection import camelize
 from random import randint, choice
@@ -45,7 +45,7 @@ class BasePreviewer():
             ax1.plot(anns[:, 0], anns[:, 1], 'r+')
 
         ax2 = fig.add_subplot(122)
-        ax2.imshow(density_heatmap.generate(path, anns))
+        ax2.imshow(density_map.generate(path, anns))
 
         yield plt
         plt.close()
