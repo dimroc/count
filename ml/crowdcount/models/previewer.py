@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from crowdcount.models import density_map
 from crowdcount.models.annotations import annotations
 from inflection import camelize
 from random import randint, choice
@@ -35,10 +36,22 @@ class BasePreviewer():
     @contextmanager
     def _create_plot(self, path):
         img = mpimg.imread(path)
-        plt.imshow(img, cmap=self.get_cmap())
-        labels = annotations.get(path)
-        if labels.any():
-            plt.plot(labels[:, 0], labels[:, 1], 'r+')
+        fig = plt.figure()
+        fig.suptitle('Ground Truth')
+
+        ax1 = fig.add_subplot(121)
+        ax1.imshow(img, cmap=self.get_cmap())
+        anns = annotations.get(path)
+        if anns.any():
+            ax1.plot(anns[:, 0], anns[:, 1], 'r+')
+            ax1.set_title("Annotations: {}".format(len(anns)))
+
+        ax2 = fig.add_subplot(122)
+        # Use diverging cmap: http://matplotlib.org/examples/color/colormaps_reference.html
+        dm = density_map.generate(path, anns)
+        ax2.imshow(dm, cmap='seismic')
+        ax2.set_title("Density Map: {}".format(dm.sum()))
+
         yield plt
         plt.close()
 

@@ -13,6 +13,7 @@ class Annotations():
 
     def reload(self):
         self.table = self._load()
+        return self
 
     def from_turk(self, path):
         dic = {}
@@ -40,4 +41,4 @@ class Annotations():
         return {k: np.array(v, ndmin=2) for k, v in dic.items()}
 
 
-annotations = Annotations()
+annotations = Annotations().reload()
