@@ -1,5 +1,5 @@
 from crowdcount.models import previewer
-from crowdcount.models.annotations import annotations
+from crowdcount.models.annotations import groundtruth, from_turk
 from django.core.management.base import BaseCommand
 import json
 
@@ -11,13 +11,13 @@ class Command(BaseCommand):
         parser.add_argument('--save', action='store_true', default=False)
 
     def handle(self, *args, **kwargs):
-        shackannotations = annotations.from_turk(kwargs['input'])
+        annotations = from_turk(kwargs['input'])
         with open(kwargs['output'], 'w') as outfile:
-            json.dump(shackannotations, outfile, indent=2, sort_keys=True)
+            json.dump(annotations, outfile, indent=2, sort_keys=True)
 
         if kwargs['save']:
-            annotations.reload()
-            self._write_images_to_tmp(shackannotations)
+            groundtruth.reload()
+            self._write_images_to_tmp(annotations)
 
     def _write_images_to_tmp(self, anns):
         p = previewer.get('shakecam')

@@ -1,6 +1,6 @@
 from contextlib import contextmanager
 from crowdcount.models import density_map
-from crowdcount.models.annotations import annotations
+from crowdcount.models.annotations import groundtruth
 from inflection import camelize
 from random import randint, choice
 import glob
@@ -41,7 +41,7 @@ class BasePreviewer():
 
         ax1 = fig.add_subplot(121)
         ax1.imshow(img, cmap=self.get_cmap())
-        anns = annotations.get(path)
+        anns = groundtruth.get(path)
         if anns.any():
             ax1.plot(anns[:, 0], anns[:, 1], 'r+')
             ax1.set_title("Annotations: {}".format(len(anns)))
