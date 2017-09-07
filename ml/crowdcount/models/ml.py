@@ -1,3 +1,4 @@
+import crowdcount.models.annotations as annotations
 from keras.layers import Dense, Activation
 from keras.models import Sequential
 import numpy as np
@@ -17,4 +18,6 @@ def train():
 
 
 def test():
+    train, test = annotations.train_test_split()
+    print(len(train), len(test))
     print('todo: test')
