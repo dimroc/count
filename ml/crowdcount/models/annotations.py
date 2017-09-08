@@ -5,7 +5,7 @@ import numpy as np
 import sklearn.model_selection as sk
 
 
-__all__ = ["groundtruth", "Annotations", "from_turk", "train_test_split"]
+__all__ = ["groundtruth", "Annotations", "from_turk"]
 
 
 @attr.s
@@ -22,9 +22,27 @@ class Annotations():
         self.table = self._load()
         return self
 
+    def train_test_split(self):
+        """
+        Take x% from each data source to have consistent distribution
+        across training and test.
+        """
+
+        train, test = [], []
+        for ds in self._datasets():
+            paths = [p for p in self.paths() if p.startswith("data/{}".format(ds))]  # e.g. data/ucf
+            traintmp, testtmp = sk.train_test_split(sorted(paths), test_size=0.1, random_state=0)
+            train.extend(traintmp)
+            test.extend(testtmp)
+
+        return train, test
+
+    def _datasets(self):
+        yield from ['ucf', 'mall', 'shakecam']
+
     def _load(self):
         dic = {}
-        paths = ["data/annotations/{}.json".format(v) for v in ['ucf', 'mall', 'shakecam']]
+        paths = ["data/annotations/{}.json".format(v) for v in self._datasets()]
         for path in paths:
             with open(path) as infile:
                 dic.update(json.load(infile))
@@ -52,22 +70,3 @@ def _turk_url_to_key(s3url):
 
 def _turk_points_to_annotations(payload):
     return [[v['left'], v['top']] for v in json.loads(payload)]
-
-
-def train_test_split():
-    """
-    Take x% from each data source to have consistent distribution
-    across training and test.
-    """
-
-    ucf = [p for p in groundtruth.paths() if p.startswith("data/ucf")]
-    mall = [p for p in groundtruth.paths() if p.startswith("data/mall")]
-    shakecam = [p for p in groundtruth.paths() if p.startswith("data/shakecam")]
-
-    train, test = [], []
-    for bucket in [ucf, mall, shakecam]:
-        traintmp, testtmp = sk.train_test_split(sorted(bucket), test_size=0.1, random_state=0)
-        train.extend(traintmp)
-        test.extend(testtmp)
-
-    return train, test
