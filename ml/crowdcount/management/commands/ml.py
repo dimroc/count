@@ -1,4 +1,4 @@
-from crowdcount.models import ml
+from crowdcount.ml import density
 from django.core.management.base import BaseCommand
 
 
@@ -9,7 +9,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         if kwargs['train']:
-            ml.train()
+            density.train()
 
         if kwargs['test']:
-            ml.test()
+            density.test()
