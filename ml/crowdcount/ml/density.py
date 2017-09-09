@@ -1,4 +1,4 @@
-from keras.callbacks import CSVLogger
+from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Conv2D, MaxPooling2D
 from keras.models import Sequential
 import crowdcount.ml.generator as generator
@@ -9,7 +9,6 @@ import keras.optimizers
 def train():
     model = _create_model()
     print(model.summary())
-    csv_logger = CSVLogger('tmp/keras_history.csv', append=True)
     model.compile(loss='mean_squared_error',
                   optimizer=keras.optimizers.adam(lr=0.00001, decay=0.00005),
                   metrics=['mae', 'accuracy'])
@@ -20,7 +19,7 @@ def train():
             verbose=1,
             validation_data=generator.validation(),
             validation_steps=generator.validation_steps(),
-            callbacks=[csv_logger])
+            callbacks=_create_callbacks())
 
     score = model.evaluate_generator(generator.validation(), verbose=0)
     print('Test loss:', score[0])
@@ -48,3 +47,9 @@ def _create_model():
     model.add(Conv2D(16, (7, 7), activation='relu', padding='same'))
     model.add(Conv2D(1, (1, 1), padding='same'))
     return model
+
+
+def _create_callbacks():
+    return [CSVLogger('tmp/keras_history.csv', append=True),
+            ModelCheckpoint("tmp/weights.{epoch:02d}-{val_loss:.2f}.hdf5"),
+            TensorBoard(log_dir='tmp/tensorboard')]
