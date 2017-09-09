@@ -38,14 +38,14 @@ def _create_model():
     https://arxiv.org/pdf/1612.00220.pdf
     """
     model = Sequential()
-    model.add(Conv2D(36, kernel_size=(9, 9), activation='relu', input_shape=(None, None, 3)))
+    model.add(Conv2D(36, kernel_size=(9, 9), activation='relu', input_shape=(None, None, 3), padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
-    model.add(Conv2D(72, (7, 7), activation='relu'))
+    model.add(Conv2D(72, (7, 7), activation='relu', padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
-    model.add(Conv2D(36, (7, 7), activation='relu'))
-    model.add(Conv2D(24, (7, 7), activation='relu'))
-    model.add(Conv2D(16, (7, 7), activation='relu'))
-    model.add(Conv2D(1, (1, 1), strides=(1, 1)))
+    model.add(Conv2D(36, (7, 7), activation='relu', padding='same'))
+    model.add(Conv2D(24, (7, 7), activation='relu', padding='same'))
+    model.add(Conv2D(16, (7, 7), activation='relu', padding='same'))
+    model.add(Conv2D(1, (1, 1), padding='same'))
     return model
 
 

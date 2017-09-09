@@ -4,7 +4,7 @@ import numpy as np
 
 
 _gaussian_kernel = 35
-_scale_for_fcn = 1 / 4.5859872611  # Hardcoded to match final dimensions of FCN
+_scale_for_fcn = 1 / 4  # Hardcoded to match final dimensions of FCN
 
 
 def generate(image_path, annotations):

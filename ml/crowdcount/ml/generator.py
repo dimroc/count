@@ -16,7 +16,6 @@ def _load_features_labels(path):
     batch_x = np.zeros((1,) + x.shape, dtype=K.floatx())
     batch_y = np.zeros((1,) + y.shape, dtype=K.floatx())
     batch_x[0], batch_y[0] = x, y
-    print("Loading {} with shape {} and label shape {}".format(path, batch_x.shape, batch_y.shape))
     return batch_x, batch_y
 
 
