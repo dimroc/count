@@ -1,9 +1,9 @@
-import cv2
 from PIL import Image
+import cv2
 import numpy as np
 
 
-_gaussian_kernel = 35
+_gaussian_kernel = 15
 _scale_for_fcn = 1 / 4  # Hardcoded to match final dimensions of FCN
 
 

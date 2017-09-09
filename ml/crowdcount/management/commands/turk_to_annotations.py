@@ -1,7 +1,7 @@
-from crowdcount.models import previewer
-from crowdcount.models.annotations import groundtruth, from_turk
+from crowdcount.models import previewer, annotations as ants
 from django.core.management.base import BaseCommand
 import json
+import os
 
 
 class Command(BaseCommand):
@@ -11,15 +11,19 @@ class Command(BaseCommand):
         parser.add_argument('--save', action='store_true', default=False)
 
     def handle(self, *args, **kwargs):
-        annotations = from_turk(kwargs['input'])
+        annotations = ants.from_turk(kwargs['input'])
         with open(kwargs['output'], 'w') as outfile:
             json.dump(annotations, outfile, indent=2, sort_keys=True)
 
         if kwargs['save']:
-            groundtruth.reload()
+            ants.groundtruth.reload()
             self._write_images_to_tmp(annotations)
 
     def _write_images_to_tmp(self, anns):
-        p = previewer.get('shakecam')
-        for k in anns.keys():
-            p.save(p.index_from_path(k))
+        os.makedirs("tmp/previews/", exist_ok=True)
+        for path in anns.keys():
+            previewer.save(path, "tmp/previews/{}.jpg".format(_index_from_path(path)))
+
+
+def _index_from_path(path):
+    return path[-14:-4]

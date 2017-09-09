@@ -3,6 +3,7 @@ import csv
 import json
 import numpy as np
 import sklearn.model_selection as sk
+from crowdcount.models.paths import datasets
 
 
 __all__ = ["groundtruth", "Annotations", "from_turk"]
@@ -13,23 +14,27 @@ class Annotations():
     table = attr.ib(default=attr.Factory(dict))
 
     def get(self, path):
-        return self.table[path]
+        return self.table[path][:]
 
     def paths(self):
         return self.table.keys()
 
     def reload(self):
+        """
+        Reload annotations stored in data/annotations
+        """
         self.table = self._load()
         return self
 
     def train_test_split(self):
         """
         Take x% from each data source to have consistent distribution
-        across training and test.
+        across training and test. Retrieves from self.paths() to ensure
+        we have annotations for said file.
         """
 
         train, test = [], []
-        for ds in self._datasets():
+        for ds in datasets():
             paths = [p for p in self.paths() if p.startswith("data/{}".format(ds))]  # e.g. data/ucf
             traintmp, testtmp = sk.train_test_split(sorted(paths), test_size=0.1, random_state=0)
             train.extend(traintmp)
@@ -37,12 +42,9 @@ class Annotations():
 
         return train, test
 
-    def _datasets(self):
-        yield from ['ucf', 'mall', 'shakecam']
-
     def _load(self):
         dic = {}
-        paths = ["data/annotations/{}.json".format(v) for v in self._datasets()]
+        paths = ["data/annotations/{}.json".format(v) for v in datasets()]
         for path in paths:
             with open(path) as infile:
                 dic.update(json.load(infile))

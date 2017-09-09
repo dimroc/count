@@ -1,3 +1,4 @@
+from crowdcount.ml.callbacks import PredictionCheckpoint
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Conv2D, MaxPooling2D
 from keras.models import Sequential
@@ -52,4 +53,5 @@ def _create_model():
 def _create_callbacks():
     return [CSVLogger('tmp/keras_history.csv', append=True),
             ModelCheckpoint("tmp/weights.{epoch:02d}-{val_loss:.2f}.hdf5"),
-            TensorBoard(log_dir='tmp/tensorboard')]
+            TensorBoard(log_dir='tmp/tensorboard'),
+            PredictionCheckpoint("data/shakecam/shakeshack-1500836313.jpg")]

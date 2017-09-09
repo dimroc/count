@@ -2,90 +2,85 @@ from PIL import Image
 from contextlib import contextmanager
 from crowdcount.models import density_map
 from crowdcount.models.annotations import groundtruth
-from inflection import camelize
-from random import randint, choice
-import glob
-import matplotlib.image as mpimg
+import attr
+import keras.preprocessing.image as kimg
 import matplotlib.pyplot as plt
 import os
-import re
 
 
-def get(dataset):
-    class_name = "{}Previewer".format(camelize(dataset))
-    return globals()[class_name]()
+def show(path, prediction=None):
+    Previewer(path, prediction).show()
 
 
-class BasePreviewer():
-    def show(self, index=None):
-        path = self.get_path(index)
-        print("Displaying {}".format(path))
-        with self._create_plot(path) as plt:
+def save(path, dest, prediction=None):
+    Previewer(path, prediction).save(dest)
+
+
+@attr.s
+class Previewer:
+    path = attr.ib()
+    prediction = attr.ib(default=None)
+    CMAP = 'seismic'
+
+    def __attrs_post_init__(self):
+        try:
+            self.annotations = groundtruth.get(self.path)
+        except KeyError:
+            self.annotations = None
+
+    def show(self):
+        print("Displaying {}".format(self.path))
+        with self._create_plot() as plt:
             plt.show()
 
-    def save(self, index):
-        os.makedirs("tmp/previews/", exist_ok=True)
-        path = self.get_path(index)
-        dest = "tmp/previews/{}.jpg".format(index)
+    def save(self, dest):
         print("Saving to {}".format(dest))
-        with self._create_plot(path) as plt:
+        with self._create_plot() as plt:
             png = "{}.png".format(dest[0:-4])
             plt.savefig(png)  # matlabplot only supports png, so convert.
             Image.open(png).save(dest, 'JPEG', quality=100)
             os.remove(png)
 
-    def get_cmap(self):
-        return None
-
     @contextmanager
-    def _create_plot(self, path):
-        img = mpimg.imread(path)
-        fig = plt.figure()
-        fig.suptitle('Ground Truth')
+    def _create_plot(self):
+        fig = plt.figure(figsize=(8, 6), dpi=100)
+        fig.suptitle('Crowd Count')
 
-        ax1 = fig.add_subplot(121)
-        ax1.imshow(img, cmap=self.get_cmap())
-        anns = groundtruth.get(path)
-        if anns.any():
-            ax1.plot(anns[:, 0], anns[:, 1], 'r+')
-            ax1.set_title("Annotations: {}".format(len(anns)))
-
-        ax2 = fig.add_subplot(122)
-        # Use diverging cmap: http://matplotlib.org/examples/color/colormaps_reference.html
-        dm = density_map.generate(path, anns)
-        ax2.imshow(dm, cmap='seismic')
-        ax2.set_title("Density Map: {}".format(dm.sum()))
+        self._render_img(fig)
+        self._render_groundtruth(fig)
+        self._render_prediction(fig)
 
         yield plt
         plt.close()
 
+    def _render_img(self, fig):
+        img = kimg.load_img(self.path)
+        ax = fig.add_subplot(self._plot_position(1))
+        ax.imshow(img)
 
-class UcfPreviewer(BasePreviewer):
-    def get_cmap(self):
-        return "gray"
+        if self.annotations is not None and self.annotations.any():
+            ax.plot(self.annotations[:, 0], self.annotations[:, 1], 'r+')
+            ax.set_title("Annotations: {}".format(len(self.annotations)))
 
-    def get_path(self, index=None):
-        if not index:
-            index = randint(1, 50)
-        return "data/ucf/{}.jpg".format(index)
+    def _render_groundtruth(self, fig):
+        if self.annotations is None:
+            return
 
+        ax = fig.add_subplot(self._plot_position(2))
+        dm = density_map.generate(self.path, self.annotations)
+        ax.imshow(dm, cmap=self.CMAP)
+        ax.set_title("Ground Truth: {0:.2f}".format(dm.sum()))
 
-class MallPreviewer(BasePreviewer):
-    def get_path(self, index=None):
-        if not index:
-            index = randint(1, 2000)
-        return "data/mall/frames/seq_00{:04}.jpg".format(index)
+    def _render_prediction(self, fig):
+        if not self.prediction:
+            return
 
+        ax = fig.add_subplot(self._plot_position(2))
+        ax.imshow(self.prediction, cmap=self.CMAP)
+        ax.set_title("Prediction: {0:.2f}".format(self.prediction.sum()))
 
-class ShakecamPreviewer(BasePreviewer):
-    def get_path(self, index=None):
-        if not index:
-            index = self.randindex()
-        return "data/shakecam/shakeshack-{}.jpg".format(index)
+    def _plot_position(self, pos):
+        return "1{}{}".format(self._cols(), pos)
 
-    def randindex(self):
-        path = choice(glob.glob('data/shakecam/shakeshack-*.jpg'))
-        return int(re.match(r".*shakeshack-(\d+)\.", path).group(1))
-
-    def index_from_path(self, path):
-        return path[-14:-4]
+    def _cols(self):
+        return len([v for v in [self.path, self.annotations, self.prediction] if v is not None])
