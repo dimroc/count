@@ -12,7 +12,7 @@ _training_paths, _test_paths = groundtruth.train_test_split()
 def _load_features_labels(path):
     # TODO: Clean up into a class and allow batch sizes.
     x = kimg.img_to_array(kimg.load_img(path))
-    y = density_map.generate_fcn(path, groundtruth.get(path))
+    y = density_map.generate_3d(path, groundtruth.get(path))
     batch_x = np.zeros((1,) + x.shape, dtype=K.floatx())
     batch_y = np.zeros((1,) + y.shape, dtype=K.floatx())
     batch_x[0], batch_y[0] = x, y
