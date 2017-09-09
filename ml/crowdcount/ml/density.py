@@ -1,29 +1,30 @@
+from keras.callbacks import CSVLogger
 from keras.layers import Conv2D, MaxPooling2D
 from keras.models import Sequential
 import crowdcount.ml.generator as generator
 import crowdcount.models.annotations as groundtruth
 import keras.optimizers
-import matplotlib.pyplot as plt
 
 
 def train():
     model = _create_model()
     print(model.summary())
+    csv_logger = CSVLogger('tmp/keras_history.csv', append=True)
     model.compile(loss='mean_squared_error',
                   optimizer=keras.optimizers.adam(lr=0.00001, decay=0.00005),
                   metrics=['mae', 'accuracy'])
 
-    history = model.fit_generator(generator.training(),
+    model.fit_generator(generator.training(),
             generator.steps_per_epoch(),
             epochs=100,
             verbose=1,
             validation_data=generator.validation(),
-            validation_steps=generator.validation_steps())
+            validation_steps=generator.validation_steps(),
+            callbacks=[csv_logger])
 
     score = model.evaluate_generator(generator.validation(), verbose=0)
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
-    _plot_history(history)
 
 
 def test():
@@ -47,10 +48,3 @@ def _create_model():
     model.add(Conv2D(16, (7, 7), activation='relu', padding='same'))
     model.add(Conv2D(1, (1, 1), padding='same'))
     return model
-
-
-def _plot_history(history):
-    plt.plot(range(1, 11), history.history['val_acc'])
-    plt.xlabel('Epochs')
-    plt.ylabel('Accuracy')
-    plt.show()
