@@ -1,2 +1,2 @@
 floyd run --gpu --env keras --data dimroc/datasets/crowdcount/1:data \
-        "FLOYD=true ./manage.py ml --train"
+        "FLOYD=true python manage.py ml --train"
