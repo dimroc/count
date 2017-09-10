@@ -3,6 +3,7 @@ from django.core.management.base import BaseCommand
 from os.path import basename
 from time import time
 import boto3
+import crowdcount.models.paths as ccp
 import requests
 
 
@@ -10,7 +11,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         now = int(time())
         source = "https://cdn.shakeshack.com/camera.jpg?{}".format(now)
-        destination = "tmp/shakeshack-{}.jpg".format(now)
+        destination = ccp.output("shakeshack-{}.jpg".format(now))
 
         with _fetch_image(source) as data:
             if len(data) > 0:

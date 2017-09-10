@@ -1,0 +1,14 @@
+attrs==17.2.0
+boltons==17.1.0
+boto3==1.4.5
+botocore==1.5.92
+cffi==1.10.0
+decorator==4.1.2
+django==1.11.3
+docutils==0.14
+flake8==3.3.0
+inflection
+ipdb==0.10.3
+jedi==0.10.2
+jmespath==0.9.0
+s3transfer==0.1.10

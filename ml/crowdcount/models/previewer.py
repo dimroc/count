@@ -41,7 +41,7 @@ class Previewer:
         with self._create_plot() as plt:
             png = "{}.png".format(dest[0:-4])
             plt.savefig(png)  # matlabplot only supports png, so convert.
-            Image.open(png).save(dest, 'JPEG', quality=100)
+            Image.open(png).convert("RGB").save(dest, 'JPEG', quality=100)
             os.remove(png)
 
     @contextmanager
@@ -80,7 +80,6 @@ class Previewer:
             return
 
         ax = fig.add_subplot(self._next_plot_position())
-        print("prediction shape: ", self.prediction.shape)
         ax.imshow(self.prediction, cmap=self.CMAP)
         ax.set_title("Prediction: {0:.2f}".format(self.prediction.sum()))
 

@@ -1,4 +1,4 @@
-from crowdcount.models import previewer
+from crowdcount.models import previewer, paths as ccp
 from keras.callbacks import Callback
 import attr
 import crowdcount.ml.generators as g
@@ -9,7 +9,7 @@ import time
 @attr.s
 class PredictionCheckpoint(Callback):
     image_path = attr.ib()
-    output_dir = attr.ib(default="tmp/predictions/{}".format(int(time.time())))
+    output_dir = attr.ib(default=ccp.output("predictions/{}".format(int(time.time()))))
 
     def on_epoch_end(self, epoch, logs=None):
         x = g.image_to_batch(self.image_path)
