@@ -54,4 +54,4 @@ def _create_callbacks():
     return [CSVLogger('tmp/keras_history.csv', append=True),
             ModelCheckpoint("tmp/weights.{epoch:02d}-{val_loss:.2f}.hdf5"),
             TensorBoard(log_dir='tmp/tensorboard'),
-            PredictionCheckpoint("data/shakecam/shakeshack-1500836313.jpg")]
+            PredictionCheckpoint("data/shakecam/shakeshack-1500833929.jpg")]
