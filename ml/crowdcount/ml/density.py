@@ -2,7 +2,7 @@ from crowdcount.ml.callbacks import PredictionCheckpoint
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Conv2D, MaxPooling2D
 from keras.models import Sequential
-import crowdcount.ml.generator as generator
+import crowdcount.ml.generators as generators
 import crowdcount.models.annotations as groundtruth
 import keras.optimizers
 
@@ -14,15 +14,15 @@ def train():
                   optimizer=keras.optimizers.adam(lr=0.00001, decay=0.00005),
                   metrics=['mae', 'accuracy'])
 
-    model.fit_generator(generator.training(),
-            generator.steps_per_epoch(),
+    model.fit_generator(generators.training(),
+            generators.steps_per_epoch(),
             epochs=100,
             verbose=1,
-            validation_data=generator.validation(),
-            validation_steps=generator.validation_steps(),
+            validation_data=generators.validation(),
+            validation_steps=generators.validation_steps(),
             callbacks=_create_callbacks())
 
-    score = model.evaluate_generator(generator.validation(), verbose=0)
+    score = model.evaluate_generator(generators.validation(), verbose=0)
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
 

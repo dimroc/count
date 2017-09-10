@@ -1,7 +1,7 @@
 from crowdcount.models import previewer
 from keras.callbacks import Callback
 import attr
-import crowdcount.ml.generator as g
+import crowdcount.ml.generators as g
 import os
 import time
 
