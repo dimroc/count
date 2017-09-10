@@ -1,7 +1,15 @@
 from inflection import camelize
 from random import randint, choice
 import glob
+import os
 import re
+
+
+def output(p=''):
+    if 'FLOYD' in os.environ:
+        return os.path.join("/output", p)
+    else:
+        return os.path.join("tmp", p)
 
 
 def datasets():

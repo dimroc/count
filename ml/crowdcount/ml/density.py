@@ -4,7 +4,9 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.models import Sequential
 import crowdcount.ml.generators as generators
 import crowdcount.models.annotations as groundtruth
+import crowdcount.models.paths as ccp
 import keras.optimizers
+import os
 
 
 def train():
@@ -51,7 +53,8 @@ def _create_model():
 
 
 def _create_callbacks():
-    return [CSVLogger('tmp/keras_history.csv', append=True),
-            ModelCheckpoint("tmp/weights.{epoch:02d}-{val_loss:.2f}.hdf5"),
-            TensorBoard(log_dir='tmp/tensorboard'),
+    os.makedirs(ccp.output('weights'), exist_ok=True)
+    return [CSVLogger(ccp.output('keras_history.csv'), append=True),
+            ModelCheckpoint(ccp.output("weights/weights.{epoch:02d}-{val_loss:.2f}.hdf5")),
+            TensorBoard(log_dir=ccp.output('tensorboard')),
             PredictionCheckpoint("data/shakecam/shakeshack-1500833929.jpg")]

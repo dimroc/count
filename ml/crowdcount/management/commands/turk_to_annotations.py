@@ -1,4 +1,4 @@
-from crowdcount.models import previewer, annotations as ants
+from crowdcount.models import previewer, annotations as ants, paths as ccp
 from django.core.management.base import BaseCommand
 import json
 import os
@@ -20,9 +20,9 @@ class Command(BaseCommand):
             self._write_images_to_tmp(annotations)
 
     def _write_images_to_tmp(self, anns):
-        os.makedirs("tmp/previews/", exist_ok=True)
+        os.makedirs(ccp.output("previews/"), exist_ok=True)
         for path in anns.keys():
-            previewer.save(path, "tmp/previews/{}.jpg".format(_index_from_path(path)))
+            previewer.save(path, ccp.output("previews/{}.jpg".format(_index_from_path(path))))
 
 
 def _index_from_path(path):
