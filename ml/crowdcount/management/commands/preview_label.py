@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from crowdcount.models import previewer
+from crowdcount.models import previewer, paths
 
 
 class Command(BaseCommand):
@@ -11,4 +11,4 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         dataset = kwargs['dataset']
         index = kwargs['index']
-        previewer.get(dataset).show(index)
+        previewer.show(paths.get(dataset).path(index))
