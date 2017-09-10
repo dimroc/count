@@ -1,9 +1,10 @@
+from crowdcount.models.paths import datasets
 import attr
 import csv
 import json
 import numpy as np
+import os
 import sklearn.model_selection as sk
-from crowdcount.models.paths import datasets
 
 
 __all__ = ["groundtruth", "Annotations", "from_turk"]
@@ -46,8 +47,11 @@ class Annotations():
         dic = {}
         paths = ["data/annotations/{}.json".format(v) for v in datasets()]
         for path in paths:
-            with open(path) as infile:
-                dic.update(json.load(infile))
+            if os.path.isfile(path):
+                with open(path) as infile:
+                    dic.update(json.load(infile))
+            else:
+                print("Warning: {} not found".format(path))
 
         return {k: np.asarray(v) for k, v in dic.items()}
 
