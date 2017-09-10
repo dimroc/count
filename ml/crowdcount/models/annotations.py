@@ -1,5 +1,5 @@
-from crowdcount.models.paths import datasets
 import attr
+import crowdcount.models.paths as ccp
 import csv
 import json
 import numpy as np
@@ -35,7 +35,7 @@ class Annotations():
         """
 
         train, test = [], []
-        for ds in datasets():
+        for ds in ccp.datasets():
             paths = [p for p in self.paths() if p.startswith("data/{}".format(ds))]  # e.g. data/ucf
             traintmp, testtmp = sk.train_test_split(sorted(paths), test_size=0.1, random_state=0)
             train.extend(traintmp)
@@ -45,7 +45,7 @@ class Annotations():
 
     def _load(self):
         dic = {}
-        paths = ["data/annotations/{}.json".format(v) for v in datasets()]
+        paths = [ccp.datapath("data/annotations/{}.json".format(v)) for v in ccp.datasets()]
         for path in paths:
             if os.path.isfile(path):
                 with open(path) as infile:

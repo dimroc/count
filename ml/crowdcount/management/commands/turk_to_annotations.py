@@ -7,7 +7,7 @@ import os
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--input', type=str, required=True)
-        parser.add_argument('--output', type=str, default='data/annotations/shakecam.json')
+        parser.add_argument('--output', type=str, default=ccp.datapath('data/annotations/shakecam.json'))
         parser.add_argument('--save', action='store_true', default=False)
 
     def handle(self, *args, **kwargs):
