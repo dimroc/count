@@ -17,5 +17,6 @@ class PredictionCheckpoint(Callback):
         self._save_image(epoch, y)
 
     def _save_image(self, epoch, y):
+        os.makedirs(self.output_dir, exist_ok=True)
         destination = "{}.jpg".format(os.path.join(self.output_dir, str(epoch)))
         previewer.save(self.image_path, destination, y)
