@@ -18,7 +18,7 @@ def train():
 
     model.fit_generator(generators.training(),
             generators.steps_per_epoch(),
-            epochs=100,
+            epochs=400,
             verbose=1,
             validation_data=generators.validation(),
             validation_steps=generators.validation_steps(),
