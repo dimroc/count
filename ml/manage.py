@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 import os
 import sys
+import matplotlib
+
+
+if 'FLOYD' in os.environ:
+    matplotlib.use('Agg')
+
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
