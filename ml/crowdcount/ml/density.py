@@ -14,8 +14,8 @@ def train(existing_weights=None):
     model = _create_model()
     initial_epoch = _load_existing_weights(model, existing_weights)
     print(model.summary())
-    model.compile(loss='mean_squared_error',
-                  optimizer=keras.optimizers.sgd(lr=1e-6, momentum=0.9, decay=0.0005),
+    model.compile(loss='mean_absolute_error',
+                  optimizer=keras.optimizers.adam(lr=1e-6, decay=5e-4),
                   metrics=['mae', 'mse', 'accuracy'])
 
     model.fit_generator(generators.training(),
