@@ -12,7 +12,7 @@ def generate(image_path, annotations):
         downscaled_size = (np.asarray(img.size) * _scale_for_fcn).astype(int)
 
     pixels = np.zeros(downscaled_size[::-1])  # np takes rows then cols, so height then w.
-    _sum_heads(pixels, annotations)
+    _sum_heads(pixels, annotations, image_path)
     return cv2.GaussianBlur(pixels, (_gaussian_kernel, _gaussian_kernel), 0)
 
 
@@ -24,6 +24,10 @@ def generate_3d(image_path, annotations):
     return generate(image_path, annotations)[..., None]
 
 
-def _sum_heads(pixels, annotations):
+def _sum_heads(pixels, annotations, path):
     for a in annotations:
-        pixels[int(a[1] * _scale_for_fcn), int(a[0] * _scale_for_fcn)] += 1
+        x, y = int(a[0] * _scale_for_fcn), int(a[1] * _scale_for_fcn)
+        if y >= pixels.shape[0] or x >= pixels.shape[1]:
+            print("{},{} is out of range, skipping annotation for {}".format(x, y, path))
+        else:
+            pixels[y, x] += 1
