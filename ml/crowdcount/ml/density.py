@@ -13,12 +13,12 @@ def train():
     model = _create_model()
     print(model.summary())
     model.compile(loss='mean_squared_error',
-                  optimizer=keras.optimizers.adam(lr=0.00001, decay=0.00005),
-                  metrics=['mae', 'accuracy'])
+                  optimizer=keras.optimizers.sgd(lr=1e-6, momentum=0.9, decay=0.0005),
+                  metrics=['mae', 'mse', 'accuracy'])
 
     model.fit_generator(generators.training(),
             generators.steps_per_epoch(),
-            epochs=400,
+            epochs=200,
             verbose=1,
             validation_data=generators.validation(),
             validation_steps=generators.validation_steps(),
@@ -41,14 +41,14 @@ def _create_model():
     https://arxiv.org/pdf/1612.00220.pdf
     """
     model = Sequential()
-    model.add(Conv2D(36, kernel_size=(9, 9), activation='relu', input_shape=(None, None, 3), padding='same'))
+    model.add(Conv2D(36, kernel_size=(9, 9), activation='relu', input_shape=(None, None, 3), padding='same', kernel_initializer='random_normal'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
-    model.add(Conv2D(72, (7, 7), activation='relu', padding='same'))
+    model.add(Conv2D(72, (7, 7), activation='relu', padding='same', kernel_initializer='random_normal'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
-    model.add(Conv2D(36, (7, 7), activation='relu', padding='same'))
-    model.add(Conv2D(24, (7, 7), activation='relu', padding='same'))
-    model.add(Conv2D(16, (7, 7), activation='relu', padding='same'))
-    model.add(Conv2D(1, (1, 1), padding='same'))
+    model.add(Conv2D(36, (7, 7), activation='relu', padding='same', kernel_initializer='random_normal'))
+    model.add(Conv2D(24, (7, 7), activation='relu', padding='same', kernel_initializer='random_normal'))
+    model.add(Conv2D(16, (7, 7), activation='relu', padding='same', kernel_initializer='random_normal'))
+    model.add(Conv2D(1, (1, 1), padding='same', kernel_initializer='random_normal'))
     return model
 
 
