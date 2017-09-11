@@ -15,7 +15,7 @@ class PredictionCheckpoint(Callback):
         self._save_prediction("begin")
 
     def on_epoch_end(self, epoch, logs=None):
-        self._save_prediction("epoch_{}".format(epoch))
+        self._save_prediction("epoch_{:03}".format(epoch))
 
     def _save_prediction(self, label):
         x = g.image_to_batch(self.image_path)
