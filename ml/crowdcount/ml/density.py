@@ -7,10 +7,12 @@ import crowdcount.models.annotations as groundtruth
 import crowdcount.models.paths as ccp
 import keras.optimizers
 import os
+import re
 
 
-def train():
+def train(existing_weights=None):
     model = _create_model()
+    initial_epoch = _load_existing_weights(model, existing_weights)
     print(model.summary())
     model.compile(loss='mean_squared_error',
                   optimizer=keras.optimizers.sgd(lr=1e-6, momentum=0.9, decay=0.0005),
@@ -18,7 +20,8 @@ def train():
 
     model.fit_generator(generators.training(),
             generators.steps_per_epoch(),
-            epochs=200,
+            initial_epoch=initial_epoch,
+            epochs=200 - initial_epoch,
             verbose=1,
             validation_data=generators.validation(),
             validation_steps=generators.validation_steps(),
@@ -58,3 +61,14 @@ def _create_callbacks():
             ModelCheckpoint(ccp.output("weights/weights.{epoch:02d}-{val_loss:.2f}.hdf5")),
             TensorBoard(log_dir=ccp.output('tensorboard')),
             PredictionCheckpoint(ccp.datapath("data/shakecam/shakeshack-1500833929.jpg"))]
+
+
+def _load_existing_weights(model, existing_weights):
+    if existing_weights:
+        model.load_weights(existing_weights)
+        match = re.match(r".*weights\.(\d+).*", existing_weights)
+        epoch = int(match.group(1))
+        print("Loading weights for epoch {} from {}".format(epoch, existing_weights))
+        return epoch
+    else:
+        return 0
