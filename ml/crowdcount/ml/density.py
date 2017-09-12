@@ -3,8 +3,7 @@ from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Conv2D, MaxPooling2D
 from keras.models import Sequential
 import crowdcount.ml.generators as generators
-import crowdcount.models.annotations as groundtruth
-import crowdcount.models.paths as ccp
+from crowdcount.models import annotations as groundtruth, paths as ccp, previewer
 import keras.optimizers
 import os
 import re
@@ -36,6 +35,13 @@ def test():
     train, test = groundtruth.train_test_split()
     print(len(train), len(test))
     print('todo: test')
+
+
+def predict(image, existing_weights):
+    model = _create_model()
+    _load_existing_weights(model, existing_weights)
+    y = model.predict(generators.image_to_batch(image), batch_size=1)
+    previewer.save(ccp.datapath(image), ccp.output("predictions/{}".format(os.path.basename(image))), y)
 
 
 def _create_model():
