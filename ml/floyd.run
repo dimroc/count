@@ -1,2 +1,9 @@
+#!/bin/bash
 floyd run --gpu --env keras --data dimroc/datasets/crowdcount/1:data \
-        "FLOYD=true python manage.py ml --train"
+        --data dimroc/projects/crowdcount/21/output:previous \
+        "FLOYD=true python manage.py ml --train --weights /previous/weights/weights.72-0.00.hdf5"
+
+
+
+#floyd run --gpu --env keras --data dimroc/datasets/crowdcount/1:data \
+        #"FLOYD=true python manage.py ml --train"
