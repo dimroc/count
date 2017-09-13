@@ -66,7 +66,7 @@ def _create_callbacks():
     return [CSVLogger(ccp.output('keras_history.csv'), append=True),
             ModelCheckpoint(ccp.output("weights/weights.{epoch:02d}-{val_loss:.2f}.hdf5")),
             TensorBoard(log_dir=ccp.output('tensorboard')),
-            PredictionCheckpoint(ccp.datapath("data/shakecam/shakeshack-1500833929.jpg"))]
+            PredictionCheckpoint(ccp.datapath("data/shakecam/shakeshack-1504543773.jpg"))]
 
 
 def _load_existing_weights(model, existing_weights):
