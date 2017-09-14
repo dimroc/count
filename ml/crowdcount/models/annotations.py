@@ -15,7 +15,8 @@ class Annotations():
     table = attr.ib(default=attr.Factory(dict))
 
     def get(self, path):
-        return self.table[path][:]
+        defloyd_path = path[1:] if path.startswith("/") else path
+        return self.table[defloyd_path][:]
 
     def paths(self):
         return self.table.keys()
