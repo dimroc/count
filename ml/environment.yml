@@ -1,0 +1,106 @@
+name: counting_company
+channels:
+- menpo
+- conda-forge
+- defaults
+dependencies:
+- attrs=17.2.0=py35_0
+- backports.weakref=1.0rc1=py35_0
+- blas=1.1=openblas
+- bleach=1.5.0=py35_0
+- boltons=17.1.0=py35_0
+- html5lib=0.9999999=py35_0
+- hypothesis=3.23.0=py35_0
+- ipdb=0.10.3=py35_0
+- keras=2.0.6=py35_0
+- libgfortran=3.0.0=0
+- mock=2.0.0=py35_0
+- numpy=1.13.1=py35_blas_openblas_200
+- openblas=0.2.19=2
+- pbr=3.1.1=py35_0
+- protobuf=3.3.2=py35_0
+- pympler=0.5=py35_0
+- pyyaml=3.12=py35_1
+- scikit-learn=0.19.0=py35_blas_openblas_201
+- scipy=0.19.1=py35_blas_openblas_202
+- tensorflow=1.0.0=py35_0
+- webencodings=0.5=py35_0
+- werkzeug=0.12.2=py35_0
+- yaml=0.1.6=0
+- appnope=0.1.0=py35_0
+- boto3=1.4.5=py35_0
+- botocore=1.5.92=py35_0
+- cffi=1.10.0=py35_0
+- cycler=0.10.0=py35_0
+- decorator=4.1.2=py35_0
+- django=1.11.3=py35_0
+- docutils=0.14=py35_0
+- flake8=3.3.0=py35_0
+- freetype=2.5.5=2
+- h5py=2.7.0=np113py35_0
+- hdf5=1.8.17=2
+- icu=54.1=0
+- inflection=0.3.1=py35_0
+- ipython=6.1.0=py35_0
+- ipython_genutils=0.2.0=py35_0
+- jbig=2.1=0
+- jedi=0.10.2=py35_2
+- jmespath=0.9.0=py35_0
+- jpeg=8d=2
+- libpng=1.6.30=1
+- libtiff=4.0.6=1
+- markdown=2.6.9=py35_0
+- matplotlib=2.0.2=np113py35_0
+- mccabe=0.6.1=py35_0
+- mkl=2017.0.3=0
+- olefile=0.44=py35_0
+- openssl=1.0.2l=0
+- path.py=10.3.1=py35_0
+- pexpect=4.2.1=py35_0
+- pickleshare=0.7.4=py35_0
+- pillow=3.4.2=py35_0
+- pip=9.0.1=py35_1
+- prompt_toolkit=1.0.15=py35_0
+- ptyprocess=0.5.2=py35_0
+- pycodestyle=2.3.1=py35_0
+- pycparser=2.18=py35_0
+- pyflakes=1.5.0=py35_0
+- pygments=2.2.0=py35_0
+- pyparsing=2.2.0=py35_0
+- pyqt=5.6.0=py35_2
+- python=3.5.0=1
+- python-dateutil=2.6.1=py35_0
+- pytz=2017.2=py35_0
+- qt=5.6.2=2
+- readline=6.2=2
+- requests=2.14.2=py35_0
+- s3transfer=0.1.10=py35_0
+- setuptools=27.2.0=py35_0
+- simplegeneric=0.8.1=py35_1
+- sip=4.18=py35_0
+- six=1.10.0=py35_0
+- sqlite=3.13.0=0
+- tk=8.5.18=0
+- traitlets=4.3.2=py35_0
+- wcwidth=0.1.7=py35_0
+- wheel=0.29.0=py35_0
+- xz=5.0.5=1
+- zlib=1.2.11=0
+- zope=1.0=py35_0
+- zope.interface=4.4.2=py35_0
+- opencv3=3.1.0=py35_0
+- tbb=4.3_20141023=0
+- pip:
+  - args==0.1.0
+  - click==6.7
+  - clint==0.5.1
+  - floyd-cli==0.10.9
+  - ipython-genutils==0.2.0
+  - marshmallow==2.13.6
+  - pathlib2==2.3.0
+  - prompt-toolkit==1.0.15
+  - requests-toolbelt==0.8.0
+  - shortuuid==0.5.0
+  - tabulate==0.7.7
+prefix: /Users/dimroc/.pyenv/versions/miniconda3-4.3.11/envs/counting_company
+
