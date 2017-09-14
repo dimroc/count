@@ -13,4 +13,4 @@ class Command(BaseCommand):
             density.train(kwargs['weights'])
 
         if kwargs['test']:
-            density.test()
+            density.test(None, kwargs['weights'])
