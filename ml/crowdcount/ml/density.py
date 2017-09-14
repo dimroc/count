@@ -1,5 +1,5 @@
 from crowdcount.ml.callbacks import PredictionCheckpoint
-from crowdcount.models import paths as ccp, previewer
+from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Conv2D, MaxPooling2D
 from keras.models import Sequential
@@ -36,8 +36,7 @@ def test(model=None, existing_weights=None):
 
 def predict(image, existing_weights):
     model = _create_model(existing_weights)
-    y = model.predict(generators.image_to_batch(image), batch_size=1)
-    previewer.save(ccp.datapath(image), ccp.output("predictions/{}".format(os.path.basename(image))), y)
+    return model.predict(generators.image_to_batch(image), batch_size=1)
 
 
 def _create_model(existing_weights=None):
