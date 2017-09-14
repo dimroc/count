@@ -33,12 +33,12 @@ class Previewer:
 
     def show(self):
         print("Displaying {}".format(self.path))
-        with self._create_plot() as plt:
+        with self._create_plot() as (plt, fig):
             plt.show()
 
     def save(self, dest):
         print("Saving to {}".format(dest))
-        with self._create_plot() as plt:
+        with self._create_plot() as (plt, fig):
             png = "{}.png".format(dest[0:-4])
             plt.savefig(png)  # matlabplot only supports png, so convert.
             Image.open(png).convert("RGB").save(dest, 'JPEG', quality=100)
@@ -54,7 +54,7 @@ class Previewer:
         self._render_groundtruth(fig)
         self._render_prediction(fig)
 
-        yield plt
+        yield plt, fig
         plt.close()
 
     def _render_img(self, fig):

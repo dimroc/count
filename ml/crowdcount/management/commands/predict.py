@@ -15,7 +15,8 @@ class Command(BaseCommand):
         if not image:
             image = ccp.random_image_path()
 
-        y = density.predict(image, kwargs['weights'])
+        self.predictor = density.Predictor(kwargs['weights'])
+        y = self.predictor.predict(image)
         if kwargs['save']:
             dest = ccp.output("predictions/{}".format(os.path.basename(image)))
             previewer.save(image, dest, y)

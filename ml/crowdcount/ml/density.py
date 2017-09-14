@@ -3,6 +3,7 @@ from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Conv2D, MaxPooling2D
 from keras.models import Sequential
+import attr
 import crowdcount.ml.generators as generators
 import keras.optimizers
 import os
@@ -34,9 +35,19 @@ def test(model=None, existing_weights=None):
     print('Test accuracy:', score[1])
 
 
+@attr.s
+class Predictor:
+    weights = attr.ib(default="data/weights/floyd26.epoch42.hdf5")
+
+    def __attrs_post_init__(self):
+        self.model = _create_model(self.weights)
+
+    def predict(self, image):
+        return self.model.predict(generators.image_to_batch(image), batch_size=1)
+
+
 def predict(image, existing_weights):
-    model = _create_model(existing_weights)
-    return model.predict(generators.image_to_batch(image), batch_size=1)
+    return Predictor(existing_weights).predict(image)
 
 
 def _create_model(existing_weights=None):
