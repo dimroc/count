@@ -1,4 +1,5 @@
 from inflection import camelize
+from numpy.random import choice as weighted_choice
 from random import randint, choice
 import glob
 import os
@@ -24,12 +25,24 @@ def output(p=''):
 
 
 def datasets():
-    yield from ['ucf', 'mall', 'shakecam']
+    # yield from ['ucf', 'mall', 'shakecam']
+    yield from ['mall', 'shakecam']
+
+
+def random_dataset():
+    """
+    Lean more towards shakecam dataset because that's the point of focus
+    """
+    return weighted_choice(list(datasets()), 1, [0.2, 0.8])[0]
 
 
 def get(dataset):
     class_name = "{}Path".format(camelize(dataset))
     return globals()[class_name]()
+
+
+def random_image_path():
+    return get(random_dataset()).path()
 
 
 class UcfPath:

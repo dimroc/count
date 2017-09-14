@@ -1,50 +1,46 @@
 from crowdcount.ml.callbacks import PredictionCheckpoint
+from crowdcount.models import paths as ccp, previewer
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Conv2D, MaxPooling2D
 from keras.models import Sequential
 import crowdcount.ml.generators as generators
-from crowdcount.models import annotations as groundtruth, paths as ccp, previewer
 import keras.optimizers
 import os
 import re
 
 
 def train(existing_weights=None):
-    model = _create_model()
-    initial_epoch = _load_existing_weights(model, existing_weights)
+    model = _create_model(existing_weights)
+    initial_epoch = _fetch_epoch(existing_weights)
     print(model.summary())
-    model.compile(loss='mean_absolute_error',
-                  optimizer=keras.optimizers.adam(lr=1e-6, decay=5e-4),
-                  metrics=['mae', 'mse', 'accuracy'])
 
     model.fit_generator(generators.training(),
             generators.steps_per_epoch(),
             initial_epoch=initial_epoch,
-            epochs=200 - initial_epoch,
+            epochs=100 - initial_epoch,
             verbose=1,
             validation_data=generators.validation(),
             validation_steps=generators.validation_steps(),
             callbacks=_create_callbacks())
 
-    score = model.evaluate_generator(generators.validation(), verbose=0)
+    test(model)
+
+
+def test(model=None, existing_weights=None):
+    if not model:
+        model = _create_model(existing_weights)
+    score = model.evaluate_generator(generators.validation(), steps=generators.validation_steps())
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
 
 
-def test():
-    train, test = groundtruth.train_test_split()
-    print(len(train), len(test))
-    print('todo: test')
-
-
 def predict(image, existing_weights):
-    model = _create_model()
-    _load_existing_weights(model, existing_weights)
+    model = _create_model(existing_weights)
     y = model.predict(generators.image_to_batch(image), batch_size=1)
     previewer.save(ccp.datapath(image), ccp.output("predictions/{}".format(os.path.basename(image))), y)
 
 
-def _create_model():
+def _create_model(existing_weights=None):
     """
     Based on the model proposed by Fully Convolutional Crowd Counting On Highly Congested Scenes:
     https://arxiv.org/pdf/1612.00220.pdf
@@ -58,6 +54,18 @@ def _create_model():
     model.add(Conv2D(24, (7, 7), activation='relu', padding='same'))
     model.add(Conv2D(16, (7, 7), activation='relu', padding='same'))
     model.add(Conv2D(1, (1, 1), padding='same', kernel_initializer='random_normal'))
+
+    if existing_weights:
+        print("Loading weights for epoch {} from {}".format(_fetch_epoch(existing_weights), existing_weights))
+        model.load_weights(existing_weights)
+
+    return _compile_model(model)
+
+
+def _compile_model(model):
+    model.compile(loss='mean_squared_error',
+                  optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-5),
+                  metrics=['mae', 'mse', 'accuracy'])
     return model
 
 
@@ -69,12 +77,11 @@ def _create_callbacks():
             PredictionCheckpoint(ccp.datapath("data/shakecam/shakeshack-1504543773.jpg"))]
 
 
-def _load_existing_weights(model, existing_weights):
+def _fetch_epoch(existing_weights):
     if existing_weights:
-        model.load_weights(existing_weights)
-        match = re.match(r".*weights\.(\d+).*", existing_weights)
-        epoch = int(match.group(1))
-        print("Loading weights for epoch {} from {}".format(epoch, existing_weights))
-        return epoch
-    else:
-        return 0
+        match = re.match(r".*(?:weights\.|epoch)(\d+).*", existing_weights)
+        if match:
+            return int(match.group(1))
+        else:
+            print("Could not retrieve epoch from {}, defaulting to 0".format(existing_weights))
+    return 0
