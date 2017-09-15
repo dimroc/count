@@ -1,6 +1,7 @@
 from crowdcount.ml import density
-from crowdcount.models import paths as ccp, previewer
+from crowdcount.models import paths as ccp, previewer as pwr, annotations as ants
 from django.core.management.base import BaseCommand
+from random import shuffle
 import os
 
 
@@ -11,14 +12,23 @@ class Command(BaseCommand):
         parser.add_argument('--save', action='store_true', default=False)
 
     def handle(self, *args, **kwargs):
-        image = kwargs['image']
-        if not image:
-            image = ccp.random_image_path()
-
-        self.predictor = density.Predictor(kwargs['weights'])
-        y = self.predictor.predict(image)
-        if kwargs['save']:
-            dest = ccp.output("predictions/{}".format(os.path.basename(image)))
-            previewer.save(image, dest, y)
+        images = kwargs['image']
+        if not kwargs['image']:
+            _, images = ants.groundtruth.train_test_split()
+            shuffle(images)
         else:
-            previewer.show(image, y)
+            images = [kwargs['image']]
+
+        predictor = density.Predictor(kwargs['weights'])
+        self._predict_images(images, predictor, kwargs['save'])
+
+    def _predict_images(self, images, predictor, save=False):
+        previewer = pwr.Previewer()
+        for image in images:
+            y = predictor.predict(image)
+            if save:
+                dest = ccp.output("predictions/{}".format(os.path.basename(image)))
+                previewer.save(image, dest, y)
+            else:
+                if previewer.show(image, y) == 'n':
+                    break

@@ -6,6 +6,8 @@ import matplotlib
 
 if 'FLOYD' in os.environ:
     matplotlib.use('Agg')
+else:
+    matplotlib.use('TKAgg')
 
 
 if __name__ == "__main__":
