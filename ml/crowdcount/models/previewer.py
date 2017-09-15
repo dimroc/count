@@ -1,6 +1,7 @@
 from PIL import Image
 from crowdcount.models import density_map
 from crowdcount.models.annotations import groundtruth
+from crowdcount.ml import linecount
 import attr
 import keras.preprocessing.image as kimg
 import matplotlib.pyplot as plt
@@ -80,7 +81,8 @@ class Previewer:
 
         ax = self.fig.add_subplot(self._next_plot_position())
         ax.imshow(self.prediction, cmap=self.CMAP)
-        ax.set_title("Prediction: {0:.2f}".format(self.prediction.sum()))
+        nline = linecount.predict(self.prediction)  # TODO: Awkward how line count prediction is not in the same place as crowd prediction
+        ax.set_title("Crowd: {:.2f}\nLine: {:.2f}".format(self.prediction.sum(), nline))
 
     def _reset_plot_position(self):
         self.current_plot = 1
