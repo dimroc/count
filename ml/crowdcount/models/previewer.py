@@ -13,18 +13,20 @@ def show(path, prediction=None):
     Previewer().show(path, prediction)
 
 
-def save(path, dest, prediction=None):
-    Previewer().save(path, prediction, dest)
+def save(dest, path, prediction=None):
+    Previewer().save(dest, path, prediction)
 
 
 @attr.s
 class Previewer:
     CMAP = 'seismic'
     fig = attr.ib(default=plt.figure(figsize=(8, 6), dpi=100))
+    just_predictions = attr.ib(default=False)
     prediction = attr.ib(default=None)
 
     def _normalize_input(self, path, prediction):
         self.path = path
+        self.shakecam = "data/shakecam" in path
         if prediction is not None:
             self.prediction = np.squeeze(prediction)
         try:
@@ -39,10 +41,22 @@ class Previewer:
         plt.show(block=False)
         return input("Continue? [y]/n: ")
 
-    def save(self, path, prediction, dest):
+    def save(self, dest, path, prediction=None):
         self._normalize_input(path, prediction)
         print("Saving to {}".format(dest))
         self._draw()
+        if self.prediction and self.just_predictions:
+            self._save_prediction(dest)
+        else:
+            self._save_charts(dest)
+
+    def _save_prediction(self, dest):
+        png = "{}.png".format(dest[0:-4])
+        plt.imsave(png, self.prediction, cmap=self.CMAP)
+        Image.open(png).convert("RGB").save(dest, 'JPEG', quality=100)
+        os.remove(png)
+
+    def _save_charts(dest):
         png = "{}.png".format(dest[0:-4])
         plt.savefig(png)  # matlabplot only supports png, so convert.
         Image.open(png).convert("RGB").save(dest, 'JPEG', quality=100)
@@ -81,8 +95,14 @@ class Previewer:
 
         ax = self.fig.add_subplot(self._next_plot_position())
         ax.imshow(self.prediction, cmap=self.CMAP)
-        nline = linecount.predict(self.prediction)  # TODO: Awkward how line count prediction is not in the same place as crowd prediction
-        ax.set_title("Crowd: {:.2f}\nLine: {:.2f}".format(self.prediction.sum(), nline))
+
+        if self.shakecam:
+            # TODO: Awkward how line count prediction is not in the same place as crowd prediction
+            # Only relevant for shakecam, not mall and ucf
+            nline = linecount.predict(self.prediction)
+            ax.set_title("Crowd: {:.2f}\nLine: {:.2f}".format(self.prediction.sum(), nline))
+        else:
+            ax.set_title("Crowd: {:.2f}".format(self.prediction.sum()))
 
     def _reset_plot_position(self):
         self.current_plot = 1

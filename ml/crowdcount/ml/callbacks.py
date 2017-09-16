@@ -9,7 +9,7 @@ import time
 @attr.s
 class PredictionCheckpoint(Callback):
     image_path = attr.ib()
-    output_dir = attr.ib(default=ccp.output("predictions/{}".format(int(time.time()))))
+    output_dir = attr.ib(default=ccp.output("prediction_checkpoint/{}".format(int(time.time()))))
 
     def on_train_begin(self, logs=None):
         self._save_prediction("begin")
@@ -25,4 +25,4 @@ class PredictionCheckpoint(Callback):
     def _save_image(self, label, y):
         os.makedirs(self.output_dir, exist_ok=True)
         destination = "{}.jpg".format(os.path.join(self.output_dir, label))
-        previewer.save(self.image_path, destination, y)
+        previewer.save(destination, self.image_path, y)
