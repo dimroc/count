@@ -1,4 +1,4 @@
-from crowdcount.ml.callbacks import PredictionCheckpoint
+from crowdcount.ml.callbacks import DensityCheckpoint
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Conv2D, MaxPooling2D
@@ -84,7 +84,7 @@ def _create_callbacks():
     return [CSVLogger(ccp.output('keras_history.csv'), append=True),
             ModelCheckpoint(ccp.output("weights/weights.{epoch:02d}-{val_loss:.2f}.hdf5")),
             TensorBoard(log_dir=ccp.output('tensorboard')),
-            PredictionCheckpoint(ccp.datapath("data/shakecam/shakeshack-1504543773.jpg"))]
+            DensityCheckpoint(ccp.datapath("data/shakecam/shakeshack-1504543773.jpg"))]
 
 
 def _fetch_epoch(existing_weights):

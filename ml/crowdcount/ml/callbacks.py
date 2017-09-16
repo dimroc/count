@@ -7,7 +7,7 @@ import time
 
 
 @attr.s
-class PredictionCheckpoint(Callback):
+class DensityCheckpoint(Callback):
     image_path = attr.ib()
     output_dir = attr.ib(default=ccp.output("prediction_checkpoint/{}".format(int(time.time()))))
 
