@@ -92,7 +92,7 @@ class Previewer:
         ax = self.fig.add_subplot(self._next_plot_position())
         dm = density_map.generate(self.path, self.annotations)
         ax.imshow(dm, cmap=self.CMAP)
-        if self.linecount:
+        if self.linecount is not None:
             ax.set_title("Ground Truth: {:.2f}\nLine: {}".format(dm.sum(), self.linecount))
         else:
             ax.set_title("Ground Truth: {:.2f}".format(dm.sum()))
