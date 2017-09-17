@@ -2,7 +2,7 @@ from crowdcount.models import density_map
 from crowdcount.models.annotations import groundtruth
 from crowdcount.models.paths import datapath
 from random import sample
-import keras.preprocessing.image as kimg
+import crowdcount.ml as ml
 import numpy as np
 
 
@@ -31,16 +31,12 @@ def features_and_labels_loop(paths):
             yield _load_features_labels(path)
 
 
-def image_to_batch(path):
-    return kimg.img_to_array(kimg.load_img(path))[np.newaxis]
-
-
 def _load_features_labels(path):
     """
     We must always have batch sizes of 1 because the images can be
     of different dimensions, and numpy doesn't support arrays with
     variable widths and heights.
     """
-    x = image_to_batch(datapath(path))
+    x = ml.image_to_batch(datapath(path))
     y = density_map.generate_3d(datapath(path), groundtruth.get(path))[np.newaxis]
     return x, y

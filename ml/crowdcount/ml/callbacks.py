@@ -1,7 +1,7 @@
 from crowdcount.models import previewer, paths as ccp
 from keras.callbacks import Callback
 import attr
-import crowdcount.ml.generators as g
+import crowdcount.ml as ml
 import os
 import time
 
@@ -18,7 +18,7 @@ class DensityCheckpoint(Callback):
         self._save_prediction("epoch_{:03}".format(epoch))
 
     def _save_prediction(self, label):
-        x = g.image_to_batch(self.image_path)
+        x = ml.image_to_batch(self.image_path)
         y = self.model.predict(x, batch_size=1)
         self._save_image(label, y)
 
