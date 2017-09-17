@@ -6,7 +6,7 @@ def predict(x):
 
 
 def train(existing_weights=None):
-    _instance.train(existing_weights)
+    regression.Model(existing_weights).train()
 
 
 _instance = regression.Model()

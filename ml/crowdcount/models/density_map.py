@@ -1,6 +1,8 @@
 from PIL import Image
 import cv2
 import numpy as np
+import crowdcount.models.annotations as ants
+import crowdcount.models.paths as ccp
 
 
 _gaussian_kernel = 15
@@ -22,6 +24,14 @@ def generate_3d(image_path, annotations):
     e.g. [640, 480] becomes [640, 480, 1]
     """
     return generate(image_path, annotations)[..., None]
+
+
+def generate_truth_batch(path):
+    """
+    From an image path, generate the density map based on the ground truth
+    as a batch of 1, ready for ml consumption.
+    """
+    return generate(ccp.datapath(path), ants.groundtruth.get(path))[np.newaxis]
 
 
 def _sum_heads(pixels, annotations, path):
