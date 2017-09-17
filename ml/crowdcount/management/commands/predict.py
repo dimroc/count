@@ -11,11 +11,12 @@ class Command(BaseCommand):
         parser.add_argument('--weights', default=ccp.datapath("data/weights/floyd26.epoch42.hdf5"))
         parser.add_argument('--save', action='store_true', default=False)
         parser.add_argument('--just-predictions', action='store_true', default=False)
+        parser.add_argument('--only-linecounts', action='store_true', default=False)
 
     def handle(self, *args, **kwargs):
         images = kwargs['image']
         if not kwargs['image']:
-            _, images = ants.groundtruth.train_test_split()
+            _, images = ants.groundtruth.train_test_split(kwargs['only_linecounts'])
             shuffle(images)
         else:
             images = [kwargs['image']]

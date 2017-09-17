@@ -32,16 +32,22 @@ class Annotations():
         self.linecounts = self._load_linecounts()
         return self
 
-    def train_test_split(self):
+    def train_test_split(self, only_linecounts=False):
         """
         Take x% from each data source to have consistent distribution
         across training and test. Retrieves from self.paths() to ensure
         we have annotations for said file.
         """
 
+        def with_linecount(path):
+            return only_linecounts and ccp.defloyd_path(path) in self.linecounts
+
+        def in_dataset(path, ds):
+            return path.startswith("data/{}".format(ds))  # e.g. data/ucf
+
         train, test = [], []
         for ds in ccp.datasets():
-            paths = [p for p in self.paths() if p.startswith("data/{}".format(ds))]  # e.g. data/ucf
+            paths = [p for p in self.paths() if in_dataset(p, ds) and with_linecount(p)]
             traintmp, testtmp = sk.train_test_split(sorted(paths), test_size=0.1, random_state=0)
             train.extend(traintmp)
             test.extend(testtmp)
