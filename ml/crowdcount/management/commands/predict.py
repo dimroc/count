@@ -1,7 +1,7 @@
 from crowdcount.ml import density, linecount
 from crowdcount.models import paths as ccp, previewer as pwr, annotations as ants
 from django.core.management.base import BaseCommand
-from random import shuffle
+from random import sample
 import os
 
 
@@ -16,8 +16,8 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         images = kwargs['image']
         if not kwargs['image']:
-            _, images = ants.groundtruth.train_test_split(kwargs['only_linecounts'])
-            shuffle(images)
+            train, test = ants.groundtruth.train_test_split(kwargs['only_linecounts'])
+            images = sample(train + test, len(train) + len(test))
         else:
             images = [kwargs['image']]
 
