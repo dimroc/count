@@ -13,10 +13,13 @@ __all__ = ["groundtruth", "Annotations", "from_turk"]
 @attr.s
 class Annotations():
     table = attr.ib(default=attr.Factory(dict))
+    linecounts = attr.ib(default=attr.Factory(dict))
 
     def get(self, path):
-        defloyd_path = path[1:] if path.startswith("/") else path
-        return self.table[defloyd_path][:]
+        return self.table[ccp.defloyd_path(path)][:]
+
+    def get_linecount(self, path):
+        return self.linecounts[ccp.defloyd_path(path)]
 
     def paths(self):
         return self.table.keys()
@@ -25,7 +28,8 @@ class Annotations():
         """
         Reload annotations stored in data/annotations
         """
-        self.table = self._load()
+        self.table = self._load_annotations()
+        self.linecounts = self._load_linecounts()
         return self
 
     def train_test_split(self):
@@ -44,7 +48,16 @@ class Annotations():
 
         return train, test
 
-    def _load(self):
+    def _load_linecounts(self):
+        """
+        Loads shakecam line counts, which can differ dramatically
+        from total crowd count.
+        """
+        with open("data/mturk/line_counts.csv") as csvfile:
+            reader = csv.reader(csvfile)
+            return {row[0]: int(row[1]) for row in reader}
+
+    def _load_annotations(self):
         dic = {}
         paths = [ccp.datapath("data/annotations/{}.json".format(v)) for v in ccp.datasets()]
         for path in paths:

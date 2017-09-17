@@ -34,6 +34,11 @@ class Previewer:
         except KeyError:
             self.annotations = None
 
+        try:
+            self.linecount = groundtruth.get_linecount(path)
+        except KeyError:
+            self.linecount = None
+
     def show(self, path, prediction):
         self._normalize_input(path, prediction)
         print("Displaying {}".format(self.path))
@@ -64,7 +69,7 @@ class Previewer:
 
     def _draw(self):
         self.fig.clear()
-        self.fig.suptitle('Crowd Count')
+        self.fig.suptitle("Crowd Count: {}".format(self.path))
 
         self._reset_plot_position()
         self._render_img()
@@ -87,7 +92,10 @@ class Previewer:
         ax = self.fig.add_subplot(self._next_plot_position())
         dm = density_map.generate(self.path, self.annotations)
         ax.imshow(dm, cmap=self.CMAP)
-        ax.set_title("Ground Truth: {0:.2f}".format(dm.sum()))
+        if self.linecount:
+            ax.set_title("Ground Truth: {:.2f}\nLine: {}".format(dm.sum(), self.linecount))
+        else:
+            ax.set_title("Ground Truth: {:.2f}".format(dm.sum()))
 
     def _render_prediction(self):
         if self.prediction is None:
