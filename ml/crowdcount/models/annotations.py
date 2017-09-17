@@ -40,7 +40,7 @@ class Annotations():
         """
 
         def with_linecount(path):
-            return only_linecounts and ccp.defloyd_path(path) in self.linecounts
+            return ccp.defloyd_path(path) in self.linecounts or not only_linecounts
 
         def in_dataset(path, ds):
             return path.startswith("data/{}".format(ds))  # e.g. data/ucf
