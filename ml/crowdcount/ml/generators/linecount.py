@@ -1,8 +1,7 @@
-from crowdcount.models import density_map
+from crowdcount.models import density_map as dm
 from crowdcount.models.annotations import groundtruth
-from crowdcount.models.paths import datapath
 from random import sample
-import crowdcount.ml as ml
+import numpy as np
 
 
 _training_paths, _test_paths = groundtruth.train_test_split(True)
@@ -36,6 +35,6 @@ def _load_features_labels(path):
     of different dimensions, and numpy doesn't support arrays with
     variable widths and heights.
     """
-    x = ml.image_to_batch(density_map.generate(datapath(path), groundtruth.get(path)))
-    y = groundtruth.get_linecount(path)
+    x = dm.generate_truth_batch(path)
+    y = np.array(groundtruth.get_linecount(path))[np.newaxis]
     return x, y

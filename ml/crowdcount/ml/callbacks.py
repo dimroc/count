@@ -42,11 +42,11 @@ class LineCountCheckpoint(Callback):
 
     def _save_prediction(self, name):
         truth = dm.generate_truth_batch(self.image_path)
-        inline = self.model.predict(truth, batch_size=1)
+        inline = float(self.model.predict(truth, batch_size=1))
         print("checkpoint linecount prediction: {}".format(inline))
         self._save_result(name, truth, inline)
 
     def _save_result(self, name, y, inline):
         os.makedirs(self.output_dir, exist_ok=True)
-        destination = "{}.txt".format(os.path.join(self.output_dir, name))
+        destination = "{}.jpg".format(os.path.join(self.output_dir, name))
         previewer.save(destination, self.image_path, y, inline)

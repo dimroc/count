@@ -3,7 +3,7 @@ from crowdcount.ml.generators import linecount as generator
 from crowdcount.ml.linecount import mask
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
-from keras.layers import Dense, Activation
+from keras.layers import Dense, Activation, Flatten
 from keras.models import Sequential
 import crowdcount.ml as ml
 import keras.optimizers
@@ -13,7 +13,8 @@ import os
 class Model:
     def __init__(self, existing_weights=None):
         self.model = Sequential([
-            Dense(4096, input_shape=(180, 180)),
+            Flatten(input_shape=(180, 180)),
+            Dense(4096),
             Activation('relu'),
             Dense(32),
             Activation('relu'),
@@ -32,7 +33,7 @@ class Model:
                 metrics=['mae', 'mse', 'accuracy'])
 
     def predict(self, x):
-        return mask.predict(x)
+        return mask.predict(x)  # TODO: Use actual model when ready
 
     def train(self):
         print(self.model.summary())
@@ -44,6 +45,10 @@ class Model:
                 validation_data=generator.validation(),
                 validation_steps=generator.validation_steps(),
                 callbacks=_create_callbacks())
+
+        score = self.model.evaluate_generator(generator.validation(), steps=generator.validation_steps())
+        print('Test loss:', score[0])
+        print('Test accuracy:', score[1])
 
 
 def _create_callbacks():
