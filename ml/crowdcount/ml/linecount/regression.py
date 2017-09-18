@@ -1,6 +1,4 @@
-from crowdcount.ml.callbacks import LineCountCheckpoint
 from crowdcount.ml.generators import linecount as generator
-from crowdcount.ml.linecount import mask
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Dense, Activation, Flatten
@@ -33,7 +31,7 @@ class Model:
                 metrics=['mse', 'mae', 'accuracy'])
 
     def predict(self, x):
-        return mask.predict(x)  # TODO: Use actual model when ready
+        return float(self.model.predict(x.reshape(*x.shape[:3]), batch_size=1))
 
     def train(self):
         print(self.model.summary())
@@ -56,4 +54,4 @@ def _create_callbacks():
     return [CSVLogger(ccp.output('keras_history.csv'), append=True),
             ModelCheckpoint(ccp.output("weights/linecount/weights.{epoch:02d}-{val_loss:.2f}.hdf5")),
             TensorBoard(log_dir=ccp.output('tensorboard')),
-            LineCountCheckpoint(ccp.datapath("data/shakecam/shakeshack-1500859164.jpg"))]
+            ml.callbacks.LineCountCheckpoint(ccp.datapath("data/shakecam/shakeshack-1500859164.jpg"))]
