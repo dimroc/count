@@ -29,7 +29,7 @@ class Model:
             self.initial_epoch = 0
 
         self.model.compile(loss='mean_squared_error',
-                optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-5),
+                optimizer=keras.optimizers.adam(lr=1e-4, decay=5e-4),
                 metrics=['mse', 'mae', 'accuracy'])
 
     def predict(self, x):
