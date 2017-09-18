@@ -59,7 +59,7 @@ class Annotations():
         Loads shakecam line counts, which can differ dramatically
         from total crowd count.
         """
-        with open("data/mturk/line_counts.csv") as csvfile:
+        with open(ccp.datapath("data/mturk/line_counts.csv")) as csvfile:
             reader = csv.reader(csvfile)
             return {row[0]: int(row[1]) for row in reader}
 

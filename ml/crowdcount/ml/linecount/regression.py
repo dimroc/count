@@ -28,9 +28,9 @@ class Model:
         else:
             self.initial_epoch = 0
 
-        self.model.compile(loss='mean_absolute_error',
-                optimizer=keras.optimizers.adam(),
-                metrics=['mae', 'mse', 'accuracy'])
+        self.model.compile(loss='mean_squared_error',
+                optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-5),
+                metrics=['mse', 'mae', 'accuracy'])
 
     def predict(self, x):
         return mask.predict(x)  # TODO: Use actual model when ready

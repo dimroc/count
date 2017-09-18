@@ -35,6 +35,6 @@ def _load_features_labels(path):
     of different dimensions, and numpy doesn't support arrays with
     variable widths and heights.
     """
-    x = dm.generate_truth_batch(path)
+    x = dm.generate_truth_batch(path, True)
     y = np.array(groundtruth.get_linecount(path))[np.newaxis]
     return x, y

@@ -1,9 +1,13 @@
 #!/bin/bash
-floyd run --gpu --env keras --data dimroc/datasets/crowdcount/1:data \
-        --data dimroc/projects/crowdcount/21/output:previous \
-        "FLOYD=true python manage.py ml --train --weights /previous/weights/weights.72-0.00.hdf5"
+#floyd run --gpu --env keras --data dimroc/datasets/crowdcount/2:data \
+        #--data dimroc/projects/crowdcount/23/output:previous \
+        #"FLOYD=true python manage.py mldensity --train --weights /previous/weights/weights.29-0.00.hdf5"
 
 
 
-#floyd run --gpu --env keras --data dimroc/datasets/crowdcount/1:data \
-        #"FLOYD=true python manage.py ml --train"
+#floyd run --gpu --env keras --data dimroc/datasets/crowdcount/2:data \
+        #"FLOYD=true python manage.py mldensity --train"
+
+floyd run --gpu --env keras --data dimroc/datasets/crowdcount/3:data \
+        --message "linecount mse lr=1e-5 decay5e-5 w mask" --tensorboard \
+        "FLOYD=true python manage.py mllinecount --train"
