@@ -1,10 +1,9 @@
 from PIL import Image
-from crowdcount.ml.linecount import mask
 import crowdcount.models.annotations as ants
+import crowdcount.models.mask as mask
 import crowdcount.models.paths as ccp
 import cv2
 import numpy as np
-
 
 _gaussian_kernel = 15
 _scale_for_fcn = 1 / 4  # Hardcoded to match final dimensions of FCN

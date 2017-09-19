@@ -3,6 +3,9 @@ import numpy as np
 import re
 
 
+__all__ = ["fetch_epoch", "image_to_batch"]
+
+
 def fetch_epoch(path):
     if path:
         match = re.match(r".*(?:weights\.|epoch)(\d+).*", path)

@@ -1,10 +1,10 @@
+import crowdcount.ml.callbacks as callbacks
 from crowdcount.ml.generators import linecount as generator
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
-from keras.layers import Dense, Activation, Flatten, AveragePooling2D
+from keras.layers import Dense, Flatten, MaxPooling2D
 from keras.models import Sequential
-import crowdcount.ml as ml
-import crowdcount.ml.callbacks as callbacks
+from crowdcount.ml import fetch_epoch
 import keras.optimizers
 import os
 
@@ -12,24 +12,22 @@ import os
 class Model:
     def __init__(self, existing_weights=None):
         self.model = Sequential([
-            AveragePooling2D(input_shape=(180, 180, 1)),
+            MaxPooling2D(input_shape=(180, 180, 1)),
             Flatten(),
-            Dense(2048),
-            Activation('relu'),
-            Dense(32),
-            Activation('relu'),
-            Dense(1)
+            Dense(512, activation='relu'),
+            Dense(512, activation='relu'),
+            Dense(1, activation='relu')
         ])
 
         if existing_weights:
             print("Loading weights for linecount from {}".format(existing_weights))
             self.model.load_weights(existing_weights)
-            self.initial_epoch = ml.fetch_epoch(existing_weights)
+            self.initial_epoch = fetch_epoch(existing_weights)
         else:
             self.initial_epoch = 0
 
         self.model.compile(loss='mean_squared_error',
-                optimizer=keras.optimizers.adam(lr=1e-4, decay=5e-4),
+                optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-7),
                 metrics=['mse', 'mae', 'accuracy'])
 
     def predict(self, x):
@@ -40,7 +38,7 @@ class Model:
         self.model.fit_generator(generator.training(),
                 generator.steps_per_epoch(),
                 initial_epoch=self.initial_epoch,
-                epochs=200 - self.initial_epoch,
+                epochs=400 - self.initial_epoch,
                 verbose=1,
                 validation_data=generator.validation(),
                 validation_steps=generator.validation_steps(),
@@ -54,6 +52,6 @@ class Model:
 def _create_callbacks():
     os.makedirs(ccp.output('weights/linecount'), exist_ok=True)
     return [CSVLogger(ccp.output('keras_history.csv'), append=True),
-            ModelCheckpoint(ccp.output("weights/linecount/weights.{epoch:02d}-{val_loss:.2f}.hdf5")),
+            ModelCheckpoint(ccp.output("weights/linecount/weights.{epoch:03d}-{val_loss:.2f}.hdf5")),
             TensorBoard(log_dir=ccp.output('tensorboard')),
             callbacks.LineCountCheckpoint(ccp.datapath("data/shakecam/shakeshack-1500859164.jpg"))]

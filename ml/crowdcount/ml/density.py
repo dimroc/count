@@ -18,7 +18,7 @@ def train(existing_weights=None):
     model.fit_generator(generator.training(),
             generator.steps_per_epoch(),
             initial_epoch=initial_epoch,
-            epochs=100 - initial_epoch,
+            epochs=150 - initial_epoch,
             verbose=1,
             validation_data=generator.validation(),
             validation_steps=generator.validation_steps(),
