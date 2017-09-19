@@ -9,5 +9,5 @@
         #"FLOYD=true python manage.py mldensity --train"
 
 floyd run --gpu --env keras --data dimroc/datasets/crowdcount/3:data \
-        --message "linecount mse lr=1e-4 decay=5e-4 w mask" \
+        --message "linecount mse lr=1e-4, decay=5e-4 w mask params: 16m" \
         "FLOYD=true python manage.py mllinecount --train"
