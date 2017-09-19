@@ -2,7 +2,7 @@ import crowdcount.ml.callbacks as callbacks
 from crowdcount.ml.generators import linecount as generator
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
-from keras.layers import Dense, Flatten, MaxPooling2D
+from keras.layers import Dense, Flatten, MaxPooling2D, Dropout
 from keras.models import Sequential
 from crowdcount.ml import fetch_epoch
 import keras.optimizers
@@ -15,7 +15,9 @@ class Model:
             MaxPooling2D(input_shape=(180, 180, 1)),
             Flatten(),
             Dense(512, activation='relu'),
+            Dropout(0.5),
             Dense(512, activation='relu'),
+            Dropout(0.5),
             Dense(1, activation='relu')
         ])
 
