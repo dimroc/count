@@ -1,9 +1,10 @@
 from crowdcount.ml.generators import linecount as generator
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
-from keras.layers import Dense, Activation, Flatten
+from keras.layers import Dense, Activation, Flatten, AveragePooling2D
 from keras.models import Sequential
 import crowdcount.ml as ml
+import crowdcount.ml.callbacks as callbacks
 import keras.optimizers
 import os
 
@@ -11,8 +12,9 @@ import os
 class Model:
     def __init__(self, existing_weights=None):
         self.model = Sequential([
-            Flatten(input_shape=(180, 180)),
-            Dense(4096),
+            AveragePooling2D(input_shape=(180, 180, 1)),
+            Flatten(),
+            Dense(2048),
             Activation('relu'),
             Dense(32),
             Activation('relu'),
@@ -27,11 +29,11 @@ class Model:
             self.initial_epoch = 0
 
         self.model.compile(loss='mean_squared_error',
-                optimizer=keras.optimizers.adam(lr=1e-4, decay=5e-4),
+                optimizer=keras.optimizers.adam(lr=1e-6, decay=5e-5),
                 metrics=['mse', 'mae', 'accuracy'])
 
     def predict(self, x):
-        return float(self.model.predict(x.reshape(*x.shape[:3]), batch_size=1))
+        return float(self.model.predict(x, batch_size=1))
 
     def train(self):
         print(self.model.summary())
@@ -54,4 +56,4 @@ def _create_callbacks():
     return [CSVLogger(ccp.output('keras_history.csv'), append=True),
             ModelCheckpoint(ccp.output("weights/linecount/weights.{epoch:02d}-{val_loss:.2f}.hdf5")),
             TensorBoard(log_dir=ccp.output('tensorboard')),
-            ml.callbacks.LineCountCheckpoint(ccp.datapath("data/shakecam/shakeshack-1500859164.jpg"))]
+            callbacks.LineCountCheckpoint(ccp.datapath("data/shakecam/shakeshack-1500859164.jpg"))]

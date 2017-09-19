@@ -34,9 +34,9 @@ def generate_truth_batch(path, usemask=False):
     """
     truth = generate(ccp.datapath(path), ants.groundtruth.get(path))
     if usemask:
-        return (truth * mask.array)[np.newaxis]
+        return (truth * mask.array)[np.newaxis][..., None]
     else:
-        return truth[np.newaxis]
+        return truth[np.newaxis][..., None]
 
 
 def _sum_heads(pixels, annotations, path):
