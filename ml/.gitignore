@@ -99,8 +99,3 @@ ENV/
 .mypy_cache/
 
 ## Mine
-
-/data/shakecam_old
-/data/shakecam
-/data/ucf
-/data/mall
