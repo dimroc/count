@@ -1,0 +1,39 @@
+files: ["**/*.js"]
+exclude_paths: ["vendor/assets/javascripts"]
+options:
+  asi:        true
+  boss:       true
+  browser:    true
+  curly:      true
+  eqeqeq:     true
+  eqnull:     true
+  expr:       true
+  immed:      true
+  indent:     2
+  latedef:    true
+  newcap:     true
+  noarg:      true
+  sub:        true
+  trailing:   true
+  undef:      true
+  unused:     vars
+  eqeqeq:     false
+  esnext:     true
+  globals:
+    jQuery:   true
+    "$":      true
+    console: true
+    Turbolinks: true
+    Turboboost: true
+    _: true
+    moment: true
+    skrollr: true
+    Stripe: true
+    EventSource: true
+    ZeroClipboard: true
+    History: true
+    alert: true
+    StripeCheckout: true
+    App: true
+    ActionCable: true
+    autosize: true
