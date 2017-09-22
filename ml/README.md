@@ -238,7 +238,7 @@ TODO:
 - Get more line count data via liz or mechanical turk
 - Redo loss function for conv ml
 - Increase complexity and fidelity of top conv ml (9x9 throws away too much too soon)
-- Hyper parameters worth tweaking: gaussian kernal
+- Hyper parameters worth tweaking: gaussian kernel
 - Create a model based on DenseNet but chop off the dense layers?
 - Have a two column approach that does both? One does shallow one goes deep
 
