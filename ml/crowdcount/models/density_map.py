@@ -1,7 +1,9 @@
 from PIL import Image
+import crowdcount.models.annotations as ants
+import crowdcount.models.mask as mask
+import crowdcount.models.paths as ccp
 import cv2
 import numpy as np
-
 
 _gaussian_kernel = 15
 _scale_for_fcn = 1 / 4  # Hardcoded to match final dimensions of FCN
@@ -22,6 +24,18 @@ def generate_3d(image_path, annotations):
     e.g. [640, 480] becomes [640, 480, 1]
     """
     return generate(image_path, annotations)[..., None]
+
+
+def generate_truth_batch(path, usemask=False):
+    """
+    From an image path, generate the density map based on the ground truth
+    as a batch of 1, ready for ml consumption.
+    """
+    truth = generate(ccp.datapath(path), ants.groundtruth.get(path))
+    if usemask:
+        return (truth * mask.array)[np.newaxis][..., None]
+    else:
+        return truth[np.newaxis][..., None]
 
 
 def _sum_heads(pixels, annotations, path):

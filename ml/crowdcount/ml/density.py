@@ -1,27 +1,27 @@
-from crowdcount.ml.callbacks import PredictionCheckpoint
+from crowdcount.ml.callbacks import DensityCheckpoint
+from crowdcount.ml.generators import density as generator
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Conv2D, MaxPooling2D
 from keras.models import Sequential
 import attr
-import crowdcount.ml.generators as generators
+import crowdcount.ml as ml
 import keras.optimizers
 import os
-import re
 
 
 def train(existing_weights=None):
     model = _create_model(existing_weights)
-    initial_epoch = _fetch_epoch(existing_weights)
+    initial_epoch = ml.fetch_epoch(existing_weights)
     print(model.summary())
 
-    model.fit_generator(generators.training(),
-            generators.steps_per_epoch(),
+    model.fit_generator(generator.training(),
+            generator.steps_per_epoch(),
             initial_epoch=initial_epoch,
-            epochs=100 - initial_epoch,
+            epochs=150 - initial_epoch,
             verbose=1,
-            validation_data=generators.validation(),
-            validation_steps=generators.validation_steps(),
+            validation_data=generator.validation(),
+            validation_steps=generator.validation_steps(),
             callbacks=_create_callbacks())
 
     test(model)
@@ -30,24 +30,24 @@ def train(existing_weights=None):
 def test(model=None, existing_weights=None):
     if not model:
         model = _create_model(existing_weights)
-    score = model.evaluate_generator(generators.validation(), steps=generators.validation_steps())
+    score = model.evaluate_generator(generator.validation(), steps=generator.validation_steps())
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
 
 
 @attr.s
-class Predictor:
+class Model:
     weights = attr.ib(default="data/weights/floyd26.epoch42.hdf5")
 
     def __attrs_post_init__(self):
         self.model = _create_model(self.weights)
 
     def predict(self, image):
-        return self.model.predict(generators.image_to_batch(image), batch_size=1)
+        return self.model.predict(ml.image_to_batch(image), batch_size=1)
 
 
 def predict(image, existing_weights):
-    return Predictor(existing_weights).predict(image)
+    return Model(existing_weights).predict(image)
 
 
 def _create_model(existing_weights=None):
@@ -66,7 +66,7 @@ def _create_model(existing_weights=None):
     model.add(Conv2D(1, (1, 1), padding='same', kernel_initializer='random_normal'))
 
     if existing_weights:
-        print("Loading weights for epoch {} from {}".format(_fetch_epoch(existing_weights), existing_weights))
+        print("Loading weights for epoch {} from {}".format(ml.fetch_epoch(existing_weights), existing_weights))
         model.load_weights(existing_weights)
 
     return _compile_model(model)
@@ -84,14 +84,4 @@ def _create_callbacks():
     return [CSVLogger(ccp.output('keras_history.csv'), append=True),
             ModelCheckpoint(ccp.output("weights/weights.{epoch:02d}-{val_loss:.2f}.hdf5")),
             TensorBoard(log_dir=ccp.output('tensorboard')),
-            PredictionCheckpoint(ccp.datapath("data/shakecam/shakeshack-1504543773.jpg"))]
-
-
-def _fetch_epoch(existing_weights):
-    if existing_weights:
-        match = re.match(r".*(?:weights\.|epoch)(\d+).*", existing_weights)
-        if match:
-            return int(match.group(1))
-        else:
-            print("Could not retrieve epoch from {}, defaulting to 0".format(existing_weights))
-    return 0
+            DensityCheckpoint(ccp.datapath("data/shakecam/shakeshack-1504543773.jpg"))]

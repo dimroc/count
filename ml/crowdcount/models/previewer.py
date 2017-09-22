@@ -1,10 +1,10 @@
 from PIL import Image
+from crowdcount.ml.prediction import Prediction
 from crowdcount.models import density_map
 from crowdcount.models.annotations import groundtruth
 import attr
 import keras.preprocessing.image as kimg
 import matplotlib.pyplot as plt
-import numpy as np
 import os
 
 
@@ -12,24 +12,29 @@ def show(path, prediction=None):
     Previewer().show(path, prediction)
 
 
-def save(path, dest, prediction=None):
-    Previewer().save(path, prediction, dest)
+def save(dest, path, prediction=None):
+    Previewer().save(dest, path, prediction)
 
 
 @attr.s
 class Previewer:
     CMAP = 'seismic'
     fig = attr.ib(default=plt.figure(figsize=(8, 6), dpi=100))
-    prediction = attr.ib(default=None)
+    just_predictions = attr.ib(default=False)
+    prediction = attr.ib(default=attr.Factory(Prediction))
 
     def _normalize_input(self, path, prediction):
         self.path = path
-        if prediction is not None:
-            self.prediction = np.squeeze(prediction)
+        self.prediction = prediction if prediction else Prediction()
         try:
             self.annotations = groundtruth.get(self.path)
         except KeyError:
             self.annotations = None
+
+        try:
+            self.true_line = groundtruth.get_linecount(path)
+        except KeyError:
+            self.true_line = "N/A"
 
     def show(self, path, prediction):
         self._normalize_input(path, prediction)
@@ -38,10 +43,22 @@ class Previewer:
         plt.show(block=False)
         return input("Continue? [y]/n: ")
 
-    def save(self, path, prediction, dest):
+    def save(self, dest, path, prediction):
         self._normalize_input(path, prediction)
         print("Saving to {}".format(dest))
         self._draw()
+        if self.prediction.density is not None and self.just_predictions:
+            self._save_prediction(dest)
+        else:
+            self._save_charts(dest)
+
+    def _save_prediction(self, dest):
+        png = "{}.png".format(dest[0:-4])
+        plt.imsave(png, self.prediction.density, cmap=self.CMAP)
+        Image.open(png).convert("RGB").save(dest, 'JPEG', quality=100)
+        os.remove(png)
+
+    def _save_charts(self, dest):
         png = "{}.png".format(dest[0:-4])
         plt.savefig(png)  # matlabplot only supports png, so convert.
         Image.open(png).convert("RGB").save(dest, 'JPEG', quality=100)
@@ -49,7 +66,7 @@ class Previewer:
 
     def _draw(self):
         self.fig.clear()
-        self.fig.suptitle('Crowd Count')
+        self.fig.suptitle("Crowd Count: {}".format(self.path))
 
         self._reset_plot_position()
         self._render_img()
@@ -72,15 +89,15 @@ class Previewer:
         ax = self.fig.add_subplot(self._next_plot_position())
         dm = density_map.generate(self.path, self.annotations)
         ax.imshow(dm, cmap=self.CMAP)
-        ax.set_title("Ground Truth: {0:.2f}".format(dm.sum()))
+        ax.set_title("True Crowd: {:.2f}\nTrue Line: {}\nPredicted Line: {:.4}".format(dm.sum(), self.true_line, self.prediction.line_from_truth))
 
     def _render_prediction(self):
-        if self.prediction is None:
+        if self.prediction.density is None:
             return
 
         ax = self.fig.add_subplot(self._next_plot_position())
-        ax.imshow(self.prediction, cmap=self.CMAP)
-        ax.set_title("Prediction: {0:.2f}".format(self.prediction.sum()))
+        ax.imshow(self.prediction.density, cmap=self.CMAP)
+        ax.set_title("Predicted Crowd: {:.2f}\n\nPredicted Line: {:.4}".format(self.prediction.density.sum(), self.prediction.line))
 
     def _reset_plot_position(self):
         self.current_plot = 1
@@ -91,4 +108,4 @@ class Previewer:
         return subplot
 
     def _cols(self):
-        return len([v for v in [self.path, self.annotations, self.prediction] if v is not None])
+        return len([v for v in [self.path, self.annotations, self.prediction.density] if v is not None])
