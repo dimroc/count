@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.admin? } do
     namespace :admin do
       root to: redirect('admin/mockups')
-      resources :mockups, only: [:index]
+      resources :mockups, only: [:index, :show]
     end
   end
 end

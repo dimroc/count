@@ -1,1 +1,5 @@
-div admin
+div
+  admin
+  ul
+    - @pages.each do |page|
+      li = link_to page, admin_mockup_path(page)
