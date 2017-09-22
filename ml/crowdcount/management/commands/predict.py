@@ -1,4 +1,4 @@
-from crowdcount.ml import density, linecount
+from crowdcount.ml.predictor import Predictor
 from crowdcount.models import paths as ccp, previewer as pwr, annotations as ants
 from django.core.management.base import BaseCommand
 from random import sample
@@ -21,24 +21,16 @@ class Command(BaseCommand):
         else:
             images = [kwargs['image']]
 
-        predictor = density.Predictor(kwargs['weights'])
+        predictor = Predictor(kwargs['weights'])
         previewer = pwr.Previewer(just_predictions=kwargs['just_predictions'])
         self._predict_images(images, predictor, previewer, kwargs['save'])
 
     def _predict_images(self, images, predictor, previewer, save=False):
         for image in images:
-            y = predictor.predict(image)
-            inline = _predict_line(image, y)
+            prediction = predictor.predict(image)
             if save:
                 dest = ccp.output("predictions/{}".format(os.path.basename(image)))
-                previewer.save(dest, image, y, inline)
+                previewer.save(dest, image, prediction)
             else:
-                if previewer.show(image, y, inline) == 'n':
+                if previewer.show(image, prediction) == 'n':
                     break
-
-
-def _predict_line(image, prediction):
-    if "data/shakecam" in image:
-        return linecount.predict(prediction)
-    else:
-        return None

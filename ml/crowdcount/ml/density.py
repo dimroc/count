@@ -36,7 +36,7 @@ def test(model=None, existing_weights=None):
 
 
 @attr.s
-class Predictor:
+class Model:
     weights = attr.ib(default="data/weights/floyd26.epoch42.hdf5")
 
     def __attrs_post_init__(self):
@@ -47,7 +47,7 @@ class Predictor:
 
 
 def predict(image, existing_weights):
-    return Predictor(existing_weights).predict(image)
+    return Model(existing_weights).predict(image)
 
 
 def _create_model(existing_weights=None):

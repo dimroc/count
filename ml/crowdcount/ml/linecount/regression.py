@@ -1,10 +1,11 @@
-import crowdcount.ml.callbacks as callbacks
+from crowdcount.ml import fetch_epoch
 from crowdcount.ml.generators import linecount as generator
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Dense, Flatten, MaxPooling2D, Dropout
 from keras.models import Sequential
-from crowdcount.ml import fetch_epoch
+import crowdcount.ml.callbacks as callbacks
+import crowdcount.models.mask as mask
 import keras.optimizers
 import os
 
@@ -33,7 +34,7 @@ class Model:
                 metrics=['mse', 'mae', 'accuracy'])
 
     def predict(self, x):
-        return float(self.model.predict(x, batch_size=1))
+        return float(self.model.predict(x * mask.batch_array, batch_size=1))
 
     def train(self):
         print(self.model.summary())

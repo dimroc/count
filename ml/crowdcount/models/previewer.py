@@ -1,19 +1,19 @@
 from PIL import Image
+from crowdcount.ml.prediction import Prediction
 from crowdcount.models import density_map
 from crowdcount.models.annotations import groundtruth
 import attr
 import keras.preprocessing.image as kimg
 import matplotlib.pyplot as plt
-import numpy as np
 import os
 
 
-def show(path, prediction=None, predicted_linecount=None):
-    Previewer().show(path, prediction, predicted_linecount)
+def show(path, prediction=None):
+    Previewer().show(path, prediction)
 
 
-def save(dest, path, prediction=None, predicted_linecount=None):
-    Previewer().save(dest, path, prediction, predicted_linecount)
+def save(dest, path, prediction=None):
+    Previewer().save(dest, path, prediction)
 
 
 @attr.s
@@ -21,42 +21,40 @@ class Previewer:
     CMAP = 'seismic'
     fig = attr.ib(default=plt.figure(figsize=(8, 6), dpi=100))
     just_predictions = attr.ib(default=False)
-    prediction = attr.ib(default=None)
+    prediction = attr.ib(default=attr.Factory(Prediction))
 
-    def _normalize_input(self, path, prediction, predicted_linecount):
+    def _normalize_input(self, path, prediction):
         self.path = path
-        self.predicted_linecount = predicted_linecount
-        if prediction is not None:
-            self.prediction = np.squeeze(prediction)
+        self.prediction = prediction if prediction else Prediction()
         try:
             self.annotations = groundtruth.get(self.path)
         except KeyError:
             self.annotations = None
 
         try:
-            self.linecount = groundtruth.get_linecount(path)
+            self.true_line = groundtruth.get_linecount(path)
         except KeyError:
-            self.linecount = None
+            self.true_line = "N/A"
 
-    def show(self, path, prediction=None, predicted_linecount=None):
-        self._normalize_input(path, prediction, predicted_linecount)
+    def show(self, path, prediction):
+        self._normalize_input(path, prediction)
         print("Displaying {}".format(self.path))
         self._draw()
         plt.show(block=False)
         return input("Continue? [y]/n: ")
 
-    def save(self, dest, path, prediction=None, predicted_linecount=None):
-        self._normalize_input(path, prediction, predicted_linecount)
+    def save(self, dest, path, prediction):
+        self._normalize_input(path, prediction)
         print("Saving to {}".format(dest))
         self._draw()
-        if self.prediction is not None and self.just_predictions:
+        if self.prediction.density is not None and self.just_predictions:
             self._save_prediction(dest)
         else:
             self._save_charts(dest)
 
     def _save_prediction(self, dest):
         png = "{}.png".format(dest[0:-4])
-        plt.imsave(png, self.prediction, cmap=self.CMAP)
+        plt.imsave(png, self.prediction.density, cmap=self.CMAP)
         Image.open(png).convert("RGB").save(dest, 'JPEG', quality=100)
         os.remove(png)
 
@@ -91,22 +89,15 @@ class Previewer:
         ax = self.fig.add_subplot(self._next_plot_position())
         dm = density_map.generate(self.path, self.annotations)
         ax.imshow(dm, cmap=self.CMAP)
-        if self.linecount is not None:
-            ax.set_title("Ground Truth: {:.2f}\nLine: {}".format(dm.sum(), self.linecount))
-        else:
-            ax.set_title("Ground Truth: {:.2f}".format(dm.sum()))
+        ax.set_title("True Crowd: {:.2f}\nTrue Line: {}\nPredicted Line: {:.4}".format(dm.sum(), self.true_line, self.prediction.line_from_truth))
 
     def _render_prediction(self):
-        if self.prediction is None:
+        if self.prediction.density is None:
             return
 
         ax = self.fig.add_subplot(self._next_plot_position())
-        ax.imshow(self.prediction, cmap=self.CMAP)
-
-        if self.predicted_linecount is not None:
-            ax.set_title("Crowd: {:.2f}\nLine: {:.2f}".format(self.prediction.sum(), self.predicted_linecount))
-        else:
-            ax.set_title("Crowd: {:.2f}".format(self.prediction.sum()))
+        ax.imshow(self.prediction.density, cmap=self.CMAP)
+        ax.set_title("Predicted Crowd: {:.2f}\n\nPredicted Line: {:.4}".format(self.prediction.density.sum(), self.prediction.line))
 
     def _reset_plot_position(self):
         self.current_plot = 1
@@ -117,4 +108,4 @@ class Previewer:
         return subplot
 
     def _cols(self):
-        return len([v for v in [self.path, self.annotations, self.prediction] if v is not None])
+        return len([v for v in [self.path, self.annotations, self.prediction.density] if v is not None])

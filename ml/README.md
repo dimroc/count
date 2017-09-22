@@ -235,8 +235,7 @@ run 16: xs, deep, w dropout
     Total params: 4,148,225
 
 TODO:
-- Illustrate line count against gt and estimated density map
-- Place mask before any linecounts throughout app
+- Get more line count data via liz or mechanical turk
 - Redo loss function for conv ml
 - Increase complexity and fidelity of top conv ml (9x9 throws away too much too soon)
 - Hyper parameters worth tweaking: gaussian kernal
