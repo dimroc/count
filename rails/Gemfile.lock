@@ -54,6 +54,7 @@ GIT
 GIT
   remote: https://github.com/rails/rails.git
   revision: 8b139444dd419306e70792ff286ffecd75d67d23
+  ref: 8b139444dd419306e70792ff286ffecd75d67d23
   specs:
     actioncable (5.2.0.alpha)
       actionpack (= 5.2.0.alpha)
@@ -145,6 +146,13 @@ GEM
     case_transform (0.2)
       activesupport
     coderay (1.1.2)
+    coffee-rails (4.2.2)
+      coffee-script (>= 2.2.0)
+      railties (>= 4.0.0)
+    coffee-script (2.4.1)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     declarative (0.0.10)
     declarative-option (0.1.0)
@@ -357,6 +365,7 @@ DEPENDENCIES
   auto_strip_attributes
   bootstrap (~> 4.0.0.beta)
   byebug
+  coffee-rails
   datafix!
   devise
   draper
