@@ -6,8 +6,13 @@ class Prediction::Shakecam < Prediction
       destination = "shakecam-#{now}.jpg"
       prediction = create!
       prediction.snapshot.attach io: open(url), filename: destination, content_type: "image/jpg"
+      prediction.image.processed
       prediction
     end
+  end
+
+  def image
+    snapshot.variant(crop: "720x720+0+0")
   end
 
   def predict!
