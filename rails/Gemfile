@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'active_model_serializers'
-gem 'activestorage'
+gem 'activestorage', github: 'h-izumi/activestorage', branch: 'filtered-5.1.4'
 gem 'american_date'
 gem 'auto_strip_attributes'
 gem 'bootstrap', '~> 4.0.0.beta'

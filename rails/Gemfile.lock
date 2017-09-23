@@ -31,6 +31,15 @@ GIT
       execjs (>= 1.4.0)
       multi_json (~> 1.0)
 
+GIT
+  remote: https://github.com/h-izumi/activestorage.git
+  revision: 4711ea8ce278f9b9a6719f34b9b254a46a5eebfd
+  branch: filtered-5.1.4
+  specs:
+    activestorage (5.1.4)
+      actionpack (= 5.1.4)
+      activerecord (= 5.1.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -75,11 +84,6 @@ GEM
       activemodel (= 5.1.4)
       activesupport (= 5.1.4)
       arel (~> 8.0)
-    activestorage (0.1)
-      actionpack (>= 5.1)
-      activejob (>= 5.1)
-      activerecord (>= 5.1)
-      activesupport (>= 5.1)
     activesupport (5.1.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
@@ -337,7 +341,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
-  activestorage
+  activestorage!
   american_date
   auto_strip_attributes
   bootstrap (~> 4.0.0.beta)

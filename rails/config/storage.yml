@@ -1,0 +1,15 @@
+google: &google
+  service: GCS
+  project: <%= ENV['GOOGLE_CLOUD_PROJECT'] %>
+  keyfile: <%= ENV['GOOGLE_CLOUD_KEYFILE'] %>
+  bucket: <%= ENV['GOOGLE_CLOUD_PROJECT'].underscore %>
+
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
+
+development:
+  <<: *google
+
+production:
+  <<: *google
