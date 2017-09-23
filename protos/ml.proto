@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+service RPC {
+  rpc CountCrowd (CountCrowdRequest) returns (CountCrowdReply) {}
+}
+
+message CountCrowdRequest {
+  bytes image = 1;
+}
+
+message CountCrowdReply {
+  string version = 1;
+  bytes density_map = 2;
+  float crowd_count = 3;
+  float line_count = 4;
+}

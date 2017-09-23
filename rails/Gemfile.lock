@@ -196,6 +196,9 @@ GEM
       mime-types (~> 3.0)
       representable (~> 3.0)
       retriable (>= 2.0, < 4.0)
+    google-protobuf (3.4.1.1)
+    googleapis-common-protos-types (1.0.0)
+      google-protobuf (~> 3.0)
     googleauth (0.5.3)
       faraday (~> 0.12)
       jwt (~> 1.4)
@@ -204,6 +207,11 @@ GEM
       multi_json (~> 1.11)
       os (~> 0.9)
       signet (~> 0.7)
+    grpc (1.6.2)
+      google-protobuf (~> 3.1)
+      googleapis-common-protos-types (~> 1.0.0)
+      googleauth (~> 0.5.1)
+    grpc-tools (1.6.2)
     httpclient (2.8.3)
     i18n (0.8.6)
     jquery-rails (4.3.1)
@@ -376,6 +384,8 @@ DEPENDENCIES
   friendly_id
   fuubar
   google-cloud-storage!
+  grpc
+  grpc-tools
   jquery-rails
   jshint!
   listen (>= 3.0.5, < 3.2)

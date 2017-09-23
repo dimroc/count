@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Generate Ruby
+mkdir -p ../rails/lib/rpc
+grpc_tools_ruby_protoc --proto_path=. \
+  --grpc_out=../rails/lib/rpc \
+  --ruby_out=../rails/lib/rpc \
+  ml.proto
+
+# Generate Python
+mkdir -p ../ml/crowdcount/rpc
+python -m grpc_tools.protoc --proto_path=. \
+  --python_out=../ml/crowdcount/rpc \
+  --grpc_python_out=../ml/crowdcount/rpc \
+  ml.proto
