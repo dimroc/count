@@ -1,11 +1,11 @@
 class Prediction::Shakecam < Prediction
   class << self
     def fetch!
-      now = DateTime.now.to_i
-      url = "https://cdn.shakeshack.com/camera.jpg?#{DateTime.now().to_i}"
-      destination = "shakecam-#{now}.jpg"
       prediction = create!
-      prediction.snapshot.attach io: open(url), filename: destination, content_type: "image/jpg"
+      timestamp = prediction.created_at.to_i
+      url = "https://cdn.shakeshack.com/camera.jpg?#{timestamp}"
+      destination = "shakecam-#{timestamp}.jpg"
+      prediction.snapshot.attach(io: open(url), filename: destination, content_type: "image/jpg")
       prediction.image.processed
       prediction
     end
@@ -16,6 +16,14 @@ class Prediction::Shakecam < Prediction
   end
 
   def predict!
+    io = bucket.file(image.key).download
+    puts "#{image.key}: #{io.size}"
+  end
 
+
+  private
+
+  def bucket
+    @bucket ||= snapshot.service.bucket
   end
 end
