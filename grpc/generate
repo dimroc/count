@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd "$(dirname "$0")"
+
 # Generate Ruby
 mkdir -p ../rails/lib/rpc
 grpc_tools_ruby_protoc --proto_path=. \
