@@ -37,5 +37,7 @@ module CountingCompany
     end
 
     config.active_storage.service = Rails.env.to_sym
+    config.eager_load_paths << "#{Rails.root}/lib"
+    config.eager_load = true
   end
 end

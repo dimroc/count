@@ -2,7 +2,7 @@
 # Source: ml.proto for package ''
 
 require 'grpc'
-require 'ml_pb'
+require_relative './ml_pb'
 
 module RPC
   class Service

@@ -5,4 +5,8 @@ namespace :prediction do
     puts "Saved to #{prediction.image.service_url}"
     prediction.predict!
   end
+
+  task :grpc => :environment do
+    RPC::Client.new.count_crowd(nil)
+  end
 end
