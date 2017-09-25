@@ -4,6 +4,7 @@ namespace :prediction do
     prediction = Prediction::Shakecam.fetch!
     puts "Saved to #{prediction.image.service_url}"
     prediction.predict!
+    end
   end
 
   task :grpc => :environment do

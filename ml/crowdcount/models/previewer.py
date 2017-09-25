@@ -97,7 +97,7 @@ class Previewer:
 
         ax = self.fig.add_subplot(self._next_plot_position())
         ax.imshow(self.prediction.density, cmap=self.CMAP)
-        ax.set_title("Predicted Crowd: {:.2f}\n\nPredicted Line: {:.4}".format(self.prediction.density.sum(), self.prediction.line))
+        ax.set_title("Predicted Crowd: {:.2f}\n\nPredicted Line: {:.4}".format(self.prediction.crowd, self.prediction.line))
 
     def _reset_plot_position(self):
         self.current_plot = 1

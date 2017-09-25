@@ -8,6 +8,9 @@ class Prediction::Shakecam < Prediction
       prediction.snapshot.attach(io: open(url), filename: destination, content_type: "image/jpg")
       prediction.image.processed
       prediction
+    rescue MiniMagick::Error
+      prediction.destroy if prediction
+      raise
     end
   end
 
@@ -18,12 +21,16 @@ class Prediction::Shakecam < Prediction
   def predict!
     io = bucket.file(image.key).download
     puts "#{image.key}: #{io.size}"
+    puts rpcclient.count_crowd(io)
   end
-
 
   private
 
   def bucket
     @bucket ||= snapshot.service.bucket
+  end
+
+  def rpcclient
+    @rpcclient ||= RPC::Client.new
   end
 end

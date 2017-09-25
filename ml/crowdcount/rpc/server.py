@@ -1,20 +1,32 @@
-import grpc
-import time
+from concurrent import futures
+from crowdcount.ml.predictor import Predictor
+import attr
 import crowdcount.rpc.ml_pb2 as ml_pb2
 import crowdcount.rpc.ml_pb2_grpc as ml_pb2_grpc
-from concurrent import futures
+import cv2
+import grpc
+import numpy as np
+import time
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 DEFAULT_PORT = 50051
 
 
+@attr.s
 class RPCServer(ml_pb2_grpc.RPCServicer):
+    predictor = attr.ib(default=attr.Factory(Predictor))
+
     def CountCrowd(self, request, context):
-        print("doing something with\n{}\n{}".format(request, context))
+        image = self._decode_image(request.image)
+        prediction = self.predictor.predict(image)
         return ml_pb2.CountCrowdReply(version="1",
-                                      density_map=None,
-                                      crowd_count=5,
-                                      line_count=2)
+                                      density_map=prediction.density,
+                                      crowd_count=prediction.crowd,
+                                      line_count=prediction.line)
+
+    def _decode_image(self, image_str):
+        image = np.fromstring(image_str, np.uint8)
+        return cv2.imdecode(image, cv2.IMREAD_COLOR).reshape(720, 720, 3)
 
 
 def serve():
