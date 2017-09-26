@@ -42,12 +42,15 @@ class Model:
     def __attrs_post_init__(self):
         self.model = _create_model(self.weights)
 
-    def predict(self, image):
-        return self.model.predict(ml.image_to_batch(image), batch_size=1)
+    def predict(self, image_array):
+        return self.model.predict(ml.image_to_batch(image_array), batch_size=1)
+
+    def summary(self):
+        return self.model.summary()
 
 
-def predict(image, existing_weights):
-    return Model(existing_weights).predict(image)
+def predict(image_array, existing_weights):
+    return Model(existing_weights).predict(image_array)
 
 
 def _create_model(existing_weights=None):

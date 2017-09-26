@@ -8,11 +8,11 @@ import matplotlib.pyplot as plt
 import os
 
 
-def show(path, prediction=None):
+def show(path, prediction=None, line_from_truth=None):
     Previewer().show(path, prediction)
 
 
-def save(dest, path, prediction=None):
+def save(dest, path, prediction=None, line_from_truth=None):
     Previewer().save(dest, path, prediction)
 
 
@@ -22,10 +22,12 @@ class Previewer:
     fig = attr.ib(default=plt.figure(figsize=(8, 6), dpi=100))
     just_predictions = attr.ib(default=False)
     prediction = attr.ib(default=attr.Factory(Prediction))
+    line_from_truth = attr.ib(default=attr.Factory(Prediction))
 
-    def _normalize_input(self, path, prediction):
+    def _normalize_input(self, path, prediction, line_from_truth):
         self.path = path
         self.prediction = prediction if prediction else Prediction()
+        self.line_from_truth = line_from_truth if line_from_truth else Prediction()
         try:
             self.annotations = groundtruth.get(self.path)
         except KeyError:
@@ -36,15 +38,15 @@ class Previewer:
         except KeyError:
             self.true_line = "N/A"
 
-    def show(self, path, prediction):
-        self._normalize_input(path, prediction)
+    def show(self, path, prediction, line_from_truth=None):
+        self._normalize_input(path, prediction, line_from_truth)
         print("Displaying {}".format(self.path))
         self._draw()
         plt.show(block=False)
         return input("Continue? [y]/n: ")
 
-    def save(self, dest, path, prediction):
-        self._normalize_input(path, prediction)
+    def save(self, dest, path, prediction, line_from_truth=None):
+        self._normalize_input(path, prediction, line_from_truth)
         print("Saving to {}".format(dest))
         self._draw()
         if self.prediction.density is not None and self.just_predictions:
@@ -89,7 +91,7 @@ class Previewer:
         ax = self.fig.add_subplot(self._next_plot_position())
         dm = density_map.generate(self.path, self.annotations)
         ax.imshow(dm, cmap=self.CMAP)
-        ax.set_title("True Crowd: {:.2f}\nTrue Line: {}\nPredicted Line: {:.4}".format(dm.sum(), self.true_line, self.prediction.line_from_truth))
+        ax.set_title("True Crowd: {:.3}\nTrue Line: {}\nPredicted Line: {:.4}".format(dm.sum(), self.true_line, self.line_from_truth.line))
 
     def _render_prediction(self):
         if self.prediction.density is None:
@@ -97,7 +99,7 @@ class Previewer:
 
         ax = self.fig.add_subplot(self._next_plot_position())
         ax.imshow(self.prediction.density, cmap=self.CMAP)
-        ax.set_title("Predicted Crowd: {:.2f}\n\nPredicted Line: {:.4}".format(self.prediction.crowd, self.prediction.line))
+        ax.set_title("Predicted Crowd: {:.3}\n\nPredicted Line: {:.4}".format(self.prediction.crowd, self.prediction.line))
 
     def _reset_plot_position(self):
         self.current_plot = 1

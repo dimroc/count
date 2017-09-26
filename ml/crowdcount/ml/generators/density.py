@@ -37,6 +37,6 @@ def _load_features_labels(path):
     of different dimensions, and numpy doesn't support arrays with
     variable widths and heights.
     """
-    x = ml.image_to_batch(datapath(path))
+    x = ml.image_to_batch(ml.load_img(datapath(path)))
     y = density_map.generate_3d(datapath(path), groundtruth.get(path))[np.newaxis]
     return x, y
