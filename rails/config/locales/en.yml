@@ -31,3 +31,21 @@
 
 en:
   hello: "Hello world"
+  datetime:
+    formats:
+      default: "%-I:%M %p %Z, %B %d, %Y"
+      calendar: "%m/%d/%Y"
+      month_day: "%M %d, %Y"
+  date:
+    formats:
+      default: "%B %d, %Y"
+      calendar: "%m/%d/%Y"
+      month_day: "%M %d, %Y"
+  time:
+    formats:
+      default: "%-I:%M %p %Z, %B %d, %Y"
+      calendar: "%m/%d/%Y"
+      calendar_time: "%m/%d/%Y %-I:%M%p"
+      calendar_timezone: "%-I:%M%p %Z %m/%d/%Y"
+      calendar_timezone_reverse: "%m/%d/%Y %-I:%M%p %Z"
+      month_day: "%B %d, %Y"

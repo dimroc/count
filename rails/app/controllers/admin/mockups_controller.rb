@@ -8,7 +8,7 @@ class Admin::MockupsController < ApplicationController
   def show
     page = params[:id]
     validate page
-    render page
+    render page, layout: 'admin/mockups'
   end
 
   private

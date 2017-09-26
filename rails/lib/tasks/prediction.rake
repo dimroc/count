@@ -5,6 +5,6 @@ namespace :prediction do
     puts "Saved snapshot to #{prediction.image.service_url}"
     prediction.predict!
     puts "Density at #{prediction.density_map.service_url}"
-    puts prediction.to_s
+    puts prediction
   end
 end

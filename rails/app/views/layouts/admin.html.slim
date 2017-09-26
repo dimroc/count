@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title Counting Company
+    = csrf_meta_tags
+    = javascript_pack_tag    'vendor'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body.navbar-padding class=body_class
+    nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+      a.navbar-brand href="#" Admin
+      button.navbar-toggler aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarsExampleDefault" data-toggle="collapse" type="button" 
+        span.navbar-toggler-icon
+      #navbarsExampleDefault.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            = link_to "Predictions", admin_predictions_path, class: 'nav-link'
+          li.nav-item
+            = link_to "Mockups", admin_mockups_path, class: 'nav-link'
+    div.container
+      = yield
