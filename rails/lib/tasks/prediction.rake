@@ -9,7 +9,7 @@ namespace :prediction do
       puts prediction
       ActionCable.server.broadcast("admin_predictions", prediction: prediction.to_param)
     rescue StandardError
-      prediction.destroy unless prediction.destroyed?
+      prediction.destroy if prediction.present? and !prediction.destroyed?
       raise
     end
   end
