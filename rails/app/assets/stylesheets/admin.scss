@@ -1,3 +1,9 @@
-body.admin.navbar-padding {
-  padding-top: 5rem;
+body.admin {
+  &.navbar-padding {
+    padding-top: 5rem;
+  }
+
+  nav.navbar .notifications {
+    color: white;
+  }
 }

@@ -18,5 +18,7 @@ html
             = link_to "Predictions", admin_predictions_path, class: 'nav-link'
           li.nav-item
             = link_to "Mockups", admin_mockups_path, class: 'nav-link'
+        .my-2.my-lg-0
+          .notifications = content_for :notifications
     div.container
       = yield

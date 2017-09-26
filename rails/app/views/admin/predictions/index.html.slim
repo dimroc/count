@@ -1,5 +1,8 @@
 = paginate @predictions, theme: 'twitter-bootstrap-4'
 
+= content_for :notifications do
+  span.counter
+
 table.table.table-striped
   thead
     tr
@@ -13,7 +16,20 @@ table.table.table-striped
       tr
         td = prediction.created_at
         td = prediction.image_tag
-        td = image_tag prediction.density_map
+        td = prediction.density_map_tag
         td = prediction.crowd_count
         td = prediction.line_count
 
+javascript:
+  (function() {
+    var newerOnes = 0;
+
+    var incrementNewers = function() {
+      newerOnes += 1;
+      $(".notifications .counter").text(newerOnes + " new predictions");
+    };
+
+    App.cable.subscriptions.create(
+      { channel: "AdminChannel", room: "predictions" },
+      { received: function() { incrementNewers(); } });
+  })();
