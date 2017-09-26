@@ -2,11 +2,11 @@ class PredictionDecorator < ApplicationDecorator
   delegate_all
 
   def image_tag
-    h.image_tag object.image, width: 180, height: 180 if object.snapshot.attached?
+    h.image_tag(h.url_for(object.image), width: 180, height: 180) if object.snapshot.attached?
   end
 
   def density_map_tag
-    h.image_tag(object.density_map) if object.density_map.attached?
+    h.image_tag(h.url_for(object.density_map)) if object.density_map.attached?
   end
 
   def created_at
