@@ -16,5 +16,9 @@ def fetch_epoch(path):
     return 0
 
 
-def image_to_batch(path):
-    return kimg.img_to_array(kimg.load_img(path))[np.newaxis]
+def image_to_batch(image_array):
+    return kimg.img_to_array(image_array)[np.newaxis]
+
+
+def load_img(path):
+    return kimg.load_img(path)

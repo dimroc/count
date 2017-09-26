@@ -1,14 +1,16 @@
-from crowdcount.ml.predictor import Predictor
+from crowdcount.ml.prediction import Prediction
+from crowdcount.ml.predictor import Predictor, DEFAULT_WEIGHTS
 from crowdcount.models import paths as ccp, previewer as pwr, annotations as ants
 from django.core.management.base import BaseCommand
 from random import sample
+import crowdcount.ml as ml
 import os
 
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--image', default=None)
-        parser.add_argument('--weights', default=ccp.datapath("data/weights/floyd26.epoch42.hdf5"))
+        parser.add_argument('--weights', default=DEFAULT_WEIGHTS)
         parser.add_argument('--save', action='store_true', default=False)
         parser.add_argument('--just-predictions', action='store_true', default=False)
         parser.add_argument('--only-linecounts', action='store_true', default=False)
@@ -21,16 +23,23 @@ class Command(BaseCommand):
         else:
             images = [kwargs['image']]
 
-        predictor = Predictor(kwargs['weights'])
-        previewer = pwr.Previewer(just_predictions=kwargs['just_predictions'])
-        self._predict_images(images, predictor, previewer, kwargs['save'])
+        self.predictor = Predictor(kwargs['weights'])
+        self.previewer = pwr.Previewer(just_predictions=kwargs['just_predictions'])
+        self._predict_images(images, kwargs['save'])
 
-    def _predict_images(self, images, predictor, previewer, save=False):
+    def _predict_images(self, images, save=False):
         for image in images:
-            prediction = predictor.predict(image)
+            prediction = self.predictor.predict(ml.load_img(image))
+            truth = self._get_truth(image)
             if save:
                 dest = ccp.output("predictions/{}".format(os.path.basename(image)))
-                previewer.save(dest, image, prediction)
+                self.previewer.save(dest, image, prediction, truth)
             else:
-                if previewer.show(image, prediction) == 'n':
+                if self.previewer.show(image, prediction, truth) == 'n':
                     break
+
+    def _get_truth(self, path):
+        if "data/shakecam" in path:
+            return self.predictor.predict_from_truth(path)
+        else:
+            return Prediction()

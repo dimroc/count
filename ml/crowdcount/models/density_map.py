@@ -31,11 +31,15 @@ def generate_truth_batch(path, usemask=False):
     From an image path, generate the density map based on the ground truth
     as a batch of 1, ready for ml consumption.
     """
+    return generate_truth(path)[np.newaxis][..., None]
+
+
+def generate_truth(path, usemask=False):
     truth = generate(ccp.datapath(path), ants.groundtruth.get(path))
     if usemask:
-        return (truth * mask.array)[np.newaxis][..., None]
+        return (truth * mask.array)
     else:
-        return truth[np.newaxis][..., None]
+        return truth
 
 
 def _sum_heads(pixels, annotations, path):

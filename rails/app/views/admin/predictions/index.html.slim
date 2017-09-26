@@ -1,0 +1,19 @@
+= paginate @predictions, theme: 'twitter-bootstrap-4'
+
+table.table.table-striped
+  thead
+    tr
+      th Created At
+      th Source
+      th Density
+      th Crowd
+      th Line
+  tbody
+    - @predictions.decorate.each do |prediction|
+      tr
+        td = prediction.created_at
+        td = prediction.image_tag
+        td = image_tag prediction.density_map
+        td = prediction.crowd_count
+        td = prediction.line_count
+

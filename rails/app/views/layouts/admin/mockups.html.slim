@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title Counting Company Mockups
+    = csrf_meta_tags
+    = javascript_pack_tag    'vendor'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body class=body_class
+    = yield

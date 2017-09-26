@@ -1,3 +1,4 @@
+from crowdcount.ml.prediction import Prediction
 from crowdcount.models import previewer, paths as ccp
 from keras.callbacks import Callback
 import attr
@@ -19,14 +20,14 @@ class DensityCheckpoint(Callback):
         self._save_prediction("epoch_{:03}".format(epoch))
 
     def _save_prediction(self, label):
-        x = ml.image_to_batch(self.image_path)
+        x = ml.image_to_batch(ml.load_img(self.image_path))
         y = self.model.predict(x, batch_size=1)
         self._save_image(label, y)
 
     def _save_image(self, label, y):
         os.makedirs(self.output_dir, exist_ok=True)
         destination = "{}.jpg".format(os.path.join(self.output_dir, label))
-        previewer.save(destination, self.image_path, y)
+        previewer.save(destination, self.image_path, Prediction(y))
 
 
 @attr.s
@@ -49,4 +50,4 @@ class LineCountCheckpoint(Callback):
     def _save_result(self, name, y, inline):
         os.makedirs(self.output_dir, exist_ok=True)
         destination = "{}.jpg".format(os.path.join(self.output_dir, name))
-        previewer.save(destination, self.image_path, y, inline)
+        previewer.save(destination, self.image_path, Prediction(y, line=inline))

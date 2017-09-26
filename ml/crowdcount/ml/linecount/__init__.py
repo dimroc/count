@@ -10,4 +10,8 @@ def train(existing_weights=None):
     regression.Model(existing_weights).train()
 
 
+def summary():
+    return _instance.model.summary()
+
+
 _instance = regression.Model(ccp.datapath("data/weights/linecount.floyd14.epoch20.hdf5"))

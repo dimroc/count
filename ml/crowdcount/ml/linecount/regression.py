@@ -1,4 +1,4 @@
-from crowdcount.ml import fetch_epoch
+from crowdcount.ml import fetch_epoch, image_to_batch
 from crowdcount.ml.generators import linecount as generator
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
@@ -33,8 +33,9 @@ class Model:
                 optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-7),
                 metrics=['mse', 'mae', 'accuracy'])
 
-    def predict(self, x):
-        return float(self.model.predict(x * mask.batch_array, batch_size=1))
+    def predict(self, image_array):
+        x = image_array * mask.array
+        return float(self.model.predict(image_to_batch(x), batch_size=1))
 
     def train(self):
         print(self.model.summary())
