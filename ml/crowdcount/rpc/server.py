@@ -6,6 +6,7 @@ import crowdcount.rpc.ml_pb2 as ml_pb2
 import crowdcount.rpc.ml_pb2_grpc as ml_pb2_grpc
 import grpc
 import io
+import matplotlib.pyplot as plt
 import tensorflow as tf
 import time
 
@@ -26,13 +27,20 @@ class RPCServer(ml_pb2_grpc.RPCServicer):
             prediction = _predictor.predict(image)
             print("Prediction: {}".format(prediction))
             return ml_pb2.CountCrowdReply(version="1",
-                                          density_map=prediction.density.tobytes(),
+                                          density_map=self._encode_image(prediction.density),
                                           crowd_count=prediction.crowd,
                                           line_count=prediction.line)
 
     def _decode_image(self, image_str):
-        image = Image.open(io.BytesIO(image_str))
-        return image.convert('RGB')
+        return Image.open(io.BytesIO(image_str)).convert('RGB')
+
+    def _encode_image(self, density):
+        buf = io.BytesIO()
+        plt.imsave(buf, density, cmap='seismic', format='png')
+        buf.seek(0)
+        final = io.BytesIO()
+        Image.open(buf).convert("RGB").save(final, 'JPEG', quality=100)
+        return final.getvalue()
 
 
 def serve():

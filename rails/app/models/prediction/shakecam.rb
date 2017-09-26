@@ -20,8 +20,15 @@ class Prediction::Shakecam < Prediction
 
   def predict!
     io = bucket.file(image.key).download
-    puts "#{image.key}: #{io.size}"
-    puts rpcclient.count_crowd(io)
+    reply = rpcclient.count_crowd(io)
+    timestamp = created_at.to_i
+    self.density_map.attach(io: StringIO.new(reply.density_map),
+                       filename: "densitymap-#{timestamp}.jpg",
+                       content_type: "image/jpg")
+
+    update_attributes!(version: reply.version,
+                       crowd_count: reply.crowd_count,
+                       line_count: reply.line_count)
   end
 
   private

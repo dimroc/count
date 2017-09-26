@@ -4,9 +4,8 @@ module RPC
   class Client
     def count_crowd(image_io)
       image_io.rewind
-      image_string = image_io.read
-      request = CountCrowdRequest.new(version: "1", image: image_string)
-      puts stub.count_crowd(request)
+      request = CountCrowdRequest.new(version: "1", image: image_io.read)
+      stub.count_crowd(request)
     end
 
     private
