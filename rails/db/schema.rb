@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_09_23_112726) do
+ActiveRecord::Schema.define(version: 2017_09_26_043310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 2017_09_23_112726) do
   end
 
   create_table "predictions", force: :cascade do |t|
-    t.integer "crowd_count"
-    t.integer "line_count"
+    t.float "crowd_count"
+    t.float "line_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type"

@@ -31,6 +31,10 @@ class Prediction::Shakecam < Prediction
                        line_count: reply.line_count)
   end
 
+  def to_s
+    "Version: #{version}, Crowd: #{crowd_count}, Line: #{line_count}"
+  end
+
   private
 
   def bucket
