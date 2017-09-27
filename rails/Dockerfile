@@ -3,7 +3,7 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs im
 
 WORKDIR /app
 COPY . ./
-RUN bundle install --jobs 20 --retry 5
+RUN bundle install --retry 2
 RUN bundle exec rake assets:precompile
 
 ENV RAILS_ENV production
