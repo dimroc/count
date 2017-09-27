@@ -4,10 +4,10 @@ import sys
 import matplotlib
 
 
-if 'FLOYD' in os.environ:
-    matplotlib.use('Agg')
-else:
+if '_system_name' in os.environ and os.environ['_system_name'] == 'OSX':
     matplotlib.use('TKAgg')
+else:
+    matplotlib.use('Agg')
 
 
 if __name__ == "__main__":

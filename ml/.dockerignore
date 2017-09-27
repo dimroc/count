@@ -99,7 +99,9 @@ ENV/
 .mypy_cache/
 
 ## Custom
-data/
+data/mall
+data/shakecam
+data/ucf
 __pycache__
 tmp
 tags

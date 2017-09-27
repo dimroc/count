@@ -1,4 +1,4 @@
-REPO=dimroc/counting_company
+REPO=dimroc/counting_company_ml
 
 .DEFAULT_GOAL := build
 .PHONY: build push ecr-push
