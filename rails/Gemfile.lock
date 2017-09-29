@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/dimroc/google-cloud-ruby.git
-  revision: 8e22fa82a656110c1e852c37603f96de2a228d70
+  revision: 0537fbe1f781586a2f55c605faa37172896821f5
   specs:
     google-cloud-core (1.0.0)
       google-cloud-env (~> 1.0)
