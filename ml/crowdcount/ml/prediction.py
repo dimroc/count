@@ -2,9 +2,16 @@ import attr
 import numpy as np
 
 
+def _density_converter(original):
+    if original is not None:
+        return np.squeeze(original)
+    else:
+        return None
+
+
 @attr.s(frozen=True)
 class Prediction:
-    density = attr.ib(default=None, convert=np.squeeze)
+    density = attr.ib(default=None, convert=_density_converter)
     crowd = attr.ib(default="N/A")
     line = attr.ib(default="N/A")
 
