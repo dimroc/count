@@ -5,6 +5,8 @@ import glob
 import os
 import re
 
+package_directory = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../.."))
+
 
 def datapath(path):
     """
@@ -14,7 +16,7 @@ def datapath(path):
     if 'FLOYD' in os.environ:
         return os.path.join("/", path)
     else:
-        return path
+        return os.path.join(package_directory, path)
 
 
 def defloyd_path(path):
@@ -25,7 +27,7 @@ def output(p=''):
     if 'FLOYD' in os.environ:
         return os.path.join("/output", p)
     else:
-        return os.path.join("tmp", p)
+        return os.path.join(package_directory, "tmp", p)
 
 
 def datasets():

@@ -13,7 +13,7 @@ test:
   root: <%= Rails.root.join("tmp/storage") %>
 
 development:
-  <<: *local
+  <<: *google
 
 production:
   <<: *google
