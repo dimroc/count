@@ -5,7 +5,9 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --retry 2
 COPY . ./
-RUN bundle exec rake assets:precompile
+
+# Make RAILS_ENV test just for asset compilation, to prevent connection to GCS.
+RUN RAILS_ENV=test bundle exec rake assets:precompile
 
 ENV RAILS_ENV production
 ENV RACK_ENV production
