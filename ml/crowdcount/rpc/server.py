@@ -19,28 +19,34 @@ graph = tf.get_default_graph()
 _predictor = Predictor()
 
 
+def predict(image_str):
+    with graph.as_default():
+        image = _decode_image(image_str)
+        prediction = _predictor.predict(image)
+        print("Prediction: {}".format(prediction))
+        return ml_pb2.CountCrowdReply(version="1",
+                                      density_map=_encode_image(prediction.density),
+                                      crowd_count=prediction.crowd,
+                                      line_count=prediction.line)
+
+
+def _decode_image(image_str):
+    return Image.open(io.BytesIO(image_str)).convert('RGB')
+
+
+def _encode_image(density):
+    buf = io.BytesIO()
+    plt.imsave(buf, density, cmap='seismic', format='png')
+    buf.seek(0)
+    final = io.BytesIO()
+    Image.open(buf).convert("RGB").save(final, 'JPEG', quality=100)
+    return final.getvalue()
+
+
 @attr.s
 class RPCServer(ml_pb2_grpc.RPCServicer):
     def CountCrowd(self, request, context):
-        with graph.as_default():
-            image = self._decode_image(request.image)
-            prediction = _predictor.predict(image)
-            print("Prediction: {}".format(prediction))
-            return ml_pb2.CountCrowdReply(version="1",
-                                          density_map=self._encode_image(prediction.density),
-                                          crowd_count=prediction.crowd,
-                                          line_count=prediction.line)
-
-    def _decode_image(self, image_str):
-        return Image.open(io.BytesIO(image_str)).convert('RGB')
-
-    def _encode_image(self, density):
-        buf = io.BytesIO()
-        plt.imsave(buf, density, cmap='seismic', format='png')
-        buf.seek(0)
-        final = io.BytesIO()
-        Image.open(buf).convert("RGB").save(final, 'JPEG', quality=100)
-        return final.getvalue()
+        predict(request.image)
 
 
 def serve():

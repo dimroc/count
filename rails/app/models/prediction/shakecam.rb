@@ -42,6 +42,6 @@ class Prediction::Shakecam < Prediction
   end
 
   def rpcclient
-    @rpcclient ||= RPC::Client.new
+    @rpcclient ||= RPC::Client.default
   end
 end

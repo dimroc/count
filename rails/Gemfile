@@ -46,6 +46,7 @@ group :development, :test do
   gem 'jshint', github: 'dimroc/jshint'
   gem 'pry'
   gem 'pry-byebug'
+  gem 'pycall'
   gem 'rspec-rails'
 end
 
