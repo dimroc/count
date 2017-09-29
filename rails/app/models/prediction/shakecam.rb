@@ -19,8 +19,7 @@ class Prediction::Shakecam < Prediction
   end
 
   def predict!
-    io = bucket.file(image.key).download
-    reply = rpcclient.count_crowd(io)
+    reply = rpcclient.count_crowd(image.blob.download)
     timestamp = created_at.to_i
     self.density_map.attach(io: StringIO.new(reply.density_map),
                        filename: "densitymap-#{timestamp}.jpg",
@@ -36,10 +35,6 @@ class Prediction::Shakecam < Prediction
   end
 
   private
-
-  def bucket
-    @bucket ||= snapshot.service.bucket
-  end
 
   def rpcclient
     @rpcclient ||= RPC::Client.default
