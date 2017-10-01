@@ -1,9 +1,13 @@
-.PHONY: secrets deployment ssh info console
+.PHONY: secretfiles secrets service deployment ssh console info rollout rollback
 
 ROLLOUT_PATCH = '{"spec":{"template":{"spec":{"containers":[\
 	{"name":"rails","image":"RAILSIMAGE"},\
 	{"name":"ml","image":"MLIMAGE"}\
 	]}}}}'
+
+secretfiles:
+	kubectl create secret generic cloudstorage-instance-credentials --from-file=credentials.json=../secrets/gcloudstorage.production.json
+	kubectl create secret generic cloudsql-instance-credentials --from-file=credentials.json=../secrets/gcloudsql.json
 
 secrets:
 	kubectl create secret generic rails-environment --from-env-file=./rails.env --dry-run=true -o yaml | kubectl apply -f -
@@ -11,6 +15,7 @@ secrets:
 
 service:
 	kubectl apply -f ./service.yaml
+	kubectl apply -f ./ingress.yaml
 
 deployment:
 	kubectl apply -f ./deployment.yaml
@@ -23,7 +28,7 @@ console:
 
 info:
 	kubectl cluster-info
-	kubectl get services,deployments,rs,pods -o wide
+	kubectl get ingress,services,deployments,rs,pods -o wide
 
 rollout:
 	kubectl patch deployment railsml-deployment -p \
