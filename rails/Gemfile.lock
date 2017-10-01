@@ -153,6 +153,7 @@ GEM
     bootstrap4-kaminari-views (1.0.0)
       kaminari (>= 0.13)
       rails (>= 3.1)
+    bugsnag (5.3.3)
     builder (3.2.3)
     byebug (9.1.0)
     case_transform (0.2)
@@ -401,6 +402,7 @@ DEPENDENCIES
   auto_strip_attributes
   bootstrap (~> 4.0.0.beta)
   bootstrap4-kaminari-views
+  bugsnag
   byebug
   coffee-rails
   datafix!

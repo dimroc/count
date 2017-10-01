@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+import bugsnag
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+bugsnag.configure(release_stage=os.environ.get("DJANGO_ENV", "development"))
 
 # Application definition
 
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'bugsnag.django.middleware.BugsnagMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

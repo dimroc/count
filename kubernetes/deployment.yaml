@@ -24,6 +24,9 @@ spec:
                 name: rails-environment
         - name: ml
           image: us.gcr.io/counting-company-production/ml
+          envFrom:
+            - secretRef:
+                name: ml-environment
         # https://cloud.google.com/sql/docs/postgres/connect-container-engine
         - image: gcr.io/cloudsql-docker/gce-proxy:1.09
           name: cloudsql-proxy

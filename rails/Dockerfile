@@ -9,8 +9,6 @@ COPY . ./
 # Make RAILS_ENV test just for asset compilation, to prevent connection to GCS.
 RUN RAILS_ENV=test bundle exec rake assets:precompile
 
-ENV RAILS_ENV production
-ENV RACK_ENV production
 ENTRYPOINT ["/bin/bash", "-c"]
 CMD [ "bundle exec rails s" ]
 EXPOSE 3000
