@@ -1,16 +1,13 @@
 REPO=dimroc/counting_company_ml
+REMOTE=us.gcr.io/counting-company-production/ml
 
 .DEFAULT_GOAL := build
-.PHONY: build push ecr-push
+.PHONY: build push
 
 
 build:
 	docker build -t $(REPO) .
 
 push:
-	docker push $(REPO)
-
-ecr-push:
-	./bin/ecr-login
-	docker tag dimroc/counting_company:latest 654158331692.dkr.ecr.us-east-1.amazonaws.com/counting_company:latest
-	docker push 654158331692.dkr.ecr.us-east-1.amazonaws.com/counting_company:latest
+	docker tag $(REPO) $(REMOTE)
+	gcloud docker -- push $(REMOTE)

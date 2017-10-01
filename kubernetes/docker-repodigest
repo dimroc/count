@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z $1 ] ; then
+  echo "Type (ml/rails) parameter needed!" && exit 1;
+fi
+
+imageid=`docker images -f "reference=us.gcr.io/counting-company-production/$1:latest" | tail -n1 | awk '{ print $3; }'`
+dirtydigest=`docker inspect --format='{{.RepoDigests}}' $imageid`
+echo $dirtydigest | sed 's/^\[\(.*\)\]$/\1/'

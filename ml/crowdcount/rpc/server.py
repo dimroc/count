@@ -46,7 +46,7 @@ def _encode_image(density):
 @attr.s
 class RPCServer(ml_pb2_grpc.RPCServicer):
     def CountCrowd(self, request, context):
-        predict(request.image)
+        return predict(request.image)
 
 
 def serve():

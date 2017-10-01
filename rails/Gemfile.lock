@@ -153,6 +153,7 @@ GEM
     bootstrap4-kaminari-views (1.0.0)
       kaminari (>= 0.13)
       rails (>= 3.1)
+    bugsnag (5.3.3)
     builder (3.2.3)
     byebug (9.1.0)
     case_transform (0.2)
@@ -272,6 +273,7 @@ GEM
     minitest (5.10.3)
     multi_json (1.12.2)
     multipart-post (2.0.0)
+    newrelic_rpm (4.5.0.337)
     nio4r (2.1.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
@@ -401,6 +403,7 @@ DEPENDENCIES
   auto_strip_attributes
   bootstrap (~> 4.0.0.beta)
   bootstrap4-kaminari-views
+  bugsnag
   byebug
   coffee-rails
   datafix!
@@ -421,6 +424,7 @@ DEPENDENCIES
   kaminari
   listen (>= 3.0.5, < 3.2)
   mini_magick
+  newrelic_rpm
   pg (~> 0.18)
   pry
   pry-byebug

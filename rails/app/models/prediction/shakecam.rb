@@ -15,11 +15,11 @@ class Prediction::Shakecam < Prediction
   end
 
   def image
-    snapshot.variant(crop: "720x720+0+0")
+    snapshot.variant(crop: "720x720+0+0").processed
   end
 
   def predict!
-    reply = rpcclient.count_crowd(image.blob.download)
+    reply = rpcclient.count_crowd(image.service.download(image.key))
     timestamp = created_at.to_i
     self.density_map.attach(io: StringIO.new(reply.density_map),
                        filename: "densitymap-#{timestamp}.jpg",
