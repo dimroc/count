@@ -10,10 +10,10 @@ deployment:
 	kubectl apply -f ./deployment.yaml
 
 ssh:
-	kubectl exec -it railsml-deployment-2545220740-1sw0p -c rails -- /bin/bash
+	kubectl exec -it $(POD) -c rails -- /bin/bash
 
 console:
-	kubectl exec -it railsml-deployment-2545220740-1sw0p -c rails -- bundle exec rails console
+	kubectl exec -it $(POD) -c rails -- bundle exec rails console
 
 info:
 	kubectl cluster-info
