@@ -1,9 +1,9 @@
-FROM starefossen/ruby-node:2-8
+FROM dimroc/docker-ruby-node
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs imagemagick
 
 WORKDIR /app
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --retry 2
+RUN bundle install --retry 2 --without development test
 COPY . ./
 
 # Make RAILS_ENV test just for asset compilation, to prevent connection to GCS.
