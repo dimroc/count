@@ -1,0 +1,16 @@
+# https://engineering.adwerx.com/rails-on-kubernetes-8cd4940eacbe
+# ./kube/web-autoscaler.yml
+apiVersion: extensions/v1beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web
+  namespace: default
+spec:
+  scaleRef:
+    kind: Deployment
+    name: web
+    subresource: scale
+  minReplicas: 2
+  maxReplicas: 10
+  cpuUtilization:
+    targetPercentage: 70
