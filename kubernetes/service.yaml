@@ -1,11 +1,11 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: rails-service
+  name: railsml-service
 spec:
   selector:
     app: railsml
-  type: LoadBalancer
+  type: NodePort
   ports:
   - name: http
     protocol: TCP
