@@ -1,8 +1,8 @@
 .PHONY: secrets deployment ssh info console
 
 ROLLOUT_PATCH = '{"spec":{"template":{"spec":{"containers":[\
-	{"name":"rails","image":"us.gcr.io/counting-company-production/rails:latest"},\
-	{"name":"ml","image":"us.gcr.io/counting-company-production/ml:latest"}\
+	{"name":"rails","image":"RAILSIMAGE"},\
+	{"name":"ml","image":"MLIMAGE"}\
 	]}}}}'
 
 secrets:
@@ -26,7 +26,8 @@ info:
 	kubectl get services,deployments,rs,pods -o wide
 
 rollout:
-	kubectl patch deployment railsml-deployment -p $(ROLLOUT_PATCH)
+	kubectl patch deployment railsml-deployment -p \
+		$(subst RAILSIMAGE,$(shell ./docker-repodigest rails),$(subst MLIMAGE,$(shell ./docker-repodigest ml),$(ROLLOUT_PATCH)))
 
 rollback:
 	kubectl rollout undo deployment/railsml-deployment
