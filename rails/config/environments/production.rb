@@ -90,4 +90,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.active_storage.service = :google
+  config.imgix = {
+    source: "countingcompany-production.imgix.net",
+    secure_url_token: "fPWGRJ37krZDYdMj",
+    hostname_to_replace: 'storage.googleapis.com'
+  }
 end
