@@ -1,4 +1,4 @@
-.PHONY: secretfiles secrets service deployment ssh console info rollout rollback
+.PHONY: secretfiles secrets service deployment ssh console info rollout rollback jobs
 
 ROLLOUT_PATCH = '{"spec":{"template":{"spec":{"containers":[\
 	{"name":"rails","image":"RAILSIMAGE"},\
@@ -28,7 +28,7 @@ console:
 
 info:
 	kubectl cluster-info
-	kubectl get ingress,services,deployments,rs,pods -o wide
+	kubectl get ingress,services,deployments,rs,pods,jobs -o wide
 
 rollout:
 	kubectl patch deployment railsml-deployment -p \
@@ -36,3 +36,6 @@ rollout:
 
 rollback:
 	kubectl rollout undo deployment/railsml-deployment
+
+jobs:
+	kubectl create -f ./jobs/dbupdate.yaml
