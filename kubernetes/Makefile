@@ -56,3 +56,4 @@ rollback:
 
 crons:
 	kubectl apply -f ./crons/shakecam.yaml
+	kubectl apply -f ./crons/dbtostorage.yaml
