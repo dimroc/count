@@ -1,4 +1,5 @@
-.PHONY: cloudsqlproxy rails ml secretfiles secrets ssh console info rollout rollback crons
+.PHONY: cloudsqlproxy rails ml secretfiles secrets staticip fixwebsockettimeout ssh
+.PHONY: console info rollout rollback crons
 
 ROLLOUT_PATCH = '{"spec":{"template":{"spec":{"containers":[\
 	{"name":"rails","image":"RAILSIMAGE"}\
@@ -27,6 +28,10 @@ secrets:
 
 staticip:
 	gcloud compute addresses create counting-company-production-ip --global
+
+fixwebsockettimeout:
+	# https://github.com/kubernetes/ingress/tree/master/controllers/gce/examples/websocket
+	gcloud compute backend-services update $(BACKEND) --global --timeout=86400
 
 ssh:
 	kubectl exec -it $(POD) -- /bin/bash
