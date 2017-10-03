@@ -1,9 +1,9 @@
-apiVersion: batch/v1beta1  # Have to wait on k8s >= 1.8
+apiVersion: batch/v2alpha1  # Have to wait on k8s >= 1.8 to be v1beta1
 kind: CronJob
 metadata:
   name: prediction-shakecam
 spec:
-  schedule: "*/2 * * * *"
+  schedule: "*/5 * * * *"
   jobTemplate:
     spec:
       template:
