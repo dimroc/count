@@ -4,26 +4,26 @@ ROLLOUT_PATCH = '{"spec":{"template":{"spec":{"containers":[\
 	{"name":"rails","image":"RAILSIMAGE"}\
 	]}}}}'
 
-sqlproxy:
-	kubectl apply -f sqlproxy-deployment.yaml
-	kubectl apply -f sqlproxy-service.yaml
+cloudsqlproxy:
+	kubectl apply -f cloudsqlproxy/deployment.yaml
+	kubectl apply -f cloudsqlproxy/service.yaml
 
 rails:
-	kubectl apply -f ./rails-deployment.yaml
-	kubectl apply -f ./rails-service.yaml
-	kubectl apply -f ./ingress.yaml
+	kubectl apply -f rails/deployment.yaml
+	kubectl apply -f rails/service.yaml
+	kubectl apply -f rails/ingress.yaml
 
 ml:
-	kubectl apply -f ./ml-deployment.yaml
-	kubectl apply -f ./ml-service.yaml
+	kubectl apply -f ml/deployment.yaml
+	kubectl apply -f ml/service.yaml
 
 secretfiles:
 	kubectl create secret generic cloudstorage-instance-credentials --from-file=credentials.json=../secrets/gcloudstorage.production.json
 	kubectl create secret generic cloudsql-instance-credentials --from-file=credentials.json=../secrets/gcloudsql.json
 
 secrets:
-	kubectl create secret generic rails-environment --from-env-file=./rails.env --dry-run=true -o yaml | kubectl apply -f -
-	kubectl create secret generic ml-environment --from-env-file=./ml.env --dry-run=true -o yaml | kubectl apply -f -
+	kubectl create secret generic rails-environment --from-env-file=rails/env --dry-run=true -o yaml | kubectl apply -f -
+	kubectl create secret generic ml-environment --from-env-file=ml/env --dry-run=true -o yaml | kubectl apply -f -
 
 ssh:
 	kubectl exec -it $(POD) -- /bin/bash
