@@ -8,7 +8,6 @@ spec:
       name: rake
     spec:
       restartPolicy: Never
-      backoffLimit: 1
       containers:
       - name: rails
         image: us.gcr.io/counting-company-production/rails
@@ -20,7 +19,7 @@ spec:
             mountPath: /secrets
             readOnly: true
         command: ["rake"]
-        args: ["db:migrate", "db:seed"] # https://github.com/InQuicker/ktmpl
+        args: $$RAKECMD
       volumes:
         - name: cloudstorage-instance-credentials
           secret:

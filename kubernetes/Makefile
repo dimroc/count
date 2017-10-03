@@ -1,10 +1,10 @@
-.PHONY: cloudsqlproxy rails ml secretfiles secrets ssh console info rollout rollback jobs
+.PHONY: cloudsqlproxy rails ml secretfiles secrets ssh console info rollout rollback
 
 ROLLOUT_PATCH = '{"spec":{"template":{"spec":{"containers":[\
 	{"name":"rails","image":"RAILSIMAGE"}\
 	]}}}}'
 
-cloudsqlproxy:
+sqlproxy:
 	kubectl apply -f sqlproxy-deployment.yaml
 	kubectl apply -f sqlproxy-service.yaml
 
@@ -41,6 +41,3 @@ rollout:
 
 rollback:
 	kubectl rollout undo deployment/rails-deployment
-
-jobs:
-	kubectl create -f ./jobs/rake.yaml

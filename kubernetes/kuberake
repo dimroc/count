@@ -1,0 +1,10 @@
+#!/bin/bash
+
+function join_by { local d=$1; shift; echo -n "$1"; shift; printf "%s" "${@/#/$d}"; }
+
+template=`cat ./jobs/rake.yaml`
+joined=$(join_by \",\" $@)
+args=[\"$joined\"]
+job="${template//"\$\$RAKECMD"/$args}"
+echo "$job" | kubectl create -f -
+kubectl get pods -a
