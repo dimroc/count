@@ -43,6 +43,10 @@ info:
 	kubectl cluster-info
 	kubectl get ingress,services,deployments,rs,pods,jobs,cronjob -o wide
 
+proxy:
+	open 'http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard/proxy/#!/node?namespace=default'
+	kubectl proxy
+
 rollout:
 	kubectl patch deployment rails-deployment -p \
 		$(subst RAILSIMAGE,$(shell ./docker-repodigest rails),$(ROLLOUT_PATCH))
