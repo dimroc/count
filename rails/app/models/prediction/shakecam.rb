@@ -8,7 +8,7 @@ class Prediction::Shakecam < Prediction
       prediction.snapshot.attach(io: open(url), filename: destination, content_type: "image/jpg")
       prediction.image.processed
       prediction
-    rescue MiniMagick::Error
+    rescue MiniMagick::Error, MiniMagick::Invalid
       prediction.destroy if prediction
       raise
     end
