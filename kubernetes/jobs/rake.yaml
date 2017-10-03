@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rake
+spec:
+  template:
+    metadata:
+      name: rake
+    spec:
+      restartPolicy: Never
+      backoffLimit: 1
+      containers:
+      - name: rails
+        image: us.gcr.io/counting-company-production/rails
+        envFrom:
+          - secretRef:
+              name: rails-environment
+        volumeMounts:
+          - name: cloudstorage-instance-credentials
+            mountPath: /secrets
+            readOnly: true
+        command: ["rake"]
+        args: ["db:migrate", "db:seed"] # https://github.com/InQuicker/ktmpl
+      volumes:
+        - name: cloudstorage-instance-credentials
+          secret:
+            secretName: cloudstorage-instance-credentials

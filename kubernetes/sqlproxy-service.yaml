@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: sqlproxy-service
+spec:
+  selector:
+    app: cloudsqlproxy
+  ports:
+  - port: 5432
+    targetPort: 5432
+

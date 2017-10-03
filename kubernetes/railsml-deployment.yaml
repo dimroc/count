@@ -31,29 +31,7 @@ spec:
           envFrom:
             - secretRef:
                 name: ml-environment
-        # https://cloud.google.com/sql/docs/postgres/connect-container-engine
-        - image: gcr.io/cloudsql-docker/gce-proxy:1.09
-          name: cloudsql-proxy
-          command: ["/cloud_sql_proxy", "--dir=/cloudsql",
-                    "-instances=counting-company-production:us-east1:counting-company-production=tcp:5432",
-                    "-credential_file=/secrets/cloudsql/credentials.json"]
-          volumeMounts:
-            - name: cloudsql-instance-credentials
-              mountPath: /secrets/cloudsql
-              readOnly: true
-            - name: ssl-certs
-              mountPath: /etc/ssl/certs
-            - name: cloudsql
-              mountPath: /cloudsql
       volumes:
-        - name: cloudsql-instance-credentials
-          secret:
-            secretName: cloudsql-instance-credentials
         - name: cloudstorage-instance-credentials
           secret:
             secretName: cloudstorage-instance-credentials
-        - name: ssl-certs
-          hostPath:
-            path: /etc/ssl/certs
-        - name: cloudsql
-          emptyDir:
