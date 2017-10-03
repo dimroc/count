@@ -4,5 +4,5 @@ metadata:
   name: web-ingress
 spec:
   backend:
-    serviceName: railsml-service
+    serviceName: rails-service
     servicePort: 80
