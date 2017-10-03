@@ -5,8 +5,7 @@ require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "CountCrowdRequest" do
-    optional :version, :string, 1
-    optional :image, :bytes, 2
+    optional :image, :bytes, 1
   end
   add_message "CountCrowdReply" do
     optional :version, :string, 1
