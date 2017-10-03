@@ -1,4 +1,4 @@
-.PHONY: cloudsqlproxy rails ml secretfiles secrets ssh console info rollout rollback
+.PHONY: cloudsqlproxy rails ml secretfiles secrets ssh console info rollout rollback crons
 
 ROLLOUT_PATCH = '{"spec":{"template":{"spec":{"containers":[\
 	{"name":"rails","image":"RAILSIMAGE"}\
@@ -41,3 +41,6 @@ rollout:
 
 rollback:
 	kubectl rollout undo deployment/rails-deployment
+
+crons:
+	kubectl apply -f ./crons/shakecam.yaml

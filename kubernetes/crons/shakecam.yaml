@@ -1,0 +1,27 @@
+apiVersion: batch/v1beta1  # Have to wait on k8s >= 1.8
+kind: CronJob
+metadata:
+  name: prediction-shakecam
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: rails
+            image: us.gcr.io/counting-company-production/rails
+            envFrom:
+              - secretRef:
+                  name: rails-environment
+            volumeMounts:
+              - name: cloudstorage-instance-credentials
+                mountPath: /secrets
+                readOnly: true
+            command: ["rake"]
+            args: ["prediction:shakecam"]
+          volumes:
+            - name: cloudstorage-instance-credentials
+              secret:
+                secretName: cloudstorage-instance-credentials
