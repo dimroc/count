@@ -1,9 +1,7 @@
 .PHONY: cloudsqlproxy rails ml secretfiles secrets staticip fixwebsockettimeout ssh
 .PHONY: console info rollout rollback crons
 
-ROLLOUT_PATCH = '{"spec":{"template":{"spec":{"containers":[\
-	{"name":"rails","image":"RAILSIMAGE"}\
-	]}}}}'
+ROLLOUT_PATCH = '{"spec":{"template":{"spec":{"containers":[{"name":"CONTNAME","image":"CONTSHA"}]}}}}'
 
 cloudsqlproxy:
 	kubectl apply -f cloudsqlproxy/deployment.yaml
@@ -49,7 +47,9 @@ proxy:
 
 rollout:
 	kubectl patch deployment rails-deployment -p \
-		$(subst RAILSIMAGE,$(shell ./docker-repodigest rails),$(ROLLOUT_PATCH))
+		$(subst CONTSHA,$(shell ./docker-repodigest rails),$(subst CONTNAME,rails,$(ROLLOUT_PATCH)))
+	kubectl patch deployment ml-deployment -p \
+		$(subst CONTSHA,$(shell ./docker-repodigest ml),$(subst CONTNAME,ml,$(ROLLOUT_PATCH)))
 
 rollback:
 	kubectl rollout undo deployment/rails-deployment
