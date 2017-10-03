@@ -36,7 +36,7 @@ console:
 
 info:
 	kubectl cluster-info
-	kubectl get ingress,services,deployments,rs,pods,jobs -o wide
+	kubectl get ingress,services,deployments,rs,pods,jobs,cronjob -o wide
 
 rollout:
 	kubectl patch deployment rails-deployment -p \
