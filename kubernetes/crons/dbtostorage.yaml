@@ -1,0 +1,30 @@
+apiVersion: batch/v2alpha1  # Have to wait on k8s >= 1.8 to be v1beta1
+kind: CronJob
+metadata:
+  name: dbtostorage
+spec:
+  schedule: "3 * * * *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: rails
+            image: us.gcr.io/counting-company-production/rails
+            envFrom:
+              - secretRef:
+                  name: rails-environment
+            volumeMounts:
+              - name: cloudstorage-instance-credentials
+                mountPath: /secrets
+                readOnly: true
+            command: ["rake"]
+            args: ["db:dump_gcs"]
+          volumes:
+            - name: cloudstorage-instance-credentials
+              secret:
+                secretName: cloudstorage-instance-credentials
+
