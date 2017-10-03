@@ -28,7 +28,7 @@ module RPC
     end
 
     def count_crowd(image_str)
-      request = CountCrowdRequest.new(version: "1", image: image_str)
+      request = CountCrowdRequest.new(image: image_str)
       stub.count_crowd(request)
     end
   end

@@ -5,8 +5,7 @@ service RPC {
 }
 
 message CountCrowdRequest {
-  string version = 1;
-  bytes image = 2;
+  bytes image = 1;
 }
 
 message CountCrowdReply {
