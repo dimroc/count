@@ -1,0 +1,9 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ml-service
+spec:
+  selector:
+    app: ml
+  ports:
+  - port: 50051

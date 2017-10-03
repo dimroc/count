@@ -4,8 +4,8 @@ metadata:
   name: rails-service
 spec:
   selector:
-    app: railsml
-  type: LoadBalancer
+    app: rails
+  type: NodePort
   ports:
   - name: http
     protocol: TCP

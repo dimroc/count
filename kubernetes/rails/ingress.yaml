@@ -1,0 +1,10 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: web-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: counting-company-production-ip
+spec:
+  backend:
+    serviceName: rails-service
+    servicePort: 80

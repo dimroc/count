@@ -1,12 +1,12 @@
 development:
   adapter: redis
   url: redis://localhost:6379/1
-  channel_prefix: counting_company_production
+  channel_prefix: counting-company-development
 
 test:
   adapter: async
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
-  channel_prefix: counting_company_production
+  url: <%= ENV["REDIS_URL"] %>
+  channel_prefix: cable-production

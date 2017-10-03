@@ -23,7 +23,7 @@ module RPC
     end
 
     attr_reader :stub
-    def initialize(stub=Stub.new('localhost:50051', :this_channel_is_insecure))
+    def initialize(stub=Stub.new(Rails.application.secrets.ml_url, :this_channel_is_insecure))
       @stub = stub
     end
 
