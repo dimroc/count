@@ -186,8 +186,6 @@ GEM
       activesupport (~> 5.0)
       request_store (~> 1.0)
     erubi (1.6.1)
-    et-orbi (1.0.5)
-      tzinfo
     execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
@@ -341,8 +339,6 @@ GEM
     rspec-support (3.6.0)
     ruby-progressbar (1.8.3)
     ruby_dep (1.5.0)
-    rufus-scheduler (3.4.2)
-      et-orbi (~> 1.0)
     sass (3.5.1)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -443,7 +439,6 @@ DEPENDENCIES
   rails!
   redis (~> 3.3)
   rspec-rails
-  rufus-scheduler
   sass-rails (~> 5.0)
   slim-rails
   spring
