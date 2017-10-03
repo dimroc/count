@@ -33,7 +33,6 @@ gem 'pundit'
 gem 'pycall'
 gem 'rails', github: 'rails/rails', ref: '8b139444dd419306e70792ff286ffecd75d67d23'
 gem 'redis', '~> 3.3'  # Temporary fix until ActionCable gets patched
-gem 'rufus-scheduler'
 gem 'sass-rails', '~> 5.0'
 gem 'slim-rails'
 gem 'sprockets', '4.0.0beta5'
