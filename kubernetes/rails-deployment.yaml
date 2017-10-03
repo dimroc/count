@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: railsml-deployment
+  name: rails-deployment
 spec:
   replicas: 1
   strategy:
@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: railsml
+        app: rails
     spec:
       containers:
         - name: rails
@@ -26,11 +26,6 @@ spec:
             - name: cloudstorage-instance-credentials
               mountPath: /secrets
               readOnly: true
-        - name: ml
-          image: us.gcr.io/counting-company-production/ml
-          envFrom:
-            - secretRef:
-                name: ml-environment
       volumes:
         - name: cloudstorage-instance-credentials
           secret:

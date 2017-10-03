@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: railsml-service
+  name: rails-service
 spec:
   selector:
-    app: railsml
+    app: rails
   type: NodePort
   ports:
   - name: http

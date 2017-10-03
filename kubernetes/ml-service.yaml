@@ -1,9 +1,9 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: sqlproxy-service
+  name: ml-service
 spec:
   selector:
-    app: cloudsqlproxy
+    app: ml
   ports:
-  - port: 5432
+  - port: 50051
