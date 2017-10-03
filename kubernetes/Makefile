@@ -25,6 +25,9 @@ secrets:
 	kubectl create secret generic rails-environment --from-env-file=rails/env --dry-run=true -o yaml | kubectl apply -f -
 	kubectl create secret generic ml-environment --from-env-file=ml/env --dry-run=true -o yaml | kubectl apply -f -
 
+staticip:
+	gcloud compute addresses create counting-company-production-ip --global
+
 ssh:
 	kubectl exec -it $(POD) -- /bin/bash
 
