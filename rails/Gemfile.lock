@@ -46,6 +46,14 @@ GIT
       multi_json (~> 1.0)
 
 GIT
+  remote: https://github.com/dimroc/shrine-google_cloud_storage.git
+  revision: 43813265ebc6d255b7a339575da74a8283c5eeb4
+  specs:
+    shrine-google_cloud_storage (0.2.0)
+      google-api-client (~> 0.13.0)
+      shrine (~> 2.0)
+
+GIT
   remote: https://github.com/rails/webpacker.git
   revision: 37d8ce2d79b9f7ac91c780be93168b27a5916550
   specs:
@@ -343,9 +351,6 @@ GEM
       tilt (>= 1.1, < 3)
     shrine (2.7.0)
       down (~> 4.1)
-    shrine-google_cloud_storage (0.2.0)
-      google-api-client (~> 0.13.0)
-      shrine (~> 2.0)
     shrine-memory (0.3.0)
       shrine (~> 2.2)
     signet (0.7.3)
@@ -444,7 +449,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   shrine
-  shrine-google_cloud_storage
+  shrine-google_cloud_storage!
   shrine-memory
   slim-rails
   spring
