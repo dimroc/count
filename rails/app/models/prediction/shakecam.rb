@@ -1,4 +1,7 @@
 class Prediction::Shakecam < Prediction
+  include ShakecamUploader[:snapshot]
+  include PredictionUploader[:density_map]
+
   class << self
     def predict!
       now = DateTime.now.to_i
@@ -14,5 +17,9 @@ class Prediction::Shakecam < Prediction
       prediction.destroy if prediction.present? and !prediction.destroyed?
       raise
     end
+  end
+
+  def image
+    snapshot[:cropped]
   end
 end

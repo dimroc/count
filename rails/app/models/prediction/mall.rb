@@ -1,4 +1,7 @@
 class Prediction::Mall < Prediction
+  include PredictionUploader[:snapshot]
+  include PredictionUploader[:density_map]
+
   class << self
     def predict!(url)
       io = open(url)
@@ -9,5 +12,9 @@ class Prediction::Mall < Prediction
               version: reply.version,
               crowd_count: reply.crowd_count)
     end
+  end
+
+  def image
+    snapshot
   end
 end

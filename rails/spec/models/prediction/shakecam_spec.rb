@@ -17,8 +17,7 @@ RSpec.describe Prediction::Shakecam, type: :model do
       let(:prediction) { FactoryGirl.create(:shakecam) }
       it "uses ml to guess the crowd and line count" do
         prediction = described_class.predict!
-        expect(prediction.snapshot).to be_present
-        expect(prediction.snapshot[:cropped]).to be_present
+        expect(prediction.snapshot[:cropped]).to be_a ShakecamUploader::UploadedFile
         expect(prediction.density_map).to be_present
         expect(prediction.crowd_count).to be_between(40, 65)
         expect(prediction.line_count).to be_between(20, 45)

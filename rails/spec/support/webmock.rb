@@ -26,7 +26,7 @@ module WebMockHelpers
 
     def mall_download_succeeds
       stub_request(:get, %r!https://dimroc-public.s3.amazonaws.com/mall/seq_\d+.jpg!).
-        to_return(:status => 200, :body => File.open(fixture_url('mall_001971.jpg')),
+        to_return(:status => 200, :body => File.open(fixture_url('mall_000001.jpg')),
                   :headers => {'Content-Type' => 'image/jpeg'})
     end
   end
