@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: redirect('admin/mockups')
     resources :mockups, only: [:index, :show]
-    resources :predictions, only: [:index]
+    resources :shakecams, only: [:index]
+    resources :malls, only: [:index]
   end
 end

@@ -4,10 +4,10 @@
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
-  add_message "CountCrowdRequest" do
+  add_message "CountRequest" do
     optional :image, :bytes, 1
   end
-  add_message "CountCrowdReply" do
+  add_message "CountReply" do
     optional :version, :string, 1
     optional :density_map, :bytes, 2
     optional :crowd_count, :float, 3
@@ -15,5 +15,5 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
 end
 
-CountCrowdRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("CountCrowdRequest").msgclass
-CountCrowdReply = Google::Protobuf::DescriptorPool.generated_pool.lookup("CountCrowdReply").msgclass
+CountRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("CountRequest").msgclass
+CountReply = Google::Protobuf::DescriptorPool.generated_pool.lookup("CountReply").msgclass

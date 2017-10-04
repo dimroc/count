@@ -19,15 +19,23 @@ graph = tf.get_default_graph()
 _predictor = Predictor()
 
 
-def predict(image_str):
+def predict_crowd(image_str):
+    return _predict(image_str, _predictor.predict_crowd)
+
+
+def predict_line(image_str):
+    return _predict(image_str, _predictor.predict_line)
+
+
+def _predict(image_str, method):
     with graph.as_default():
         image = _decode_image(image_str)
-        prediction = _predictor.predict(image)
+        prediction = method(image)
         print("Prediction: {}".format(prediction))
-        return ml_pb2.CountCrowdReply(version="1",
-                                      density_map=_encode_image(prediction.density),
-                                      crowd_count=prediction.crowd,
-                                      line_count=prediction.line)
+        return ml_pb2.CountReply(version="1",
+                density_map=_encode_image(prediction.density),
+                crowd_count=prediction.crowd,
+                line_count=prediction.line)
 
 
 def _decode_image(image_str):
@@ -46,7 +54,10 @@ def _encode_image(density):
 @attr.s
 class RPCServer(ml_pb2_grpc.RPCServicer):
     def CountCrowd(self, request, context):
-        return predict(request.image)
+        return predict_crowd(request.image)
+
+    def CountLine(self, request, context):
+        return predict_line(request.image)
 
 
 def serve():
