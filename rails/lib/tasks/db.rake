@@ -3,7 +3,7 @@ require "google/cloud/storage"
 namespace :db do
   desc "Dumps the database to tmp/APP_NAME.dump"
   task :dump => :environment do
-    cmd = "pg_dump --verbose --clean --no-owner --no-acl --format=plain #{pg_dump_params} > #{dump_path}"
+    cmd = "pg_dump --verbose --clean --no-owner --no-acl --format=plain #{pg_dump_params} | gzip > #{dump_path}"
     puts cmd
     system cmd
   end
@@ -16,8 +16,7 @@ namespace :db do
 
   desc "Restores the database dump at tmp/APP_NAME.dump."
   task :restore => :environment do
-    #cmd = "pg_restore --verbose --host #{host} --clean --no-owner --no-acl --dbname #{db} #{dump_path}"
-    cmd = "psql #{db} < #{dump_path}"
+    cmd = "gunzip -c #{dump_path} | psql #{db}"
     Rake::Task["db:drop"].invoke
     Rake::Task["db:create"].invoke
     puts cmd
@@ -37,7 +36,7 @@ namespace :db do
     @bucket ||= begin
                   project = Rails.application.secrets.google_cloud_project
                   storage = Google::Cloud::Storage.new(project: project)
-                  storage.bucket Shrine.storages[:store].bucket
+                  storage.bucket "#{project}_ops"
                 end
   end
 
