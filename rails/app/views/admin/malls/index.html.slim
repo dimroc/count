@@ -9,7 +9,7 @@ table.table.table-striped
       th Density
       th Crowd
   tbody
-    - @predictions.decorate(with: PredictionDecorator).each do |prediction|
+    - PredictionDecorator.decorate_collection(@predictions).each do |prediction|
       tr
         td = prediction.id
         td = prediction.created_at
