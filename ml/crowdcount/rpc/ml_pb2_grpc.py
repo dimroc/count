@@ -16,8 +16,13 @@ class RPCStub(object):
     """
     self.CountCrowd = channel.unary_unary(
         '/RPC/CountCrowd',
-        request_serializer=ml__pb2.CountCrowdRequest.SerializeToString,
-        response_deserializer=ml__pb2.CountCrowdReply.FromString,
+        request_serializer=ml__pb2.CountRequest.SerializeToString,
+        response_deserializer=ml__pb2.CountReply.FromString,
+        )
+    self.CountLine = channel.unary_unary(
+        '/RPC/CountLine',
+        request_serializer=ml__pb2.CountRequest.SerializeToString,
+        response_deserializer=ml__pb2.CountReply.FromString,
         )
 
 
@@ -32,13 +37,25 @@ class RPCServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def CountLine(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_RPCServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'CountCrowd': grpc.unary_unary_rpc_method_handler(
           servicer.CountCrowd,
-          request_deserializer=ml__pb2.CountCrowdRequest.FromString,
-          response_serializer=ml__pb2.CountCrowdReply.SerializeToString,
+          request_deserializer=ml__pb2.CountRequest.FromString,
+          response_serializer=ml__pb2.CountReply.SerializeToString,
+      ),
+      'CountLine': grpc.unary_unary_rpc_method_handler(
+          servicer.CountLine,
+          request_deserializer=ml__pb2.CountRequest.FromString,
+          response_serializer=ml__pb2.CountReply.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
