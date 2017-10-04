@@ -7,7 +7,7 @@ namespace :prediction do
       prediction.predict!
       puts "Density at #{prediction.density_map.url}"
       puts prediction
-      ActionCable.server.broadcast("admin_predictions", prediction: prediction.to_param)
+      ActionCable.server.broadcast("admin_shakecams", prediction: prediction.to_param)
     rescue StandardError, RuntimeError
       prediction.destroy if prediction.present? and !prediction.destroyed?
       raise
