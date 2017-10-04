@@ -1,3 +1,5 @@
+require "google/cloud/storage"
+
 namespace :db do
   desc "Dumps the database to tmp/APP_NAME.dump"
   task :dump => :environment do
@@ -33,8 +35,9 @@ namespace :db do
 
   def bucket
     @bucket ||= begin
-                  storage = Google::Cloud::Storage.new(project: "#{Rails.application.class.parent_name.underscore}_#{Rails.env.underscore}")
-                  storage.bucket config.bucket
+                  project = Rails.application.secrets.google_cloud_project
+                  storage = Google::Cloud::Storage.new(project: project)
+                  storage.bucket Shrine.storages[:store].bucket
                 end
   end
 
