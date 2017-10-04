@@ -13,13 +13,7 @@ class PredictionUploader < Shrine
   def generate_location(io, context)
     name = super
     name = "#{name}.jpg" if File.extname(name).blank?
-    [ friendly_type(context[:record]), name ].join("/")
-  end
-
-  private
-
-  def friendly_type(record)
-    record.class.name.demodulize.underscore
+    [context[:record].friendly_type, name].join("/")
   end
 end
 

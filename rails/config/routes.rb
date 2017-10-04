@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     root to: redirect('admin/mockups')
     resources :mockups, only: [:index, :show]
     resources :shakecams, only: [:index]
+    resources :malls, only: [:index]
   end
 end
