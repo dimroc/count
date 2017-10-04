@@ -1,5 +1,5 @@
 from PIL import Image
-from crowdcount.ml.prediction import Prediction
+from crowdcount.ml.prediction import Prediction, PredictionDecorator
 from crowdcount.models import density_map
 from crowdcount.models.annotations import groundtruth
 import attr
@@ -28,6 +28,9 @@ class Previewer:
         self.path = path
         self.prediction = prediction if prediction else Prediction()
         self.line_from_truth = line_from_truth if line_from_truth else Prediction()
+
+        self.prediction = PredictionDecorator(self.prediction)
+        self.line_from_truth = PredictionDecorator(self.line_from_truth)
         try:
             self.annotations = groundtruth.get(self.path)
         except KeyError:

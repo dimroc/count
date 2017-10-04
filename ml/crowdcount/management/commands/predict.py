@@ -29,7 +29,7 @@ class Command(BaseCommand):
 
     def _predict_images(self, images, save=False):
         for image in images:
-            prediction = self.predictor.predict(ml.load_img(image))
+            prediction = self.predictor.predict_line(ml.load_img(image))
             truth = self._get_truth(image)
             if save:
                 dest = ccp.output("predictions/{}".format(os.path.basename(image)))
@@ -40,6 +40,6 @@ class Command(BaseCommand):
 
     def _get_truth(self, path):
         if "data/shakecam" in path:
-            return self.predictor.predict_from_truth(path)
+            return self.predictor.predict_line_from_truth(path)
         else:
             return Prediction()

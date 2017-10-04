@@ -28,8 +28,11 @@ module RPC
     end
 
     def count_crowd(image_str)
-      request = CountCrowdRequest.new(image: image_str.force_encoding("ascii-8bit"))
-      stub.count_crowd(request)
+      stub.count_crowd(CountRequest.new(image: image_str.force_encoding("ascii-8bit")))
+    end
+
+    def count_line(image_str)
+      stub.count_line(CountRequest.new(image: image_str.force_encoding("ascii-8bit")))
     end
   end
 end
