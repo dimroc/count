@@ -1,6 +1,6 @@
 require "image_processing/mini_magick"
 
-class SnapshotUploader < PredictionUploader
+class ShakecamUploader < PredictionUploader
   include ImageProcessing::MiniMagick
   plugin :processing
   plugin :versions

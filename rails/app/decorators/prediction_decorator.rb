@@ -2,7 +2,7 @@ class PredictionDecorator < ApplicationDecorator
   delegate_all
 
   def image_tag
-    h.ix_image_tag(object.snapshot[:cropped].url, { sizes: "180px" }) if object.snapshot
+    h.ix_image_tag(object.image.url, { sizes: "180px" }) if object.snapshot
   end
 
   def density_map_tag
