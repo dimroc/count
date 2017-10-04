@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='ml.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\x08ml.proto\"3\n\x11\x43ountCrowdRequest\x12\x0f\n\x07version\x18\x01 \x01(\t\x12\r\n\x05image\x18\x02 \x01(\x0c\"`\n\x0f\x43ountCrowdReply\x12\x0f\n\x07version\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65nsity_map\x18\x02 \x01(\x0c\x12\x13\n\x0b\x63rowd_count\x18\x03 \x01(\x02\x12\x12\n\nline_count\x18\x04 \x01(\x02\x32;\n\x03RPC\x12\x34\n\nCountCrowd\x12\x12.CountCrowdRequest\x1a\x10.CountCrowdReply\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x08ml.proto\"\"\n\x11\x43ountCrowdRequest\x12\r\n\x05image\x18\x01 \x01(\x0c\"`\n\x0f\x43ountCrowdReply\x12\x0f\n\x07version\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65nsity_map\x18\x02 \x01(\x0c\x12\x13\n\x0b\x63rowd_count\x18\x03 \x01(\x02\x12\x12\n\nline_count\x18\x04 \x01(\x02\x32;\n\x03RPC\x12\x34\n\nCountCrowd\x12\x12.CountCrowdRequest\x1a\x10.CountCrowdReply\"\x00\x62\x06proto3')
 )
 
 
@@ -33,15 +33,8 @@ _COUNTCROWDREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='version', full_name='CountCrowdRequest.version', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='image', full_name='CountCrowdRequest.image', index=1,
-      number=2, type=12, cpp_type=9, label=1,
+      name='image', full_name='CountCrowdRequest.image', index=0,
+      number=1, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -59,7 +52,7 @@ _COUNTCROWDREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=12,
-  serialized_end=63,
+  serialized_end=46,
 )
 
 
@@ -110,8 +103,8 @@ _COUNTCROWDREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=65,
-  serialized_end=161,
+  serialized_start=48,
+  serialized_end=144,
 )
 
 DESCRIPTOR.message_types_by_name['CountCrowdRequest'] = _COUNTCROWDREQUEST
@@ -140,8 +133,8 @@ _RPC = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=163,
-  serialized_end=222,
+  serialized_start=146,
+  serialized_end=205,
   methods=[
   _descriptor.MethodDescriptor(
     name='CountCrowd',

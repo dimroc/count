@@ -1,9 +1,9 @@
 apiVersion: batch/v2alpha1  # Have to wait on k8s >= 1.8 to be v1beta1
 kind: CronJob
 metadata:
-  name: prediction-shakecam
+  name: dbtostorage
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "3 * * * *"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
   jobTemplate:
@@ -22,8 +22,9 @@ spec:
                 mountPath: /secrets
                 readOnly: true
             command: ["rake"]
-            args: ["prediction:shakecam"]
+            args: ["db:dump_gcs"]
           volumes:
             - name: cloudstorage-instance-credentials
               secret:
                 secretName: cloudstorage-instance-credentials
+
