@@ -1,6 +1,6 @@
 class Prediction::Mall < Prediction
   class << self
-    def fetch!(url)
+    def predict!(url)
       io = open(url)
       reply = RPC::Client.default.count_crowd(io.read)
       io.rewind
