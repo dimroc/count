@@ -7,7 +7,7 @@ RSpec.describe Prediction::Shakecam, type: :model do
       it "uses ml to guess the crowd and line count" do
         expect {
           described_class.fetch!
-        }.to raise_error MiniMagick::Invalid
+        }.to raise_error ActiveRecord::RecordInvalid
         expect(Prediction::Shakecam.count).to eq 0
       end
     end
@@ -16,11 +16,11 @@ RSpec.describe Prediction::Shakecam, type: :model do
   describe "#predict!" do
     let(:prediction) { FactoryGirl.create(:shakecam) }
     it "uses ml to guess the crowd and line count" do
-      expect(prediction.density_map).to_not be_attached
+      expect(prediction.density_map).to be_blank
       expect(prediction.crowd_count).to be_blank
       expect(prediction.line_count).to be_blank
       prediction.predict!
-      expect(prediction.reload.density_map).to be_attached
+      expect(prediction.reload.density_map).to be_present
       expect(prediction.crowd_count).to be_between(40, 65)
       expect(prediction.line_count).to be_between(20, 45)
     end

@@ -1,31 +1,15 @@
 class Prediction::Shakecam < Prediction
   class << self
     def fetch!
-      prediction = create!
-      timestamp = prediction.created_at.to_i
-      url = "https://cdn.shakeshack.com/camera.jpg?#{timestamp}"
-      destination = "shakecam-#{timestamp}.jpg"
-      prediction.snapshot.attach(io: open(url), filename: destination, content_type: "image/jpg")
-      prediction.image.processed
-      prediction
-    rescue MiniMagick::Error, MiniMagick::Invalid
-      prediction.destroy if prediction
-      raise
+      url = "https://cdn.shakeshack.com/camera.jpg?#{DateTime.now.to_i}"
+      create!(snapshot: open(url))
     end
   end
 
-  def image
-    snapshot.variant(crop: "720x720+0+0")
-  end
-
   def predict!
-    reply = rpcclient.count_crowd(image.service.download(image.processed.key))
-    timestamp = created_at.to_i
-    self.density_map.attach(io: StringIO.new(reply.density_map),
-                       filename: "densitymap-#{timestamp}.jpg",
-                       content_type: "image/jpg")
-
-    update_attributes!(version: reply.version,
+    reply = rpcclient.count_crowd(snapshot[:cropped].read)
+    update_attributes!(density_map: StringIO.new(reply.density_map),
+                       version: reply.version,
                        crowd_count: reply.crowd_count,
                        line_count: reply.line_count)
   end
