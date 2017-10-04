@@ -9,7 +9,6 @@ Shrine.storages = {
 
 Shrine::Storage::GoogleCloudStorage.new(
   bucket: bucket,
-  default_acl: 'publicRead',
   object_options: {
     cache_control: 'public, max-age: 31536000'
   },
