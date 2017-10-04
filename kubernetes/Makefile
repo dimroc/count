@@ -17,12 +17,15 @@ ml:
 	kubectl apply -f ml/service.yaml
 
 secretfiles:
-	kubectl create secret generic cloudstorage-instance-credentials --from-file=credentials.json=../secrets/gcloudstorage.production.json
 	kubectl create secret generic cloudsql-instance-credentials --from-file=credentials.json=../secrets/gcloudsql.json
 
 secrets:
 	kubectl create secret generic rails-environment --from-env-file=rails/env --dry-run=true -o yaml | kubectl apply -f -
 	kubectl create secret generic ml-environment --from-env-file=ml/env --dry-run=true -o yaml | kubectl apply -f -
+
+crons:
+	kubectl apply -f ./crons/shakecam.yaml
+	kubectl apply -f ./crons/dbtostorage.yaml
 
 staticip:
 	gcloud compute addresses create counting-company-production-ip --global
@@ -54,6 +57,4 @@ rollout:
 rollback:
 	kubectl rollout undo deployment/rails-deployment
 
-crons:
-	kubectl apply -f ./crons/shakecam.yaml
-	kubectl apply -f ./crons/dbtostorage.yaml
+bootstrap-cluster: cloudsqlproxy rails ml secretfiles secrets crons info

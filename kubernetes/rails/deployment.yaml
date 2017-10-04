@@ -22,11 +22,3 @@ spec:
           envFrom:
             - secretRef:
                 name: rails-environment
-          volumeMounts:
-            - name: cloudstorage-instance-credentials
-              mountPath: /secrets
-              readOnly: true
-      volumes:
-        - name: cloudstorage-instance-credentials
-          secret:
-            secretName: cloudstorage-instance-credentials
