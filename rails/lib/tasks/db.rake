@@ -33,10 +33,7 @@ namespace :db do
 
   def bucket
     @bucket ||= begin
-                  key = Rails.application.config.active_storage.service.to_s
-                  config = Rails.application.config.active_storage.service_configurations[key]
-                  config = OpenStruct.new config
-                  storage = Google::Cloud::Storage.new
+                  storage = Google::Cloud::Storage.new(project: "#{Rails.application.class.parent_name.underscore}_#{Rails.env.underscore}")
                   storage.bucket config.bucket
                 end
   end
