@@ -4,16 +4,8 @@ require 'shrine/storage/google_cloud_storage'
 bucket = "#{Rails.application.class.parent_name.underscore}_#{Rails.env.underscore}"
 Shrine.storages = {
   cache: Shrine::Storage::GoogleCloudStorage.new(bucket: "#{bucket}_cache"),
-  store: Shrine::Storage::GoogleCloudStorage.new(bucket: bucket),
+  store: Shrine::Storage::GoogleCloudStorage.new(bucket: bucket, prefix: 'uploads'),
 }
-
-Shrine::Storage::GoogleCloudStorage.new(
-  bucket: bucket,
-  default_acl: 'AllUsers:R',
-  object_options: {
-    cache_control: 'public, max-age: 31536000'
-  },
-)
 
 Shrine.plugin :activerecord
 Shrine.plugin :cached_attachment_data

@@ -4,7 +4,6 @@ class SnapshotUploader < PredictionUploader
   include ImageProcessing::MiniMagick
   plugin :processing
   plugin :versions
-  plugin :upload_options, store: { acl: "AllUsers:R" }
 
   process(:store) do |io, context|
     original = io.download

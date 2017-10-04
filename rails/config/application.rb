@@ -37,5 +37,11 @@ module CountingCompany
 
     config.eager_load_paths << "#{Rails.root}/lib"
     config.eager_load = true
+
+    config.imgix = {
+      source: "countingcompany.imgix.net",
+      secure_url_token: "fPWGRJ37krZDYdMj",
+      hostname_to_replace: 'storage.googleapis.com'
+    }
   end
 end
