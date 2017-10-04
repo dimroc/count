@@ -1,7 +1,7 @@
 require 'shrine'
 require 'shrine/storage/google_cloud_storage'
 
-bucket = "#{Rails.application.class.parent_name.underscore}_#{Rails.env.underscore}"
+bucket = Rails.application.secrets.google_cloud_project.underscore
 Shrine.storages = {
   cache: Shrine::Storage::GoogleCloudStorage.new(bucket: "#{bucket}_cache"),
   store: Shrine::Storage::GoogleCloudStorage.new(bucket: bucket, prefix: 'uploads'),
