@@ -17,14 +17,5 @@ spec:
             envFrom:
               - secretRef:
                   name: rails-environment
-            volumeMounts:
-              - name: cloudstorage-instance-credentials
-                mountPath: /secrets
-                readOnly: true
             command: ["rake"]
             args: ["db:dump_gcs"]
-          volumes:
-            - name: cloudstorage-instance-credentials
-              secret:
-                secretName: cloudstorage-instance-credentials
-

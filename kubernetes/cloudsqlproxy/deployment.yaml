@@ -33,8 +33,5 @@ spec:
         - name: cloudsql-instance-credentials
           secret:
             secretName: cloudsql-instance-credentials
-        - name: cloudstorage-instance-credentials
-          secret:
-            secretName: cloudstorage-instance-credentials
         - name: cloudsql
           emptyDir:
