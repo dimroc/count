@@ -12,6 +12,12 @@ module WebMockHelpers
                   :headers => {'Content-Type' => 'image/jpeg'})
     end
 
+    def shakecam_download_succeeds
+      stub_request(:get, %r!https://cdn.shakeshack.com/camera.jpg.*!).
+        to_return(:status => 200, :body => File.open(fixture_url('shakeshack-1501021280.jpg')),
+                  :headers => {'Content-Type' => 'image/jpeg'})
+    end
+
     def shakecam_downloads_empty_image
       stub_request(:get, %r!https://cdn.shakeshack.com/camera.jpg.*!).
         to_return(:status => 200, :body => File.open(fixture_url('shakeshack-empty.jpg')),
