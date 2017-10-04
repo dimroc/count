@@ -13,7 +13,8 @@ module RPC
     self.unmarshal_class_method = :decode
     self.service_name = 'RPC'
 
-    rpc :CountCrowd, CountCrowdRequest, CountCrowdReply
+    rpc :CountCrowd, CountRequest, CountReply
+    rpc :CountLine, CountRequest, CountReply
   end
 
   Stub = Service.rpc_stub_class
