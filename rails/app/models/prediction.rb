@@ -9,7 +9,7 @@ class Prediction < ApplicationRecord
   end
 
   def friendly_type
-    record.class.name.demodulize.underscore
+    self.class.name.demodulize.underscore
   end
 
   private
