@@ -1,13 +1,14 @@
 class Prediction::Shakecam < Prediction
   class << self
     def fetch!
-      url = "https://cdn.shakeshack.com/camera.jpg?#{DateTime.now.to_i}"
-      create!(snapshot: open(url))
+      now = DateTime.now.to_i
+      url = "https://cdn.shakeshack.com/camera.jpg?#{now}"
+      create!(snapshot: open(url), created_at: now)
     end
   end
 
   def predict!
-    reply = rpcclient.count_crowd(snapshot[:cropped].read)
+    reply = rpcclient.count_crowd(snapshot[:cropped].read.force_encoding("ascii-8bit"))
     update_attributes!(density_map: StringIO.new(reply.density_map),
                        version: reply.version,
                        crowd_count: reply.crowd_count,
