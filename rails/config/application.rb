@@ -10,7 +10,6 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
-require "active_storage/engine"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -36,8 +35,13 @@ module CountingCompany
       g.decorator false
     end
 
-    config.active_storage.service = Rails.env.to_sym
     config.eager_load_paths << "#{Rails.root}/lib"
     config.eager_load = true
+
+    config.imgix = {
+      source: "countingcompany.imgix.net",
+      secure_url_token: "fPWGRJ37krZDYdMj",
+      hostname_to_replace: 'storage.googleapis.com'
+    }
   end
 end

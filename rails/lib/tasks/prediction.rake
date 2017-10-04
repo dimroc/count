@@ -3,9 +3,9 @@ namespace :prediction do
   task :shakecam => :environment do
     begin
       prediction = Prediction::Shakecam.fetch!
-      puts "Saved snapshot to #{prediction.image.service_url}"
+      puts "Saved snapshot to #{prediction.snapshot[:cropped].url}"
       prediction.predict!
-      puts "Density at #{prediction.density_map.service_url}"
+      puts "Density at #{prediction.density_map.url}"
       puts prediction
       ActionCable.server.broadcast("admin_predictions", prediction: prediction.to_param)
     rescue StandardError, RuntimeError
