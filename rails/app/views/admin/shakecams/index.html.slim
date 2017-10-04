@@ -32,6 +32,6 @@ javascript:
     };
 
     App.cable.subscriptions.create(
-      { channel: "AdminChannel", room: "predictions" },
+      { channel: "AdminChannel", room: "shakecams" },
       { received: function() { incrementNewers(); } });
   })();
