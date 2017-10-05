@@ -6,5 +6,7 @@ template=`cat ./jobs/rake.yaml`
 joined=$(join_by \",\" $@)
 args=[\"$joined\"]
 job="${template//"\$\$RAKECMD"/$args}"
+uniqueid=`date +%s`
+job="${job//"\$\$RAKEID"/$uniqueid}"
 echo "$job" | kubectl create -f -
 kubectl get pods -a

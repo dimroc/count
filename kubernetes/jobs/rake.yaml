@@ -1,13 +1,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: rake
+  name: rake-$$RAKEID
 spec:
   template:
     metadata:
       name: rake
     spec:
       restartPolicy: Never
+      #backoffLimit: 0
       containers:
       - name: rails
         image: us.gcr.io/counting-company-production/rails
