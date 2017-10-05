@@ -11,7 +11,16 @@ namespace :prediction do
     2000.downto(1) do |n|
       url = "https://dimroc-public.s3.amazonaws.com/mall/seq_#{n.to_s.rjust(6, "0")}.jpg"
       puts "Generating prediction from #{url}"
-      Prediction::Mall.predict!(url)
+      safe_prediction(url)
     end
+  end
+
+  private
+
+  def safe_prediction(url)
+    Prediction::Mall.predict!(url)
+  rescue Google::Apis::ServerError => e
+    puts "Retrying because of #{e}"
+    retry
   end
 end
