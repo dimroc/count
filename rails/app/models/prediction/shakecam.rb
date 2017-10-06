@@ -20,6 +20,6 @@ class Prediction::Shakecam < Prediction
   end
 
   def image
-    snapshot[:cropped]
+    snapshot[:cropped] if snapshot.respond_to? :keys
   end
 end
