@@ -10,7 +10,7 @@ import time
 
 @attr.s
 class DensityCheckpoint(Callback):
-    image_path = attr.ib()
+    image_key = attr.ib()
     output_dir = attr.ib(default=ccp.output("prediction_checkpoint/{}".format(int(time.time()))))
 
     def on_train_begin(self, logs=None):
@@ -20,19 +20,19 @@ class DensityCheckpoint(Callback):
         self._save_prediction("epoch_{:03}".format(epoch))
 
     def _save_prediction(self, label):
-        x = ml.image_to_batch(ml.load_img(self.image_path))
+        x = ml.image_to_batch(ml.load_img(self.image_key))
         y = self.model.predict(x, batch_size=1)
         self._save_image(label, y)
 
     def _save_image(self, label, y):
         os.makedirs(self.output_dir, exist_ok=True)
         destination = "{}.jpg".format(os.path.join(self.output_dir, label))
-        previewer.save(destination, self.image_path, Prediction(y))
+        previewer.save(destination, self.image_key, Prediction(y))
 
 
 @attr.s
 class LineCountCheckpoint(Callback):
-    image_path = attr.ib()
+    image_key = attr.ib()
     output_dir = attr.ib(default=ccp.output("prediction_checkpoint/{}".format(int(time.time()))))
 
     def on_train_begin(self, logs=None):
@@ -42,7 +42,8 @@ class LineCountCheckpoint(Callback):
         self._save_prediction("epoch_{:03}".format(epoch))
 
     def _save_prediction(self, name):
-        truth = dm.generate_truth_batch(self.image_path, True)
+        print(self.image_key)
+        truth = dm.generate_truth_batch(self.image_key, True)
         inline = float(self.model.predict(truth, batch_size=1))
         print("checkpoint linecount prediction: {}".format(inline))
         self._save_result(name, truth, inline)
@@ -50,4 +51,4 @@ class LineCountCheckpoint(Callback):
     def _save_result(self, name, y, inline):
         os.makedirs(self.output_dir, exist_ok=True)
         destination = "{}.jpg".format(os.path.join(self.output_dir, name))
-        previewer.save(destination, self.image_path, Prediction(y, line=inline))
+        previewer.save(destination, self.image_key, Prediction(y, line=inline))

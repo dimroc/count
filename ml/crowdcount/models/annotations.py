@@ -15,13 +15,13 @@ class Annotations():
     table = attr.ib(default=attr.Factory(dict))
     linecounts = attr.ib(default=attr.Factory(dict))
 
-    def get(self, path):
-        return self.table[ccp.defloyd_path(path)][:]
+    def get(self, image_key):
+        return self.table[image_key][:]
 
-    def get_linecount(self, path):
-        return self.linecounts[ccp.defloyd_path(path)]
+    def get_linecount(self, image_key):
+        return self.linecounts[image_key]
 
-    def paths(self):
+    def keys(self):
         return self.table.keys()
 
     def reload(self):
@@ -35,20 +35,20 @@ class Annotations():
     def train_test_split(self, only_linecounts=False):
         """
         Take x% from each data source to have consistent distribution
-        across training and test. Retrieves from self.paths() to ensure
+        across training and test. Retrieves from self.keys() to ensure
         we have annotations for said file.
         """
 
-        def with_linecount(path):
-            return ccp.defloyd_path(path) in self.linecounts or not only_linecounts
+        def with_linecount(key):
+            return key in self.linecounts or not only_linecounts
 
-        def in_dataset(path, ds):
-            return path.startswith("data/{}".format(ds))  # e.g. data/ucf
+        def in_dataset(key, ds):
+            return key.startswith("data/{}".format(ds))  # e.g. data/ucf
 
         train, test = [], []
         for ds in ccp.datasets():
-            paths = [p for p in self.paths() if in_dataset(p, ds) and with_linecount(p)]
-            traintmp, testtmp = sk.train_test_split(sorted(paths), test_size=0.1, random_state=0)
+            keys = [k for k in self.keys() if in_dataset(k, ds) and with_linecount(k)]
+            traintmp, testtmp = sk.train_test_split(sorted(keys), test_size=0.1, random_state=0)
             train.extend(traintmp)
             test.extend(testtmp)
 

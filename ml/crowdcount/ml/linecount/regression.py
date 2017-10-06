@@ -58,4 +58,4 @@ def _create_callbacks():
     return [CSVLogger(ccp.output('keras_history.csv'), append=True),
             ModelCheckpoint(ccp.output("weights/linecount/weights.{epoch:03d}-{val_loss:.2f}.hdf5")),
             TensorBoard(log_dir=ccp.output('tensorboard')),
-            callbacks.LineCountCheckpoint(ccp.datapath("data/shakecam/shakeshack-1500859164.jpg"))]
+            callbacks.LineCountCheckpoint("data/shakecam/shakeshack-1500859164.jpg")]
