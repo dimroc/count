@@ -39,7 +39,7 @@ def random_dataset():
 
 
 def get(dataset):
-    class_name = "{}Path".format(camelize(dataset))
+    class_name = "{}Key".format(camelize(dataset))
     return globals()[class_name]()
 
 
@@ -47,25 +47,25 @@ def random_image_path():
     return get(random_dataset()).path()
 
 
-class UcfPath:
-    def path(self, index=None):
+class UcfKey:
+    def key_for(self, index=None):
         if not index:
             index = randint(1, 50)
-        return datapath("data/ucf/{}.jpg".format(index))
+        return "data/ucf/{}.jpg".format(index)
 
 
-class MallPath:
-    def path(self, index=None):
+class MallKey:
+    def key_for(self, index=None):
         if not index:
             index = randint(1, 2000)
-        return datapath("data/mall/frames/seq_00{:04}.jpg".format(index))
+        return "data/mall/frames/seq_00{:04}.jpg".format(index)
 
 
-class ShakecamPath:
-    def path(self, index=None):
+class ShakecamKey:
+    def key_for(self, index=None):
         if not index:
             index = self.randindex()
-        return datapath("data/shakecam/shakeshack-{}.jpg".format(index))
+        return "data/shakecam/shakeshack-{}.jpg".format(index)
 
     def randindex(self):
         path = choice(glob.glob(datapath("data/shakecam/shakeshack-*.jpg")))

@@ -8,12 +8,12 @@ import matplotlib.pyplot as plt
 import os
 
 
-def show(path, prediction=None, line_from_truth=None):
-    Previewer().show(path, prediction)
+def show(image_key, prediction=None, line_from_truth=None):
+    Previewer().show(image_key, prediction)
 
 
-def save(dest, path, prediction=None, line_from_truth=None):
-    Previewer().save(dest, path, prediction)
+def save(dest, image_key, prediction=None, line_from_truth=None):
+    Previewer().save(dest, image_key, prediction)
 
 
 @attr.s
@@ -24,32 +24,32 @@ class Previewer:
     prediction = attr.ib(default=attr.Factory(Prediction))
     line_from_truth = attr.ib(default=attr.Factory(Prediction))
 
-    def _normalize_input(self, path, prediction, line_from_truth):
-        self.path = path
+    def _normalize_input(self, image_key, prediction, line_from_truth):
+        self.image_key = image_key
         self.prediction = prediction if prediction else Prediction()
         self.line_from_truth = line_from_truth if line_from_truth else Prediction()
 
         self.prediction = PredictionDecorator(self.prediction)
         self.line_from_truth = PredictionDecorator(self.line_from_truth)
         try:
-            self.annotations = groundtruth.get(self.path)
+            self.annotations = groundtruth.get(self.image_key)
         except KeyError:
             self.annotations = None
 
         try:
-            self.true_line = groundtruth.get_linecount(path)
+            self.true_line = groundtruth.get_linecount(image_key)
         except KeyError:
             self.true_line = "N/A"
 
-    def show(self, path, prediction, line_from_truth=None):
-        self._normalize_input(path, prediction, line_from_truth)
-        print("Displaying {}".format(self.path))
+    def show(self, image_key, prediction, line_from_truth=None):
+        self._normalize_input(image_key, prediction, line_from_truth)
+        print("Displaying {}".format(self.image_key))
         self._draw()
         plt.show(block=False)
         return input("Continue? [y]/n: ")
 
-    def save(self, dest, path, prediction, line_from_truth=None):
-        self._normalize_input(path, prediction, line_from_truth)
+    def save(self, dest, image_key, prediction, line_from_truth=None):
+        self._normalize_input(image_key, prediction, line_from_truth)
         print("Saving to {}".format(dest))
         self._draw()
         if self.prediction.density is not None and self.just_predictions:
@@ -71,7 +71,7 @@ class Previewer:
 
     def _draw(self):
         self.fig.clear()
-        self.fig.suptitle("Crowd Count: {}".format(self.path))
+        self.fig.suptitle("Image: {}".format(self.image_key))
 
         self._reset_plot_position()
         self._render_img()
@@ -79,7 +79,7 @@ class Previewer:
         self._render_prediction()
 
     def _render_img(self):
-        img = kimg.load_img(self.path)
+        img = kimg.load_img(self.image_key)
         ax = self.fig.add_subplot(self._next_plot_position())
         ax.imshow(img)
 
@@ -92,7 +92,7 @@ class Previewer:
             return
 
         ax = self.fig.add_subplot(self._next_plot_position())
-        dm = density_map.generate(self.path, self.annotations)
+        dm = density_map.generate(self.image_key, self.annotations)
         ax.imshow(dm, cmap=self.CMAP)
         ax.set_title("True Crowd: {:.3}\nTrue Line: {}\nPredicted Line: {:.4}".format(dm.sum(), self.true_line, self.line_from_truth.line))
 
@@ -113,4 +113,4 @@ class Previewer:
         return subplot
 
     def _cols(self):
-        return len([v for v in [self.path, self.annotations, self.prediction.density] if v is not None])
+        return len([v for v in [self.image_key, self.annotations, self.prediction.density] if v is not None])

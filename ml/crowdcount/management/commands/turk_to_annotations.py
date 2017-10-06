@@ -24,8 +24,8 @@ class Command(BaseCommand):
 
     def _write_images_to_tmp(self, anns):
         os.makedirs(ccp.output("previews/"), exist_ok=True)
-        for path in anns.keys():
-            previewer.save(ccp.output("previews/{}.jpg".format(_index_from_path(path))), path)
+        for key in anns.keys():
+            previewer.save(ccp.output("previews/{}.jpg".format(_index_from_key(key))), key)
 
     def _exclude_ignorables(self, annotations, ignorables_path):
         with open(ignorables_path) as csvfile:
@@ -34,5 +34,5 @@ class Command(BaseCommand):
         return {k: v for k, v in annotations.items() if k not in ignorables}
 
 
-def _index_from_path(path):
-    return path[-14:-4]
+def _index_from_key(key):
+    return key[-14:-4]

@@ -11,4 +11,4 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         dataset = kwargs['dataset']
         index = kwargs['index']
-        previewer.show(paths.get(dataset).path(index))
+        previewer.show(paths.get(dataset).key_for(index))

@@ -16,30 +16,30 @@ class Command(BaseCommand):
         parser.add_argument('--only-linecounts', action='store_true', default=False)
 
     def handle(self, *args, **kwargs):
-        images = kwargs['image']
+        image_keys = kwargs['image']
         if not kwargs['image']:
             train, test = ants.groundtruth.train_test_split(kwargs['only_linecounts'])
-            images = sample(train + test, len(train) + len(test))
+            image_keys = sample(train + test, len(train) + len(test))
         else:
-            images = [kwargs['image']]
+            image_keys = [kwargs['image']]
 
         self.predictor = Predictor(kwargs['weights'])
         self.previewer = pwr.Previewer(just_predictions=kwargs['just_predictions'])
-        self._predict_images(images, kwargs['save'])
+        self._predict_images(image_keys, kwargs['save'])
 
-    def _predict_images(self, images, save=False):
-        for image in images:
-            prediction = self.predictor.predict_line(ml.load_img(image))
-            truth = self._get_truth(image)
+    def _predict_images(self, image_keys, save=False):
+        for image_key in image_keys:
+            prediction = self.predictor.predict_line(ml.load_img(image_key))
+            truth = self._get_truth(image_key)
             if save:
-                dest = ccp.output("predictions/{}".format(os.path.basename(image)))
-                self.previewer.save(dest, image, prediction, truth)
+                dest = ccp.output("predictions/{}".format(os.path.basename(image_key)))
+                self.previewer.save(dest, image_key, prediction, truth)
             else:
-                if self.previewer.show(image, prediction, truth) == 'n':
+                if self.previewer.show(image_key, prediction, truth) == 'n':
                     break
 
-    def _get_truth(self, path):
-        if "data/shakecam" in path:
-            return self.predictor.predict_line_from_truth(path)
+    def _get_truth(self, image_key):
+        if "data/shakecam" in image_key:
+            return self.predictor.predict_line_from_truth(image_key)
         else:
             return Prediction()
