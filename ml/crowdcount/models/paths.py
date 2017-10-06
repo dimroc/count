@@ -19,10 +19,6 @@ def datapath(path):
         return os.path.join(package_directory, path)
 
 
-def defloyd_path(path):
-    return path[1:] if path.startswith("/") else path
-
-
 def output(p=''):
     if 'FLOYD' in os.environ:
         return os.path.join("/output", p)
