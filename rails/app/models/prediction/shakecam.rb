@@ -13,7 +13,7 @@ class Prediction::Shakecam < Prediction
                                     crowd_count: reply.crowd_count,
                                     line_count: reply.line_count)
       prediction
-    rescue StandardError, RuntimeError
+    rescue StandardError, RuntimeError, Google::Apis::ServerError
       prediction.destroy if prediction.present? and !prediction.destroyed?
       raise
     end
