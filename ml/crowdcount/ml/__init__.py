@@ -20,5 +20,5 @@ def image_to_batch(image_array):
     return kimg.img_to_array(image_array)[np.newaxis]
 
 
-def load_img(path):
-    return kimg.load_img(path)
+def load_img(image_key):
+    return kimg.load_img(image_key)
