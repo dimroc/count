@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004033425) do
+ActiveRecord::Schema.define(version: 20171006212622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20171004033425) do
     t.datetime "updated_at", null: false
     t.string "type"
     t.string "version"
-    t.text "snapshot_data"
-    t.text "density_map_data"
+    t.jsonb "snapshot_data"
+    t.jsonb "density_map_data"
     t.index ["created_at"], name: "index_predictions_on_created_at"
     t.index ["type"], name: "index_predictions_on_type"
   end
