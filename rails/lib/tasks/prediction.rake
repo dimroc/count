@@ -2,9 +2,10 @@ namespace :prediction do
   desc "Save an image from shakecam and make an ml prediction against it"
   task :shakecam => :environment do
     prediction = with_retry { Prediction::Shakecam.predict! }
-    return unless prediction.present?
-    puts prediction
-    ActionCable.server.broadcast("admin_shakecams", prediction: prediction.to_param)
+    if prediction.present?
+      puts prediction
+      ActionCable.server.broadcast("admin_shakecams", prediction: prediction.to_param)
+    end
   end
 
   desc "Pull the mall dataset and generate predictions"
