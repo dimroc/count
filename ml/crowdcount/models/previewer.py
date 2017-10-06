@@ -41,14 +41,13 @@ class Previewer:
         except KeyError:
             self.true_line = "N/A"
 
-    def show(self, image_key, prediction, line_from_truth=None):
+    def show(self, image_key, prediction=None, line_from_truth=None):
         self._normalize_input(image_key, prediction, line_from_truth)
         print("Displaying {}".format(self.image_key))
         self._draw()
         plt.show(block=False)
-        return input("Continue? [y]/n: ")
 
-    def save(self, dest, image_key, prediction, line_from_truth=None):
+    def save(self, dest, image_key, prediction=None, line_from_truth=None):
         self._normalize_input(image_key, prediction, line_from_truth)
         print("Saving to {}".format(dest))
         self._draw()
