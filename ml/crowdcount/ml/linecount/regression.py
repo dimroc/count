@@ -7,7 +7,6 @@ from keras.models import Sequential, load_model
 import crowdcount.ml.callbacks as callbacks
 import crowdcount.models.mask as mask
 import keras.optimizers
-import keras.regularizers as regularizers
 import os
 
 
@@ -22,12 +21,12 @@ class Model:
                 MaxPooling2D(input_shape=(180, 180, 1)),
                 MaxPooling2D(input_shape=(90, 90, 1)),
                 Flatten(),
-                Dense(512, activation='relu', kernel_regularizer=regularizers.l2(0.01)),
+                Dense(512, activation='relu'),
                 Dropout(0.5),
                 Dense(1, activation='relu')
             ])
             self.model.compile(loss='mean_squared_error',
-                    optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-7),
+                    optimizer=keras.optimizers.adam(lr=1e-5, decay=1e-8),
                     metrics=['mse', 'mae', 'accuracy'])
             self.initial_epoch = 0
 

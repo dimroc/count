@@ -43,6 +43,10 @@ def generate_truth(image_key, usemask=False):
 
 
 def _sum_heads(pixels, annotations, image_key):
+    """
+    Annotations are x, y.
+    Numpy pixels are y, x.
+    """
     for a in annotations:
         x, y = int(a[0] * _scale_for_fcn), int(a[1] * _scale_for_fcn)
         if y >= pixels.shape[0] or x >= pixels.shape[1]:
