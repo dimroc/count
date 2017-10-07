@@ -3,16 +3,16 @@ from crowdcount.ml.generators import density as generator
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Conv2D, MaxPooling2D
-from keras.models import Sequential
+from keras.models import Sequential, load_model
 import attr
 import crowdcount.ml as ml
 import keras.optimizers
 import os
 
 
-def train(existing_weights=None):
-    model = _create_model(existing_weights)
-    initial_epoch = ml.fetch_epoch(existing_weights)
+def train(model_path=None):
+    model = _create_model(model_path)
+    initial_epoch = ml.fetch_epoch(model_path)
     print(model.summary())
 
     model.fit_generator(generator.training(),
@@ -27,9 +27,9 @@ def train(existing_weights=None):
     test(model)
 
 
-def test(model=None, existing_weights=None):
+def test(model=None, model_path=None):
     if not model:
-        model = _create_model(existing_weights)
+        model = _create_model(model_path)
     score = model.evaluate_generator(generator.validation(), steps=generator.validation_steps())
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
@@ -49,15 +49,19 @@ class Model:
         return self.model.summary()
 
 
-def predict(image_array, existing_weights):
-    return Model(existing_weights).predict(image_array)
+def predict(image_array, model_path):
+    return Model(model_path).predict(image_array)
 
 
-def _create_model(existing_weights=None):
+def _create_model(model_path=None):
     """
     Based on the model proposed by Fully Convolutional Crowd Counting On Highly Congested Scenes:
     https://arxiv.org/pdf/1612.00220.pdf
     """
+    if model_path:
+        print("Loading model for epoch {} from {}".format(ml.fetch_epoch(model_path), model_path))
+        return load_model(model_path)
+
     model = Sequential()
     model.add(Conv2D(36, kernel_size=(9, 9), activation='relu', input_shape=(None, None, 3), padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
@@ -67,11 +71,6 @@ def _create_model(existing_weights=None):
     model.add(Conv2D(24, (7, 7), activation='relu', padding='same'))
     model.add(Conv2D(16, (7, 7), activation='relu', padding='same'))
     model.add(Conv2D(1, (1, 1), padding='same', kernel_initializer='random_normal'))
-
-    if existing_weights:
-        print("Loading weights for epoch {} from {}".format(ml.fetch_epoch(existing_weights), existing_weights))
-        model.load_weights(existing_weights)
-
     return _compile_model(model)
 
 
