@@ -3,7 +3,7 @@ from crowdcount.ml.prediction import Prediction, PredictionDecorator
 from crowdcount.models import density_map
 from crowdcount.models.annotations import groundtruth
 import attr
-import keras.preprocessing.image as kimg
+import crowdcount.ml as ml
 import matplotlib.pyplot as plt
 import os
 
@@ -41,14 +41,13 @@ class Previewer:
         except KeyError:
             self.true_line = "N/A"
 
-    def show(self, image_key, prediction, line_from_truth=None):
+    def show(self, image_key, prediction=None, line_from_truth=None):
         self._normalize_input(image_key, prediction, line_from_truth)
         print("Displaying {}".format(self.image_key))
         self._draw()
         plt.show(block=False)
-        return input("Continue? [y]/n: ")
 
-    def save(self, dest, image_key, prediction, line_from_truth=None):
+    def save(self, dest, image_key, prediction=None, line_from_truth=None):
         self._normalize_input(image_key, prediction, line_from_truth)
         print("Saving to {}".format(dest))
         self._draw()
@@ -79,7 +78,7 @@ class Previewer:
         self._render_prediction()
 
     def _render_img(self):
-        img = kimg.load_img(self.image_key)
+        img = ml.load_img(self.image_key)
         ax = self.fig.add_subplot(self._next_plot_position())
         ax.imshow(img)
 

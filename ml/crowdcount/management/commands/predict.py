@@ -35,7 +35,8 @@ class Command(BaseCommand):
                 dest = ccp.output("predictions/{}".format(os.path.basename(image_key)))
                 self.previewer.save(dest, image_key, prediction, truth)
             else:
-                if self.previewer.show(image_key, prediction, truth) == 'n':
+                self.previewer.show(image_key, prediction, truth)
+                if input("Continue? [y]/n: ") == 'n':
                     break
 
     def _get_truth(self, image_key):

@@ -1,3 +1,4 @@
+import crowdcount.models.paths as ccp
 import keras.preprocessing.image as kimg
 import numpy as np
 import re
@@ -21,4 +22,4 @@ def image_to_batch(image_array):
 
 
 def load_img(image_key):
-    return kimg.load_img(image_key)
+    return kimg.load_img(ccp.datapath(image_key))

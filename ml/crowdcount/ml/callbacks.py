@@ -42,7 +42,6 @@ class LineCountCheckpoint(Callback):
         self._save_prediction("epoch_{:03}".format(epoch))
 
     def _save_prediction(self, name):
-        print(self.image_key)
         truth = dm.generate_truth_batch(self.image_key, True)
         inline = float(self.model.predict(truth, batch_size=1))
         print("checkpoint linecount prediction: {}".format(inline))
