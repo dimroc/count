@@ -234,8 +234,24 @@ run 16: xs, deep, w dropout
     w MASK
     Total params: 4,148,225
 
+run 19: xs, deep, w dropout
+        self.model = Sequential([
+            MaxPooling2D(input_shape=(180, 180, 1)),
+            Flatten(),
+            Dense(512, activation='relu'),
+            Dropout(0.5),
+            Dense(512, activation='relu'),
+            Dropout(0.5),
+            Dense(1, activation='relu')
+        ])
+
+        self.model.compile(loss='mean_squared_error',
+                optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-7),
+                metrics=['mse', 'mae', 'accuracy'])
+    w MASK
+    Total params: 4,148,225
+
 TODO:
-- Get more line count data via liz or mechanical turk
 - Redo loss function for conv ml
 - Increase complexity and fidelity of top conv ml (9x9 throws away too much too soon)
 - Hyper parameters worth tweaking: gaussian kernel
