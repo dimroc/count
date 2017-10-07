@@ -32,7 +32,7 @@ def _predict(image_str, method):
         image = _decode_image(image_str)
         prediction = method(image)
         print("Prediction: {}".format(prediction))
-        return ml_pb2.CountReply(version="1",
+        return ml_pb2.CountReply(version="2",
                 density_map=_encode_image(prediction.density),
                 crowd_count=prediction.crowd,
                 line_count=prediction.line)
