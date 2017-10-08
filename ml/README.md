@@ -420,32 +420,65 @@ run 31: 3 FCN cols density model
                     metrics=['mae', 'mse', 'accuracy'])
 
 
-run TODO?!: 3 FCN cols density model
+run 32: 3 FCN multicols density model ONLY SHAKECAM
 
     inputs = Input(shape=(None, None, 3))
-    x = Conv2D(36, kernel_size=(9, 9), activation='relu', padding='same')(inputs) # PLACE THIS
-    cols = [_create_column(d, x) for d in [3, 5, 9]]
+    cols = [_create_column(d, inputs) for d in [3, 5, 9]]
     model = KModel(inputs=inputs, outputs=average(cols))
     return _compile_model(model)
 
 
-  def _create_column(kernel_dimension, inputs):
-      kd = kernel_dimension
-      x = Conv2D(36, kernel_size=(kd, kd), activation='relu', padding='same')(inputs)
+def _create_column(kernel_dimension, inputs):
+    kd = kernel_dimension
+    x = Conv2D(36, kernel_size=(kd, kd), activation='relu', padding='same')(inputs)
+    x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
+    x = Conv2D(72, (kd, kd), activation='relu', padding='same')(x)
+    x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
+    x = Conv2D(36, (kd, kd), activation='relu', padding='same')(x)
+    if kd == 9:
+        kd = 7
+    x = Conv2D(24, (kd, kd), activation='relu', padding='same')(x)
+    x = Conv2D(16, (kd, kd), activation='relu', padding='same')(x)
+    return Conv2D(1, (1, 1), activation='relu', kernel_initializer='random_normal')(x)
+
+
+def _compile_model(model):
+    model.compile(loss='mean_squared_error',
+                  optimizer=keras.optimizers.adam(lr=1e-6, decay=5e-6),
+                  metrics=['mae', 'mse', 'accuracy'])
+    return model
+
+run 33: shake cam and mall
+  def _create_msb_model():
+      inputs = Input(shape=(None, None, 3))
+      x = Conv2D(64, kernel_size=(9, 9), activation='relu', padding='same')(inputs)
+      x = _create_msb(16, [9, 7, 5, 3], x)
       x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
-      x = Conv2D(72, (kd, kd), activation='relu', padding='same')(x)
+      x = _create_msb(32, [9, 7, 5, 3], x)
+      x = _create_msb(32, [9, 7, 5, 3], x)
       x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
-      x = Conv2D(36, (kd, kd), activation='relu', padding='same')(x)
-      if kd == 9:
-          kd = 7
-      x = Conv2D(24, (kd, kd), activation='relu', padding='same')(x)
-      x = Conv2D(16, (kd, kd), activation='relu', padding='same')(x)
-      return Conv2D(1, (1, 1), activation='relu', kernel_initializer='random_normal')(x)
+      x = _create_msb(64, [7, 5, 3], x)
+      x = _create_msb(64, [7, 5, 3], x)
+      x = Conv2D(1000, (1, 1), activation='relu')(x)
+      x = Conv2D(1, (1, 1), activation='relu')(x)
+      model = KModel(inputs=inputs, outputs=x)
+      return _compile_model(model)
+
+
+  def _create_msb(filters, dimensions, inputs):
+      cols = [Conv2D(filters, kernel_size=(d, d), activation='relu', padding='same')(inputs) for d in dimensions]
+      return average(cols)
 
 
   def _compile_model(model):
       model.compile(loss='mean_squared_error',
-                    optimizer=keras.optimizers.adam(lr=1e-6, decay=5e-6),
+                    optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-6),
                     metrics=['mae', 'mse', 'accuracy'])
+      return model
+
+## TODO
+
+- Train only w shakecam dataset
+- Create proper Multiscale blobs (MSB)
 
 ```
