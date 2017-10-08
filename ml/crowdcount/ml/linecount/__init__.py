@@ -14,4 +14,4 @@ def summary():
     return _instance.model.summary()
 
 
-_instance = regression.Model(ccp.datapath("data/weights/linecount.floyd14.epoch20.hdf5"))
+_instance = regression.Model(ccp.datapath("data/weights/linecount.v2.floyd35.21-12.epoch388.hdf5"))

@@ -19,14 +19,14 @@ class Model:
         else:
             self.model = Sequential([
                 MaxPooling2D(input_shape=(180, 180, 1)),
-                MaxPooling2D(input_shape=(90, 90, 1)),
                 Flatten(),
+                Dropout(0.5),
                 Dense(512, activation='relu'),
                 Dropout(0.5),
                 Dense(1, activation='relu')
             ])
             self.model.compile(loss='mean_squared_error',
-                    optimizer=keras.optimizers.adam(lr=1e-5, decay=1e-6),
+                    optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-5),
                     metrics=['mse', 'mae', 'accuracy'])
             self.initial_epoch = 0
 
