@@ -98,12 +98,15 @@ def _create_msb_model():
     x = _create_msb(64, [7, 5, 3], x)
     x = _create_msb(64, [7, 5, 3], x)
     x = Conv2D(1000, (1, 1), activation='relu')(x)
-    x = Conv2D(1, (1, 1), activation='relu')(x)
+    x = Conv2D(1, (1, 1), activation='relu', kernel_initializer='random_normal')(x)
     model = KModel(inputs=inputs, outputs=x)
     return _compile_model(model)
 
 
 def _create_msb(filters, dimensions, inputs):
+    """
+    Multi-scale Blob as described in https://arxiv.org/pdf/1702.02359.pdf
+    """
     cols = [Conv2D(filters, kernel_size=(d, d), activation='relu', padding='same')(inputs) for d in dimensions]
     return average(cols)
 
@@ -127,7 +130,7 @@ def _create_congested_fcn():
 
 def _compile_model(model):
     model.compile(loss='mean_squared_error',
-                  optimizer=keras.optimizers.sgd(lr=1e-7, decay=5e-4),
+                  optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-4),
                   metrics=['mae', 'mse', 'accuracy'])
     return model
 
