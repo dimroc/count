@@ -26,7 +26,7 @@ class Model:
                 Dense(1, activation='relu')
             ])
             self.model.compile(loss='mean_squared_error',
-                    optimizer=keras.optimizers.adam(lr=1e-5, decay=1e-8),
+                    optimizer=keras.optimizers.adam(lr=1e-5, decay=1e-6),
                     metrics=['mse', 'mae', 'accuracy'])
             self.initial_epoch = 0
 
