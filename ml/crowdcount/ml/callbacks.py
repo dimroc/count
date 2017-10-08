@@ -27,7 +27,7 @@ class DensityCheckpoint(Callback):
     def _save_image(self, label, y):
         os.makedirs(self.output_dir, exist_ok=True)
         destination = "{}.jpg".format(os.path.join(self.output_dir, label))
-        previewer.save(destination, self.image_key, Prediction(y))
+        previewer.save(destination, self.image_key, Prediction(y, y.sum()))
 
 
 @attr.s
