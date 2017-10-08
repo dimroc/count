@@ -6,7 +6,7 @@
 
 
 floyd run --gpu --env keras --data dimroc/datasets/crowdcount/4:data \
-        --message "3 fcn col densitymap mse lr=1e-6 decay=5e-6, params: 540k" \
+        --message "multiscale blob densitymap mse lr=1e-5 decay=5e-6" \
         "FLOYD=true BUGSNAG_API_KEY=4140f3166858768f0409cb3d638012f9 \
         python manage.py train_density"
 
