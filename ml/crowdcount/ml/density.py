@@ -18,7 +18,7 @@ def train(model_path=None):
     model.fit_generator(generator.training(),
             generator.steps_per_epoch(),
             initial_epoch=initial_epoch,
-            epochs=150 - initial_epoch,
+            epochs=200 - initial_epoch,
             verbose=1,
             validation_data=generator.validation(),
             validation_steps=generator.validation_steps(),
@@ -37,7 +37,7 @@ def test(model=None, model_path=None):
 
 @attr.s
 class Model:
-    weights = attr.ib(default="data/weights/floyd26.epoch42.hdf5")
+    weights = attr.ib()
 
     def __attrs_post_init__(self):
         self.model = _create_model(self.weights)
@@ -127,7 +127,7 @@ def _create_congested_fcn():
 
 def _compile_model(model):
     model.compile(loss='mean_squared_error',
-                  optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-6),
+                  optimizer=keras.optimizers.sgd(lr=1e-7, decay=5e-4),
                   metrics=['mae', 'mse', 'accuracy'])
     return model
 
