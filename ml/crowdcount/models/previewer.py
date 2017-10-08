@@ -83,7 +83,7 @@ class Previewer:
         ax.imshow(img)
 
         if self.annotations is not None and self.annotations.any():
-            ax.plot(self.annotations[:, 0], self.annotations[:, 1], 'r+')
+            ax.plot(self.annotations[:, 0], self.annotations[:, 1], 'c+')
             ax.set_title("Annotations: {}".format(len(self.annotations)))
 
     def _render_groundtruth(self):
