@@ -234,6 +234,10 @@ run 16: xs, deep, w dropout
     w MASK
     Total params: 4,148,225
 
+-------------
+
+## V2: new school
+
 run 19: xs, deep, w dropout
         self.model = Sequential([
             MaxPooling2D(input_shape=(180, 180, 1)),
@@ -341,6 +345,7 @@ run 24: 3cols extra deep density model
       x = Conv2D(64, (kd, kd), activation='relu', padding='same')(x)
       x = Conv2D(64, (kd, kd), activation='relu', padding='same')(x)
       return Conv2D(1, (1, 1), padding='same', kernel_initializer='random_normal')(x)
+######### TODO: Redo the one above ^^ but remove the last col Conv2D layer of 1 (1,1)
 
 
   def _compile_model(model):
@@ -373,10 +378,74 @@ run 25: 3 FCN cols density model
       model.compile(loss='mean_squared_error',
                     optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-5),
                     metrics=['mae', 'mse', 'accuracy'])
-TODO:
-- Increase complexity and fidelity of top conv ml (9x9 throws away too much too soon)
-- Hyper parameters worth tweaking: gaussian kernel
-- Create a model based on DenseNet but chop off the dense layers?
-- Have a two column approach that does both? One does shallow one goes deep
+
+run 30: xxs deep, w 1 dropout layer
+            self.model = Sequential([
+                MaxPooling2D(input_shape=(180, 180, 1)),
+                MaxPooling2D(input_shape=(90, 90, 1)),
+                Flatten(),
+                Dense(512, activation='relu'),
+                Dropout(0.5),
+                Dense(1, activation='relu')
+            ])
+            self.model.compile(loss='mean_squared_error',
+                    optimizer=keras.optimizers.adam(lr=1e-5, decay=1e-6),
+                    metrics=['mse', 'mae', 'accuracy'])
+
+run 31: 3 FCN cols density model
+
+    inputs = Input(shape=(None, None, 3))
+    cols = [_create_column(d, inputs) for d in [3, 5, 9]]
+    model = KModel(inputs=inputs, outputs=average(cols))
+    return _compile_model(model)
+
+
+  def _create_column(kernel_dimension, inputs):
+      kd = kernel_dimension
+      x = Conv2D(36, kernel_size=(kd, kd), activation='relu', padding='same')(inputs)
+      x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
+      x = Conv2D(72, (kd, kd), activation='relu', padding='same')(x)
+      x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
+      x = Conv2D(36, (kd, kd), activation='relu', padding='same')(x)
+      if kd == 9:
+          kd = 7
+      x = Conv2D(24, (kd, kd), activation='relu', padding='same')(x)
+      x = Conv2D(16, (kd, kd), activation='relu', padding='same')(x)
+      return Conv2D(1, (1, 1), activation='relu', kernel_initializer='random_normal')(x)
+
+
+  def _compile_model(model):
+      model.compile(loss='mean_squared_error',
+                    optimizer=keras.optimizers.adam(lr=1e-6, decay=5e-6),
+                    metrics=['mae', 'mse', 'accuracy'])
+
+
+run TODO?!: 3 FCN cols density model
+
+    inputs = Input(shape=(None, None, 3))
+    x = Conv2D(36, kernel_size=(9, 9), activation='relu', padding='same')(inputs) # PLACE THIS
+    cols = [_create_column(d, x) for d in [3, 5, 9]]
+    model = KModel(inputs=inputs, outputs=average(cols))
+    return _compile_model(model)
+
+
+  def _create_column(kernel_dimension, inputs):
+      kd = kernel_dimension
+      x = Conv2D(36, kernel_size=(kd, kd), activation='relu', padding='same')(inputs)
+      x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
+      x = Conv2D(72, (kd, kd), activation='relu', padding='same')(x)
+      x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
+      x = Conv2D(36, (kd, kd), activation='relu', padding='same')(x)
+      if kd == 9:
+          kd = 7
+      x = Conv2D(24, (kd, kd), activation='relu', padding='same')(x)
+      x = Conv2D(16, (kd, kd), activation='relu', padding='same')(x)
+      return Conv2D(1, (1, 1), activation='relu', kernel_initializer='random_normal')(x)
+
+
+  def _compile_model(model):
+      model.compile(loss='mean_squared_error',
+                    optimizer=keras.optimizers.adam(lr=1e-6, decay=5e-6),
+                    metrics=['mae', 'mse', 'accuracy'])
 
 ```

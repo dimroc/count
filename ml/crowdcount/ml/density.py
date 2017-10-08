@@ -74,11 +74,11 @@ def _create_column(kernel_dimension, inputs):
     kd = kernel_dimension
     x = Conv2D(36, kernel_size=(kd, kd), activation='relu', padding='same')(inputs)
     x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
-    if kd == 9:
-        kd = 7
     x = Conv2D(72, (kd, kd), activation='relu', padding='same')(x)
     x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
     x = Conv2D(36, (kd, kd), activation='relu', padding='same')(x)
+    if kd == 9:
+        kd = 7
     x = Conv2D(24, (kd, kd), activation='relu', padding='same')(x)
     x = Conv2D(16, (kd, kd), activation='relu', padding='same')(x)
     return Conv2D(1, (1, 1), activation='relu', kernel_initializer='random_normal')(x)
@@ -86,7 +86,7 @@ def _create_column(kernel_dimension, inputs):
 
 def _compile_model(model):
     model.compile(loss='mean_squared_error',
-                  optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-5),
+                  optimizer=keras.optimizers.adam(lr=1e-6, decay=5e-6),
                   metrics=['mae', 'mse', 'accuracy'])
     return model
 
