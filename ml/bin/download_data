@@ -3,6 +3,7 @@
 ## Shakecam dataset
 wget https://dimroc-public.s3.amazonaws.com/shakecam.zip -O tmp/shakecam.zip
 unzip tmp/shakecam.zip -d data
+rm -rf data/__MACOSX/
 
 # UCF CC 50 dataset
 mkdir -p tmp
@@ -14,4 +15,5 @@ unrar e -y tmp/UCFCrowdCountingDataset.rar data/ucf -nv
 # Mall dataset
 wget http://personal.ie.cuhk.edu.hk/~ccloy/files/datasets/mall_dataset.zip -O tmp/.
 unzip tmp/mall_dataset.zip -d data
-mv data/mall_dataset data/mall
+rm -rf data/mall
+mv data/mall_dataset/ data/mall/
