@@ -512,6 +512,24 @@ run 40: multiscale blob adam, with better weight initialization
     model.compile(loss='mean_squared_error',
                   optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-4),
                   metrics=['mae', 'mse', 'accuracy'])
+
+run 41: multiscale blob adam, with better weight initialization
+    x = Conv2D(1, (1, 1), activation='relu', kernel_initializer='random_normal')(x)
+    model.compile(loss='mean_squared_error',
+                  optimizer=keras.optimizers.adam(lr=1e-8, decay=5e-4),
+                  metrics=['mae', 'mse', 'accuracy'])
+
+run 42: multiscale blob adam, with better weight initialization
+    x = Conv2D(1, (1, 1), activation='relu', kernel_initializer='random_normal')(x)
+    model.compile(loss='mean_squared_error',
+                  optimizer=keras.optimizers.adam(lr=1e-7, decay=5e-4),
+                  metrics=['mae', 'mse', 'accuracy'])
+
+run 42: multiscale blob adam, with better weight initialization
+    x = Conv2D(1, (1, 1), activation='relu', kernel_initializer='random_normal')(x)
+    model.compile(loss='mean_squared_error',
+                  optimizer=keras.optimizers.adam(lr=1e-7, decay=5e-3),
+                  metrics=['mae', 'mse', 'accuracy'])
 ## TODO
 
 - Train only w shakecam dataset

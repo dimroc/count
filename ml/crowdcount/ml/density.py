@@ -2,12 +2,15 @@ from crowdcount.ml.callbacks import DensityCheckpoint
 from crowdcount.ml.generators import density as generator
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
+from keras.initializers import RandomNormal
 from keras.layers import Conv2D, MaxPooling2D, Input, average
 from keras.models import Sequential, load_model, Model as KModel
 import attr
 import crowdcount.ml as ml
 import keras.optimizers
 import os
+
+_msb_initializer = RandomNormal(stddev=0.01)
 
 
 def train(model_path=None):
@@ -89,7 +92,7 @@ def _create_msb_model():
     https://arxiv.org/pdf/1702.02359.pdf
     """
     inputs = Input(shape=(None, None, 3))
-    x = Conv2D(64, kernel_size=(9, 9), activation='relu', padding='same')(inputs)
+    x = Conv2D(64, kernel_size=(9, 9), activation='relu', padding='same', kernel_initializer=_msb_initializer)(inputs)
     x = _create_msb(16, [9, 7, 5, 3], x)
     x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
     x = _create_msb(32, [9, 7, 5, 3], x)
@@ -97,8 +100,8 @@ def _create_msb_model():
     x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
     x = _create_msb(64, [7, 5, 3], x)
     x = _create_msb(64, [7, 5, 3], x)
-    x = Conv2D(1000, (1, 1), activation='relu')(x)
-    x = Conv2D(1, (1, 1), activation='relu', kernel_initializer='random_normal')(x)
+    x = Conv2D(1000, (1, 1), activation='relu', kernel_initializer=_msb_initializer)(x)
+    x = Conv2D(1, (1, 1), activation='relu', kernel_initializer=_msb_initializer)(x)
     model = KModel(inputs=inputs, outputs=x)
     return _compile_model(model)
 
@@ -107,7 +110,7 @@ def _create_msb(filters, dimensions, inputs):
     """
     Multi-scale Blob as described in https://arxiv.org/pdf/1702.02359.pdf
     """
-    cols = [Conv2D(filters, kernel_size=(d, d), activation='relu', padding='same')(inputs) for d in dimensions]
+    cols = [Conv2D(filters, kernel_size=(d, d), activation='relu', padding='same', kernel_initializer=_msb_initializer)(inputs) for d in dimensions]
     return average(cols)
 
 
@@ -130,7 +133,7 @@ def _create_congested_fcn():
 
 def _compile_model(model):
     model.compile(loss='mean_squared_error',
-                  optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-4),
+                  optimizer=keras.optimizers.adam(lr=1e-7, decay=5e-3),
                   metrics=['mae', 'mse', 'accuracy'])
     return model
 
