@@ -3,7 +3,7 @@ from crowdcount.ml.generators import linecount as generator
 from crowdcount.models import paths as ccp
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard
 from keras.layers import Dense, Flatten, MaxPooling2D, Dropout
-from keras.models import Sequential
+from keras.models import Sequential, load_model
 import crowdcount.ml.callbacks as callbacks
 import crowdcount.models.mask as mask
 import keras.optimizers
@@ -11,27 +11,24 @@ import os
 
 
 class Model:
-    def __init__(self, existing_weights=None):
-        self.model = Sequential([
-            MaxPooling2D(input_shape=(180, 180, 1)),
-            Flatten(),
-            Dense(512, activation='relu'),
-            Dropout(0.5),
-            Dense(512, activation='relu'),
-            Dropout(0.5),
-            Dense(1, activation='relu')
-        ])
-
-        if existing_weights:
-            print("Loading weights for linecount from {}".format(existing_weights))
-            self.model.load_weights(existing_weights)
-            self.initial_epoch = fetch_epoch(existing_weights)
+    def __init__(self, existing_model_path=None):
+        if existing_model_path:
+            print("Loading model for linecount from {}".format(existing_model_path))
+            self.model = load_model(ccp.datapath(existing_model_path))
+            self.initial_epoch = fetch_epoch(existing_model_path)
         else:
+            self.model = Sequential([
+                MaxPooling2D(input_shape=(180, 180, 1)),
+                Flatten(),
+                Dropout(0.5),
+                Dense(512, activation='relu'),
+                Dropout(0.5),
+                Dense(1, activation='relu')
+            ])
+            self.model.compile(loss='mean_squared_error',
+                    optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-5),
+                    metrics=['mse', 'mae', 'accuracy'])
             self.initial_epoch = 0
-
-        self.model.compile(loss='mean_squared_error',
-                optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-7),
-                metrics=['mse', 'mae', 'accuracy'])
 
     def predict(self, image_array):
         x = image_array * mask.array
