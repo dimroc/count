@@ -547,6 +547,9 @@ run 44: multiscale blob adam, with better weight initialization
     model.compile(loss='mean_squared_error',
                   optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-5),
                   metrics=['mae', 'mse', 'accuracy'])
+
+run 45: Copied from 44 epoch 5 and then increased decay to 5e-4
+
 ## TODO
 
 - Train only w shakecam dataset
