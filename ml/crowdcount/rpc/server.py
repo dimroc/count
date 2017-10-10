@@ -1,6 +1,6 @@
 from PIL import Image
 from concurrent import futures
-from crowdcount.ml.predictor import Predictor
+from crowdcount.ml import predictor
 import attr
 import crowdcount.rpc.ml_pb2 as ml_pb2
 import crowdcount.rpc.ml_pb2_grpc as ml_pb2_grpc
@@ -11,12 +11,21 @@ import tensorflow as tf
 import time
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
-DEFAULT_PORT = 50051
 
 # Keras models aren't thread safe, so explicitly use graph.
 # https://github.com/fchollet/keras/issues/5896
 graph = tf.get_default_graph()
-_predictor = Predictor()
+_predictor = None
+
+
+def initialize_predictor(version=predictor.DEFAULT_VERSION):
+    global _predictor
+    if _predictor is None:
+        _predictor = predictor.create(version)
+
+
+def port_for(version):
+    return str(50050 + version)
 
 
 def predict_crowd(image_str):
@@ -31,8 +40,8 @@ def _predict(image_str, method):
     with graph.as_default():
         image = _decode_image(image_str)
         prediction = method(image)
-        print("Prediction: {}".format(prediction))
-        return ml_pb2.CountReply(version="2",
+        print("v{} Prediction: {}".format(_predictor.version, prediction))
+        return ml_pb2.CountReply(version=str(_predictor.version),
                 density_map=_encode_image(prediction.density),
                 crowd_count=prediction.crowd,
                 line_count=prediction.line)
@@ -60,10 +69,11 @@ class RPCServer(ml_pb2_grpc.RPCServicer):
         return predict_line(request.image)
 
 
-def serve():
+def serve(version=predictor.DEFAULT_VERSION):
+    initialize_predictor(version)
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))  # Wait for keras to become thread safe.
     ml_pb2_grpc.add_RPCServicer_to_server(RPCServer(), server)
-    server.add_insecure_port("[::]:{}".format(DEFAULT_PORT))
+    server.add_insecure_port("[::]:{}".format(port_for(version)))
     server.start()
     try:
         while True:
