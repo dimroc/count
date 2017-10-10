@@ -133,7 +133,7 @@ def _create_congested_fcn():
 
 def _compile_model(model):
     model.compile(loss='mean_squared_error',
-                  optimizer=keras.optimizers.adam(lr=1e-7, decay=5e-3),
+                  optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-5),
                   metrics=['mae', 'mse', 'accuracy'])
     return model
 

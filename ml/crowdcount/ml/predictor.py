@@ -4,7 +4,7 @@ from crowdcount.models import paths as ccp
 import attr
 import numpy as np
 
-DEFAULT_WEIGHTS = ccp.datapath("data/weights/floyd26.epoch42.hdf5")
+DEFAULT_WEIGHTS = ccp.weights_for("density", 2)
 
 
 @attr.s
