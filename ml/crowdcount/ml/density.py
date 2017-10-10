@@ -61,7 +61,6 @@ def _create_model(model_path=None):
         print("Loading model for epoch {} from {}".format(ml.fetch_epoch(model_path), model_path))
         return load_model(model_path)
 
-    # return _create_multicol_model()
     return _create_msb_model()
 
 
