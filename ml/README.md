@@ -18,6 +18,17 @@ pip install -g floyd-cli
 ./manage.py predict
 ```
 
+## Weights and Versions
+
+### Density Versions
+
+1. Copy of [FCN For Crowd Counting](https://arxiv.org/pdf/1612.00220.pdf) with loss value of 8.72e-6. Floyd old run 26.
+2. Custom 3 column FCN with kernel sizes 9, 5, 3 based on 1. with a loss value of 6.88e-6. Floyd run 24.
+
+### Linecount Versions
+
+1. 3 dense layers with 4m parameters with a loss value of 27.6. Floyd run 14.
+2. 2 dense layers with 1m parameters trained to a larger dataset with a loss value of 21.12. Floyd run 35.
 
 ---
 
@@ -525,10 +536,16 @@ run 42: multiscale blob adam, with better weight initialization
                   optimizer=keras.optimizers.adam(lr=1e-7, decay=5e-4),
                   metrics=['mae', 'mse', 'accuracy'])
 
-run 42: multiscale blob adam, with better weight initialization
+run 43: multiscale blob adam, with better weight initialization
     x = Conv2D(1, (1, 1), activation='relu', kernel_initializer='random_normal')(x)
     model.compile(loss='mean_squared_error',
                   optimizer=keras.optimizers.adam(lr=1e-7, decay=5e-3),
+                  metrics=['mae', 'mse', 'accuracy'])
+
+run 44: multiscale blob adam, with better weight initialization
+    x = Conv2D(1, (1, 1), activation='relu', kernel_initializer=_msb_initializer)(x)
+    model.compile(loss='mean_squared_error',
+                  optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-5),
                   metrics=['mae', 'mse', 'accuracy'])
 ## TODO
 
