@@ -550,6 +550,8 @@ run 44: multiscale blob adam, with better weight initialization
 
 run 45: Copied from 44 epoch 5 and then increased decay to 5e-4
 
+Run 46: Identical to 44, just only trained with shakecam data
+
 ## TODO
 
 - Train only w shakecam dataset
