@@ -1,0 +1,27 @@
+.container
+  h1 Image test
+  div.card
+    = image_tag '/assets/paint3.jpg', class: 'card-img', id: "stanley", style: ""
+
+script src="/assets/close-pixelate.js"
+
+javascript:
+  function init() {
+    document.getElementById('stanley').closePixelate([
+        // { resolution: 32 },
+        // { shape : 'circle', resolution : 32, offset: 15 },
+        // { shape : 'circle', resolution : 32, size: 26, offset: 13 },
+        // { shape : 'circle', resolution : 32, size: 18, offset: 10 },
+        // { shape : 'circle', resolution : 32, size: 12, offset: 8 }
+
+        { shape : 'diamond', resolution : 48, size: 50 },
+        { shape : 'diamond', resolution : 48, offset : 24 },
+        { shape : 'circle', resolution : 8, size: 6 }
+
+        // { shape: 'square', resolution: 32 },
+        // { shape: 'circle', resolution: 32, offset: 16 },
+        // { shape: 'circle', resolution: 32, offset: 0, alpha: 0.5 },
+        // { shape: 'circle', resolution: 16, size: 9, offset: 0, alpha: 0.5 }
+    ]);
+  };
+  window.addEventListener( 'load', init, false);
