@@ -1,6 +1,5 @@
-class Prediction::Mall < Prediction
-  include PredictionUploader[:snapshot]
-  include PredictionUploader[:density_map]
+class Frame::Mall < Frame
+  include ImageUploader[:raw]
 
   class << self
     def predict!(url)
@@ -15,6 +14,6 @@ class Prediction::Mall < Prediction
   end
 
   def image
-    snapshot
+    raw
   end
 end

@@ -1,10 +1,6 @@
 class PredictionDecorator < ApplicationDecorator
   delegate_all
 
-  def image_tag
-    h.ix_image_tag(object.image.url, { sizes: "180px" }) if object.image
-  end
-
   def density_map_tag
     h.ix_image_tag(object.density_map.url, { sizes: "180px" }) if object.density_map
   end

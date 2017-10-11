@@ -7,7 +7,7 @@ RSpec.describe Prediction::Mall, type: :model do
     it "uses ml to guess the crowd and line count" do
       prediction = Prediction::Mall.predict!(mall_image_url)
       expect(prediction.snapshot).to be_present
-      expect(prediction.snapshot).to be_a PredictionUploader::UploadedFile
+      expect(prediction.snapshot).to be_a ImageUploader::UploadedFile
       expect(prediction.density_map).to be_present
       expect(prediction.crowd_count).to be_between(20, 35)
       expect(prediction.line_count).to be_blank
