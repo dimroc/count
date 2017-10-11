@@ -1,21 +1,16 @@
 class Prediction < ApplicationRecord
-  scope :desc, -> { order(created_at: :desc) }
+  include ImageUploader[:density_map]
+  belongs_to :frame
 
-  def image
-    fail NotImplementedError
-  end
+  self.inheritance_column = :somthing
 
   def to_s
-    "Type: #{friendly_type} Version: #{version}, Crowd: #{crowd_count}, Line: #{line_count}"
-  end
-
-  def friendly_type
-    self.class.name.demodulize.underscore
+    "Version: #{version}, Crowd: #{crowd_count}, Line: #{line_count}"
   end
 
   private
 
   def rpcclient
-    @rpcclient ||= RPC::Client.default
+    @rpcclient ||= RPC::Client.default  # Get client based on version
   end
 end

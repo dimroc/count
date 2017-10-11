@@ -10,11 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171006212622) do
+ActiveRecord::Schema.define(version: 20171011113757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "citext"
+
+  create_table "frames", force: :cascade do |t|
+    t.jsonb "raw_data"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_frames_on_created_at"
+    t.index ["type"], name: "index_frames_on_type"
+  end
 
   create_table "predictions", force: :cascade do |t|
     t.float "crowd_count"
@@ -25,7 +34,9 @@ ActiveRecord::Schema.define(version: 20171006212622) do
     t.string "version"
     t.jsonb "snapshot_data"
     t.jsonb "density_map_data"
+    t.bigint "frame_id"
     t.index ["created_at"], name: "index_predictions_on_created_at"
+    t.index ["frame_id"], name: "index_predictions_on_frame_id"
     t.index ["type"], name: "index_predictions_on_type"
   end
 
@@ -48,4 +59,5 @@ ActiveRecord::Schema.define(version: 20171006212622) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "predictions", "frames"
 end

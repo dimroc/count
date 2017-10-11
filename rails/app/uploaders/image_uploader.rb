@@ -13,20 +13,7 @@ class ImageUploader < Shrine
   def generate_location(io, context)
     name = super
     name = "#{name}.jpg" if File.extname(name).blank?
-    [get_type(context), name].join("/")
-  end
-
-  private
-
-  def get_type(context)
-    record = context[:record]
-    if record.respond_to? :friendly_type
-      record.friendly_type
-    elsif record.respond_to? :type
-      record.type
-    else
-      record.class.name.underscore
-    end
+    [context[:record].friendly_type, name].join("/")
   end
 end
 
