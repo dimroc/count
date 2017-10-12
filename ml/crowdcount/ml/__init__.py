@@ -4,7 +4,8 @@ import numpy as np
 import re
 
 
-__all__ = ["fetch_epoch", "image_to_batch"]
+__all__ = ["fetch_epoch", "image_to_batch", "CMAP"]
+CMAP = "gist_yarg"
 
 
 def fetch_epoch(path):
