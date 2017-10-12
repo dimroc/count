@@ -52,7 +52,9 @@ rollout:
 	kubectl patch deployment rails-deployment -p \
 		$(subst CONTSHA,$(shell ./docker-repodigest rails),$(subst CONTNAME,rails,$(ROLLOUT_PATCH)))
 	kubectl patch deployment ml-deployment -p \
-		$(subst CONTSHA,$(shell ./docker-repodigest ml),$(subst CONTNAME,ml,$(ROLLOUT_PATCH)))
+		$(subst CONTSHA,$(shell ./docker-repodigest ml),$(subst CONTNAME,mlv1,$(ROLLOUT_PATCH)))
+	kubectl patch deployment ml-deployment -p \
+		$(subst CONTSHA,$(shell ./docker-repodigest ml),$(subst CONTNAME,mlv2,$(ROLLOUT_PATCH)))
 
 rollback:
 	kubectl rollout undo deployment/rails-deployment
