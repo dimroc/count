@@ -16,4 +16,15 @@ class PredictionDecorator < ApplicationDecorator
   def line_count
     h.number_with_precision object.line_count, precision: 2
   end
+
+  def admin_cell
+    density_map_tag&.html_safe +
+      h.content_tag(:span) do
+        h.content_tag(:h6, "Crowd") + crowd_count
+      end + h.content_tag(:span) do
+        h.content_tag(:h6, "Line") + line_count
+      end + h.content_tag(:span) do
+        h.content_tag(:h6, "Version") + version
+      end
+  end
 end

@@ -20,8 +20,7 @@ _predictor = None
 
 def initialize_predictor(version=predictor.DEFAULT_VERSION):
     global _predictor
-    if _predictor is None:
-        _predictor = predictor.create(version)
+    _predictor = predictor.create(version)
 
 
 def port_for(version):

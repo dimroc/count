@@ -1,0 +1,17 @@
+table.table.table-striped
+  thead
+    tr
+      th Id
+      th Created At
+      th Frame
+      th V1
+      th V2
+  tbody
+    - FrameDecorator.decorate_collection(frames).each do |frame|
+      tr
+        td = frame.id
+        td = frame.created_at
+        td = frame.image_tag
+        - frame.predictions.each do |prediction|
+          td.prediction
+            = prediction.decorate.admin_cell if prediction

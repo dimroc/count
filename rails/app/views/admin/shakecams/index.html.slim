@@ -3,30 +3,7 @@
 = content_for :notifications do
   span.counter
 
-table.table.table-striped
-  thead
-    tr
-      th Id
-      th Created At
-      th Frame
-      th V1
-      th V2
-  tbody
-    - FrameDecorator.decorate_collection(@frames).each do |frame|
-      tr
-        td = frame.id
-        td = frame.created_at
-        td = frame.image_tag
-        td.prediction
-          - prediction = frame.predictions[0]&.decorate
-          = prediction.decorate.density_map_tag
-          span
-            h6 Crowd
-            = prediction.crowd_count
-          span
-            h6 Line
-            = prediction.line_count
-        td
+= render 'admin/shared/frame_table', frames: @frames
 
 javascript:
   (function() {
