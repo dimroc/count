@@ -6,4 +6,7 @@ spec:
   selector:
     app: ml
   ports:
-  - port: 50051
+  - name: v1
+    port: 50051
+  - name: v2
+    port: 50052

@@ -61,7 +61,6 @@ def _create_model(model_path=None):
         print("Loading model for epoch {} from {}".format(ml.fetch_epoch(model_path), model_path))
         return load_model(model_path)
 
-    # return _create_multicol_model()
     return _create_msb_model()
 
 
@@ -133,7 +132,7 @@ def _create_congested_fcn():
 
 def _compile_model(model):
     model.compile(loss='mean_squared_error',
-                  optimizer=keras.optimizers.adam(lr=1e-7, decay=5e-3),
+                  optimizer=keras.optimizers.adam(lr=1e-5, decay=5e-5),
                   metrics=['mae', 'mse', 'accuracy'])
     return model
 

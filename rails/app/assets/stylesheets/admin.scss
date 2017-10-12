@@ -6,4 +6,18 @@ body.admin {
   nav.navbar .notifications {
     color: white;
   }
+
+  td.prediction {
+    > img {
+      display: block;
+    }
+
+    span {
+      display: inline-block;
+      margin-right: 20px;
+      h6 {
+        margin: 5px 0 0 0;
+      }
+    }
+  }
 }

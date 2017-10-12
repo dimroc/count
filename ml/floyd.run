@@ -1,16 +1,21 @@
 #!/bin/bash
-#floyd run --gpu --env keras --data dimroc/datasets/crowdcount/4:data \
+#floyd run --gpu --env keras --data dimroc/datasets/crowdcount/5:data \
         #--data dimroc/projects/crowdcount/23/output:previous \
         #"FLOYD=true python manage.py train_density --train --weights /previous/weights/weights.29-0.00.hdf5"
 
 
 
-floyd run --gpu --env keras --data dimroc/datasets/crowdcount/4:data \
-        --message "multiscale blob densitymap mse adam lr=1e-7 decay=5e-3" \
+floyd run --gpu --env keras --data dimroc/datasets/crowdcount/5:data \
+        --message "MSB densitymap adam msb_init lr=1e-5 decay=5e-5" \
         "FLOYD=true BUGSNAG_API_KEY=4140f3166858768f0409cb3d638012f9 \
         python manage.py train_density"
 
-#floyd run --gpu --env keras --data dimroc/datasets/crowdcount/4:data \
+#floyd run --gpu --env keras --data dimroc/datasets/crowdcount/5:data \
+        #--message "msb relearn densitymap adam msb_init lr=1e-5 decay=5e-4" \
+        #"FLOYD=true BUGSNAG_API_KEY=4140f3166858768f0409cb3d638012f9 \
+        #python manage.py train_density --file /data/weights/density/v2alpha.epoch5.hdf5"
+
+#floyd run --gpu --env keras --data dimroc/datasets/crowdcount/5:data \
         #--message "medium linecount mse lr=1e-5 decay=5e-5 w dropout, mask params: 1m" \
         #"FLOYD=true BUGSNAG_API_KEY=4140f3166858768f0409cb3d638012f9 \
         #python manage.py train_linecount"

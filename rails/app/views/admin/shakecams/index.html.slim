@@ -1,26 +1,9 @@
-= paginate @predictions, theme: 'twitter-bootstrap-4'
+= paginate @frames, theme: 'twitter-bootstrap-4'
 
 = content_for :notifications do
   span.counter
 
-table.table.table-striped
-  thead
-    tr
-      th Id
-      th Created At
-      th Source
-      th Density
-      th Crowd
-      th Line
-  tbody
-    - PredictionDecorator.decorate_collection(@predictions).each do |prediction|
-      tr
-        td = prediction.id
-        td = prediction.created_at
-        td = prediction.image_tag
-        td = prediction.density_map_tag
-        td = prediction.crowd_count
-        td = prediction.line_count
+= render 'admin/shared/frame_table', frames: @frames
 
 javascript:
   (function() {

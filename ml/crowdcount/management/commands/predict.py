@@ -1,5 +1,5 @@
 from crowdcount.ml.prediction import Prediction
-from crowdcount.ml.predictor import Predictor, DEFAULT_WEIGHTS
+from crowdcount.ml import predictor
 from crowdcount.models import paths as ccp, previewer as pwr, annotations as ants
 from django.core.management.base import BaseCommand
 from random import sample
@@ -10,7 +10,7 @@ import os
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--image', default=None)
-        parser.add_argument('--weights', default=DEFAULT_WEIGHTS)
+        parser.add_argument('--mlversion', default=2)
         parser.add_argument('--save', action='store_true', default=False)
         parser.add_argument('--just-predictions', action='store_true', default=False)
         parser.add_argument('--only-linecounts', action='store_true', default=False)
@@ -23,7 +23,7 @@ class Command(BaseCommand):
         else:
             image_keys = [kwargs['image']]
 
-        self.predictor = Predictor(kwargs['weights'])
+        self.predictor = predictor.create(kwargs['mlversion'])
         self.previewer = pwr.Previewer(just_predictions=kwargs['just_predictions'])
         self._predict_images(image_keys, kwargs['save'])
 

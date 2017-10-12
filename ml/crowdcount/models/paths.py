@@ -8,6 +8,18 @@ import re
 package_directory = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../.."))
 
 
+def weights_for(model_type, version):
+    """
+    e.g.
+    model_type = "linecount"
+    version = 2
+    result: /User/dimroc/counting/ml/data/weights/linecount/v2.somenote.hdf5
+    """
+    pattern = os.path.join(package_directory, "data/weights", model_type, "v{}.*".format(version))
+    versioned_filename = glob.glob(pattern)[0]
+    return os.path.join(model_type, versioned_filename)
+
+
 def datapath(path):
     """
     Support local paths: data/ucf/1.jpg

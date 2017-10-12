@@ -2,6 +2,6 @@ class Admin::MallsController < ApplicationController
   include AdminControllable
 
   def index
-    @predictions = Prediction::Mall.desc.page(params[:page])
+    @frames = Frame::Mall.eager.desc.page(params[:page])
   end
 end
