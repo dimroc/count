@@ -23,7 +23,7 @@ module RPC
 
     def initialize(version)
       port = 50050 + version
-      @stub = stub_factory.new("localhost:#{port}", :this_channel_is_insecure)
+      @stub = stub_factory.new("#{Rails.application.secrets.ml_domain}:#{port}", :this_channel_is_insecure)
     end
 
     def count_crowd(image_str)
