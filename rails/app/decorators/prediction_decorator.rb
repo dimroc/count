@@ -22,6 +22,7 @@ class PredictionDecorator < ApplicationDecorator
   end
 
   def admin_cell
+    return unless density_map_tag.present?
     density_map_tag&.html_safe +
       h.content_tag(:span) do
         h.content_tag(:h6, "Crowd") + crowd_count
