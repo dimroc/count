@@ -17,6 +17,13 @@ namespace :prediction do
     end
   end
 
+  desc "Walks through all old frames and generates predictions with the v2 engine"
+  task :backfill_mall_v2 => :environment do
+    Frame::Mall.all.find_each do |frame|
+      with_retry { frame.predict!(version: 2) }
+    end
+  end
+
   private
 
   # Not happy about having to retry but GCS returns a lot of 5xx internal errors.

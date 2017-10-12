@@ -22,7 +22,7 @@ class PredictionDecorator < ApplicationDecorator
       h.content_tag(:span) do
         h.content_tag(:h6, "Crowd") + crowd_count
       end + h.content_tag(:span) do
-        h.content_tag(:h6, "Line") + line_count
+        h.content_tag(:h6, "Line") + (line_count.presence || "NA")
       end + h.content_tag(:span) do
         h.content_tag(:h6, "Version") + version
       end
