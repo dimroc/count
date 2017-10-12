@@ -6,25 +6,24 @@ module RPC
       attr_accessor :__test_mode
 
       def inline!
-        self.__test_mode = :inline
+        self.__test_mode = true
       end
 
-      def inline?
-        self.__test_mode == :inline
-      end
-
-      def default
-        if inline?
-          new(RPC::InlineStub.new)
+      def stub_factory
+        if __test_mode
+          RPC::InlineStub
         else
-          new
+          Stub
         end
       end
     end
 
     attr_reader :stub
-    def initialize(stub=Stub.new(Rails.application.secrets.ml_url, :this_channel_is_insecure))
-      @stub = stub
+    delegate :stub_factory, to: :class
+
+    def initialize(version)
+      port = 50050 + version
+      @stub = stub_factory.new("localhost:#{port}", :this_channel_is_insecure)
     end
 
     def count_crowd(image_str)
