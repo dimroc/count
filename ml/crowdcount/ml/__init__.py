@@ -1,3 +1,4 @@
+from matplotlib.colors import LinearSegmentedColormap
 import crowdcount.models.paths as ccp
 import keras.preprocessing.image as kimg
 import numpy as np
@@ -5,7 +6,6 @@ import re
 
 
 __all__ = ["fetch_epoch", "image_to_batch", "CMAP"]
-CMAP = "gist_yarg"
 
 
 def fetch_epoch(path):
@@ -24,3 +24,21 @@ def image_to_batch(image_array):
 
 def load_img(image_key):
     return kimg.load_img(ccp.datapath(image_key))
+
+
+_cdict = {'red': ((0.0, 1.0, 1.0),
+                 (0.1, 0.0, 0.0),
+                 (0.5, 1.0, 1.0),
+                 (1.0, 1.0, 1.0)),
+
+         'green': ((0.0, 1.0, 1.0),
+                   (0.1, 0.0, 0.0),
+                   (0.65, 0.9, 0.9),
+                   (1.0, 0.2, 0.2)),
+
+         'blue': ((0.0, 1.0, 1.0),
+                  (0.1, 0.0, 0.0),
+                  (1.0, 0.2, 0.2))}
+
+
+CMAP = LinearSegmentedColormap('CountingColor', _cdict)
