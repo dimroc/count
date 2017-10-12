@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011113757) do
+ActiveRecord::Schema.define(version: 20171012013422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,14 +30,11 @@ ActiveRecord::Schema.define(version: 20171011113757) do
     t.float "line_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "type"
     t.string "version"
-    t.jsonb "snapshot_data"
     t.jsonb "density_map_data"
     t.bigint "frame_id"
     t.index ["created_at"], name: "index_predictions_on_created_at"
     t.index ["frame_id"], name: "index_predictions_on_frame_id"
-    t.index ["type"], name: "index_predictions_on_type"
   end
 
   create_table "users", force: :cascade do |t|

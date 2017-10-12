@@ -9,4 +9,3 @@ class FrameDecorator < ApplicationDecorator
     l object.created_at, format: :calendar_timezone
   end
 end
-

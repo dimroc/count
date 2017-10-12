@@ -20,10 +20,6 @@ class Frame::Shakecam < Frame
   end
 
   def predict!(version: 2)
-    reply = RPC::Client.new(version).count_line(image.read)
-    predictions.create!(density_map: StringIO.new(reply.density_map),
-                        version: reply.version,
-                        crowd_count: reply.crowd_count,
-                        line_count: reply.line_count)
+    create_prediction! RPC::Client.new(version).count_line(image.read)
   end
 end

@@ -14,10 +14,16 @@ RSpec.describe Frame::Shakecam, type: :model do
 
     context "a proper image" do
       before { shakecam_download_succeeds }
-      let(:prediction) { FactoryGirl.create(:shakecam) }
       it "uses ml to guess the crowd and line count" do
-        prediction = described_class.predict!
-        expect(prediction.snapshot[:cropped]).to be_a ShakecamUploader::UploadedFile
+        frame = described_class.predict!
+        expect(frame.raw[:cropped]).to be_a ShakecamUploader::UploadedFile
+
+        prediction = frame.predictions[0]
+        expect(prediction.density_map).to be_present
+        expect(prediction.crowd_count).to be_between(40, 65)
+        expect(prediction.line_count).to be_between(20, 45)
+
+        prediction = frame.predictions[1]
         expect(prediction.density_map).to be_present
         expect(prediction.crowd_count).to be_between(40, 65)
         expect(prediction.line_count).to be_between(20, 45)
