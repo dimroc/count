@@ -59,4 +59,4 @@ rollout:
 rollback:
 	kubectl rollout undo deployment/rails-deployment
 
-bootstrap-cluster: cloudsqlproxy rails ml secretfiles secrets crons info
+bootstrap-cluster: secretfiles secrets cloudsqlproxy rails ml crons info

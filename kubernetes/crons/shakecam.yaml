@@ -1,4 +1,4 @@
-apiVersion: batch/v2alpha1  # Have to wait on k8s >= 1.8 to be v1beta1
+apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: prediction-shakecam
@@ -11,6 +11,7 @@ spec:
       template:
         spec:
           restartPolicy: OnFailure
+          backoffLimit: 1
           containers:
           - name: rails
             image: us.gcr.io/counting-company-production/rails
