@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Prediction::Shakecam, type: :model do
+RSpec.describe Frame::Shakecam, type: :model do
   describe ".fetch!" do
     context "reads an empty image" do
       before { shakecam_downloads_empty_image }
@@ -8,7 +8,7 @@ RSpec.describe Prediction::Shakecam, type: :model do
         expect {
           described_class.predict!
         }.to raise_error ActiveRecord::RecordInvalid
-        expect(Prediction::Shakecam.count).to eq 0
+        expect(Frame::Shakecam.count).to eq 0
       end
     end
 
