@@ -12,12 +12,12 @@ RSpec.describe Frame::Mall, type: :model do
       prediction = frame.predictions[0]
       expect(prediction.density_map).to be_present
       expect(prediction.crowd_count).to be_between(20, 35)
-      expect(prediction.line_count).to be_zero
+      expect(prediction.line_count).to be_blank
 
       prediction = frame.predictions[1]
       expect(prediction.density_map).to be_present
       expect(prediction.crowd_count).to be_between(20, 35)
-      expect(prediction.line_count).to be_zero
+      expect(prediction.line_count).to be_blank
     end
   end
 end

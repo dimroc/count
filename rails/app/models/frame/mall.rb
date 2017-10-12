@@ -15,6 +15,8 @@ class Frame::Mall < Frame
   end
 
   def predict!(version: 2)
-    create_prediction! RPC::Client.new(version).count_crowd(image.read)
+    prediction = create_prediction! RPC::Client.new(version).count_crowd(image.read)
+    prediction.update_attributes(line_count: nil)
+    prediction
   end
 end
