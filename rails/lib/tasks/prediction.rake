@@ -20,6 +20,7 @@ namespace :prediction do
   desc "Walks through all old frames and generates predictions with the v2 engine"
   task :backfill_mall_v2 => :environment do
     Frame::Mall.all.find_each do |frame|
+      next if frame.predictions.version(2).exists?
       with_retry { frame.predict!(version: 2) }
     end
   end
