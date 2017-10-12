@@ -1,6 +1,6 @@
 from PIL import Image
 from concurrent import futures
-from crowdcount.ml import predictor
+from crowdcount.ml import predictor, CMAP
 import attr
 import crowdcount.rpc.ml_pb2 as ml_pb2
 import crowdcount.rpc.ml_pb2_grpc as ml_pb2_grpc
@@ -52,7 +52,7 @@ def _decode_image(image_str):
 
 def _encode_image(density):
     buf = io.BytesIO()
-    plt.imsave(buf, density, cmap='seismic', format='png')
+    plt.imsave(buf, density, cmap=CMAP, format='png')
     buf.seek(0)
     final = io.BytesIO()
     Image.open(buf).convert("RGB").save(final, 'JPEG', quality=100)

@@ -18,7 +18,7 @@ def save(dest, image_key, prediction=None, line_from_truth=None):
 
 @attr.s
 class Previewer:
-    CMAP = 'seismic'
+    CMAP = ml.CMAP
     fig = attr.ib(default=plt.figure(figsize=(8, 6), dpi=100))
     just_predictions = attr.ib(default=False)
     prediction = attr.ib(default=attr.Factory(Prediction))
