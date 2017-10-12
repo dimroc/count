@@ -2,7 +2,11 @@ class PredictionDecorator < ApplicationDecorator
   delegate_all
 
   def density_map_tag
-    h.ix_image_tag(object.density_map.url, { sizes: "180px" }) if object.density_map
+    if object.density_map
+      h.link_to(object.density_map.url) do
+        h.ix_image_tag(object.density_map.url, { sizes: "180px" })
+      end
+    end
   end
 
   def created_at
