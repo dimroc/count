@@ -15,8 +15,19 @@ spec:
         app: ml
     spec:
       containers:
-        - name: ml
+        - name: mlv1
           image: us.gcr.io/counting-company-production/ml
+          args: [ "source activate counting_company && KERAS_BACKEND=tensorflow exec python -u",
+                  "manage.py rpcserver --mlversion 1" ]
+          envFrom:
+            - secretRef:
+                name: ml-environment
+    spec:
+      containers:
+        - name: mlv2
+          image: us.gcr.io/counting-company-production/ml
+          args: [ "source activate counting_company && KERAS_BACKEND=tensorflow exec python -u",
+                  "manage.py rpcserver --mlversion 2" ]
           envFrom:
             - secretRef:
                 name: ml-environment

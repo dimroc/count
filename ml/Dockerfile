@@ -8,4 +8,4 @@ RUN ["conda", "env", "create", "--file", "docker.environment.yml"]
 COPY . ./
 ENTRYPOINT ["/bin/bash", "-c"]
 CMD [ "source activate counting_company && KERAS_BACKEND=tensorflow exec python -u manage.py rpcserver" ]
-EXPOSE 50051
+EXPOSE 50051 50052
