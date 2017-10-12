@@ -542,6 +542,7 @@ run 43: multiscale blob adam, with better weight initialization
                   optimizer=keras.optimizers.adam(lr=1e-7, decay=5e-3),
                   metrics=['mae', 'mse', 'accuracy'])
 
+## Winner Winner Chicken Dinner number 44
 run 44: multiscale blob adam, with better weight initialization
     x = Conv2D(1, (1, 1), activation='relu', kernel_initializer=_msb_initializer)(x)
     model.compile(loss='mean_squared_error',
