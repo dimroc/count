@@ -1,0 +1,14 @@
+tr class="frame frame-#{frame.id}"
+  td = frame.id
+  td
+    = frame.created_at
+    = link_to [:admin, frame], remote: true, method: :patch, format: :js do
+      - if frame.flagged?
+        .icon-holder = fa_icon "thumbs-down"
+      - else
+        .icon-holder = fa_icon "thumbs-o-down"
+  td = frame.image_tag
+  - frame.predictions.each do |prediction|
+    td.prediction
+      = prediction.decorate.admin_cell if prediction
+

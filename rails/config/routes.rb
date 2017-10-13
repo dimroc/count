@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     resources :mockups, only: [:index, :show]
     resources :shakecams, only: [:index]
     resources :malls, only: [:index]
+    resources :frames, only: [:update]
   end
 end
