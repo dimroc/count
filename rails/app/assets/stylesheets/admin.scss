@@ -7,16 +7,25 @@ body.admin {
     color: white;
   }
 
-  td.prediction {
-    img {
-      display: block;
-    }
+  table.admin-predictions {
+    .frame {
+      td.prediction {
+        img {
+          display: block;
+        }
 
-    span {
-      display: inline-block;
-      margin-right: 20px;
-      h6 {
-        margin: 5px 0 0 0;
+        span {
+          display: inline-block;
+          margin-right: 20px;
+          h6 {
+            margin: 5px 0 0 0;
+          }
+        }
+      }
+
+      i.fa {
+        font-size: 40px;
+        margin: 40px;
       }
     }
   }

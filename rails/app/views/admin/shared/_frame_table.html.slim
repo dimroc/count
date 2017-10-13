@@ -1,4 +1,4 @@
-table.table.table-striped
+table.table.table-striped.admin-predictions
   thead
     tr
       th Id
@@ -8,10 +8,12 @@ table.table.table-striped
       th V2
   tbody
     - FrameDecorator.decorate_collection(frames).each do |frame|
-      tr
-        td = frame.id
-        td = frame.created_at
-        td = frame.image_tag
-        - frame.predictions.each do |prediction|
-          td.prediction
-            = prediction.decorate.admin_cell if prediction
+      = render 'admin/shared/frame_row', frame: frame
+
+javascript:
+  $(function() {
+    $(".admin-predictions .frame").on("ajax:success", function(event) {
+      [data, status, xhr] = event.detail;
+      $(event.currentTarget).find(".icon-holder").html($(data.html).find(".icon-holder"));
+    });
+  });
