@@ -8,7 +8,6 @@ spec:
       name: rake
     spec:
       restartPolicy: Never
-      backoffLimit: 0
       containers:
       - name: rails
         image: us.gcr.io/counting-company-production/rails
