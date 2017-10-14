@@ -1,6 +1,7 @@
 <template>
-  <section class="crowd-map">
+  <section class="crowdmap">
     <img :src="frame.density_map_url"/>
+    <img :src="frame.image_url"/>
   </section>
 
   <!--<section class="raw-feed">-->
@@ -15,4 +16,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.crowdmap {
+  margin: auto;
+  > img {
+    width: 200px;
+  }
+}
 </style>
