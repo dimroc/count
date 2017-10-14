@@ -28,6 +28,10 @@
 </template>
 
 <script>
+App.cable.subscriptions.create(
+  { channel: "FramesChannel", room: "shakecam" },
+  { received: function() { console.log(arguments); } });
+
 export default {
   data: function () {
     return {

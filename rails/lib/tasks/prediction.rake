@@ -4,7 +4,7 @@ namespace :prediction do
     frame = with_retry { Frame::Shakecam.predict! }
     if frame.predictions.present?
       puts frame.predictions
-      ActionCable.server.broadcast("admin_shakecams", prediction: frame.to_param)
+      ActionCable.server.broadcast("shakecam", frame: frame.to_param)
     end
   end
 
