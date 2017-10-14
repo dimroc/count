@@ -8,19 +8,11 @@
     <div class="box">
       <header>
         <h4>Crowd Map</h4>
-        <small>12:55pm EDT</small>
+        <clock />
       </header>
 
-      <crowdmap :frame="current" v-if="current" />
-
-      <!--<section class="raw-feed">-->
-        <!--<h4>Raw Feed</h4>-->
-      <!--</section>-->
-
-      <section class="chart">
-        <h1>32</h1>
-        <h4>People in line</h4>
-      </section>
+      <crowdmap v-if="current" :frame="current" />
+      <linechart v-if="frames" :frames="frames" />
     </div>
 
     <footer>
@@ -31,7 +23,9 @@
 </template>
 
 <script>
+import clock from './clock'
 import crowdmap from './crowdmap'
+import linechart from './linechart'
 
 App.cable.subscriptions.create(
   { channel: "FramesChannel", room: "shakecam" },
@@ -39,7 +33,9 @@ App.cable.subscriptions.create(
 
 export default {
   components: {
-    crowdmap
+    clock,
+    crowdmap,
+    linechart
   },
   data: function () {
     return {
