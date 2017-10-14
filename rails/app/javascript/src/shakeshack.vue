@@ -1,32 +1,3 @@
-<template>
-  <div id="app">
-    <header>
-      <h1>Shake Shack Line</h1>
-      <h4>Madison Square Park, New York City</h4>
-    </header>
-
-    <div class="box">
-      <header>
-        <h4>Crowd Map</h4>
-        <small>12:55pm EDT</small>
-      </header>
-
-      <section class="raw-feed">
-        <h4>Raw Feed</h4>
-      </section>
-
-      <section class="chart">
-        <h1>32</h1>
-        <h4>People in line</h4>
-      </section>
-    </div>
-
-    <footer>
-      <h4>1,426 other snapshots over 14 days.</h4>
-    </footer>
-  </div>
-</template>
-
 <script>
 App.cable.subscriptions.create(
   { channel: "FramesChannel", room: "shakecam" },
