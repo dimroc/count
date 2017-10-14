@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => "/cable"
 
+  resources :shakecams, only: [:index]
+
   namespace :admin do
     root to: redirect('admin/mockups')
     resources :mockups, only: [:index, :show]

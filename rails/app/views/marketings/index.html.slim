@@ -1,20 +1,2 @@
 = javascript_pack_tag 'shakeshack'
 = stylesheet_pack_tag 'shakeshack'
-
-#app
-  header
-    h1 Shake Shack Line
-    h4 Madison Square Park, New York City
-  .box
-    header
-      h4 Crowd Map
-      small 12:55pm EDT
-    section.crowd-map
-      = image_tag Frame::Shakecam.last.predictions.version(2).last.density_map.url
-    section.raw-feed
-      h4 Raw Feed
-    section.chart
-      h1 32
-      h4 People in line
-  footer
-    h4 1,426 other snapshots over 14 days.
