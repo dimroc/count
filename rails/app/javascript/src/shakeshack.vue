@@ -11,13 +11,11 @@
         <small>12:55pm EDT</small>
       </header>
 
-      <section class="crowd-map">
-        <!--<img :src="image"/>-->
-      </section>
+      <crowdmap :frame="current" v-if="current" />
 
-      <section class="raw-feed">
-        <h4>Raw Feed</h4>
-      </section>
+      <!--<section class="raw-feed">-->
+        <!--<h4>Raw Feed</h4>-->
+      <!--</section>-->
 
       <section class="chart">
         <h1>32</h1>
@@ -33,31 +31,38 @@
 </template>
 
 <script>
+import crowdmap from './crowdmap'
+
 App.cable.subscriptions.create(
   { channel: "FramesChannel", room: "shakecam" },
   { received: function() { console.log(arguments); } });
 
 export default {
+  components: {
+    crowdmap
+  },
   data: function () {
     return {
       message: "Hello Dimitri!",
-      frames: null
+      frames: null,
+      current: null
     }
   },
-  mounted: function() {
+  created: function() {
     this.fetchFrames();
   },
   methods: {
     fetchFrames: function() {
       this.$http.get('/shakecams').then((response) => {
         this.frames = response.body;
+        this.current = this.frames[0];
       })
     }
   }
 }
 </script>
 
-<style scoped  lang="scss">
+<style scoped lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 $offwhite: #888;
 
