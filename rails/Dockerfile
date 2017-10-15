@@ -7,10 +7,9 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev \
 WORKDIR /app
 COPY Gemfile Gemfile.lock package.json yarn.lock ./
 RUN bundle install --retry 2 --without development test
-RUN npm rebuild node-sass --force # Node Sass could not find a binding for your current environment: Linux 64-bit with Node.js 8.x
+RUN yarn install
 
 COPY . ./
-# Make RAILS_ENV test just for asset compilation, to prevent connection to GCS.
 RUN RAILS_ENV=test bundle exec rake assets:precompile
 
 ENTRYPOINT ["/bin/bash", "-c"]
