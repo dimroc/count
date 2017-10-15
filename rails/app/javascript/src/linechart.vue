@@ -1,27 +1,34 @@
 <template>
   <section class="chart">
     <svg width="700" height="300"></svg>
-    <h1>32</h1>
+    <h1>{{current_line_count | round}}</h1>
     <h4>People in line</h4>
   </section>
 </template>
 
 <script>
 import Vue from 'vue'
+import CurveNMoveAge from './d3.nmoveavg'
 const d3 = require('d3');
 
 export default {
   props: ['frames'],
   mounted: function() {
-    this.drawLine()
+    this.resetLinechart()
+  },
+  data: function() {
+    return {
+      current_line_count: null
+    }
   },
   watch: {
     frames: function(newValue) {
-      this.drawLine()
+      this.resetLinechart()
     }
   },
   methods: {
-    drawLine: function() {
+    resetLinechart: function() {
+      this.current_line_count = this.frames[0].line_count
       let svg = d3.select(this.$el).select('svg')
 
       var data = this.frames.map(function(f) {
@@ -32,28 +39,27 @@ export default {
         }
       });
 
-      console.log(data);
-
-      var line = d3.line()
-        .x(function(d) { return d.created_at; })
-        .y(function(d) { return d.line_count; });
-
       // Handle Axis
       var x = d3.scaleTime().range([0, 650]);
-      var y = d3.scaleLinear().range([0, 250])
-      var xAxis = d3.axisBottom(x)//.ticks(d3.timeHour.every(1))
+      var y = d3.scaleLinear().range([250, 0])
+      var xAxis = d3.axisBottom(x)
+
+      var line = d3.line()
+        .x(function(d) { return x(d.created_at); })
+        .y(function(d) { return y(d.line_count); });
 
       // Scale the range of the data
       x.domain(d3.extent(data, function(d) { return d.created_at; }));
-      y.domain([0, d3.max(data, function(d) { return d.line_count; })]);
+      y.domain([0, 80]);
 
       // Draw everything
       svg.append('path')
         .data([data])
         .attr("stroke-width", 2)
         .attr("stroke", "black")
+        .attr("fill", "none")
         .attr('class', 'line')
-        .attr('d', line)
+        .attr('d', line.curve(CurveNMoveAge.N(3)))
 
       svg.append("g").attr("class", "y axis").call(d3.axisLeft(y))
 
@@ -61,11 +67,13 @@ export default {
         .attr("class", "x axis")
         .attr("transform", "translate(0, 250)")
         .call(xAxis)
-        .selectAll("text").remove()
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+section.chart {
+  margin-top: 30px;
+}
 </style>
