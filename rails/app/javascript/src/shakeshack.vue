@@ -5,19 +5,18 @@
       <h4>Madison Square Park, New York City</h4>
     </header>
 
-    <div class="box">
+    <div class="box" v-if="frames">
       <header>
         <h4>Crowd Map</h4>
         <clock />
       </header>
 
-      <crowdmap v-if="current" :frame="current" />
-      <linechart v-if="frames" :frames="frames" />
+      <crowdmap :frame="current" />
+      <linechart :frames="frames" />
     </div>
 
-    <footer>
-      <h4>1,426 other snapshots over 14 days.</h4>
-      <p>{{frames}}</p>
+    <footer v-if="stats">
+      <h4>{{stats.count | humannumber}} other snapshots over {{stats.days}} days.</h4>
     </footer>
   </div>
 </template>
@@ -40,6 +39,7 @@ export default {
   data: function () {
     return {
       message: "Hello Dimitri!",
+      stats: null,
       frames: null,
       current: null
     }
@@ -50,7 +50,8 @@ export default {
   methods: {
     fetchFrames: function() {
       this.$http.get('/shakecams').then((response) => {
-        this.frames = response.body;
+        this.frames = response.body.frames;
+        this.stats = response.body.stats;
         this.current = this.frames[0];
       })
     }
