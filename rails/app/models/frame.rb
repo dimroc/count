@@ -2,8 +2,6 @@ class Frame < ApplicationRecord
   has_many :predictions, -> { order(:version) }
   has_many :v2_predictions, -> { where(version: "2") }, class_name: "Prediction"
   scope :v2, -> { joins(:v2_predictions).includes(:v2_predictions).order(created_at: :desc) }
-  scope :day, -> (day) { where(created_at: day.in_time_zone(timezone).beginning_of_day..day.in_time_zone(timezone).end_of_day) }
-  scope :today, -> { where(created_at: DateTime.now.in_time_zone(timezone).beginning_of_day..DateTime.now) }
   scope :eager, -> { includes(:predictions) }
   scope :desc, -> { order(created_at: :desc) }
 

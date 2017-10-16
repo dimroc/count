@@ -48,8 +48,12 @@ export default {
         .x(function(d) { return x(d.created_at); })
         .y(function(d) { return y(d.line_count); });
 
-      // Scale the range of the data
-      x.domain(d3.extent(data, function(d) { return d.created_at; }));
+      // Scale the range of the data, and ensure end of range is end of day.
+      var range = d3.extent(data, function(d) { return d.created_at; });
+      var end = new Date(range[1]);
+      end.setHours(23);
+      end.setMinutes(59);
+      x.domain([range[0], end]);
       y.domain([0, 80]);
 
       // Draw everything
@@ -61,11 +65,9 @@ export default {
         .attr('class', 'line')
         .attr('d', line.curve(CurveNMoveAge.N(3)))
 
-      svg.append("g").attr("class", "y axis").call(d3.axisLeft(y))
-
       svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0, 250)")
+        .attr("transform", "translate(0, 270)")
         .call(xAxis)
     }
   }
