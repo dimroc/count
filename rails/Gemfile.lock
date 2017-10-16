@@ -55,9 +55,9 @@ GIT
 
 GIT
   remote: https://github.com/rails/webpacker.git
-  revision: 37d8ce2d79b9f7ac91c780be93168b27a5916550
+  revision: 3c8adb79201bf4928276936dcbb183c8c029e8f1
   specs:
-    webpacker (3.0.1)
+    webpacker (3.0.2)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
       railties (>= 4.2)
@@ -166,7 +166,7 @@ GEM
       activemodel-serializers-xml (~> 1.0)
       activesupport (~> 5.0)
       request_store (~> 1.0)
-    erubi (1.6.1)
+    erubi (1.7.0)
     execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
