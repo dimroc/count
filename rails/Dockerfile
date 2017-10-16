@@ -10,7 +10,7 @@ RUN bundle install --retry 2 --without development test
 RUN yarn install
 
 COPY . ./
-RUN RAILS_ENV=test bundle exec rake assets:precompile
+RUN SECRET_KEY_BASE=bogus RAILS_ENV=production bundle exec rake assets:precompile
 
 ENTRYPOINT ["/bin/bash", "-c"]
 CMD [ "bundle exec rails s" ]
