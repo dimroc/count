@@ -16,7 +16,7 @@
     </div>
 
     <footer v-if="stats">
-      <h4>{{stats.count | humannumber}} other snapshots over {{stats.days}} days.</h4>
+      <h4>{{stats.count | humannumber}} other snapshots over {{stats.days}} days</h4>
     </footer>
   </div>
 </template>
@@ -52,7 +52,7 @@ export default {
       this.$http.get('/shakecams').then((response) => {
         this.frames = response.body.frames;
         this.stats = response.body.stats;
-        this.current = this.frames[0];
+        this.current = this.frames[0][0];
       })
     }
   }

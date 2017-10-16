@@ -18,8 +18,7 @@ class Frame::Shakecam < Frame
     end
 
     def working_hours(day)
-      tomorrow = day + 1.day
-      day.in_time_zone(timezone).change(hour: 8, min: 0, sec: 0)..tomorrow.in_time_zone(timezone).end_of_day
+      day.in_time_zone(timezone).change(hour: 8, min: 0, sec: 0)..day.in_time_zone(timezone).end_of_day
     end
   end
 
