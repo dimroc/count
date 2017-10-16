@@ -11,8 +11,8 @@ class ShakecamsController < ApplicationController
 
   def stats
     {
-      count: Frame::Shakecam.count,
-      days: 44
+      count: Frame::Shakecam.v2.count,
+      days: (Frame::Shakecam.v2.first.created_at.to_date - Frame::Shakecam.v2.last.created_at.to_date).to_i
     }
   end
 end
