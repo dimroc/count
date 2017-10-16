@@ -16,27 +16,38 @@ export default {
   mounted: function() {
     this.resetLinechart()
   },
+
   data: function() {
     return {
       current_line_count: null
     }
   },
+
   watch: {
     frames: function(newValue) {
       this.resetLinechart()
     }
   },
+
   methods: {
     resetLinechart: function() {
-      this.current_line_count = this.frames[0].line_count
+      this.current_line_count = this.frames[0][0].line_count
       let svg = d3.select(this.$el).select('svg')
 
-      var data = this.frames.map(function(f) {
-        return {
-          created_at: d3.isoParse(f.created_at),
-          crowd_count: parseFloat(f.crowd_count),
-          line_count: parseFloat(f.line_count)
-        }
+      var generateData = function(daysData, dayOffset) {
+        return daysData.map(function(f) {
+          var tweakedDate = new Date(f.created_at)
+          tweakedDate.setDate(tweakedDate.getDate() + dayOffset)
+          return {
+            created_at: tweakedDate,
+            crowd_count: parseFloat(f.crowd_count),
+            line_count: parseFloat(f.line_count)
+          }
+        });
+      };
+
+      let daysData = this.frames.map(function(daysFrames, idx) {
+        return generateData(daysFrames, idx);
       });
 
       // Handle Axis
@@ -49,21 +60,33 @@ export default {
         .y(function(d) { return y(d.line_count); });
 
       // Scale the range of the data, and ensure end of range is end of day.
-      var range = d3.extent(data, function(d) { return d.created_at; });
+      var range = d3.extent(daysData[0], function(d) { return d.created_at; });
       var end = new Date(range[1]);
       end.setHours(23);
       end.setMinutes(59);
       x.domain([range[0], end]);
       y.domain([0, 80]);
 
-      // Draw everything
-      svg.append('path')
-        .data([data])
-        .attr("stroke-width", 2)
-        .attr("stroke", "black")
-        .attr("fill", "none")
-        .attr('class', 'line')
-        .attr('d', line.curve(CurveNMoveAge.N(3)))
+      // Draw previous days
+      daysData.slice(1).forEach(function(day) {
+        svg.append('path')
+          .data([day])
+          .attr("stroke-width", 1)
+          .attr("stroke", "#ccc")
+          .style("stroke-dasharray", ("3, 3"))
+          .attr("fill", "none")
+          .attr('class', 'previousline')
+          .attr('d', line.curve(CurveNMoveAge.N(3)))
+      });
+
+      // Draw today
+     svg.append('path')
+       .data([daysData[0]])
+       .attr("stroke-width", 2)
+       .attr("stroke", "black")
+       .attr("fill", "none")
+       .attr('class', 'line')
+       .attr('d', line.curve(CurveNMoveAge.N(3)))
 
       svg.append("g")
         .attr("class", "x axis")
