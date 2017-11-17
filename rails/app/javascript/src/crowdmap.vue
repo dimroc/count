@@ -16,6 +16,7 @@ export default {
   margin: auto;
   > img {
     width: 200px;
+    border-radius: 10px;
   }
 }
 </style>

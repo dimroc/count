@@ -1,24 +1,27 @@
 <template>
-  <div id="app">
-    <header>
-      <h1>Shake Shack Line</h1>
-      <h4>Madison Square Park, New York City</h4>
-    </header>
-
+  <section id="app">
     <div class="box" v-if="frames">
       <header>
-        <h4>Crowd Map</h4>
+        <div v-if="current.closed">
+          <h1>No one in line because it's closed</h1>
+        </div>
+
+        <div v-else>
+          <h1>{{current.line_count | round}} people in line</h1>
+        </div>
+
+        <h4>at Shake Shack Madison Square Park, NYC</h4>
         <clock />
       </header>
 
-      <crowdmap :frame="current" />
       <linechart :frames="frames" />
+      <crowdmap :frame="current" />
     </div>
 
     <footer v-if="stats">
       <h4>{{stats.count | humannumber}} other snapshots over {{stats.days}} days</h4>
     </footer>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -77,7 +80,9 @@ $offwhite: #888;
 }
 
 .box {
-  border: 1px solid lighten($offwhite, 25%);
+  background-color: white;
+  //border: 1px solid lighten($offwhite, 25%);
+  box-shadow: 0px 0 5px #aaa;
   padding: 20px;
   margin-bottom: 20px;
 
@@ -97,7 +102,7 @@ $offwhite: #888;
 }
 
 h1 {
-  font-size: 2.8rem;
+  font-size: 2.0rem;
 }
 
 h4 {

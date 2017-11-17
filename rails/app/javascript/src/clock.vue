@@ -19,3 +19,12 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+small {
+  background-color: rgb(83,83,83);
+  color: white;
+  border-radius: 15px;
+  padding: 5px 10px;
+}
+</style>

@@ -1,0 +1,19 @@
+body.marketings.index {
+  .offwhite {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 800px;
+    background-color: #eff9fc;
+    width: 100vw;
+    z-index: -1;
+  }
+
+  header.banner {
+    h1, h2 {
+      display: inline-block;
+      vertical-align: bottom;
+      line-height: 100px;
+    }
+  }
+}
