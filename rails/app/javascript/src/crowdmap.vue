@@ -1,13 +1,16 @@
 <template>
   <section class="crowdmap">
-    <img :src="frame.density_map_url"/>
-    <img :src="frame.image_url"/>
+    <img :ix-src="frame.density_map_url" sizes="200w"/>
+    <img :ix-src="frame.image_url" sizes="200w"/>
   </section>
 </template>
 
 <script>
 export default {
-  props: ['frame']
+  props: ['frame'],
+  mounted: function () {
+    imgix.init({ host: 'countingcompany.imgix.net' });
+  }
 }
 </script>
 

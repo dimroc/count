@@ -40,7 +40,6 @@ module CountingCompany
 
     config.imgix = {
       source: "countingcompany.imgix.net",
-      secure_url_token: "fPWGRJ37krZDYdMj",
       hostname_to_replace: 'storage.googleapis.com'
     }
   end

@@ -37,3 +37,4 @@ options:
     App: true
     ActionCable: true
     autosize: true
+    imgix: true

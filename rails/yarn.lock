@@ -2562,6 +2562,10 @@ ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
 
+imgix.js@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/imgix.js/-/imgix.js-3.3.2.tgz#632c1dc359306ecc24d2ff66b36eb1735fcbacdb"
+
 in-publish@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/in-publish/-/in-publish-2.0.0.tgz#e20ff5e3a2afc2690320b6dc552682a9c7fadf51"
