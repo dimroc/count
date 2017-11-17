@@ -3,14 +3,7 @@
     <div class="box" v-if="frames">
       <header>
         <clock />
-        <div v-if="current.closed">
-          <h1>No one in line because it's closed</h1>
-        </div>
-
-        <div v-else>
-          <h1>{{current.line_count | round}} people in line</h1>
-        </div>
-
+        <h1> {{ lineMessage }}</h1>
         <h4>at
           <a href="https://www.shakeshack.com/location/madison-square-park" target="_blank">
             Shake Shack Madison Square Park, NYC
@@ -39,12 +32,24 @@ export default {
     crowdmap,
     linechart
   },
-  data: function () {
+  data: function() {
     return {
-      message: "Hello Dimitri!",
       stats: null,
       frames: null,
       current: null
+    }
+  },
+  computed: {
+    lineMessage: function() {
+      if(this.current.closed) {
+        return "No one in line (closed)"
+      } else if(this.current.line_count == 0) {
+        return "No one in line"
+      } else if(this.current.line_count == 1) {
+        return `${Math.round(this.current.line_count)} person in line`
+      } else {
+        return `${Math.round(this.current.line_count)} people in line`
+      }
     }
   },
   created: function() {
