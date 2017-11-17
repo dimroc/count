@@ -1,7 +1,11 @@
 <template>
   <section class="crowdmap">
-    <img :ix-src="frame.density_map_url" sizes="200w"/>
-    <img :ix-src="frame.image_url" sizes="200w"/>
+    <a :href="frame.density_map_url" target="_blank">
+      <img :ix-src="frame.density_map_url" sizes="200w"/>
+    </a>
+    <a :href="frame.image_url" target="_blank">
+      <img :ix-src="frame.image_url" sizes="200w"/>
+    </a>
   </section>
 </template>
 
@@ -17,7 +21,7 @@ export default {
 <style scoped lang="scss">
 .crowdmap {
   margin: auto;
-  > img {
+  img {
     width: 200px;
     border-radius: 10px;
   }
