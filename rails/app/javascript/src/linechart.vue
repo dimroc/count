@@ -1,8 +1,14 @@
 <template>
   <section class="chart">
     <svg width="700" height="300"></svg>
-    <h1>{{current_line_count | round}}</h1>
-    <h4>People in line</h4>
+    <div v-if="current.closed">
+      <h1>Closed</h1>
+    </div>
+
+    <div v-else>
+      <h1>{{current.line_count | round}}</h1>
+      <h4>People in line</h4>
+    </div>
   </section>
 </template>
 
@@ -19,7 +25,7 @@ export default {
 
   data: function() {
     return {
-      current_line_count: null
+      current: { closed: true }
     }
   },
 
@@ -31,7 +37,7 @@ export default {
 
   methods: {
     resetLinechart: function() {
-      this.current_line_count = this.frames[0][0].line_count
+      this.current = this.frames[0][0]
       let svg = d3.select(this.$el).select('svg')
 
       var generateData = function(daysData, dayOffset) {
