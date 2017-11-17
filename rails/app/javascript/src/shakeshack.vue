@@ -2,6 +2,7 @@
   <section id="app">
     <div class="box" v-if="frames">
       <header>
+        <clock />
         <div v-if="current.closed">
           <h1>No one in line because it's closed</h1>
         </div>
@@ -10,8 +11,11 @@
           <h1>{{current.line_count | round}} people in line</h1>
         </div>
 
-        <h4>at Shake Shack Madison Square Park, NYC</h4>
-        <clock />
+        <h4>at
+          <a href="https://www.shakeshack.com/location/madison-square-park" target="_blank">
+            Shake Shack Madison Square Park, NYC
+        </a>
+      </h4>
       </header>
 
       <linechart :frames="frames" />

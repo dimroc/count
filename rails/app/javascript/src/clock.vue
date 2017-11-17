@@ -26,5 +26,6 @@ small {
   color: white;
   border-radius: 15px;
   padding: 5px 10px;
+  margin-top: 5px;
 }
 </style>

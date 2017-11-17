@@ -81,7 +81,7 @@ export default {
      svg.append('path')
        .data([daysData[0]])
        .attr("stroke-width", 2)
-       .attr("stroke", "black")
+       .attr("stroke", "#0bf6bb")
        .attr("fill", "none")
        .attr('class', 'line')
        .attr('d', line.curve(CurveNMoveAge.N(3)))
