@@ -17,10 +17,6 @@
       <linechart :frames="frames" />
       <crowdmap :frame="current" />
     </div>
-
-    <footer v-if="stats">
-      <h4>{{stats.count | humannumber}} other snapshots over {{stats.days}} days</h4>
-    </footer>
   </section>
 </template>
 
