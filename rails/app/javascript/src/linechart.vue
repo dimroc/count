@@ -1,14 +1,6 @@
 <template>
   <section class="chart">
-    <svg width="700" height="300"></svg>
-    <div v-if="current.closed">
-      <h1>Closed</h1>
-    </div>
-
-    <div v-else>
-      <h1>{{current.line_count | round}}</h1>
-      <h4>People in line</h4>
-    </div>
+    <svg width="700" height="250"></svg>
   </section>
 </template>
 
@@ -58,7 +50,7 @@ export default {
 
       // Handle Axis
       var x = d3.scaleTime().range([0, 650]);
-      var y = d3.scaleLinear().range([250, 0])
+      var y = d3.scaleLinear().range([200, 0])
       var xAxis = d3.axisBottom(x)
 
       var line = d3.line()
@@ -96,7 +88,7 @@ export default {
 
       svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0, 270)")
+        .attr("transform", "translate(0, 220)")
         .call(xAxis)
     }
   }
@@ -104,7 +96,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-section.chart {
-  margin-top: 30px;
-}
 </style>
