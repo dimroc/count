@@ -11,10 +11,16 @@ class FrameSerializer < ActiveModel::Serializer
   end
 
   def density_map_url
-    object.v2_predictions.last.density_map.url
+    h.ix_image_url object.v2_predictions.last.density_map.url
   end
 
   def image_url
-    object.image.url
+    h.ix_image_url object.image.url
+  end
+
+  private
+
+  def h
+    ActionController::Base.helpers
   end
 end
