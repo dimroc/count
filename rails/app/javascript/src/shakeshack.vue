@@ -21,13 +21,14 @@
 import clock from './clock'
 import crowdmap from './crowdmap'
 import linechart from './linechart'
-import moment from 'moment-timezone'
+import helper_mixin from './helper_mixin'
 
 App.cable.subscriptions.create(
   { channel: "FramesChannel", room: "shakecam" },
   { received: function() { console.log(arguments); } });
 
 export default {
+  mixins: [helper_mixin],
   components: {
     clock,
     crowdmap,
@@ -37,8 +38,7 @@ export default {
     return {
       stats: null,
       frames: null,
-      current: null,
-      date: this.$route.params.date || moment().format("YYYY-MM-DD")
+      current: null
     }
   },
   computed: {
