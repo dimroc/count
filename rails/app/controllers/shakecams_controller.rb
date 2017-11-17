@@ -6,7 +6,6 @@ class ShakecamsController < ApplicationController
         serialize(Frame::Shakecam.v2.day(date_param - 1.day)),
         serialize(Frame::Shakecam.v2.day(date_param - 2.days)),
         serialize(Frame::Shakecam.v2.day(date_param - 3.days)),
-        serialize(Frame::Shakecam.v2.day(date_param - 4.days)),
       ]
     }
   end
