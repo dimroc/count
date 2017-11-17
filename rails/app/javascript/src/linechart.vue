@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import CurveNMoveAge from './d3.nmoveavg'
 const d3 = require('d3');
 

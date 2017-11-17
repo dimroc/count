@@ -38,7 +38,7 @@ export default {
       stats: null,
       frames: null,
       current: null,
-      date: moment().format("YYYY-MM-DD")
+      date: this.$route.params.date || moment().format("YYYY-MM-DD")
     }
   },
   computed: {
