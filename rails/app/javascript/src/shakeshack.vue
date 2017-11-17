@@ -21,6 +21,7 @@
 import clock from './clock'
 import crowdmap from './crowdmap'
 import linechart from './linechart'
+import moment from 'moment-timezone'
 
 App.cable.subscriptions.create(
   { channel: "FramesChannel", room: "shakecam" },
@@ -36,7 +37,8 @@ export default {
     return {
       stats: null,
       frames: null,
-      current: null
+      current: null,
+      date: moment().format("YYYY-MM-DD")
     }
   },
   computed: {
@@ -57,7 +59,7 @@ export default {
   },
   methods: {
     fetchFrames: function() {
-      this.$http.get('/shakecams').then((response) => {
+      this.$http.get('/shakecams', { params: { date: this.date }}).then((response) => {
         this.frames = response.body.frames;
         this.stats = response.body.stats;
         this.current = this.frames[0][0];
