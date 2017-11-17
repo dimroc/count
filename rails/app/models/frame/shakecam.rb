@@ -2,7 +2,7 @@ class Frame::Shakecam < Frame
   include ShakecamUploader[:raw]
 
   scope :day, -> (day) { where(created_at: working_hours(day)) }
-  scope :today, -> { where(created_at: working_hours(DateTime.now).begin..DateTime.now) }
+  scope :today, -> { day(DateTime.now) }
 
   class << self
     def predict!
