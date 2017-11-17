@@ -63,11 +63,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 $offwhite: #888;
 
 #app {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'arquette';
   font-smooth: always;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
