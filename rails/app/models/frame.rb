@@ -5,6 +5,8 @@ class Frame < ApplicationRecord
   scope :eager, -> { includes(:predictions) }
   scope :desc, -> { order(created_at: :desc) }
 
+  attr_accessor :closed
+
   # The cameras that generate these frames belong in a timezone,
   # which is relevant for retrieveing frames for that particular day.
   def self.timezone

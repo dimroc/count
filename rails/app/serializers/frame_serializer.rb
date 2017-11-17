@@ -1,6 +1,6 @@
 class FrameSerializer < ActiveModel::Serializer
   attributes :id, :created_at, :line_count, :crowd_count,
-    :density_map_url, :image_url
+    :density_map_url, :image_url, :closed
 
   def line_count
     object.v2_predictions.last.line_count
