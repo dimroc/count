@@ -3,16 +3,18 @@
 </template>
 
 <script>
-import moment from 'moment'
+import moment from 'moment-timezone'
+moment.tz.setDefault('America/New_York')
+
 export default {
   data: function() {
     return {
-      time: moment().format('LTS')
+      time: moment().format('LTS z')
     }
   },
   mounted: function() {
     setInterval(() => {
-      this.time = moment().format('LTS')
+      this.time = moment().format('LTS z')
     }, 1000)
   }
 }
