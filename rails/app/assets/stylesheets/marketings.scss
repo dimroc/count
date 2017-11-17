@@ -10,6 +10,9 @@ body.marketings.index {
   }
 
   header.banner {
+    max-width: 750px;
+    margin: 0 auto;
+
     h1, h2 {
       display: inline-block;
       vertical-align: bottom;

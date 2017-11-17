@@ -1,6 +1,6 @@
 <template>
   <section class="chart">
-    <svg width="700" height="250"></svg>
+    <svg width="710" height="250"></svg>
   </section>
 </template>
 
@@ -49,7 +49,7 @@ export default {
       });
 
       // Handle Axis
-      var x = d3.scaleTime().range([0, 650]);
+      var x = d3.scaleTime().range([0, 700]);
       var y = d3.scaleLinear().range([200, 0])
       var xAxis = d3.axisBottom(x)
 
@@ -63,7 +63,7 @@ export default {
       end.setHours(23);
       end.setMinutes(59);
       x.domain([range[0], end]);
-      y.domain([0, 80]);
+      y.domain([0, 70]);
 
       // Draw previous days
       daysData.slice(1).forEach(function(day) {
