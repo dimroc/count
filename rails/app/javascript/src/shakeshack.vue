@@ -1,5 +1,5 @@
 <template>
-  <section id="app">
+  <section id="shakecam">
     <div class="box" v-if="frames">
       <header>
         <clock />
@@ -72,7 +72,7 @@ export default {
 <style scoped lang="scss">
 $offwhite: #888;
 
-#app {
+section {
   font-family: 'arquette';
   font-smooth: always;
   -webkit-font-smoothing: antialiased;

@@ -27,6 +27,12 @@ export default {
   },
 
   methods: {
+    movingLineCountAverageAt: function(frame) {
+      var points = [this.frames[0][frame], this.frames[0][frame+1], this.frames[0][frame+2]]
+      points = points.filter(p => p).map(p => p.line_count)
+      var rval = points.reduce((a, b) => a + b, 0) / points.length
+      return rval
+    },
     resetLinechart: function() {
       this.current = this.frames[0][0]
       let svg = d3.select(this.$el).select('svg')
@@ -50,11 +56,11 @@ export default {
       // Handle Axis
       var x = d3.scaleTime().range([0, 700]);
       var y = d3.scaleLinear().range([200, 0])
-      var xAxis = d3.axisBottom(x)
+      var xAxis = d3.axisBottom(x).ticks(6);
 
       var line = d3.line()
-        .x(function(d) { return x(d.created_at); })
-        .y(function(d) { return y(d.line_count); });
+        .x(d => x(d.created_at))
+        .y(d => y(d.line_count))
 
       // Scale the range of the data, and ensure end of range is end of day.
       var range = d3.extent(daysData[0], function(d) { return d.created_at; });
@@ -77,7 +83,7 @@ export default {
       });
 
       // Draw today
-     svg.append('path')
+     let today = svg.append('path')
        .data([daysData[0]])
        .attr("stroke-width", 2)
        .attr("stroke", "#0bf6bb")
@@ -86,13 +92,40 @@ export default {
        .attr('d', line.curve(CurveNMoveAge.N(3)))
 
       svg.append("g")
-        .attr("class", "x axis")
+        .attr("class", "xaxis")
         .attr("transform", "translate(0, 220)")
         .call(xAxis)
+
+      // Draw circle at current spot
+      let jsonCircle = {
+        x_axis: new Date(this.current.created_at),
+        y_axis: this.movingLineCountAverageAt(0)
+      }
+
+      svg.selectAll("circle")
+        .data([jsonCircle])
+        .enter()
+        .append("circle")
+        .attr("cx", function(c) { return x(c.x_axis); })
+        .attr("cy", function(c) { return y(c.y_axis); })
+        .attr("r", 5)
+        .style("fill", "#0bf6bb")
+        .style("stroke", "#fff")
+        .style("stroke-width", 2)
     }
   }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+#shakecam {
+  .xaxis line,
+  .xaxis path {
+    stroke: #b2b2b2;
+  }
+
+  .xaxis text {
+    fill: #b2b2b2;
+  }
+}
 </style>

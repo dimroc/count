@@ -21,5 +21,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const mountee = new Vue({
     router,
     template: `<router-view class="view"></router-view>`
-  }).$mount('#vue')
+  }).$mount('#shakecam')
 })
