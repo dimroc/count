@@ -2,7 +2,7 @@
   <section id="shakecam">
     <div class="box" v-if="frames">
       <header>
-        <clock />
+        <clock :current="current"/>
         <h1> {{ lineMessage }}</h1>
         <h4>at
           <a href="https://www.shakeshack.com/location/madison-square-park" target="_blank">

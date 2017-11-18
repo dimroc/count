@@ -14,12 +14,11 @@ const MOMENT_FORMAT = 'ddd MMM D LTS z'
 
 export default {
   mixins: [helper_mixin],
-  data: function() {
-    return {
-      time: moment().format(MOMENT_FORMAT)
-    }
-  },
+  props: ['current'],
   computed: {
+    time: function() {
+      return moment(this.current.created_at).format(MOMENT_FORMAT)
+    },
     yesterdays_path: function() {
       return `/dates/${moment().add(-1, 'days').format(this.dateFormat)}`
     },
@@ -29,11 +28,6 @@ export default {
     today: function() {
       return moment(this.date).format(this.dateFormat) == moment().format(this.dateFormat)
     }
-  },
-  mounted: function() {
-    setInterval(() => {
-      this.time = moment().format(MOMENT_FORMAT)
-    }, 1000)
   }
 }
 </script>
