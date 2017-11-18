@@ -30,10 +30,10 @@ export default {
     movingLineCountAverageAt: function(frame) {
       var points = [this.frames[0][frame], this.frames[0][frame+1], this.frames[0][frame+2]]
       points = points.filter(p => p).map(p => p.line_count)
-      var rval = points.reduce((a, b) => a + b, 0) / points.length
-      return rval
+      return points.reduce((a, b) => a + b, 0) / points.length
     },
     resetLinechart: function() {
+      let that = this
       this.current = this.frames[0][0]
       let svg = d3.select(this.$el).select('svg')
 
@@ -88,7 +88,7 @@ export default {
        .attr("stroke-width", 2)
        .attr("stroke", "#0bf6bb")
        .attr("fill", "none")
-       .attr('class', 'line')
+       .attr('class', 'currentline')
        .attr('d', line.curve(CurveNMoveAge.N(3)))
 
       svg.append("g")
@@ -96,29 +96,63 @@ export default {
         .attr("transform", "translate(0, 220)")
         .call(xAxis)
 
-      // Draw circle at current spot
-      let jsonCircle = {
-        x_axis: new Date(this.current.created_at),
-        y_axis: this.movingLineCountAverageAt(0)
+      if(!this.current.closed) {
+        // Draw circle at current spot
+        let jsonCircle = {
+          x_axis: new Date(this.current.created_at),
+          y_axis: this.movingLineCountAverageAt(0)
+        }
+        svg.selectAll("circle")
+          .data([jsonCircle])
+          .enter()
+          .append("circle")
+          .attr("cx", function(c) { return x(c.x_axis); })
+          .attr("cy", function(c) { return y(c.y_axis); })
+          .attr("r", 5)
+          .style("fill", "#0bf6bb")
+          .style("stroke", "#fff")
+          .style("stroke-width", 2)
       }
 
-      svg.selectAll("circle")
-        .data([jsonCircle])
-        .enter()
-        .append("circle")
-        .attr("cx", function(c) { return x(c.x_axis); })
-        .attr("cy", function(c) { return y(c.y_axis); })
-        .attr("r", 5)
-        .style("fill", "#0bf6bb")
-        .style("stroke", "#fff")
+      // Handle Mouse
+      var focus = svg.append("g")
+        .attr("class", "focus")
+        .style("display", "none");
+
+      focus.append("circle")
+        .style("fill", "white")
+        .style("stroke", "#0bf6bb")
         .style("stroke-width", 2)
+        .attr("r", 4.5);
+
+      focus.append("text")
+        .attr("x", 9)
+        .attr("dy", ".35em");
+
+      svg.on("mouseover", () => focus.style("display", null))
+        .on("mouseout", () => focus.style("display", "none"))
+        .on("mousemove", mousemove)
+
+      var bisectDate = d3.bisector((d, x) => x - d.created_at).left;
+      function mousemove() {
+        let data = daysData[0];
+        let mouseDate = x.invert(d3.mouse(this)[0]), mouseFrame = bisectDate(data, mouseDate)
+        var d = Object.assign({}, data[mouseFrame])
+        d.line_count = that.movingLineCountAverageAt(mouseFrame)
+        focus.attr("transform", "translate(" + x(d.created_at) + "," + y(d.line_count) + ")");
+        focus.select("text").text(Math.round(d.line_count));
+      }
     }
   }
 }
 </script>
 
 <style lang="scss">
-#shakecam {
+#shakecam .chart {
+  svg:hover {
+    cursor: pointer;
+  }
+
   .xaxis line,
   .xaxis path {
     stroke: #b2b2b2;
