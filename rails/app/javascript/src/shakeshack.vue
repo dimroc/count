@@ -1,16 +1,9 @@
 <template>
-  <section id="app">
+  <section id="shakecam">
     <div class="box" v-if="frames">
       <header>
-        <clock />
-        <div v-if="current.closed">
-          <h1>No one in line because it's closed</h1>
-        </div>
-
-        <div v-else>
-          <h1>{{current.line_count | round}} people in line</h1>
-        </div>
-
+        <clock :current="current"/>
+        <h1> {{ lineMessage }}</h1>
         <h4>at
           <a href="https://www.shakeshack.com/location/madison-square-park" target="_blank">
             Shake Shack Madison Square Park, NYC
@@ -18,8 +11,8 @@
       </h4>
       </header>
 
-      <linechart :frames="frames" />
-      <crowdmap :frame="current" />
+      <linechart :frames="frames" :current="current" v-on:frameselected="selectframe" />
+      <crowdmap :current="current" />
     </div>
   </section>
 </template>
@@ -28,46 +21,63 @@
 import clock from './clock'
 import crowdmap from './crowdmap'
 import linechart from './linechart'
+import helper_mixin from './helper_mixin'
 
 App.cable.subscriptions.create(
   { channel: "FramesChannel", room: "shakecam" },
   { received: function() { console.log(arguments); } });
 
 export default {
+  mixins: [helper_mixin],
   components: {
     clock,
     crowdmap,
     linechart
   },
-  data: function () {
+  data: function() {
     return {
-      message: "Hello Dimitri!",
       stats: null,
       frames: null,
       current: null
     }
   },
-  created: function() {
-    this.fetchFrames();
+  computed: {
+    lineMessage: function() {
+      let lc = Math.round(this.current.line_count || 0)
+      if(this.current.closed) {
+        return "No one in line (closed)"
+      } else if(lc == 0) {
+        return "No one in line"
+      } else if(lc == 1) {
+        return `${Math.round(this.current.line_count)} person in line`
+      } else {
+        return `${Math.round(this.current.line_count)} people in line`
+      }
+    }
+  },
+  mounted: function() {
+    this.fetchFrames()
   },
   methods: {
     fetchFrames: function() {
-      this.$http.get('/shakecams').then((response) => {
+      this.$http.get('/shakecams', { params: { date: this.date }}).then((response) => {
         this.frames = response.body.frames;
         this.stats = response.body.stats;
-        this.current = this.frames[0][0];
+        this.current = this.frames[0][this.currentFrameIndex];
       })
+    },
+    selectframe: function() {
+      this.current = this.frames[0][this.currentFrameIndex];
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 $offwhite: #888;
 
-#app {
-  font-family: 'Open Sans', sans-serif;
+section {
+  font-family: 'arquette';
   font-smooth: always;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

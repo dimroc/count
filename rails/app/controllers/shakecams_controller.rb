@@ -2,20 +2,27 @@ class ShakecamsController < ApplicationController
   def index
     render json: {
       frames: [
-        ActiveModelSerializers::SerializableResource.new(with_closed_frame(Frame::Shakecam.v2.today)),
-        ActiveModelSerializers::SerializableResource.new(Frame::Shakecam.v2.day(1.day.ago)),
-        ActiveModelSerializers::SerializableResource.new(Frame::Shakecam.v2.day(2.days.ago)),
-        ActiveModelSerializers::SerializableResource.new(Frame::Shakecam.v2.day(3.days.ago)),
-        ActiveModelSerializers::SerializableResource.new(Frame::Shakecam.v2.day(4.days.ago)),
+        serialize(with_closed_frame(Frame::Shakecam.v2.asc.day(date_param))),
+        serialize(Frame::Shakecam.v2.asc.day(date_param - 1.day)),
+        serialize(Frame::Shakecam.v2.asc.day(date_param - 2.days)),
+        serialize(Frame::Shakecam.v2.asc.day(date_param - 3.days)),
       ]
     }
   end
 
   private
 
+  def date_param
+    @date_param ||= Date.parse(params[:date])
+  end
+
+  def serialize(value)
+    ActiveModelSerializers::SerializableResource.new(value)
+  end
+
   def with_closed_frame(relation)
     if relation.blank?
-      [Frame::Shakecam.v2.first.tap { |f| f.closed = true }]
+      [Frame::Shakecam.v2.asc.last.tap { |f| f.closed = true }]
     else
       relation
     end
