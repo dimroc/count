@@ -12,7 +12,9 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/date/:date', component: App },
+    { path: '/dates/:date', component: App, children: [
+      { path: 'frames/:frame', component: App },
+    ]},
     { path: '/', component: App }
   ]
 })
@@ -20,6 +22,6 @@ const router = new VueRouter({
 document.addEventListener('DOMContentLoaded', () => {
   const mountee = new Vue({
     router,
-    template: `<router-view class="view"></router-view>`
+    template: `<router-view></router-view>`
   }).$mount('#shakecam')
 })

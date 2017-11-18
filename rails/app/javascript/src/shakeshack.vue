@@ -11,8 +11,8 @@
       </h4>
       </header>
 
-      <linechart :frames="frames" />
-      <crowdmap :frame="current" />
+      <linechart :frames="frames" :current="current" v-on:frameselected="selectframe" />
+      <crowdmap :current="current" />
     </div>
   </section>
 </template>
@@ -54,16 +54,19 @@ export default {
       }
     }
   },
-  created: function() {
-    this.fetchFrames();
+  mounted: function() {
+    this.fetchFrames()
   },
   methods: {
     fetchFrames: function() {
       this.$http.get('/shakecams', { params: { date: this.date }}).then((response) => {
         this.frames = response.body.frames;
         this.stats = response.body.stats;
-        this.current = this.frames[0][0];
+        this.current = this.frames[0][this.currentFrameIndex];
       })
+    },
+    selectframe: function() {
+      this.current = this.frames[0][this.currentFrameIndex];
     }
   }
 }
