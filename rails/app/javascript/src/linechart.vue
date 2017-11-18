@@ -24,7 +24,7 @@ export default {
 
   methods: {
     movingLineCountAverageAt: function(frame) {
-      let points = [this.frames[0][frame], this.frames[0][frame+1], this.frames[0][frame+2]]
+      let points = [this.frames[0][frame], this.frames[0][frame-1], this.frames[0][frame-2]]
       points = points.filter(p => p).map(p => p.line_count)
       return points.reduce((a, b) => a + b, 0) / points.length
     },
@@ -125,19 +125,23 @@ export default {
         .on("click", mouseclick)
 
       let todaysData = daysData[0];
-      let bisectDate = d3.bisector((d, x) => x - d.created_at).left;
+      let bisectDate = d3.bisector((d, x) => d.created_at - x).left;
+      function mouseToFrame(mouse) {
+        let mouseDate = x.invert(d3.mouse(mouse)[0])
+        return bisectDate(todaysData, mouseDate, 0, todaysData.length-1)
+      }
+
       function mousemove() {
-        let mouseDate = x.invert(d3.mouse(this)[0]), mouseFrame = bisectDate(todaysData, mouseDate)
-        let d = Object.assign({}, todaysData[mouseFrame])
+        let frame = mouseToFrame(this)
+        let d = Object.assign({}, todaysData[frame])
         d.display = Math.round(d.line_count)
-        d.line_count = that.movingLineCountAverageAt(mouseFrame)
+        d.line_count = that.movingLineCountAverageAt(frame)
         focus.attr("transform", "translate(" + x(d.created_at) + "," + y(d.line_count) + ")");
         focus.select("text").text(d.display);
       }
 
       function mouseclick() {
-        let mouseDate = x.invert(d3.mouse(this)[0]), mouseFrame = bisectDate(todaysData, mouseDate)
-        that.$router.push(`/dates/${that.date}/frames/${mouseFrame}`)
+        that.$router.push(`/dates/${that.date}/frames/${mouseToFrame(this)}`)
         that.$emit('frameselected')
       }
     },

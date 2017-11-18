@@ -9,7 +9,11 @@ export default {
       return "YYYY-MM-DD"
     },
     currentFrameIndex: function() {
-      return +this.$route.params.frame || 0
+      let frame = +this.$route.params.frame
+      if (!frame && frame !== 0) {
+        frame = this.frames[0].length - 1
+      }
+      return frame
     },
   }
 }
