@@ -142,7 +142,6 @@ export default {
 
       function mouseclick() {
         that.$router.push(`/dates/${that.date}/frames/${mouseToFrame(this)}`)
-        that.$emit('frameselected')
       }
     },
     moveCurrentPoint: function() {
