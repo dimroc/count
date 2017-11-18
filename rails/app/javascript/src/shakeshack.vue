@@ -43,11 +43,12 @@ export default {
   },
   computed: {
     lineMessage: function() {
+      let lc = Math.round(this.current.line_count || 0)
       if(this.current.closed) {
         return "No one in line (closed)"
-      } else if(this.current.line_count == 0) {
+      } else if(lc == 0) {
         return "No one in line"
-      } else if(this.current.line_count == 1) {
+      } else if(lc == 1) {
         return `${Math.round(this.current.line_count)} person in line`
       } else {
         return `${Math.round(this.current.line_count)} people in line`
