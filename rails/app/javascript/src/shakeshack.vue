@@ -3,7 +3,7 @@
     <div class="box" v-if="frames">
       <header>
         <clock :current="current"/>
-        <h1> {{ lineMessage }}</h1>
+        <h1>{{lineMessage}}</h1>
         <h4>at
           <a href="https://www.shakeshack.com/location/madison-square-park" target="_blank">
             Shake Shack Madison Square Park, NYC
@@ -11,7 +11,7 @@
       </h4>
       </header>
 
-      <linechart :frames="frames" :current="current" v-on:frameselected="selectframe" />
+      <linechart :frames="frames" :current="current" />
       <crowdmap :current="current" />
     </div>
   </section>
@@ -55,8 +55,13 @@ export default {
       }
     }
   },
-  mounted: function() {
+  created: function() {
     this.fetchFrames()
+  },
+  watch: {
+    '$route' (to, from) {
+      this.current = this.frames[0][this.currentFrameIndex];
+    }
   },
   methods: {
     fetchFrames: function() {
@@ -65,9 +70,6 @@ export default {
         this.stats = response.body.stats;
         this.current = this.frames[0][this.currentFrameIndex];
       })
-    },
-    selectframe: function() {
-      this.current = this.frames[0][this.currentFrameIndex];
     }
   }
 }
@@ -103,12 +105,6 @@ section {
     small { float: right; }
     h4 { float: left; }
   }
-}
-
-.raw-feed {
-}
-
-.chart {
 }
 
 h1 {
