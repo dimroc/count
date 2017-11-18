@@ -147,7 +147,7 @@ export default {
     },
     moveCurrentPoint: function() {
       let point = this.getCurrentPoint()
-      this.circle.transition().duration(200)
+      this.circle.transition().duration(500)
         .attr("cx", point.x)
         .attr("cy", point.y);
     },
