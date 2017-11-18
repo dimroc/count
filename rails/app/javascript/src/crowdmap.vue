@@ -1,19 +1,24 @@
 <template>
   <section class="crowdmap">
-    <a :href="frame.density_map_url" target="_blank">
-      <img :ix-src="frame.density_map_url" sizes="200w"/>
+    <a :href="current.density_map_url" target="_blank">
+      <img :ix-src="current.density_map_url" sizes="200w"/>
     </a>
-    <a :href="frame.image_url" target="_blank">
-      <img :ix-src="frame.image_url" sizes="200w"/>
+    <a :href="current.image_url" target="_blank">
+      <img :ix-src="current.image_url" sizes="200w"/>
     </a>
   </section>
 </template>
 
 <script>
 export default {
-  props: ['frame'],
-  mounted: function () {
+  props: ['current'],
+  mounted: function() {
     imgix.init({ host: 'countingcompany.imgix.net' });
+  },
+  watch: {
+    current: function() {
+      this.$nextTick(() => imgix.init({ host: 'countingcompany.imgix.net', force: true }))
+    }
   }
 }
 </script>

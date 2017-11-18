@@ -7,6 +7,9 @@ export default {
     },
     dateFormat: function() {
       return "YYYY-MM-DD"
-    }
+    },
+    currentFrameIndex: function() {
+      return +this.$route.params.frame || 0
+    },
   }
 }

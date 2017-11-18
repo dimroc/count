@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     yesterdays_path: function() {
-      return `/date/${moment().add(-1, 'days').format(this.dateFormat)}`
+      return `/dates/${moment().add(-1, 'days').format(this.dateFormat)}`
     },
     todays_path: function() {
       return `/`
