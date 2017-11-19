@@ -23,10 +23,6 @@ import crowdmap from './crowdmap'
 import linechart from './linechart'
 import helper_mixin from './helper_mixin'
 
-App.cable.subscriptions.create(
-  { channel: "FramesChannel", room: "shakecam" },
-  { received: function() { console.log(arguments); } });
-
 export default {
   mixins: [helper_mixin],
   components: {
@@ -69,7 +65,14 @@ export default {
         this.frames = response.body.frames;
         this.stats = response.body.stats;
         this.current = this.frames[0][this.currentFrameIndex];
+        this.connectToCable()
       })
+    },
+    connectToCable: function() {
+      let that = this
+      App.cable.subscriptions.create(
+        { channel: "FramesChannel", room: `shakecam-${this.date}` },
+        { received: function(frame) { that.frames[0].push(frame) }});
     }
   }
 }

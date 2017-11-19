@@ -5,6 +5,8 @@ namespace :prediction do
     if frame.predictions.present?
       puts frame.predictions
       ActionCable.server.broadcast("shakecam", frame: frame.to_param)
+      date = DateTime.current.in_time_zone("Eastern Time (US & Canada)").strftime("%Y-%m-%d")
+      ActionCable.server.broadcast("shakecam-#{date}", ActiveModelSerializers::SerializableResource.new(frame))
     end
   end
 
