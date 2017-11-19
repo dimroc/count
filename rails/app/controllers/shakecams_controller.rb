@@ -22,7 +22,7 @@ class ShakecamsController < ApplicationController
 
   def with_closed_frame(relation)
     if relation.blank?
-      [Frame::Shakecam.v2.asc.last.tap { |f| f.closed = true }]
+      [Frame::Shakecam.v2.asc.last]
     else
       relation
     end

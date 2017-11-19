@@ -6,8 +6,8 @@ class Frame::Shakecam < Frame
 
   class << self
     def predict!
-      now = DateTime.now.to_i
-      url = "https://cdn.shakeshack.com/camera.jpg?#{now}"
+      now = DateTime.now
+      url = "https://cdn.shakeshack.com/camera.jpg?#{now.to_i}"
       frame = create!(raw: open(url), created_at: now)
       frame.predict!(version: 1)
       frame.predict!(version: 2)
@@ -24,6 +24,10 @@ class Frame::Shakecam < Frame
 
   def image
     raw[:cropped] if raw.respond_to? :keys
+  end
+
+  def closed
+    !self.class.working_hours(created_at).cover?(created_at)
   end
 
   def predict!(version: 2)

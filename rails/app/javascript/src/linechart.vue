@@ -19,10 +19,19 @@ export default {
   watch: {
     current: function() {
       this.moveCurrentPoint()
+    },
+    frames: function(newValue) {
+      this.redrawToday(newValue[0])
     }
   },
 
   methods: {
+    redrawToday: function(frames) {
+      this.frames[0] = frames
+      this.todaysPath
+        .data([frames])
+        .attr('d', this.line.curve(CurveNMoveAge.N(3)))
+    },
     movingLineCountAverageAt: function(frame) {
       let points = [this.frames[0][frame], this.frames[0][frame-1], this.frames[0][frame-2]]
       points = points.filter(p => p).map(p => p.line_count)
@@ -33,7 +42,7 @@ export default {
       let svg = d3.select(this.$el).select('svg')
       this.svg = svg
 
-      let generateData = function(daysData, dayOffset) {
+      let generateData = function(daysData, dayOffset=0) {
         return daysData.map(function(f) {
           let tweakedDate = new Date(f.created_at)
           tweakedDate.setDate(tweakedDate.getDate() + dayOffset)
@@ -54,9 +63,9 @@ export default {
       let y = this.y = d3.scaleLinear().range([200, 0])
       let xAxis = d3.axisBottom(x).ticks(6);
 
-      let line = d3.line()
-        .x(d => x(d.created_at))
-        .y(d => y(d.line_count))
+      let line = this.line = d3.line()
+        .x(d => x(new Date(d.created_at)))
+        .y(d => y(+d.line_count))
 
       // Scale the range of the data, and ensure end of range is end of day.
       let range = d3.extent(daysData[0], function(d) { return d.created_at; });
@@ -79,7 +88,7 @@ export default {
       });
 
       // Draw today
-     let today = svg.append('path')
+     this.todaysPath = svg.append('path')
        .data([daysData[0]])
        .attr("stroke-width", 2)
        .attr("stroke", "#0bf6bb")
@@ -124,14 +133,15 @@ export default {
         .on("mousemove", mousemove)
         .on("click", mouseclick)
 
-      let todaysData = daysData[0];
       let bisectDate = d3.bisector((d, x) => d.created_at - x).left;
       function mouseToFrame(mouse) {
+        let todaysData = generateData(that.frames[0]);
         let mouseDate = x.invert(d3.mouse(mouse)[0])
         return bisectDate(todaysData, mouseDate, 0, todaysData.length-1)
       }
 
       function mousemove() {
+        let todaysData = generateData(that.frames[0]);
         let frame = mouseToFrame(this)
         let d = Object.assign({}, todaysData[frame])
         d.display = Math.round(d.line_count)
