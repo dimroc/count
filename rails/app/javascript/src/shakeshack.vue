@@ -72,7 +72,10 @@ export default {
       let that = this
       App.cable.subscriptions.create(
         { channel: "FramesChannel", room: `shakecam-${this.date}` },
-        { received: function(frame) { that.frames[0].push(frame) }});
+        { received: function(frame) {
+          that.frames[0].push(frame)
+          if (that.onLatestFrame) { that.current = frame }
+        }});
     }
   }
 }
