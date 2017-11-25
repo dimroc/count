@@ -46,6 +46,14 @@ GIT
       multi_json (~> 1.0)
 
 GIT
+  remote: https://github.com/dimroc/shrine-google_cloud_storage.git
+  revision: b932967a6c200eeec3e23d610fbd994cf5f7810b
+  specs:
+    shrine-google_cloud_storage (0.2.0)
+      google-api-client (~> 0.13.0)
+      shrine (~> 2.0)
+
+GIT
   remote: https://github.com/rails/webpacker.git
   revision: 3c8adb79201bf4928276936dcbb183c8c029e8f1
   specs:
@@ -124,8 +132,6 @@ GEM
     builder (3.2.3)
     bullet (5.6.1)
       activesupport (>= 3.0.0)
-      coffee-script-source
-      execjs
       uniform_notifier (~> 1.10.0)
     byebug (9.1.0)
     case_transform (0.2)
@@ -153,7 +159,7 @@ GEM
     diff-lcs (1.3)
     digest-crc (0.4.1)
     dotenv (0.7.0)
-    down (4.1.1)
+    down (4.1.0)
     draper (3.0.0)
       actionpack (~> 5.0)
       activemodel (~> 5.0)
@@ -269,7 +275,7 @@ GEM
     pry-byebug (3.5.0)
       byebug (~> 9.1)
       pry (~> 0.10)
-    public_suffix (3.0.1)
+    public_suffix (3.0.0)
     puma (3.10.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
@@ -349,12 +355,9 @@ GEM
       tilt (>= 1.1, < 3)
     shrine (2.8.0)
       down (~> 4.1)
-    shrine-google_cloud_storage (0.2.0)
-      google-api-client (~> 0.13.0)
-      shrine (~> 2.0)
     shrine-memory (0.3.0)
       shrine (~> 2.2)
-    signet (0.8.1)
+    signet (0.8.0)
       addressable (~> 2.3)
       faraday (~> 0.9)
       jwt (>= 1.5, < 3.0)
@@ -407,8 +410,6 @@ GEM
     websocket-extensions (0.1.2)
 
 PLATFORMS
-      websocket-unknown
-    websocket-unknown
   ruby
 
 DEPENDENCIES
@@ -454,7 +455,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   shrine
-  shrine-google_cloud_storage
+  shrine-google_cloud_storage!
   shrine-memory
   slim-rails
   spring
