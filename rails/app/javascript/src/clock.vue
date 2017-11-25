@@ -43,7 +43,7 @@ small {
   color: white;
   border-radius: 15px;
   padding: 5px 10px;
-  width: 190px;
+  width: 200px;
   text-align: center;
   display: inline-block;
 }
