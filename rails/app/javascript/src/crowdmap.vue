@@ -6,6 +6,11 @@
     <a :href="current.image_url" target="_blank">
       <img :ix-src="current.image_url" sizes="200w"/>
     </a>
+    <small>
+      * The early winter darkness has thrown off predictions. An improved,
+      retrained model from a larger data set of populated dark images is
+      coming soon and will give better predictions.
+    </small>
   </section>
 </template>
 
@@ -29,6 +34,12 @@ export default {
   img {
     width: 200px;
     border-radius: 10px;
+  }
+
+  small {
+    display: block;
+    max-width: 500px;
+    margin-top: 20px;
   }
 }
 </style>

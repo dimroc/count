@@ -7,8 +7,8 @@
         <h4>at
           <a href="https://www.shakeshack.com/location/madison-square-park" target="_blank">
             Shake Shack Madison Square Park, NYC
-        </a>
-      </h4>
+          </a>
+        </h4>
       </header>
 
       <linechart :frames="frames" :current="current" />
