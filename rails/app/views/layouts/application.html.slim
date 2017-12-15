@@ -32,9 +32,12 @@ html
           p Our feedback mechanic updates our model on a regular basis. The best model is always the next one.
 
       .row.justify-content-center
-        .col-9
-          h2 How Crowd Counting at Shake Shake Works
-          p A diversity of conditions creates a challenging environment. Very tight crowds, blaring sunshine, hard shadows, night, and weather conditions need to be factored into any model. We were able to build our model over two weeks of implentation using over 30,000 ground truth images. 
+        .col-12.text-center.hp-how-shake-works.p-5.mb-5
+          = image_tag '/assets/icons/network.svg', class: 'hp-feature-icons'
+          h2.mb-4 
+            ' How Crowd Counting at 
+            br Shake Shake Works
+          p.mx-5.mb-5 A diversity of conditions creates a challenging environment. Very tight crowds, blaring sunshine, hard shadows, night, and weather conditions need to be factored into any model. We were able to build our model over two weeks of implentation using over 30,000 ground truth images. 
           .row
             .col-4
               h4 Live Input
@@ -46,8 +49,8 @@ html
               h4 Accurate Data
               p We constantly compare ground truth information to our latest perdiction to build our model.
 
-        .row.justify-content-center
-          .col-9
+        .row.justify-content-center.mb-5
+          .col-8
             h2 Count builds image analysis for businesses. 
             p We love images. Nothing will ever give you the same content with context that an image or video will give you. There is so much data in any given image that it is impossible for a human to gain any sort of insight by looking, especially over time at scale.
 
@@ -55,7 +58,7 @@ html
 
             p Count provides analytics and inghts based on a businesses own custom needs and goals. We partner with you to develop the right solution.
 
-            a.cta-btn href="#" Get in touch
+            a.hp-cta-btn href="#" Get in touch
 
         .row.justify-content-center
           .col-9
