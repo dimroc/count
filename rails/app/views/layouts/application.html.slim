@@ -11,21 +11,24 @@ html
   body class=body_class
     div.container
       = yield
-      h1 derp
-      .row
-        .col-6
-          h3 Any input
+      .row.justify-content-center.mt-3
+        .col-sm-4.my-4.text-center
+          = image_tag '/assets/icons/camera.svg', class: 'hp-feature-icons'
+          h4 Any input
           p Count can digest any video feed, web cam, image, image sequence, or sensor data. Real-time or in batches.
-        .col-6
-          h3 Secondary Tooling
+        .col-sm-4.my-4.text-center
+          = image_tag '/assets/icons/layers.svg', class: 'hp-feature-icons'
+          h4 Secondary Tooling
           p We have developed a proprietary pipeline for image analysis tooling to extract accurate insights.
 
-      .row
-        .col-6
-          h3 Revealing Insights
+      .row.justify-content-center
+        .col-sm-4.my-4.text-center
+          = image_tag '/assets/icons/chart.svg', class: 'hp-feature-icons'
+          h4 Revealing Insights
           p Count extracts concise, easy to read charts from any organic data source.
-        .col-6
-          h3 Constant Learning
+        .col-sm-4.my-4.text-center
+          = image_tag '/assets/icons/brain.svg', class: 'hp-feature-icons'
+          h4 Constant Learning
           p Our feedback mechanic updates our model on a regular basis. The best model is always the next one.
 
       .row.justify-content-center
