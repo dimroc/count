@@ -9,76 +9,17 @@ html
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'spa'
   body class=body_class
-    div.container
-      = yield
-      h1 derp
-      .row
-        .col-6
-          h3 Any input
-          p Count can digest any video feed, web cam, image, image sequence, or sensor data. Real-time or in batches.
-        .col-6
-          h3 Secondary Tooling
-          p We have developed a proprietary pipeline for image analysis tooling to extract accurate insights.
-
-      .row
-        .col-6
-          h3 Revealing Insights
-          p Count extracts concise, easy to read charts from any organic data source.
-        .col-6
-          h3 Constant Learning
-          p Our feedback mechanic updates our model on a regular basis. The best model is always the next one.
-
+    = yield
+    .container
       .row.justify-content-center
-        .col-9
-          h2 How Crowd Counting at Shake Shake Works
-          p A diversity of conditions creates a challenging environment. Very tight crowds, blaring sunshine, hard shadows, night, and weather conditions need to be factored into any model. We were able to build our model over two weeks of implentation using over 30,000 ground truth images. 
-          .row
-            .col-4
-              h4 Live Input
-              p Shake Shack provides a live web camera we can pull from every 5 minutes.
-            .col-4
-              h4 Mapping Layer
-              p We create a density map to get an accurate line number as the crowd tends to clump together.
-            .col-4
-              h4 Accurate Data
-              p We constantly compare ground truth information to our latest perdiction to build our model.
-
-        .row.justify-content-center
-          .col-9
-            h2 Count builds image analysis for businesses. 
-            p We love images. Nothing will ever give you the same content with context that an image or video will give you. There is so much data in any given image that it is impossible for a human to gain any sort of insight by looking, especially over time at scale.
-
-            p We built Count so that a robot can do what no human can do - extract accurate analysis from images at scale.
-
-            p Count provides analytics and inghts based on a businesses own custom needs and goals. We partner with you to develop the right solution.
-
-            a.cta-btn href="#" Get in touch
-
-        .row.justify-content-center
-          .col-9
-            h2 Count wants to:
-
-            h5 Gauge storefront window attention.
-            p Quantify the number of people that look at storefront windows.
-            hr
-            h5 Coorelate sales to customers that interact with clothings.
-            p Identify customers that are more invested in your brand and products.
-            hr
-            h5 Understand pedestrian traffic flow in public spaces.
-            p Trace common paths by averaging desire paths over different days.
-            hr
-            h5 Count people who look at advertising billboards.
-            p Quantify how effective your advertising is.
-            hr
-            h5 Encourage office collaboration.
-            p Track movement in your office space and time coworkers collaborate.
-            hr
-            h5 Surf condition insights.
-            p   Instantly identify the quality and size of waves.
-
-            a.cta-btn href="#" Get in touch
-
-        .row.justify-content-center
-          .col-9
-            p @countingcompany count@thoughtmerchants.com
-            p Count is a paternship between Evolution of Books LLC & Thought Merchants.
+        .col-8.my-5
+          p
+            ' Get in touch with us at:  
+            a href="mailto:count@thoughtmerchants.com" count@thoughtmerchants.com
+            '.
+          p 
+            ' Count is a partnership between 
+            a href="http://experiments.dimroc.com/"Evolution of Books LLC
+            '  and 
+            a href="http://thoughtmerchants.com/"Thought Merchants
+            '.
