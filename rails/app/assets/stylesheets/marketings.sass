@@ -28,10 +28,17 @@ body.marketings.index
   display: block
   font-size: 1.3rem
   color: #000000
-  background-color: #00f0ac
   border-radius: 4px
   padding: 1.2rem 2rem
   margin: 2rem 0
+  background: $activegreen url(/assets/icons/arrow.svg) 0 0 no-repeat
+  background-position: calc(100% - 20px) calc(100% - -1px)
+  &:hover
+    background-color: darken($activegreen, 5%)
+    text-decoration: none
+    color: $black
+  &:active
+    background-color: darken($activegreen, 9%)
 
 .hp-count-wants
   background-color: #f3fafc
