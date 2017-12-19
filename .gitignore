@@ -1,2 +1,4 @@
 .envrc
 /secrets
+.ruby-version
+.DS_Store

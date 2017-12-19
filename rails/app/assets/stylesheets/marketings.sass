@@ -1,0 +1,51 @@
+@import "bootstrap"
+
+$activegreen: #00f0ac
+$black: #000
+$lightblue: #eff9fc
+
+.hp-offwhite
+  background: $lightblue
+
+header.banner
+  max-width: 750px
+  margin: 0 auto
+  padding: 1rem 0
+
+  h1, h2, h3, h4, h5
+    display: inline-block
+    line-height: 53px
+
+.hp-feature-icons
+  width: 80px
+  height: 80px
+  @extend .mb-3
+.hp-step-globes
+  width: 120px
+  @extend .mb-4
+
+.hp-how-shake-works
+  background-color: #fff9e8
+
+.hp-cta-btn
+  display: block
+  font-size: 1.3rem
+  color: #000000
+  border-radius: 4px
+  padding: 1.2rem 2rem
+  margin: 2rem 0
+  background: $activegreen url(/assets/icons/arrow.svg) 0 0 no-repeat
+  background-position: calc(100% - 20px) calc(100% - -1px)
+  &:hover
+    background-color: darken($activegreen, 5%)
+    text-decoration: none
+    color: $black
+  &:active
+    background-color: darken($activegreen, 9%)
+
+.hp-count-wants
+  background-color: #f3fafc
+
+.hp-sm-arrow
+  background: transparent url(/assets/icons/arrow.svg) 0 0 no-repeat
+  background-position: center 15%

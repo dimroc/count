@@ -9,5 +9,19 @@ html
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'spa'
   body class=body_class
-    div.container
-      = yield
+    = yield
+    .container
+      .row.justify-content-center
+        .col-8.my-5
+          p
+            ' Get in touch with us:  
+            a href="https://twitter.com/CountCompany" @CountCompany
+            '  or 
+            a href="mailto:count@thoughtmerchants.com" count@thoughtmerchants.com
+            '.
+          p 
+            ' Count is a partnership between 
+            a href="http://experiments.dimroc.com/"Evolution of Books LLC
+            '  and 
+            a href="http://thoughtmerchants.com/"Thought Merchants
+            '.
