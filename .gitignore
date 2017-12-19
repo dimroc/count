@@ -1,4 +1,4 @@
 .envrc
 /secrets
 .ruby-version
-rails/app/assets/images/.DS_Store
+.DS_Store
