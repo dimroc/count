@@ -18,7 +18,9 @@ export default {
 
   watch: {
     current: function() {
-      this.moveCurrentPoint()
+      if(this.current && !this.current.closed) {
+        this.moveCurrentPoint()
+      }
     },
     frames: function(newValue) {
       this.redrawToday(newValue[0])
