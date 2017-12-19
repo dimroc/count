@@ -1,10 +1,10 @@
 <template>
   <section class="crowdmap">
     <a :href="current.density_map_url" target="_blank">
-      <img :ix-src="current.density_map_url" sizes="200w"/>
+      <img :ix-src="current.density_map_url" sizes="200px"/>
     </a>
     <a :href="current.image_url" target="_blank">
-      <img :ix-src="current.image_url" sizes="200w"/>
+      <img :ix-src="current.image_url" sizes="200px"/>
     </a>
     <small>
       * Snow and early winter darkness has thrown off predictions. An improved,
