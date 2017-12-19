@@ -4,7 +4,7 @@
 .hp-offwhite
   header.banner
     a#count-logo href="/"
-    	= image_tag '/assets/icons/count-logo.svg'
+      = image_tag 'icons/count-logo.svg'
     h4#qi.pull-right Quantified Imagery.
 
   div
@@ -12,44 +12,44 @@
 .container
   .row.justify-content-center.mt-3
     .col-sm-5.col-md-4.my-4.text-center
-      = image_tag '/assets/icons/camera.svg', class: 'hp-feature-icons'
+      = image_tag 'icons/camera.svg', class: 'hp-feature-icons'
       h4 Any input
       p.mx-5.mx-sm-0 Count can digest any video feed, web cam, image, image sequence, or sensor data. Real-time or in batches.
     .col-sm-5.col-md-4.my-4.text-center
-      = image_tag '/assets/icons/layers.svg', class: 'hp-feature-icons'
+      = image_tag 'icons/layers.svg', class: 'hp-feature-icons'
       h4 Secondary Tooling
       p.mx-5.mx-sm-0 We have developed a proprietary pipeline for image analysis tooling to extract accurate insights.
 
   .row.justify-content-center
     .col-sm-5.col-md-4.my-4.text-center
-      = image_tag '/assets/icons/chart.svg', class: 'hp-feature-icons'
+      = image_tag 'icons/chart.svg', class: 'hp-feature-icons'
       h4 Revealing Insights
       p.mx-5.mx-sm-0 Count extracts concise, easy to read charts from any organic data source.
     .col-sm-5.col-md-4.my-4.text-center
-      = image_tag '/assets/icons/brain.svg', class: 'hp-feature-icons'
+      = image_tag 'icons/brain.svg', class: 'hp-feature-icons'
       h4 Constant Learning
       p.mx-5.mx-sm-0 Our feedback mechanic updates our model on a regular basis. The best model is always the next one.
 
   .row.justify-content-center
     .col-12.text-center.hp-how-shake-works.p-5.mb-5
-      = image_tag '/assets/icons/network.svg', class: 'hp-feature-icons'
+      = image_tag 'icons/network.svg', class: 'hp-feature-icons'
       h2.mb-4 
         ' How Crowd Counting at 
         br Shake Shack Works
       p.m-sm-5 A diversity of conditions creates a challenging environment. Very tight crowds, blaring sunshine, hard shadows, night, and weather conditions need to be factored into any model. We were able to build our model over two weeks of implentation using over 10,000 ground truth images. 
       .row.justify-content-center
         .col-md-3.py-3
-          = image_tag '/assets/hp/step1.png', class: 'hp-step-globes'
+          = image_tag 'hp/step1.png', class: 'hp-step-globes'
           h4 Live Input
           p Shake Shack provides a live web camera we can pull from every 5 minutes.
         .col-md-1.hp-sm-arrow
         .col-md-3.py-3
-          = image_tag '/assets/hp/step2.png', class: 'hp-step-globes'
+          = image_tag 'hp/step2.png', class: 'hp-step-globes'
           h4 Mapping Layer
           p We create a density map to get an accurate line number as the crowd tends to clump together.
         .col-md-1.hp-sm-arrow
         .col-md-3.py-3
-          = image_tag '/assets/hp/step3.png', class: 'hp-step-globes'
+          = image_tag 'hp/step3.png', class: 'hp-step-globes'
           h4 Accurate Data
           p We constantly compare ground truth information to our latest perdiction to build our model.
 
