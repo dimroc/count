@@ -7,9 +7,9 @@
       <img :ix-src="current.image_url" sizes="200w"/>
     </a>
     <small>
-      * The early winter darkness has thrown off predictions. An improved,
+      * Snow and early winter darkness has thrown off predictions. An improved,
       retrained model from a larger data set of populated dark images is
-      coming soon and will give better predictions.
+      coming soon.
     </small>
   </section>
 </template>
