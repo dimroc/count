@@ -99,9 +99,10 @@ section {
 .box {
   background-color: white;
   //border: 1px solid lighten($offwhite, 25%);
-  box-shadow: 0px 0 5px #aaa;
+  box-shadow: 0px 0 2px #e0e9eb;
   padding: 20px;
   margin-bottom: 20px;
+  border-radius: 2px;
 
   > header {
     height: 40px;

@@ -1,6 +1,6 @@
 <template>
   <section class="crowdmap">
-    <a :href="current.density_map_url" target="_blank">
+    <a :href="current.density_map_url" target="_blank" class="fuzzbox">
       <img :ix-src="current.density_map_url" sizes="200px"/>
     </a>
     <a :href="current.image_url" target="_blank">
@@ -27,8 +27,9 @@ export default {
 .crowdmap {
   margin: auto;
   img {
-    width: 200px;
-    border-radius: 10px;
+    width: 170px;
+    border-radius: 2px;
+    border: 1px solid #eff2f4;
   }
 
   small {
