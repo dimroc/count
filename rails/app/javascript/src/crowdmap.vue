@@ -6,11 +6,6 @@
     <a :href="current.image_url" target="_blank">
       <img :ix-src="current.image_url" sizes="200px"/>
     </a>
-    <small>
-      * Snow and early winter darkness has thrown off predictions. An improved,
-      retrained model from a larger data set of populated dark images is
-      coming soon.
-    </small>
   </section>
 </template>
 
