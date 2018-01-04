@@ -86,7 +86,6 @@ $offwhite: #888;
 
 section {
   font-family: 'arquette';
-  font-smooth: always;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: auto;
