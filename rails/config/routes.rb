@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   root to: 'marketings#index'
   resources :shakecams, only: [:index]
+  resources :malls, only: [:index]
 
   get "/dates/:date", to: "marketings#index"
   get "/dates/:date/frames/:frame", to: "marketings#index"

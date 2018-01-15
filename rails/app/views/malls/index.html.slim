@@ -1,0 +1,17 @@
+.container
+  .row.justify-content-center.mt-3
+    .col-sm-5.col-md-4.my-4.text-center
+      = image_tag 'icons/camera.svg', class: 'hp-feature-icons'
+
+    .col-sm-12.text-center
+      video src="https://dimroc-public.s3.amazonaws.com/mallcount.mp4" controls="true" type="video/mp4" style="max-width:600px"
+
+  .row.justify-content-center.mt-3
+    .col-sm-12.text-center
+      table
+        tbody
+          - @frames.each do |frame|
+            tr
+              td = frame.image_tag
+              td = frame.predictions[1].decorate.density_map_tag
+              td = frame.predictions[1].decorate.crowd_count
