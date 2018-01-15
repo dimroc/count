@@ -10,7 +10,7 @@
 import helper_mixin from './helper_mixin'
 import moment from 'moment-timezone'
 moment.tz.setDefault('America/New_York')
-const MOMENT_FORMAT = 'ddd MMM D LTS z'
+const MOMENT_FORMAT = 'MMM D LT'
 
 export default {
   mixins: [helper_mixin],
@@ -35,16 +35,18 @@ export default {
 <style scoped lang="scss">
 section {
   float: right;
-  margin-top: 5px;
 }
-
+a {
+  font-size: 12px;
+}
 small {
-  background-color: rgb(83,83,83);
-  color: white;
+  background-color: #eff9fc;
+  box-shadow: inset 0px 0 2px #e0e9eb;
+  line-height: 15px;
   border-radius: 15px;
-  padding: 5px 10px;
-  width: 200px;
+  padding: 5px 13px;
   text-align: center;
   display: inline-block;
+
 }
 </style>
