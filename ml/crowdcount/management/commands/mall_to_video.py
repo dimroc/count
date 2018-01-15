@@ -15,5 +15,5 @@ class Command(BaseCommand):
         mall_dataset = ccp.get("mall")
         images = [mall_dataset.key_for(i) for i in range(1, 2001)]
 
-        video.create_side_by_side(p, images, output, (800, 300), (400 + 10, 300 - 10))
+        video.create_side_by_side(p, images, output, (800, 300), (800 - 30, 20))
         print("The output video is {}".format(output))
