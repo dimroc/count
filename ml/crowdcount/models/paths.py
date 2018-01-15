@@ -79,6 +79,19 @@ class ShakecamKey:
             index = self.randindex()
         return "data/shakecam/shakeshack-{}.jpg".format(index)
 
+    def from_index(self, index=None):
+        path = "data/shakecam"
+        onlyfiles = sorted([os.path.join(path, f) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.startswith("shake")])
+        # import ipdb; ipdb.set_trace()
+        if index:
+            start = onlyfiles.index(self.file_from_index(index))
+        else:
+            start = 0
+        return onlyfiles[start:]
+
     def randindex(self):
         path = choice(glob.glob(datapath("data/shakecam/shakeshack-*.jpg")))
         return int(re.match(r".*shakeshack-(\d+)\.", path).group(1))
+
+    def file_from_index(self, index):
+        return "data/shakecam/shakeshack-{}.jpg".format(index)
