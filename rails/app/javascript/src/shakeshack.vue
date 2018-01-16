@@ -90,6 +90,7 @@ section {
   -moz-osx-font-smoothing: grayscale;
   margin: auto;
   max-width: 750px;
+  margin-top: -10px;
 
   > header {
     margin: 50px 0;
