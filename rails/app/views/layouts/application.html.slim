@@ -10,6 +10,12 @@ html
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'spa'
   body class=body_class
+    .hp-offwhite.pb-1
+      header.banner
+        a#count-logo href="/"
+          = image_tag 'icons/count-logo.svg'
+        h4#qi.pull-right Quantified Imagery.
+
     = yield
     .container
       .row.justify-content-center
