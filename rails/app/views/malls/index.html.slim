@@ -8,12 +8,26 @@
       video src="https://dimroc-public.s3.amazonaws.com/mallcount.mp4" controls="true" type="video/mp4" style="max-width:600px;width:100%"
 
   .row.justify-content-center.mt-3
-    .col-sm-8
-      table
-        tbody
-          - @frames.each do |frame|
-            tr
-              td = frame.predictions[1].decorate.crowd_count
-            tr
-              td = frame.image_tag
-              td = frame.predictions[1].decorate.density_map_tag
+    - @frames.each do |frame|
+      .col-md-4.img-iterate
+        .linedbox
+          p.pc
+            = frame.predictions[1].decorate.crowd_count 
+            span  Predicted Crowd
+          = frame.predictions[1].decorate.density_map_tag
+          .img-raw
+            = frame.image_tag
+
+
+
+script src="/assets/close-pixelate.js"
+
+javascript:
+  function init() {
+    document.getElementsByClassName('densitymaphook').closePixelate([
+        { shape : 'diamond', resolution : 48, size: 50 },
+        { shape : 'diamond', resolution : 48, offset : 24 },
+        { shape : 'circle', resolution : 8, size: 6 }
+    ]);
+  };
+  window.addEventListener( 'load', init, false);
