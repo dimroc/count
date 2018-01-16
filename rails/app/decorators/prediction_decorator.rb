@@ -4,7 +4,7 @@ class PredictionDecorator < ApplicationDecorator
   def density_map_tag
     if object.density_map
       h.link_to(object.density_map.url) do
-        h.ix_image_tag(object.density_map.url, { sizes: "180px" })
+        h.ix_image_tag(object.density_map.url, { sizes: "180px", class: "densitymaphook" })
       end
     end
   end
