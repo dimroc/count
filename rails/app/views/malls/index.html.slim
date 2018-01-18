@@ -8,8 +8,8 @@
       video src="https://dimroc-public.s3.amazonaws.com/mallcount.mp4" controls="true" type="video/mp4" style="max-width:600px;width:100%"
 
   .row.justify-content-center.mt-3
-    - @frames.each do |frame|
-      .col-md-4.img-iterate
+    .col-md-8.img-iterate
+      - @frames.each do |frame|
         .linedbox
           p.pc
             = frame.predictions[1].decorate.crowd_count 
