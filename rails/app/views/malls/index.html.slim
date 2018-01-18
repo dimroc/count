@@ -17,17 +17,3 @@
           = frame.predictions[1].decorate.density_map_tag
           .img-raw
             = frame.image_tag
-
-
-
-script src="/assets/close-pixelate.js"
-
-javascript:
-  function init() {
-    document.getElementsByClassName('densitymaphook').closePixelate([
-        { shape : 'diamond', resolution : 48, size: 50 },
-        { shape : 'diamond', resolution : 48, offset : 24 },
-        { shape : 'circle', resolution : 8, size: 6 }
-    ]);
-  };
-  window.addEventListener( 'load', init, false);
