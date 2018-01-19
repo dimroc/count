@@ -1,6 +1,6 @@
 class MallsController < ApplicationController
   def index
-    @frames = Frame::Mall.eager.desc.limit(10).decorate
+    @frames = FrameDecorator.decorate_collection(Frame::Mall.eager.desc.limit(10))
     @frames.reverse!
   end
 end
