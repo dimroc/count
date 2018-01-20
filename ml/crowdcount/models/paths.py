@@ -82,7 +82,6 @@ class ShakecamKey:
     def from_index(self, index=None):
         path = "data/shakecam"
         onlyfiles = sorted([os.path.join(path, f) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.startswith("shake")])
-        # import ipdb; ipdb.set_trace()
         if index:
             start = onlyfiles.index(self.file_from_index(index))
         else:
