@@ -17,5 +17,5 @@ class Command(BaseCommand):
         folder = kwargs['input']
 
         images = sorted([os.path.join(folder, path) for path in os.listdir(folder) if fnmatch.fnmatch(path, "*.jpg")])
-        video.create_side_by_side(p, images, output, (800, 400), (400 + 10, 400 - 10))
+        video.create_side_by_side(p, images, output, (800, 300), (400 + 10, 20))
         print("The output video is {}".format(output))
