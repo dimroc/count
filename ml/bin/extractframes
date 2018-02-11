@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir -p tmp/extraction
+ffmpeg -i $1 tmp/extraction/frame%06d.jpg
