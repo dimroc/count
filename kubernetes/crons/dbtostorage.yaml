@@ -11,7 +11,7 @@ spec:
       template:
         spec:
           restartPolicy: OnFailure
-          backoffLimit: 2
+          #backoffLimit: 2
           containers:
           - name: rails
             image: us.gcr.io/counting-company-production/rails

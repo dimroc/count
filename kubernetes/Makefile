@@ -31,7 +31,9 @@ staticip:
 	gcloud compute addresses create counting-company-production-ip --global
 
 fixwebsockettimeout:
-	# https://github.com/kubernetes/ingress/tree/master/controllers/gce/examples/websocket
+	# https://cloud.google.com/compute/docs/load-balancing/http/backend-service
+	# BACKEND = [BACKEND_SERVICE_NAME] i.e. k8s-be-31452--e8b4d6bed11fac7b
+	# gcloud compute backend-services list
 	gcloud compute backend-services update $(BACKEND) --global --timeout=86400
 
 ssh:
@@ -45,7 +47,7 @@ info:
 	kubectl get ingress,services,deployments,rs,pods,jobs,cronjob -o wide
 
 proxy:
-	open 'http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard/proxy/#!/node?namespace=default'
+	open 'http://127.0.0.1:8001/ui'
 	kubectl proxy
 
 rollout:
