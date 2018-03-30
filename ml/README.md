@@ -2,20 +2,46 @@
 
 Houses all data science, image manipulation, and machine learning software.
 
+Used with [Floyd Hub](https://www.floydhub.com/).
 
 Setup:
 
 ```
-# Install docker for mac
-brew install django-completion
+# Install docker
 pyenv install conda # or wtever u do to get conda going
 conda-env create -f environment.yml # or something like this
-pip install -g floyd-cli
 
-./bin/download_data
-./bin/process_shakecam
+./manage.py --help
+```
 
-./manage.py predict
+## Running
+
+```
+./manage.py --help
+
+[crowdcount]
+    folder_to_video
+    keep_every_tenth_frame
+    mall_to_video
+    predict
+    preview_label
+    rpcserver
+    shakecam_paths
+    shakecam_to_video
+    train_density
+    train_linecount
+    turk_to_annotations
+    upload_image
+```
+
+### Running with Rails application
+
+```
+# Run two grpc servers:
+./manage.py rpcserver --mlversion 1
+./manage.py rpcserver --mlversion 2
+
+# Rails will auto connect
 ```
 
 ## Weights and Versions
@@ -23,7 +49,7 @@ pip install -g floyd-cli
 ### Density Versions
 
 1. Copy of [FCN For Crowd Counting](https://arxiv.org/pdf/1612.00220.pdf) with loss value of 8.72e-6. Floyd old run 26.
-2. Custom 3 column FCN with kernel sizes 9, 5, 3 based on 1. with a loss value of 6.88e-6. Floyd run 24.
+2. [Custom 3 column FCN](https://arxiv.org/abs/1702.02359) with kernel sizes 9, 5, 3 based on 1. with a loss value of 6.88e-6. Floyd run 24.
 
 ### Linecount Versions
 
