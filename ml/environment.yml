@@ -97,6 +97,7 @@ dependencies:
   - args==0.1.0
   - click==6.7
   - clint==0.5.1
+  - coremltools==0.8
   - floyd-cli==0.10.9
   - grpcio==1.6.0
   - grpcio-tools==1.6.0

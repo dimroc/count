@@ -91,6 +91,7 @@ dependencies:
 - zope=1.0=py35_0
 - zope.interface=4.4.2=py35_0
 - pip:
+  - coremltools==0.8
   - grpcio==1.6.0
   - bugsnag==3.2.0
 prefix: /opt/conda/envs/counting_company
