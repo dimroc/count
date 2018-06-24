@@ -62,7 +62,7 @@ dependencies:
 - pexpect=4.2.1=py35_0
 - pickleshare=0.7.4=py35_0
 - pillow=3.4.2=py35_0
-- pip=9.0.1=py35_1
+- pip=10.0.1=py35_1
 - prompt_toolkit=1.0.15=py35_0
 - ptyprocess=0.5.2=py35_0
 - pycodestyle=2.3.1=py35_0

@@ -55,7 +55,7 @@ dependencies:
 - pbr=3.1.1=py35_0
 - pcre=8.39=0
 - pillow=4.2.1=py35_1
-- pip=9.0.1=py35_0
+- pip=10.0.1=py35_0
 - pixman=0.34.0=0
 - protobuf=3.4.0=py35_0
 - pygpu=0.7.3=np113py35_0
