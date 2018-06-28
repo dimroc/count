@@ -9,7 +9,7 @@ from keras.models import load_model
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--mlversion', default=2)
-        parser.add_argument("-o", "--output", required=False, default='tmp/crowdcount.mlmodel', help="output coreml file")
+        parser.add_argument("-o", "--output", required=False, default='tmp/CrowdPredictor.mlmodel', help="output coreml file")
 
     def handle(self, *args, **kwargs):
         os.makedirs("tmp", exist_ok=True)
