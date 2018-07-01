@@ -12,8 +12,10 @@ class MyViewController : UIViewController {
         
         let label = UILabel()
         label.frame = CGRect(x: 150, y: 200, width: 200, height: 20)
-        
-        label.text = "Hello World!"
+        let imagePath = Bundle.main.path(forResource: "CrowdCount", ofType: "jpg")!
+        let image = UIImage(contentsOfFile: imagePath)!
+        let prediction = predictor.predict(image: image)
+        label.text = "Hello World!" + String(format:"%f", prediction)
         label.textColor = .black
         
         view.addSubview(label)

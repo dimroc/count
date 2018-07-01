@@ -2,5 +2,20 @@
 <Timeline
    version = "3.0">
    <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/dimroc/workspace/counting_company/ios/CrowdCount.playground/Pages/prediction.xcplaygroundpage#CharacterRangeLen=6&amp;CharacterRangeLoc=509&amp;EndingColumnNumber=18&amp;EndingLineNumber=15&amp;StartingColumnNumber=12&amp;StartingLineNumber=15&amp;Timestamp=552174499.877215"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/dimroc/workspace/counting_company/ios/CrowdCount.playground/Pages/prediction.xcplaygroundpage#CharacterRangeLen=5&amp;CharacterRangeLoc=510&amp;EndingColumnNumber=18&amp;EndingLineNumber=15&amp;StartingColumnNumber=13&amp;StartingLineNumber=15&amp;Timestamp=552174499.8775049"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/dimroc/workspace/counting_company/ios/CrowdCount.playground/Pages/prediction.xcplaygroundpage#CharacterRangeLen=10&amp;CharacterRangeLoc=566&amp;EndingColumnNumber=23&amp;EndingLineNumber=16&amp;StartingColumnNumber=13&amp;StartingLineNumber=16&amp;Timestamp=552174499.877766"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
    </TimelineItems>
 </Timeline>

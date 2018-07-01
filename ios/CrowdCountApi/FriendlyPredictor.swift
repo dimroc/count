@@ -16,15 +16,26 @@ public class FriendlyPredictor {
         self.predictor = CrowdPredictor()
     }
     
-    public func predict(imagePath: String) -> Double {
-        let image = UIImage(contentsOfFile: imagePath)!
+    public func predict(image: UIImage) -> Double {
         let buffer = image.pixelBuffer(width: 900, height: 600)
         let input = CrowdPredictorInput(input_1: buffer!)
         let output = try! self.predictor.prediction(input: input)
-        return sum(multiarray: output.density_map)
+        return sum(coreMLArray: output.density_map)
     }
     
-    func sum(multiarray: MLMultiArray) -> Double {
-        return 5 // todo
+    func sum(coreMLArray: MLMultiArray) -> Double {
+        let rows = 150
+        let cols = 225
+        
+        var multiarray = MultiArray<Double>(coreMLArray)
+        assert(multiarray.shape == [1, rows, cols])
+        
+        var sum: Double = 0
+        for row in 0..<rows {
+            for col in 0..<cols {
+                sum += multiarray[0, row, col]
+            }
+        }
+        return sum
     }
 }
