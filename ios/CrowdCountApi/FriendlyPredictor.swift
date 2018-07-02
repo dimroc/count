@@ -17,7 +17,8 @@ public class FriendlyPredictor {
     }
     
     public func predict(image: UIImage) -> Double {
-        let buffer = image.pixelBuffer(width: 900, height: 600)
+        let resized = image.resizeImage(CGSize(width: 900, height: 600))!
+        let buffer = resized.pixelBuffer(width: 900, height: 600)
         let input = CrowdPredictorInput(input_1: buffer!)
         let output = try! self.predictor.prediction(input: input)
         return sum(coreMLArray: output.density_map)
