@@ -10,6 +10,8 @@ import CoreML
 import Foundation
 
 public class FriendlyPredictor {
+    public static let ImageWidth: Double = 900
+    public static let ImageHeight: Double = 675
     var predictor: CrowdPredictor!
     
     public init() {
@@ -17,15 +19,18 @@ public class FriendlyPredictor {
     }
     
     public func predict(image: UIImage) -> Double {
-        let resized = image.resizeImage(CGSize(width: 900, height: 600))!
-        let buffer = resized.pixelBuffer(width: 900, height: 600)
+        let resized = image.resizeImage(CGSize(width: FriendlyPredictor.ImageWidth, height: FriendlyPredictor.ImageHeight))!
+        let buffer = resized.pixelBuffer(
+            width: Int(FriendlyPredictor.ImageWidth),
+            height: Int(FriendlyPredictor.ImageHeight)
+        )
         let input = CrowdPredictorInput(input_1: buffer!)
         let output = try! self.predictor.prediction(input: input)
         return sum(coreMLArray: output.density_map)
     }
     
     func sum(coreMLArray: MLMultiArray) -> Double {
-        let rows = 150
+        let rows = 168
         let cols = 225
         
         var multiarray = MultiArray<Double>(coreMLArray)

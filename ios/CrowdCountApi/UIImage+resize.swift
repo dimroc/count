@@ -10,7 +10,7 @@ import Foundation
 
 extension UIImage {
     // https://stackoverflow.com/questions/31314412/how-to-resize-image-in-swift
-    func resizeImage(_ newSize: CGSize) -> UIImage? {
+    public func resizeImage(_ newSize: CGSize) -> UIImage? {
         func isSameSize(_ newSize: CGSize) -> Bool {
             return size == newSize
         }

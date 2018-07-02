@@ -22,7 +22,7 @@ class Command(BaseCommand):
         model = load_model(path)
 
         # Create a new input layer to replace the (None,None,3) input layer
-        input_layer = InputLayer(input_shape=(600, 900, 3), name="input_1")
+        input_layer = InputLayer(input_shape=(675, 900, 3), name="input_1")
 
         # Save
         intermediary_path = "tmp/reshaped_model.h5"
