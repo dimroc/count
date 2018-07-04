@@ -6,6 +6,7 @@
 //  Copyright © 2018 Dimitri Roche. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 extension UIImage {

@@ -1,35 +1,14 @@
-//: A UIKit based Playground for presenting user interface
+//: A Cocoa based Playground to present user interface
 
-import UIKit
+import AppKit
 import PlaygroundSupport
 import CrowdCountApi
 
-class MyViewController : UIViewController {
-    override func loadView() {
-        let predictor = FriendlyPredictor()
-        let view = UIView()
-        view.backgroundColor = .white
-        
-        let label = UILabel()
-        label.frame = CGRect(x: 150, y: 200, width: 200, height: 20)
-//        let imagePath = Bundle.main.path(forResource: "CrowdCount", ofType: "jpg")!
-//        let image = UIImage(contentsOfFile: imagePath)!
-//        let resized = image.resizeImage(CGSize(width: FriendlyPredictor.ImageWidth, height: FriendlyPredictor.ImageHeight))!
-//        print(resized.size)
-//        var prediction: Double = 0
-//        Duration.measure("Crowd Prediction") {
-//            prediction = predictor.predict(image: image)
-//        }
-//        label.text = "Number of people: " + String(format:"%f", prediction)
-//
+let nibFile = NSNib.Name("MyView")
+var topLevelObjects : NSArray?
 
-        label.text = "Hello World!"
-        label.textColor = .black
-        
-        view.addSubview(label)
-        self.view = view
-    }
-}
+Bundle.main.loadNibNamed(nibFile, owner:nil, topLevelObjects: &topLevelObjects)
+let views = (topLevelObjects as! Array<Any>).filter { $0 is NSView }
 
-// Present the view controller in the Live View window
-PlaygroundPage.current.liveView = MyViewController()
+// Present the view in Playground
+PlaygroundPage.current.liveView = views[0] as! NSView

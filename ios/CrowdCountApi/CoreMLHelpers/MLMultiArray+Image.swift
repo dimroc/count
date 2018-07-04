@@ -22,6 +22,7 @@
 
 import Foundation
 import CoreML
+import UIKit
 
 extension MLMultiArray {
   /**

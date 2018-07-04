@@ -8,6 +8,7 @@
 
 import CoreML
 import Foundation
+import UIKit
 
 public class FriendlyPredictor {
     public static let ImageWidth: Double = 900
@@ -17,7 +18,7 @@ public class FriendlyPredictor {
     public init() {
         self.predictor = TensPredictor()
     }
-    
+
     public func predict(image: UIImage) -> Double {
         let resized = image.resizeImage(CGSize(width: FriendlyPredictor.ImageWidth, height: FriendlyPredictor.ImageHeight))!
         let buffer = resized.pixelBuffer(
