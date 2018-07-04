@@ -12,7 +12,7 @@ dependencies:
 - html5lib=0.9999999=py35_0
 - hypothesis=3.23.0=py35_0
 - ipdb=0.10.3=py35_0
-- keras=2.0.6=py35_0
+- keras=2.1.6=py35_0
 - libgfortran=3.0.0=0
 - mock=2.0.0=py35_0
 - numpy=1.13.1=py35_blas_openblas_200
@@ -97,7 +97,7 @@ dependencies:
   - args==0.1.0
   - click==6.7
   - clint==0.5.1
-  - coremltools==0.8
+  - coremltools==2.0b1
   - floyd-cli==0.10.9
   - grpcio==1.6.0
   - grpcio-tools==1.6.0
