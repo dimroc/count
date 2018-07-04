@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E1A670220ECE9E700CB6CD7 /* HundredsPredictor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A670120ECE9E700CB6CD7 /* HundredsPredictor.mlmodel */; };
+		5E1A670420ECED6C00CB6CD7 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A670320ECED6C00CB6CD7 /* MobileNet.mlmodel */; };
 		5E59932A20EC8AA80036DAD1 /* CrowdClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */; };
 		5E67667D20E72E9B002A4E0D /* FriendlyPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */; };
 		5E67668F20E73C8F002A4E0D /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668720E73C8F002A4E0D /* Math.swift */; };
@@ -89,6 +91,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E1A670120ECE9E700CB6CD7 /* HundredsPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HundredsPredictor.mlmodel; sourceTree = "<group>"; };
+		5E1A670320ECED6C00CB6CD7 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
 		5E4741AB20EBC97500E940B6 /* Classifier.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Classifier.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CrowdClassifier.mlmodel; sourceTree = "<group>"; };
 		5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyPredictor.swift; sourceTree = "<group>"; };
@@ -245,6 +249,8 @@
 		5EA2190A20E41D380061F7FF /* CrowdCountApi */ = {
 			isa = PBXGroup;
 			children = (
+				5E1A670320ECED6C00CB6CD7 /* MobileNet.mlmodel */,
+				5E1A670120ECE9E700CB6CD7 /* HundredsPredictor.mlmodel */,
 				5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */,
 				5E67668620E73C8F002A4E0D /* CoreMLHelpers */,
 				5EA2192620E41D670061F7FF /* TensPredictor.mlmodel */,
@@ -501,12 +507,14 @@
 				5EA2192720E41D670061F7FF /* TensPredictor.mlmodel in Sources */,
 				5E67669420E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift in Sources */,
 				5E67669A20E9A549002A4E0D /* Duration.swift in Sources */,
+				5E1A670220ECE9E700CB6CD7 /* HundredsPredictor.mlmodel in Sources */,
 				5E67669120E73C8F002A4E0D /* Array.swift in Sources */,
 				5E67667D20E72E9B002A4E0D /* FriendlyPredictor.swift in Sources */,
 				5E67669320E73C8F002A4E0D /* MultiArray.swift in Sources */,
 				5E67668F20E73C8F002A4E0D /* Math.swift in Sources */,
 				5E59932A20EC8AA80036DAD1 /* CrowdClassifier.mlmodel in Sources */,
 				5E67669220E73C8F002A4E0D /* Predictions.swift in Sources */,
+				5E1A670420ECED6C00CB6CD7 /* MobileNet.mlmodel in Sources */,
 				5E67669820E9A420002A4E0D /* UIImage+resize.swift in Sources */,
 				5E67669520E73C8F002A4E0D /* NonMaxSuppression.swift in Sources */,
 				5E67669020E73C8F002A4E0D /* UIImage+CVPixelBuffer.swift in Sources */,
