@@ -93,6 +93,7 @@
 /* Begin PBXFileReference section */
 		5E1A670120ECE9E700CB6CD7 /* HundredsPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HundredsPredictor.mlmodel; sourceTree = "<group>"; };
 		5E1A670320ECED6C00CB6CD7 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
+		5E1A670520ED27C900CB6CD7 /* Prediction.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Prediction.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5E4741AB20EBC97500E940B6 /* Classifier.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Classifier.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CrowdClassifier.mlmodel; sourceTree = "<group>"; };
 		5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyPredictor.swift; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		5EA217FA20E40CEC0061F7FF /* CrowdCountUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrowdCountUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EA217FE20E40CED0061F7FF /* CrowdCountUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrowdCountUITests.swift; sourceTree = "<group>"; };
 		5EA2180020E40CED0061F7FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5EA2180E20E40E920061F7FF /* CrowdCount.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CrowdCount.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5EA2190920E41D380061F7FF /* CrowdCountApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrowdCountApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EA2190B20E41D380061F7FF /* CrowdCountApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrowdCountApi.h; sourceTree = "<group>"; };
 		5EA2190C20E41D380061F7FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -190,8 +190,8 @@
 		5EA217CE20E40CEA0061F7FF = {
 			isa = PBXGroup;
 			children = (
+				5E1A670520ED27C900CB6CD7 /* Prediction.playground */,
 				5E4741AB20EBC97500E940B6 /* Classifier.playground */,
-				5EA2180E20E40E920061F7FF /* CrowdCount.playground */,
 				5EA217D920E40CEA0061F7FF /* CrowdCount */,
 				5EA217F220E40CEC0061F7FF /* CrowdCountTests */,
 				5EA217FD20E40CED0061F7FF /* CrowdCountUITests */,

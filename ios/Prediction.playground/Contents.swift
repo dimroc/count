@@ -12,17 +12,18 @@ class MyViewController : UIViewController {
         
         let label = UILabel()
         label.frame = CGRect(x: 150, y: 200, width: 200, height: 20)
-        let imagePath = Bundle.main.path(forResource: "CrowdCount", ofType: "jpg")!
-        let image = UIImage(contentsOfFile: imagePath)!
-        let resized = image.resizeImage(CGSize(width: FriendlyPredictor.ImageWidth, height: FriendlyPredictor.ImageHeight))!
-        print(resized.size)
-        var prediction: Double = 0
-        Duration.measure("Crowd Prediction") {
-            prediction = predictor.predict(image: image)
-        }
-        label.text = "Number of people: " + String(format:"%f", prediction)
-        
-        print(label.text!)
+//        let imagePath = Bundle.main.path(forResource: "CrowdCount", ofType: "jpg")!
+//        let image = UIImage(contentsOfFile: imagePath)!
+//        let resized = image.resizeImage(CGSize(width: FriendlyPredictor.ImageWidth, height: FriendlyPredictor.ImageHeight))!
+//        print(resized.size)
+//        var prediction: Double = 0
+//        Duration.measure("Crowd Prediction") {
+//            prediction = predictor.predict(image: image)
+//        }
+//        label.text = "Number of people: " + String(format:"%f", prediction)
+//
+
+        label.text = "Hello World!"
         label.textColor = .black
         
         view.addSubview(label)
