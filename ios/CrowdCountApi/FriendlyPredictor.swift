@@ -12,10 +12,10 @@ import Foundation
 public class FriendlyPredictor {
     public static let ImageWidth: Double = 900
     public static let ImageHeight: Double = 675
-    var predictor: CrowdPredictor!
+    var predictor: TensPredictor!
     
     public init() {
-        self.predictor = CrowdPredictor()
+        self.predictor = TensPredictor()
     }
     
     public func predict(image: UIImage) -> Double {
@@ -24,7 +24,7 @@ public class FriendlyPredictor {
             width: Int(FriendlyPredictor.ImageWidth),
             height: Int(FriendlyPredictor.ImageHeight)
         )
-        let input = CrowdPredictorInput(input_1: buffer!)
+        let input = TensPredictorInput(input_1: buffer!)
         let output = try! self.predictor.prediction(input: input)
         return sum(coreMLArray: output.density_map)
     }

@@ -33,7 +33,7 @@
 		5EA2191B20E41D390061F7FF /* CrowdCountApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EA2190B20E41D380061F7FF /* CrowdCountApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5EA2191E20E41D390061F7FF /* CrowdCountApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2190920E41D380061F7FF /* CrowdCountApi.framework */; };
 		5EA2191F20E41D390061F7FF /* CrowdCountApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2190920E41D380061F7FF /* CrowdCountApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5EA2192720E41D670061F7FF /* CrowdPredictor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EA2192620E41D670061F7FF /* CrowdPredictor.mlmodel */; };
+		5EA2192720E41D670061F7FF /* TensPredictor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EA2192620E41D670061F7FF /* TensPredictor.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,7 +124,7 @@
 		5EA2191120E41D390061F7FF /* CrowdCountApiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrowdCountApiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EA2191820E41D390061F7FF /* CrowdCountApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrowdCountApiTests.swift; sourceTree = "<group>"; };
 		5EA2191A20E41D390061F7FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5EA2192620E41D670061F7FF /* CrowdPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CrowdPredictor.mlmodel; sourceTree = "<group>"; };
+		5EA2192620E41D670061F7FF /* TensPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TensPredictor.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,7 +247,7 @@
 			children = (
 				5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */,
 				5E67668620E73C8F002A4E0D /* CoreMLHelpers */,
-				5EA2192620E41D670061F7FF /* CrowdPredictor.mlmodel */,
+				5EA2192620E41D670061F7FF /* TensPredictor.mlmodel */,
 				5EA2190B20E41D380061F7FF /* CrowdCountApi.h */,
 				5EA2190C20E41D380061F7FF /* Info.plist */,
 				5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */,
@@ -498,7 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E67669620E73C8F002A4E0D /* MLMultiArray+Image.swift in Sources */,
-				5EA2192720E41D670061F7FF /* CrowdPredictor.mlmodel in Sources */,
+				5EA2192720E41D670061F7FF /* TensPredictor.mlmodel in Sources */,
 				5E67669420E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift in Sources */,
 				5E67669A20E9A549002A4E0D /* Duration.swift in Sources */,
 				5E67669120E73C8F002A4E0D /* Array.swift in Sources */,
