@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E59932A20EC8AA80036DAD1 /* CrowdClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */; };
 		5E67667D20E72E9B002A4E0D /* FriendlyPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */; };
 		5E67668F20E73C8F002A4E0D /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668720E73C8F002A4E0D /* Math.swift */; };
 		5E67669020E73C8F002A4E0D /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668820E73C8F002A4E0D /* UIImage+CVPixelBuffer.swift */; };
@@ -88,6 +89,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E4741AB20EBC97500E940B6 /* Classifier.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Classifier.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CrowdClassifier.mlmodel; sourceTree = "<group>"; };
 		5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyPredictor.swift; sourceTree = "<group>"; };
 		5E67668720E73C8F002A4E0D /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		5E67668820E73C8F002A4E0D /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
@@ -183,6 +186,7 @@
 		5EA217CE20E40CEA0061F7FF = {
 			isa = PBXGroup;
 			children = (
+				5E4741AB20EBC97500E940B6 /* Classifier.playground */,
 				5EA2180E20E40E920061F7FF /* CrowdCount.playground */,
 				5EA217D920E40CEA0061F7FF /* CrowdCount */,
 				5EA217F220E40CEC0061F7FF /* CrowdCountTests */,
@@ -241,6 +245,7 @@
 		5EA2190A20E41D380061F7FF /* CrowdCountApi */ = {
 			isa = PBXGroup;
 			children = (
+				5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */,
 				5E67668620E73C8F002A4E0D /* CoreMLHelpers */,
 				5EA2192620E41D670061F7FF /* CrowdPredictor.mlmodel */,
 				5EA2190B20E41D380061F7FF /* CrowdCountApi.h */,
@@ -500,6 +505,7 @@
 				5E67667D20E72E9B002A4E0D /* FriendlyPredictor.swift in Sources */,
 				5E67669320E73C8F002A4E0D /* MultiArray.swift in Sources */,
 				5E67668F20E73C8F002A4E0D /* Math.swift in Sources */,
+				5E59932A20EC8AA80036DAD1 /* CrowdClassifier.mlmodel in Sources */,
 				5E67669220E73C8F002A4E0D /* Predictions.swift in Sources */,
 				5E67669820E9A420002A4E0D /* UIImage+resize.swift in Sources */,
 				5E67669520E73C8F002A4E0D /* NonMaxSuppression.swift in Sources */,
