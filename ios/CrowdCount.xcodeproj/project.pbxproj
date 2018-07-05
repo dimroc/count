@@ -103,7 +103,6 @@
 /* Begin PBXFileReference section */
 		5E1A670120ECE9E700CB6CD7 /* HundredsPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HundredsPredictor.mlmodel; sourceTree = "<group>"; };
 		5E1A670320ECED6C00CB6CD7 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
-		5E1A670520ED27C900CB6CD7 /* Prediction.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Prediction.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5E3F316520ED3F23008B5C1B /* CrowdCountApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrowdCountApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4741AB20EBC97500E940B6 /* Classifier.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Classifier.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CrowdClassifier.mlmodel; sourceTree = "<group>"; };
@@ -118,6 +117,7 @@
 		5E67668E20E73C8F002A4E0D /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
 		5E67669720E9A41F002A4E0D /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		5E67669920E9A549002A4E0D /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
+		5E8CB16120EE6B6300145EAD /* Prediction.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Prediction.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5EA217D720E40CEA0061F7FF /* CrowdCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrowdCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EA217DA20E40CEA0061F7FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EA217DC20E40CEA0061F7FF /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -215,7 +215,7 @@
 		5EA217CE20E40CEA0061F7FF = {
 			isa = PBXGroup;
 			children = (
-				5E1A670520ED27C900CB6CD7 /* Prediction.playground */,
+				5E8CB16120EE6B6300145EAD /* Prediction.playground */,
 				5E4741AB20EBC97500E940B6 /* Classifier.playground */,
 				5EA217D920E40CEA0061F7FF /* CrowdCount */,
 				5EA217F220E40CEC0061F7FF /* CrowdCountTests */,
