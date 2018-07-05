@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		5E1A670220ECE9E700CB6CD7 /* HundredsPredictor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A670120ECE9E700CB6CD7 /* HundredsPredictor.mlmodel */; };
 		5E1A670420ECED6C00CB6CD7 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A670320ECED6C00CB6CD7 /* MobileNet.mlmodel */; };
+		5E1AAA5D20EE9BCB00098F1D /* FriendlyPredictor+macos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AAA5C20EE9BCA00098F1D /* FriendlyPredictor+macos.swift */; };
+		5E1AAA5E20EE9BD400098F1D /* FriendlyPredictor+ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AAA5A20EE9B8800098F1D /* FriendlyPredictor+ios.swift */; };
+		5E1AAA5F20EE9C9100098F1D /* FriendlyPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */; };
+		5E1AAA6020EE9D7E00098F1D /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668B20E73C8F002A4E0D /* MultiArray.swift */; };
+		5E1AAA6220EEA05300098F1D /* NSImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */; };
 		5E3F316D20ED4134008B5C1B /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A670320ECED6C00CB6CD7 /* MobileNet.mlmodel */; };
 		5E3F316E20ED4140008B5C1B /* HundredsPredictor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A670120ECE9E700CB6CD7 /* HundredsPredictor.mlmodel */; };
 		5E3F316F20ED4140008B5C1B /* CrowdClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */; };
@@ -28,7 +33,7 @@
 		5E67669320E73C8F002A4E0D /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668B20E73C8F002A4E0D /* MultiArray.swift */; };
 		5E67669420E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668C20E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift */; };
 		5E67669520E73C8F002A4E0D /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668D20E73C8F002A4E0D /* NonMaxSuppression.swift */; };
-		5E67669620E73C8F002A4E0D /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668E20E73C8F002A4E0D /* MLMultiArray+Image.swift */; };
+		5E67669620E73C8F002A4E0D /* MLMultiArray+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668E20E73C8F002A4E0D /* MLMultiArray+UIImage.swift */; };
 		5E67669820E9A420002A4E0D /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67669720E9A41F002A4E0D /* UIImage+resize.swift */; };
 		5E67669A20E9A549002A4E0D /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67669920E9A549002A4E0D /* Duration.swift */; };
 		5EA217DB20E40CEA0061F7FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA217DA20E40CEA0061F7FF /* AppDelegate.swift */; };
@@ -46,9 +51,17 @@
 		5EA2191E20E41D390061F7FF /* CrowdCountApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2190920E41D380061F7FF /* CrowdCountApi.framework */; };
 		5EA2191F20E41D390061F7FF /* CrowdCountApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2190920E41D380061F7FF /* CrowdCountApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5EA2192720E41D670061F7FF /* TensPredictor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EA2192620E41D670061F7FF /* TensPredictor.mlmodel */; };
+		5ED4789C20EEA5250000B09D /* MultiArray+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5E8A692420EEAD6E001B4AD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EA217CF20E40CEA0061F7FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E3F316420ED3F23008B5C1B;
+			remoteInfo = CrowdCountApiMac;
+		};
 		5EA217F020E40CEC0061F7FF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5EA217CF20E40CEA0061F7FF /* Project object */;
@@ -103,6 +116,9 @@
 /* Begin PBXFileReference section */
 		5E1A670120ECE9E700CB6CD7 /* HundredsPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HundredsPredictor.mlmodel; sourceTree = "<group>"; };
 		5E1A670320ECED6C00CB6CD7 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
+		5E1AAA5A20EE9B8800098F1D /* FriendlyPredictor+ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+ios.swift"; sourceTree = "<group>"; };
+		5E1AAA5C20EE9BCA00098F1D /* FriendlyPredictor+macos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+macos.swift"; sourceTree = "<group>"; };
+		5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+resize.swift"; sourceTree = "<group>"; };
 		5E3F316520ED3F23008B5C1B /* CrowdCountApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrowdCountApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4741AB20EBC97500E940B6 /* Classifier.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Classifier.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CrowdClassifier.mlmodel; sourceTree = "<group>"; };
@@ -114,7 +130,7 @@
 		5E67668B20E73C8F002A4E0D /* MultiArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiArray.swift; sourceTree = "<group>"; };
 		5E67668C20E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Helpers.swift"; sourceTree = "<group>"; };
 		5E67668D20E73C8F002A4E0D /* NonMaxSuppression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonMaxSuppression.swift; sourceTree = "<group>"; };
-		5E67668E20E73C8F002A4E0D /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
+		5E67668E20E73C8F002A4E0D /* MLMultiArray+UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+UIImage.swift"; sourceTree = "<group>"; };
 		5E67669720E9A41F002A4E0D /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		5E67669920E9A549002A4E0D /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		5E8CB16120EE6B6300145EAD /* Prediction.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Prediction.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -140,6 +156,7 @@
 		5EA2191820E41D390061F7FF /* CrowdCountApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrowdCountApiTests.swift; sourceTree = "<group>"; };
 		5EA2191A20E41D390061F7FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EA2192620E41D670061F7FF /* TensPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TensPredictor.mlmodel; sourceTree = "<group>"; };
+		5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiArray+UIImage.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,9 +222,10 @@
 				5E67668920E73C8F002A4E0D /* Array.swift */,
 				5E67668A20E73C8F002A4E0D /* Predictions.swift */,
 				5E67668B20E73C8F002A4E0D /* MultiArray.swift */,
+				5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */,
 				5E67668C20E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift */,
 				5E67668D20E73C8F002A4E0D /* NonMaxSuppression.swift */,
-				5E67668E20E73C8F002A4E0D /* MLMultiArray+Image.swift */,
+				5E67668E20E73C8F002A4E0D /* MLMultiArray+UIImage.swift */,
 			);
 			path = CoreMLHelpers;
 			sourceTree = "<group>";
@@ -276,15 +294,18 @@
 		5EA2190A20E41D380061F7FF /* CrowdCountApi */ = {
 			isa = PBXGroup;
 			children = (
+				5E67668620E73C8F002A4E0D /* CoreMLHelpers */,
 				5E1A670320ECED6C00CB6CD7 /* MobileNet.mlmodel */,
+				5EA2192620E41D670061F7FF /* TensPredictor.mlmodel */,
 				5E1A670120ECE9E700CB6CD7 /* HundredsPredictor.mlmodel */,
 				5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */,
-				5E67668620E73C8F002A4E0D /* CoreMLHelpers */,
-				5EA2192620E41D670061F7FF /* TensPredictor.mlmodel */,
 				5EA2190B20E41D380061F7FF /* CrowdCountApi.h */,
 				5EA2190C20E41D380061F7FF /* Info.plist */,
 				5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */,
+				5E1AAA5C20EE9BCA00098F1D /* FriendlyPredictor+macos.swift */,
+				5E1AAA5A20EE9B8800098F1D /* FriendlyPredictor+ios.swift */,
 				5E67669720E9A41F002A4E0D /* UIImage+resize.swift */,
+				5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */,
 				5E67669920E9A549002A4E0D /* Duration.swift */,
 			);
 			path = CrowdCountApi;
@@ -350,6 +371,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5E8A692520EEAD6E001B4AD1 /* PBXTargetDependency */,
 				5EA2191D20E41D390061F7FF /* PBXTargetDependency */,
 			);
 			name = CrowdCount;
@@ -543,12 +565,16 @@
 				5E3F317620ED41A3008B5C1B /* Array.swift in Sources */,
 				5E3F317920ED41A3008B5C1B /* CVPixelBuffer+Helpers.swift in Sources */,
 				5E3F316D20ED4134008B5C1B /* MobileNet.mlmodel in Sources */,
+				5E1AAA6020EE9D7E00098F1D /* MultiArray.swift in Sources */,
 				5E3F316F20ED4140008B5C1B /* CrowdClassifier.mlmodel in Sources */,
+				5E1AAA6220EEA05300098F1D /* NSImage+resize.swift in Sources */,
 				5E3F317320ED4140008B5C1B /* Duration.swift in Sources */,
 				5E3F317A20ED41A3008B5C1B /* NonMaxSuppression.swift in Sources */,
+				5E1AAA5F20EE9C9100098F1D /* FriendlyPredictor.swift in Sources */,
 				5E3F317720ED41A3008B5C1B /* Predictions.swift in Sources */,
 				5E3F317020ED4140008B5C1B /* TensPredictor.mlmodel in Sources */,
 				5E3F317420ED41A3008B5C1B /* Math.swift in Sources */,
+				5E1AAA5D20EE9BCB00098F1D /* FriendlyPredictor+macos.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,11 +609,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E67669620E73C8F002A4E0D /* MLMultiArray+Image.swift in Sources */,
+				5E67669620E73C8F002A4E0D /* MLMultiArray+UIImage.swift in Sources */,
 				5EA2192720E41D670061F7FF /* TensPredictor.mlmodel in Sources */,
 				5E67669420E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift in Sources */,
 				5E67669A20E9A549002A4E0D /* Duration.swift in Sources */,
 				5E1A670220ECE9E700CB6CD7 /* HundredsPredictor.mlmodel in Sources */,
+				5E1AAA5E20EE9BD400098F1D /* FriendlyPredictor+ios.swift in Sources */,
 				5E67669120E73C8F002A4E0D /* Array.swift in Sources */,
 				5E67667D20E72E9B002A4E0D /* FriendlyPredictor.swift in Sources */,
 				5E67669320E73C8F002A4E0D /* MultiArray.swift in Sources */,
@@ -597,6 +624,7 @@
 				5E1A670420ECED6C00CB6CD7 /* MobileNet.mlmodel in Sources */,
 				5E67669820E9A420002A4E0D /* UIImage+resize.swift in Sources */,
 				5E67669520E73C8F002A4E0D /* NonMaxSuppression.swift in Sources */,
+				5ED4789C20EEA5250000B09D /* MultiArray+UIImage.swift in Sources */,
 				5E67669020E73C8F002A4E0D /* UIImage+CVPixelBuffer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -612,6 +640,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5E8A692520EEAD6E001B4AD1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5E3F316420ED3F23008B5C1B /* CrowdCountApiMac */;
+			targetProxy = 5E8A692420EEAD6E001B4AD1 /* PBXContainerItemProxy */;
+		};
 		5EA217F120E40CEC0061F7FF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5EA217D620E40CEA0061F7FF /* CrowdCount */;

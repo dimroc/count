@@ -8,7 +8,6 @@
 
 import CoreML
 import Foundation
-import UIKit
 
 public class FriendlyPredictor {
     public static let ImageWidth: Double = 900
@@ -19,13 +18,8 @@ public class FriendlyPredictor {
         self.predictor = TensPredictor()
     }
 
-    public func predict(image: UIImage) -> Double {
-        let resized = image.resizeImage(CGSize(width: FriendlyPredictor.ImageWidth, height: FriendlyPredictor.ImageHeight))!
-        let buffer = resized.pixelBuffer(
-            width: Int(FriendlyPredictor.ImageWidth),
-            height: Int(FriendlyPredictor.ImageHeight)
-        )
-        let input = TensPredictorInput(input_1: buffer!)
+    public func predict(buffer: CVPixelBuffer) -> Double {
+        let input = TensPredictorInput(input_1: buffer)
         let output = try! self.predictor.prediction(input: input)
         return sum(coreMLArray: output.density_map)
     }

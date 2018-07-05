@@ -1,6 +1,7 @@
 //: A Cocoa based Playground to experiment with crowd prediction
 
 import AppKit
+import CrowdCountApi
 import PlaygroundSupport
 
 let nibFile = NSNib.Name("MyView")
@@ -10,8 +11,11 @@ Bundle.main.loadNibNamed(nibFile, owner:nil, topLevelObjects: &topLevelObjects)
 
 let views = (topLevelObjects as! Array<Any>).filter { $0 is NSView }
 let topView = views[0] as! NSView
-let imageWell = topView.subviews[0].subviews[1] as! NSImageView // Hardcoded to match MyView.xib
+
+ // Hardcoded to match MyView.xib
+let imageWell = topView.subviews[0].subviews[1] as! NSImageView
 imageWell.isEditable = true
+let predictionLabel = topView.subviews[0].subviews[2] as! NSTextField
 
 typealias ObserverCallback = (NSImage) -> Void
 
@@ -27,7 +31,21 @@ class ImageObserver: NSObject {
     }
 }
 
-let observer = ImageObserver({ image in Swift.print(image) })
+let predictor = FriendlyPredictor()
+let observer = ImageObserver({ image in
+    predictionLabel.stringValue = "Predicting..."
+
+    DispatchQueue.global().async {
+        var result: Double = 0
+        let duration = Duration.measure("Prediction", block: {
+            result = predictor.predict(image: image)
+        })
+        
+        DispatchQueue.main.async {
+            predictionLabel.stringValue = String.init(format: "Count: %f, Duration: %f seconds", result, duration)
+        }
+    }
+})
 imageWell.addObserver(observer, forKeyPath: "image", options: NSKeyValueObservingOptions.new, context: nil)
 
 // Present the view in Playground
