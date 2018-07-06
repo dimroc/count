@@ -25,6 +25,8 @@
 		5E3F317720ED41A3008B5C1B /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668A20E73C8F002A4E0D /* Predictions.swift */; };
 		5E3F317920ED41A3008B5C1B /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668C20E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift */; };
 		5E3F317A20ED41A3008B5C1B /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668D20E73C8F002A4E0D /* NonMaxSuppression.swift */; };
+		5E4DFE6F20F0122700CD07FF /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4DFE6E20F0122700CD07FF /* Promises.framework */; };
+		5E4DFE7120F0123C00CD07FF /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4DFE7020F0123C00CD07FF /* Promises.framework */; };
 		5E59932A20EC8AA80036DAD1 /* CrowdClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */; };
 		5E67667D20E72E9B002A4E0D /* FriendlyPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */; };
 		5E67668F20E73C8F002A4E0D /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668720E73C8F002A4E0D /* Math.swift */; };
@@ -123,6 +125,8 @@
 		5E1AAA5C20EE9BCA00098F1D /* FriendlyPredictor+macos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+macos.swift"; sourceTree = "<group>"; };
 		5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+resize.swift"; sourceTree = "<group>"; };
 		5E3F316520ED3F23008B5C1B /* CrowdCountApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrowdCountApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E4DFE6E20F0122700CD07FF /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E4DFE7020F0123C00CD07FF /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59932920EC8AA80036DAD1 /* CrowdClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CrowdClassifier.mlmodel; sourceTree = "<group>"; };
 		5E5C796E20EFF40200EDC113 /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E5C797020EFF4C700EDC113 /* FBLPromises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBLPromises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E4DFE6F20F0122700CD07FF /* Promises.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +204,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E4DFE7120F0123C00CD07FF /* Promises.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +335,8 @@
 		5EB25CF720EF0C84006FA509 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E4DFE7020F0123C00CD07FF /* Promises.framework */,
+				5E4DFE6E20F0122700CD07FF /* Promises.framework */,
 				5E5C797020EFF4C700EDC113 /* FBLPromises.framework */,
 				5E5C796E20EFF40200EDC113 /* Promises.framework */,
 				5EB25CFA20EF0C9A006FA509 /* Cartography.framework */,

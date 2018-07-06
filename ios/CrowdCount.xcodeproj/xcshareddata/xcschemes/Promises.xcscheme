@@ -17,7 +17,7 @@
                BlueprintIdentifier = "Promises::Promises"
                BuildableName = "Promises.framework"
                BlueprintName = "Promises"
-               ReferencedContainer = "container:Promises.xcodeproj">
+               ReferencedContainer = "container:Carthage/Checkouts/promises/Promises.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "Promises::PromisesInteroperabilityTests"
                BuildableName = "PromisesInteroperabilityTests.xctest"
                BlueprintName = "PromisesInteroperabilityTests"
-               ReferencedContainer = "container:Promises.xcodeproj">
+               ReferencedContainer = "container:Carthage/Checkouts/promises/Promises.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "Promises::PromisesPerformanceTests"
                BuildableName = "PromisesPerformanceTests.xctest"
                BlueprintName = "PromisesPerformanceTests"
-               ReferencedContainer = "container:Promises.xcodeproj">
+               ReferencedContainer = "container:Carthage/Checkouts/promises/Promises.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -55,7 +55,7 @@
                BlueprintIdentifier = "Promises::PromisesTests"
                BuildableName = "PromisesTests.xctest"
                BlueprintName = "PromisesTests"
-               ReferencedContainer = "container:Promises.xcodeproj">
+               ReferencedContainer = "container:Carthage/Checkouts/promises/Promises.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,7 +65,7 @@
             BlueprintIdentifier = "Promises::Promises"
             BuildableName = "Promises.framework"
             BlueprintName = "Promises"
-            ReferencedContainer = "container:Promises.xcodeproj">
+            ReferencedContainer = "container:Carthage/Checkouts/promises/Promises.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -87,7 +87,7 @@
             BlueprintIdentifier = "Promises::Promises"
             BuildableName = "Promises.framework"
             BlueprintName = "Promises"
-            ReferencedContainer = "container:Promises.xcodeproj">
+            ReferencedContainer = "container:Carthage/Checkouts/promises/Promises.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -105,7 +105,7 @@
             BlueprintIdentifier = "Promises::Promises"
             BuildableName = "Promises.framework"
             BlueprintName = "Promises"
-            ReferencedContainer = "container:Promises.xcodeproj">
+            ReferencedContainer = "container:Carthage/Checkouts/promises/Promises.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

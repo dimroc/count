@@ -20,6 +20,20 @@
                ReferencedContainer = "container:CrowdCount.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Promises::Promises"
+               BuildableName = "Promises.framework"
+               BlueprintName = "Promises"
+               ReferencedContainer = "container:Carthage/Checkouts/promises/Promises.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -29,6 +43,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "5EA2190820E41D380061F7FF"
+            BuildableName = "CrowdCountApi.framework"
+            BlueprintName = "CrowdCountApi"
+            ReferencedContainer = "container:CrowdCount.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
