@@ -18,7 +18,6 @@ let stackView = topView.subviews[0] as! NSStackView
 let imageWell = stackView.subviews[1] as! NSImageView
 imageWell.isEditable = true
 let predictionLabel = stackView.subviews[2] as! NSTextField
-print(stackView.subviews)
 
 typealias ObserverCallback = (NSImage) -> Void
 class ImageObserver: NSObject {
@@ -33,38 +32,41 @@ class ImageObserver: NSObject {
     }
 }
 
-func generatePredictionGrid(_ result: Double) {
-    let label = NSTextField(labelWithString: "singles")
+func generatePredictionGrid(_ result: Double) -> NSGridView {
+    let label = NSTextField(labelWithString: "tens")
     let count = NSTextField(labelWithString: String.init(format: "%f", result))
-    // or should i add NSStackView
-//    let gridView = NSGridView(views: [[label, count]])
-//    gridView.translatesAutoresizingMaskIntoConstraints = false
-//    constrain(gridView, stackView) { gv, sv in
-//        gv.left == sv.left
-//        gv.right == sv.right
-//        gv.height == 50
-//    }
-//
-//    gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .horizontal)
-//    gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .vertical)
-//
-//
-//    stackView.addSubview(gridView)
+
+    let gridView = NSGridView(views: [[label, count]])
+    gridView.translatesAutoresizingMaskIntoConstraints = false
+    gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .horizontal)
+    gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .vertical)
+
+    stackView.addArrangedSubview(gridView)
+    constrain(gridView) { gv in
+        align(left: gv, gv.superview!)
+        align(right: gv, gv.superview!)
+    }
+    return gridView
 }
 
+var grid: NSGridView? = nil
 let predictor = FriendlyPredictor()
 let observer = ImageObserver({ image in
     predictionLabel.stringValue = "Predicting..."
+    if grid != nil {
+        stackView.removeArrangedSubview(grid!)
+        grid!.removeFromSuperview()
+    }
 
     DispatchQueue.global().async {
         var result: Double = 0
         let duration = Duration.measure("Prediction", block: {
             result = predictor.predict(image: image)
-            generatePredictionGrid(result)
         })
         
         DispatchQueue.main.async {
-            predictionLabel.stringValue = String.init(format: "Count: %f, Duration: %f seconds", result, duration)
+            predictionLabel.stringValue = String.init(format: "Duration: %f seconds", result, duration)
+            grid = generatePredictionGrid(result)
         }
     }
 })

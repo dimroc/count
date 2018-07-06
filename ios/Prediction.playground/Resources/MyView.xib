@@ -13,8 +13,8 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lb4-ff-pAl">
-                    <rect key="frame" x="101" y="407" width="444" height="475"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <rect key="frame" x="101" y="418" width="444" height="475"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="W1N-9h-qi2">
                             <rect key="frame" x="39" y="416" width="366" height="39"/>
