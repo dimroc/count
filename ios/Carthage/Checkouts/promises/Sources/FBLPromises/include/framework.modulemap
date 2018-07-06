@@ -1,0 +1,26 @@
+framework module FBLPromises {
+    umbrella header "FBLPromises.h"
+
+    header "FBLPromise.h"
+    header "FBLPromiseError.h"
+    header "FBLPromise+All.h"
+    header "FBLPromise+Always.h"
+    header "FBLPromise+Any.h"
+    header "FBLPromise+Async.h"
+    header "FBLPromise+Await.h"
+    header "FBLPromise+Catch.h"
+    header "FBLPromise+Delay.h"
+    header "FBLPromise+Do.h"
+    header "FBLPromise+Race.h"
+    header "FBLPromise+Recover.h"
+    header "FBLPromise+Reduce.h"
+    header "FBLPromise+Testing.h"
+    header "FBLPromise+Then.h"
+    header "FBLPromise+Timeout.h"
+    header "FBLPromise+Validate.h"
+    header "FBLPromise+Wrap.h"
+
+    exclude header "FBLPromisePrivate.h"
+
+    export *
+}

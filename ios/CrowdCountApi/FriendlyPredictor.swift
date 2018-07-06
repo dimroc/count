@@ -12,25 +12,23 @@ import Foundation
 public class FriendlyPredictor {
     public static let ImageWidth: Double = 900
     public static let ImageHeight: Double = 675
-    var predictor: TensPredictor!
     
-    public init() {
-        self.predictor = TensPredictor()
-    }
+    public init() {}
 
-    public func predict(buffer: CVPixelBuffer) -> Double {
-        let input = TensPredictorInput(input_1: buffer)
-        let output = try! self.predictor.prediction(input: input)
-        return sum(coreMLArray: output.density_map)
+    public func predict(buffer: CVPixelBuffer, strategy: PredictionStrategy) -> FriendlyPrediction {
+        var output: PredictionStrategyOutput? = nil
+        let duration = Duration.measure(String(describing: strategy)) {
+            output = strategy.predict(buffer)
+        }
+        return FriendlyPrediction(count: sum(output!.density_map), duration: duration)
     }
     
-    func sum(coreMLArray: MLMultiArray) -> Double {
+    func sum(_ multiarray: MultiArray<Double>) -> Double {
         let rows = 168
         let cols = 225
-        
-        var multiarray = MultiArray<Double>(coreMLArray)
+
         assert(multiarray.shape == [1, rows, cols])
-        
+
         var sum: Double = 0
         for row in 0..<rows {
             for col in 0..<cols {
@@ -39,4 +37,9 @@ public class FriendlyPredictor {
         }
         return sum
     }
+}
+
+public struct FriendlyPrediction {
+    public var count: Double
+    public var duration: Double
 }

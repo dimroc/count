@@ -1,2 +1,3 @@
 github "taoyuxuan/Cartography" "swift4.2"
+github "google/promises" ~> 1.2
 

@@ -8,9 +8,12 @@
       location = "group:Prediction.playground">
    </FileRef>
    <FileRef
+      location = "group:CrowdCount.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Carthage/Checkouts/Cartography/Cartography.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:CrowdCount.xcodeproj">
+      location = "group:Carthage/Checkouts/promises/Promises.xcodeproj">
    </FileRef>
 </Workspace>

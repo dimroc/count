@@ -4,6 +4,7 @@ import AppKit
 import Cartography
 import CrowdCountApi
 import PlaygroundSupport
+import Promises
 
 let nibFile = NSNib.Name("MyView")
 var topLevelObjects : NSArray?
@@ -57,17 +58,11 @@ let observer = ImageObserver({ image in
         stackView.removeArrangedSubview(grid!)
         grid!.removeFromSuperview()
     }
-
-    DispatchQueue.global().async {
-        var result: Double = 0
-        let duration = Duration.measure("Prediction", block: {
-            result = predictor.predict(image: image)
-        })
-        
-        DispatchQueue.main.async {
-            predictionLabel.stringValue = String.init(format: "Duration: %f seconds", result, duration)
-            grid = generatePredictionGrid(result)
-        }
+    
+    predictor.predictAllPromise(image: image, on: .global()).then(on: .main) { predictions in
+        let tens = predictions[0]
+        predictionLabel.stringValue = String.init(format: "Duration: %f seconds", tens.duration)
+        grid = generatePredictionGrid(tens.count)
     }
 })
 imageWell.addObserver(observer, forKeyPath: "image", options: NSKeyValueObservingOptions.new, context: nil)
