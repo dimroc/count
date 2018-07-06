@@ -1,6 +1,7 @@
 //: A Cocoa based Playground to experiment with crowd prediction
 
 import AppKit
+import Cartography
 import CrowdCountApi
 import PlaygroundSupport
 
@@ -12,13 +13,14 @@ Bundle.main.loadNibNamed(nibFile, owner:nil, topLevelObjects: &topLevelObjects)
 let views = (topLevelObjects as! Array<Any>).filter { $0 is NSView }
 let topView = views[0] as! NSView
 
- // Hardcoded to match MyView.xib
-let imageWell = topView.subviews[0].subviews[1] as! NSImageView
+// Hardcoded to match MyView.xib
+let stackView = topView.subviews[0] as! NSStackView
+let imageWell = stackView.subviews[1] as! NSImageView
 imageWell.isEditable = true
-let predictionLabel = topView.subviews[0].subviews[2] as! NSTextField
+let predictionLabel = stackView.subviews[2] as! NSTextField
+print(stackView.subviews)
 
 typealias ObserverCallback = (NSImage) -> Void
-
 class ImageObserver: NSObject {
     var callback: ObserverCallback    
     init(_ callback: @escaping ObserverCallback) {
@@ -31,6 +33,25 @@ class ImageObserver: NSObject {
     }
 }
 
+func generatePredictionGrid(_ result: Double) {
+    let label = NSTextField(labelWithString: "singles")
+    let count = NSTextField(labelWithString: String.init(format: "%f", result))
+    // or should i add NSStackView
+//    let gridView = NSGridView(views: [[label, count]])
+//    gridView.translatesAutoresizingMaskIntoConstraints = false
+//    constrain(gridView, stackView) { gv, sv in
+//        gv.left == sv.left
+//        gv.right == sv.right
+//        gv.height == 50
+//    }
+//
+//    gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .horizontal)
+//    gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .vertical)
+//
+//
+//    stackView.addSubview(gridView)
+}
+
 let predictor = FriendlyPredictor()
 let observer = ImageObserver({ image in
     predictionLabel.stringValue = "Predicting..."
@@ -39,6 +60,7 @@ let observer = ImageObserver({ image in
         var result: Double = 0
         let duration = Duration.measure("Prediction", block: {
             result = predictor.predict(image: image)
+            generatePredictionGrid(result)
         })
         
         DispatchQueue.main.async {
