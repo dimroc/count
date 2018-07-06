@@ -20,7 +20,10 @@ public class FriendlyPredictor {
         let duration = Duration.measure(String(describing: strategy)) {
             output = strategy.predict(buffer)
         }
-        return FriendlyPrediction(count: sum(output!.density_map), duration: duration)
+        return FriendlyPrediction(
+            name: strategy.FriendlyName(),
+            count: sum(output!.density_map),
+            duration: duration)
     }
     
     func sum(_ multiarray: MultiArray<Double>) -> Double {
@@ -40,6 +43,7 @@ public class FriendlyPredictor {
 }
 
 public struct FriendlyPrediction {
+    public var name: String
     public var count: Double
     public var duration: Double
 }

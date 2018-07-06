@@ -13,6 +13,14 @@ public protocol PredictionStrategy {
     func predict(_ buffer: CVPixelBuffer) -> PredictionStrategyOutput
 }
 
+extension PredictionStrategy {
+    func FriendlyName() -> String {
+        return String(describing: self)
+            .replacingOccurrences(of: "CrowdCountApi.", with: "")
+            .replacingOccurrences(of: "PredictionStrategy", with: "")
+    }
+}
+
 public struct PredictionStrategyOutput {
     var density_map: MultiArray<Double>
 }

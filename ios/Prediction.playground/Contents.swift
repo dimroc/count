@@ -33,11 +33,18 @@ class ImageObserver: NSObject {
     }
 }
 
-func generatePredictionGrid(_ result: Double) -> NSGridView {
-    let label = NSTextField(labelWithString: "tens")
-    let count = NSTextField(labelWithString: String.init(format: "%f", result))
+func nslabel(_ label: String) -> NSTextField { return NSTextField(labelWithString: label) }
 
-    let gridView = NSGridView(views: [[label, count]])
+func generatePredictionGrid(_ predictions: [FriendlyPrediction]) -> NSGridView {
+    let headers = [[nslabel("Strategy"), nslabel("Duration (s)"), nslabel("Count")]]
+    let views = predictions.map { prediction -> [NSView] in
+        let label = nslabel(prediction.name)
+        let duration = nslabel(String.init(format: "%f", prediction.duration))
+        let count = nslabel(String.init(format: "%f", prediction.count))
+        return [label, duration, count]
+    }
+
+    let gridView = NSGridView(views: headers + views)
     gridView.translatesAutoresizingMaskIntoConstraints = false
     gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .horizontal)
     gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .vertical)
@@ -60,9 +67,7 @@ let observer = ImageObserver({ image in
     }
     
     predictor.predictAllPromise(image: image, on: .global()).then(on: .main) { predictions in
-        let tens = predictions[0]
-        predictionLabel.stringValue = String.init(format: "Duration: %f seconds", tens.duration)
-        grid = generatePredictionGrid(tens.count)
+        grid = generatePredictionGrid(predictions)
     }
 })
 imageWell.addObserver(observer, forKeyPath: "image", options: NSKeyValueObservingOptions.new, context: nil)
