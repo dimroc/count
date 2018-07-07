@@ -15,6 +15,9 @@ let views = (topLevelObjects as! Array<Any>).filter { $0 is NSView }
 let topView = views[0] as! NSView
 
 // Hardcoded to match MyView.xib
+print(topView.subviews)
+//let scrollView = topView.subviews[0] as! NSScrollView
+//let stackView = scrollView.documentView as! NSStackView
 let stackView = topView.subviews[0] as! NSStackView
 let imageWell = stackView.subviews[1] as! NSImageView
 let predictionLabel = stackView.subviews[2] as! NSTextField
@@ -71,7 +74,7 @@ func generatePredictionGrid(_ predictions: [FriendlyPrediction]) -> NSGridView {
     constrain(gridView) { gv in
         align(leading: gv, gv.superview!)
         align(trailing: gv, gv.superview!)
-        gv.height >= 400
+        gv.height >= 600
     }
     return gridView
 }
@@ -116,6 +119,7 @@ let observer = ImageObserver({ image in
     ).then(on: .main) { predictions, classification in
         classificationGrid = generateClassificationGrid(classification)
         predictionGrid = generatePredictionGrid(predictions)
+        topView.updateConstraintsForSubtreeIfNeeded()
     }
 })
 imageWell.addObserver(observer, forKeyPath: "image", options: NSKeyValueObservingOptions.new, context: nil)
