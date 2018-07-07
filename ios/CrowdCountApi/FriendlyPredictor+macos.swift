@@ -13,12 +13,7 @@ import Promises
 
 extension FriendlyPredictor {
     public func predict(image: NSImage, strategy: PredictionStrategy) -> FriendlyPrediction {
-        let resized = image.resizeImage(CGSize(width: FriendlyPredictor.ImageWidth, height: FriendlyPredictor.ImageHeight))
-        let buffer = resized.pixelBuffer(
-            width: Int(FriendlyPredictor.ImageWidth),
-            height: Int(FriendlyPredictor.ImageHeight)
-        )
-        return predict(buffer: buffer!, strategy: strategy)
+        return predict(buffer: imageToBuffer(image)!, strategy: strategy)
     }
     
     public func predictPromise(image: NSImage, strategy: PredictionStrategy) -> Promise<FriendlyPrediction> {
@@ -32,5 +27,17 @@ extension FriendlyPredictor {
             self.predictPromise(image: image, strategy: TensPredictionStrategy()),
             self.predictPromise(image: image, strategy: HundredsPredictionStrategy())
         ])
+    }
+    
+    public func classifyPromise(image: NSImage, on: DispatchQueue) -> Promise<FriendlyClassification> {
+        return classifyPromise(buffer: imageToBuffer(image)!, on: on)
+    }
+    
+    func imageToBuffer(_ image: NSImage) -> CVPixelBuffer? {
+        let resized = image.resizeImage(CGSize(width: FriendlyPredictor.ImageWidth, height: FriendlyPredictor.ImageHeight))
+        return resized.pixelBuffer(
+            width: Int(FriendlyPredictor.ImageWidth),
+            height: Int(FriendlyPredictor.ImageHeight)
+        )
     }
 }

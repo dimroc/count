@@ -44,7 +44,6 @@ func nsimage(_ prediction: FriendlyPrediction) -> NSView {
 }
 
 func generatePredictionGrid(_ predictions: [FriendlyPrediction]) -> NSGridView {
-    print("Generating prediction grid")
     let headers: [[NSView]] = [[nslabel("Strategy"), nslabel("Duration (s)"), nslabel("Count")]]
     let labels = predictions.map { prediction -> [NSView] in
         let label = nslabel(prediction.name)
@@ -74,21 +73,49 @@ func generatePredictionGrid(_ predictions: [FriendlyPrediction]) -> NSGridView {
         align(trailing: gv, gv.superview!)
         gv.height >= 400
     }
-    stackView.updateConstraintsForSubtreeIfNeeded()
     return gridView
 }
 
-var grid: NSGridView? = nil
+func generateClassificationGrid(_ classification: FriendlyClassification) -> NSGridView {
+    predictionLabel.stringValue = "Winning Classification: " + classification.classification
+    print("Probabilities", classification.probabilities)
+    let labels: [[NSView]] = classification.probabilities.map { tuple -> [NSView] in
+        let (key, value) = tuple
+        return [NSTextField(labelWithString: key), NSTextField(labelWithString: String.init(reflecting: value))]
+    }
+    let gridView = NSGridView(views: labels)
+    gridView.translatesAutoresizingMaskIntoConstraints = false
+    gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .horizontal)
+    gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .vertical)
+    
+    stackView.addArrangedSubview(gridView)
+    constrain(gridView) { gv in
+        align(leading: gv, gv.superview!)
+        align(trailing: gv, gv.superview!)
+    }
+    return gridView
+}
+
+func removeFromPlayground(_ view: NSView?) {
+    if view != nil {
+        stackView.removeArrangedSubview(view!)
+        view!.removeFromSuperview()
+    }
+}
+
+var predictionGrid: NSGridView?, classificationGrid: NSGridView? = nil
 let predictor = FriendlyPredictor()
 let observer = ImageObserver({ image in
     predictionLabel.stringValue = "Predicting..."
-    if grid != nil {
-        stackView.removeArrangedSubview(grid!)
-        grid!.removeFromSuperview()
-    }
+    removeFromPlayground(predictionGrid)
+    removeFromPlayground(classificationGrid)
     
-    predictor.predictAllPromise(image: image, on: .global()).then(on: .main) { predictions in
-        grid = generatePredictionGrid(predictions)
+    all(
+        predictor.predictAllPromise(image: image, on: .global()),
+        predictor.classifyPromise(image: image, on: .global())
+    ).then(on: .main) { predictions, classification in
+        classificationGrid = generateClassificationGrid(classification)
+        predictionGrid = generatePredictionGrid(predictions)
     }
 })
 imageWell.addObserver(observer, forKeyPath: "image", options: NSKeyValueObservingOptions.new, context: nil)

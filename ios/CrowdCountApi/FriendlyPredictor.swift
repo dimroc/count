@@ -8,6 +8,7 @@
 
 import CoreML
 import Foundation
+import Promises
 
 public class FriendlyPredictor {
     public static let ImageWidth: Double = 900
@@ -28,6 +29,14 @@ public class FriendlyPredictor {
             count: sum(output!.density_map),
             density_map: output!.density_map.reshaped([FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]),
             duration: duration)
+    }
+    
+    public func classifyPromise(buffer: CVPixelBuffer, on: DispatchQueue) -> Promise<FriendlyClassification> {
+        return Promise(on: on) { () -> FriendlyClassification in
+            let classifier = CrowdClassifier()
+            let output = try! classifier.prediction(image: buffer)
+            return FriendlyClassification(classification: output.classLabel, probabilities: output.classLabelProbs)
+        }
     }
     
     func sum(_ multiarray: MultiArray<Double>) -> Double {
@@ -51,4 +60,9 @@ public struct FriendlyPrediction {
     public var count: Double
     public var density_map: MultiArray<Double>
     public var duration: Double
+}
+
+public struct FriendlyClassification {
+    public var classification: String
+    public var probabilities: [String: Double]
 }
