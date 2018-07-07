@@ -17,7 +17,6 @@ let topView = views[0] as! NSView
 // Hardcoded to match MyView.xib
 let stackView = topView.subviews[0] as! NSStackView
 let imageWell = stackView.subviews[1] as! NSImageView
-imageWell.isEditable = true
 let predictionLabel = stackView.subviews[2] as! NSTextField
 
 typealias ObserverCallback = (NSImage) -> Void
@@ -35,25 +34,47 @@ class ImageObserver: NSObject {
 
 func nslabel(_ label: String) -> NSTextField { return NSTextField(labelWithString: label) }
 
+func nsimage(_ prediction: FriendlyPrediction) -> NSView {
+    guard let cgi = prediction.image else {
+        print("Image missing")
+        return NSTextField(labelWithString: "image missing")
+    }
+    return NSImageView(image: NSImage.init(cgImage: cgi, size: NSSize(width: cgi.width, height: cgi.height)))
+}
+
 func generatePredictionGrid(_ predictions: [FriendlyPrediction]) -> NSGridView {
-    let headers = [[nslabel("Strategy"), nslabel("Duration (s)"), nslabel("Count")]]
-    let views = predictions.map { prediction -> [NSView] in
+    print("Generating prediction grid")
+    let headers: [[NSView]] = [[nslabel("Strategy"), nslabel("Duration (s)"), nslabel("Count")]]
+    let labels = predictions.map { prediction -> [NSView] in
         let label = nslabel(prediction.name)
         let duration = nslabel(String.init(format: "%f", prediction.duration))
         let count = nslabel(String.init(format: "%f", prediction.count))
         return [label, duration, count]
     }
+    
+    let images = predictions.map { prediction -> [NSView] in
+        print("mounting image for...", prediction.name)
+        return [nsimage(prediction)]
+    }
 
-    let gridView = NSGridView(views: headers + views)
+    let zipped = zip(labels, images)
+    let reduced: [[NSView]] = zipped.reduce([[NSView]]()) { acc, entry in
+        acc + [entry.0, entry.1]    // convert from tuples to array
+    }
+
+    print(reduced)
+    let gridView = NSGridView(views: headers + reduced)
     gridView.translatesAutoresizingMaskIntoConstraints = false
     gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .horizontal)
     gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .vertical)
 
     stackView.addArrangedSubview(gridView)
     constrain(gridView) { gv in
-        align(left: gv, gv.superview!)
-        align(right: gv, gv.superview!)
+        align(leading: gv, gv.superview!)
+        align(trailing: gv, gv.superview!)
+        gv.height >= 400
     }
+    stackView.updateConstraintsForSubtreeIfNeeded()
     return gridView
 }
 

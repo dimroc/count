@@ -275,4 +275,62 @@ extension MultiArray {
     }
     return (bytes, width, height)
   }
+
+    
+    func getCGImageForRGBAData(width: Int, height: Int, data: NSData) -> CGImage {
+        let pixelData = data.bytes
+        let bytesPerPixel:Int = 4
+        let scanWidth = bytesPerPixel * width
+        
+        let provider = CGDataProvider(dataInfo: nil, data: pixelData, size: height * scanWidth, releaseData: {_,_,_ in })!
+        
+        let colorSpaceRef = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.last.rawValue)
+        let renderingIntent = CGColorRenderingIntent.defaultIntent;
+        
+        return CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: bytesPerPixel * 8, bytesPerRow: scanWidth, space: colorSpaceRef, bitmapInfo: bitmapInfo, provider: provider, decode: nil, shouldInterpolate: false, intent: renderingIntent)!;
+    }
+    
+    func getCGImageforGrayscaleData(width: Int, height: Int, data: [UInt8]?) ->  CGImage?
+    {
+        var imageRef: CGImage?
+        if let data = data {
+            let bitsPerComponent = 8
+            let bytesPerPixel = 1
+            let bitsPerPixel = bytesPerPixel * bitsPerComponent
+            let bytesPerRow = bytesPerPixel * width
+            let totalBytes = height * bytesPerRow
+            let providerRef = CGDataProvider(dataInfo: nil, data: data, size: totalBytes, releaseData: {_,_,_ in })!
+
+//            let providerRef = CGDataProviderCreateWithData(nil, data, totalBytes, nil)
+            
+            let colorSpaceRef = CGColorSpaceCreateDeviceGray()
+            let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue)
+            imageRef = CGImage.init(width: width,
+                                    height: height,
+                                    bitsPerComponent: bitsPerComponent,
+                                    bitsPerPixel: bitsPerPixel,
+                                    bytesPerRow: bytesPerRow,
+                                    space: colorSpaceRef,
+                                    bitmapInfo: bitmapInfo,
+                                    provider: providerRef,
+                                    decode: nil,
+                                    shouldInterpolate: false,
+                                    intent: CGColorRenderingIntent.defaultIntent)
+        }
+        
+        return imageRef
+    }
+
+    public func cgimage(offset: T, scale: T) -> CGImage? {
+        print("cgimaging", shape)
+        if shape.count == 3, let (b, w, h) = toRawBytesRGBA(offset: offset, scale: scale) {
+            return getCGImageForRGBAData(width: w, height: h, data: NSData(bytes: b, length: b.count))
+        } else if shape.count == 2, let (b, w, h) = toRawBytesGray(offset: offset, scale: scale) {
+            print("converting to grayscale", w, h)
+            return getCGImageforGrayscaleData(width: w, height: h, data: b)
+        } else {
+            return nil
+        }
+    }
 }

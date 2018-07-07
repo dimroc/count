@@ -13,6 +13,9 @@ public class FriendlyPredictor {
     public static let ImageWidth: Double = 900
     public static let ImageHeight: Double = 675
     
+    public static let DensityMapWidth: Int = 225
+    public static let DensityMapHeight: Int = 168
+    
     public init() {}
 
     public func predict(buffer: CVPixelBuffer, strategy: PredictionStrategy) -> FriendlyPrediction {
@@ -23,12 +26,13 @@ public class FriendlyPredictor {
         return FriendlyPrediction(
             name: strategy.FriendlyName(),
             count: sum(output!.density_map),
+            image: output!.density_map.reshaped([FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]).cgimage(offset: 0, scale: 1),
             duration: duration)
     }
     
     func sum(_ multiarray: MultiArray<Double>) -> Double {
-        let rows = 168
-        let cols = 225
+        let rows = FriendlyPredictor.DensityMapHeight
+        let cols = FriendlyPredictor.DensityMapWidth
 
         assert(multiarray.shape == [1, rows, cols])
 
@@ -45,5 +49,6 @@ public class FriendlyPredictor {
 public struct FriendlyPrediction {
     public var name: String
     public var count: Double
+    public var image: CGImage?
     public var duration: Double
 }
