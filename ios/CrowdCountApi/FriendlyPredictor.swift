@@ -26,7 +26,7 @@ public class FriendlyPredictor {
         return FriendlyPrediction(
             name: strategy.FriendlyName(),
             count: sum(output!.density_map),
-            image: output!.density_map.reshaped([FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]).cgimage(offset: 0, scale: 1),
+            density_map: output!.density_map.reshaped([FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]),
             duration: duration)
     }
     
@@ -49,6 +49,6 @@ public class FriendlyPredictor {
 public struct FriendlyPrediction {
     public var name: String
     public var count: Double
-    public var image: CGImage?
+    public var density_map: MultiArray<Double>
     public var duration: Double
 }

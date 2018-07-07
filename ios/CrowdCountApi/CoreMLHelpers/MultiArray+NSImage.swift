@@ -21,10 +21,9 @@ extension MultiArray {
      `scale: 255`. If the range is [-1, 1], use `offset: 1` and `scale: 127.5`.
      */
     public func image(offset: T, scale: T) -> NSImage? {
-        guard let cgimage = self.cgimage(offset: offset, scale: scale) else {
-            return nil
-        }
-        return NSImage(cgImage: cgimage, size: NSSize(width: cgimage.width, height: cgimage.height))
+        let (b, w, h) = toRawBytesGray(offset: offset, scale: scale)!
+        print("converting from multiarray to nsimage with min", self.min(), " max", self.max(), " and dimensions", w, h)
+        return imageFromPixels(size: NSSize(width: w, height: h), pixels: b, width: w, height: h)
     }
     
     /**
@@ -53,4 +52,31 @@ extension MultiArray {
         }
         return a.image(offset: offset, scale: scale)
     }
+    
+    func imageFromPixels(size: NSSize, pixels: UnsafePointer<UInt8>, width: Int, height: Int)-> NSImage {
+        let colorSpace = CGColorSpaceCreateDeviceGray()
+        let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue)
+        let bitsPerComponent = 8 //number of bits in UInt8
+        let bitsPerPixel = 1 * bitsPerComponent // Grayscale uses 1 components
+        let bytesPerRow = bitsPerPixel * width / 8 // bitsPerRow / 8 (in some cases, you need some paddings)
+        let providerRef = CGDataProvider(
+            data: NSData(bytes: pixels, length: height * bytesPerRow)
+        )
+        
+        let cgim = CGImage(
+            width: width,
+            height: height,
+            bitsPerComponent: bitsPerComponent,
+            bitsPerPixel: bitsPerPixel,
+            bytesPerRow: bytesPerRow,
+            space: colorSpace,
+            bitmapInfo: bitmapInfo,
+            provider: providerRef!,
+            decode: nil,
+            shouldInterpolate: true,
+            intent: .defaultIntent
+        )
+        return NSImage(cgImage: cgim!, size: size)
+    }
+
 }

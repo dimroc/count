@@ -27,7 +27,9 @@ import Swift
 public protocol MultiArrayType: Comparable {
   static var multiArrayDataType: MLMultiArrayDataType { get }
   static func +(lhs: Self, rhs: Self) -> Self
+  static func -(lhs: Self, rhs: Self) -> Self
   static func *(lhs: Self, rhs: Self) -> Self
+  static func /(lhs: Self, rhs: Self) -> Self
   init(_: Int)
   var toUInt8: UInt8 { get }
 }
@@ -165,6 +167,53 @@ public struct MultiArray<T: MultiArrayType> {
 
     return MultiArray(array, dimensions, newStrides)
   }
+    
+    public func max() -> T {
+        var m: T = T.init(0)
+        for i in 0..<count {
+            if pointer[i] > m {
+                m = pointer[i]
+            }
+        }
+        return m
+    }
+    
+    public func min() -> T {
+        var m: T = T.init(Int.max)
+        for i in 0..<count {
+            if pointer[i] < m {
+                m = pointer[i]
+            }
+        }
+        return m
+    }
+    
+    public func copy() -> MultiArray {
+        let copy = MultiArray(shape: shape)
+        for i in 0..<count {
+            copy.pointer[i] = pointer[i]
+        }
+        return copy
+    }
+    
+    public func normalize() -> MultiArray {
+        let max = self.max()
+        let min = self.min()
+        let multiplier = T.init(1)/(max-min)
+        print("normalizing with min max multiplier", min, max, multiplier)
+        
+        for i in 0..<count {
+            pointer[i] = (pointer[i] - min) * multiplier
+        }
+        return self
+    }
+    
+    public func multiply(_ factor: T) -> MultiArray {
+        for i in 0..<count {
+            pointer[i] = pointer[i] * factor
+        }
+        return self
+    }
 }
 
 extension MultiArray: CustomStringConvertible {
@@ -321,7 +370,7 @@ extension MultiArray {
         
         return imageRef
     }
-
+    
     public func cgimage(offset: T, scale: T) -> CGImage? {
         print("cgimaging", shape)
         if shape.count == 3, let (b, w, h) = toRawBytesRGBA(offset: offset, scale: scale) {

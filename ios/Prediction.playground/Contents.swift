@@ -35,11 +35,12 @@ class ImageObserver: NSObject {
 func nslabel(_ label: String) -> NSTextField { return NSTextField(labelWithString: label) }
 
 func nsimage(_ prediction: FriendlyPrediction) -> NSView {
-    guard let cgi = prediction.image else {
-        print("Image missing")
-        return NSTextField(labelWithString: "image missing")
+    var image: NSImage? = nil
+    Duration.measure("multiarray to grayscale") {
+        image = prediction.density_map.copy().normalize().image(offset: 0, scale: 255)
     }
-    return NSImageView(image: NSImage.init(cgImage: cgi, size: NSSize(width: cgi.width, height: cgi.height)))
+    
+    return NSImageView(image: image!.flipVertically())
 }
 
 func generatePredictionGrid(_ predictions: [FriendlyPrediction]) -> NSGridView {
@@ -62,7 +63,6 @@ func generatePredictionGrid(_ predictions: [FriendlyPrediction]) -> NSGridView {
         acc + [entry.0, entry.1]    // convert from tuples to array
     }
 
-    print(reduced)
     let gridView = NSGridView(views: headers + reduced)
     gridView.translatesAutoresizingMaskIntoConstraints = false
     gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .horizontal)
