@@ -13,7 +13,7 @@ import Promises
 
 extension FriendlyPredictor {
     public func predict(image: NSImage, strategy: PredictionStrategy) -> FriendlyPrediction {
-        return predict(buffer: imageToBuffer(image)!, strategy: strategy)
+        return predict(buffer: imageToBuffer(image, width: Int(FriendlyPredictor.ImageWidth), height: Int(FriendlyPredictor.ImageHeight))!, strategy: strategy)
     }
     
     public func predictPromise(image: NSImage, strategy: PredictionStrategy) -> Promise<FriendlyPrediction> {
@@ -23,21 +23,24 @@ extension FriendlyPredictor {
     }
 
     public func predictAllPromise(image: NSImage, on: DispatchQueue) -> Promise<[FriendlyPrediction]> {
+        print("predictAllPromise")
+        let singlesBuffer = imageToBuffer(image, width: 416, height: 416)!
         return all(on: on, [
+            self.predictPromise(buffer: singlesBuffer, strategy: SinglesPredictionStrategy()),
             self.predictPromise(image: image, strategy: TensPredictionStrategy()),
             self.predictPromise(image: image, strategy: HundredsPredictionStrategy())
         ])
     }
     
     public func classifyPromise(image: NSImage, on: DispatchQueue) -> Promise<FriendlyClassification> {
-        return classifyPromise(buffer: imageToBuffer(image)!, on: on)
+        return classifyPromise(buffer: imageToBuffer(image, width: 299, height: 299)!, on: on)
     }
     
-    func imageToBuffer(_ image: NSImage) -> CVPixelBuffer? {
-        let resized = image.resizeImage(CGSize(width: FriendlyPredictor.ImageWidth, height: FriendlyPredictor.ImageHeight))
+    func imageToBuffer(_ image: NSImage, width: Int, height: Int) -> CVPixelBuffer? {
+        let resized = image.resizeImage(CGSize(width: width, height: height))
         return resized.pixelBuffer(
-            width: Int(FriendlyPredictor.ImageWidth),
-            height: Int(FriendlyPredictor.ImageHeight)
+            width: width,
+            height: height
         )
     }
 }

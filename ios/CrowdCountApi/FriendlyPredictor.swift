@@ -31,9 +31,16 @@ public class FriendlyPredictor {
             duration: duration)
     }
     
+    public func predictPromise(buffer: CVPixelBuffer, strategy: PredictionStrategy) -> Promise<FriendlyPrediction> {
+        return Promise {
+            self.predict(buffer: buffer, strategy: strategy)
+        }
+    }
+    
     public func classifyPromise(buffer: CVPixelBuffer, on: DispatchQueue) -> Promise<FriendlyClassification> {
         return Promise(on: on) { () -> FriendlyClassification in
             let classifier = CrowdClassifier()
+            print("classifyPromise on")
             let output = try! classifier.prediction(image: buffer)
             return FriendlyClassification(classification: output.classLabel, probabilities: output.classLabelProbs)
         }

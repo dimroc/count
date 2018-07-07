@@ -199,6 +199,10 @@ public struct MultiArray<T: MultiArrayType> {
     public func normalize() -> MultiArray {
         let max = self.max()
         let min = self.min()
+        if max - min == T.init(0) {
+            return self
+        }
+        
         let multiplier = T.init(1)/(max-min)
         print("normalizing with min max multiplier", min, max, multiplier)
         

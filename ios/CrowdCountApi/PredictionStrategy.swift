@@ -25,6 +25,18 @@ public struct PredictionStrategyOutput {
     var density_map: MultiArray<Double>
 }
 
+public class SinglesPredictionStrategy: PredictionStrategy {
+    let predictor = YOLO()
+    let personClassIndex = 14
+    public init() {}
+    public func predict(_ buffer: CVPixelBuffer) -> PredictionStrategyOutput {
+        let output = try! predictor.predict(image: buffer)
+        print("singls prediction output:", output)
+        let emptyShape = [1, FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]
+        return PredictionStrategyOutput(density_map: MultiArray<Double>(shape: emptyShape))
+    }
+}
+
 public class TensPredictionStrategy: PredictionStrategy {
     let predictor = TensPredictor()
     public init() {}
