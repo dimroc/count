@@ -1,0 +1,5 @@
+Classifier.playground/Resources filter=lfs diff=lfs merge=lfs -text
+Classifier.playground/Resources/** filter=lfs diff=lfs merge=lfs -text
+Classifier.playground/Resources/Training/ filter=lfs diff=lfs merge=lfs -text
+Classifier.playground/Resources/Test/ filter=lfs diff=lfs merge=lfs -text
+CrowdCountApi/Models/ filter=lfs diff=lfs merge=lfs -text
