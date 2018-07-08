@@ -26,7 +26,7 @@ public class FriendlyPredictor {
         }
         return FriendlyPrediction(
             name: strategy.FriendlyName(),
-            count: sum(output!.density_map),
+            count: output!.count,
             density_map: output!.density_map.reshaped([FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]),
             duration: duration)
     }
@@ -44,21 +44,6 @@ public class FriendlyPredictor {
             let output = try! classifier.prediction(image: buffer)
             return FriendlyClassification(classification: output.classLabel, probabilities: output.classLabelProbs)
         }
-    }
-    
-    func sum(_ multiarray: MultiArray<Double>) -> Double {
-        let rows = FriendlyPredictor.DensityMapHeight
-        let cols = FriendlyPredictor.DensityMapWidth
-
-        assert(multiarray.shape == [1, rows, cols])
-
-        var sum: Double = 0
-        for row in 0..<rows {
-            for col in 0..<cols {
-                sum += multiarray[0, row, col]
-            }
-        }
-        return sum
     }
 }
 
