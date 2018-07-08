@@ -46,11 +46,9 @@ func nsimage(_ prediction: FriendlyPrediction) -> NSView {
 }
 
 func drawBoundingBoxes(_ image: NSImage, _ boundingBoxes: [CGRect]) {
-    // YOLO has input hardcoded to 416x416
-    // Use that to calculate offset for bounding boxes that must translate
-    // to density map dimensions 225 x 168
-    let xfactor = CGFloat(225.0/416.0)
-    let yfactor = CGFloat(168.0/416.0)
+    // Map the bounding boxes to density map dimensions 225 x 168
+    let xfactor = CGFloat(FriendlyPredictor.DensityMapWidth)
+    let yfactor = CGFloat(FriendlyPredictor.DensityMapHeight)
     image.lockFocus()
     NSColor.white.set()
     for bb in boundingBoxes {

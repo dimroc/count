@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreML
+import Vision
+import VideoToolbox
 
 public protocol PredictionStrategy {
     func predict(_ buffer: CVPixelBuffer) -> PredictionStrategyOutput
@@ -32,14 +34,16 @@ public class SinglesPredictionStrategy: PredictionStrategy {
     let personClassIndex = 14
     public init() {}
     public func predict(_ buffer: CVPixelBuffer) -> PredictionStrategyOutput {
-        let output = try! predictor.predict(image: buffer)
-        print("singles prediction output:", output)
-        let persons = output.filter { $0.classIndex == personClassIndex }
+        var cgImage: CGImage?
+        VTCreateCGImageFromCVPixelBuffer(buffer, options: nil, imageOut: &cgImage)
+        let boundingBoxes = FaceDetector.detect(within: cgImage!)
+        print("singles prediction bbs: ", boundingBoxes)
+        print(String.init(describing: boundingBoxes))
         let emptyShape = [1, FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]
         return PredictionStrategyOutput(
             densityMap: MultiArray<Double>(shape: emptyShape),
-            count: Double(persons.count),
-            boundingBoxes: persons.map { $0.rect }
+            count: Double(boundingBoxes.count),
+            boundingBoxes: boundingBoxes
         )
     }
 }

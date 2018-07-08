@@ -23,9 +23,8 @@ extension FriendlyPredictor {
     }
 
     public func predictAllPromise(image: NSImage, on: DispatchQueue) -> Promise<[FriendlyPrediction]> {
-        let singlesBuffer = imageToBuffer(image, width: 416, height: 416)!
         return all(on: on, [
-            self.predictPromise(buffer: singlesBuffer, strategy: SinglesPredictionStrategy()),
+            self.predictPromise(image: image, strategy: SinglesPredictionStrategy()),
             self.predictPromise(image: image, strategy: TensPredictionStrategy()),
             self.predictPromise(image: image, strategy: HundredsPredictionStrategy())
         ])
