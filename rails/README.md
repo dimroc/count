@@ -3,6 +3,8 @@
 Rails application that periodically pulls an image from the Shake Shack Camera
 in Madison Square Park, and plots the number of people in line.
 
+![Shake Shack Chart](readmeimages/countalpha.png)
+
 ## Setup
 
 Usual rails setup:
