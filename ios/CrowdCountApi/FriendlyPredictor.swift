@@ -27,7 +27,8 @@ public class FriendlyPredictor {
         return FriendlyPrediction(
             name: strategy.FriendlyName(),
             count: output!.count,
-            density_map: output!.density_map.reshaped([FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]),
+            densityMap: output!.densityMap.reshaped([FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]),
+            boundingBoxes: output!.boundingBoxes,
             duration: duration)
     }
     
@@ -40,7 +41,6 @@ public class FriendlyPredictor {
     public func classifyPromise(buffer: CVPixelBuffer, on: DispatchQueue) -> Promise<FriendlyClassification> {
         return Promise(on: on) { () -> FriendlyClassification in
             let classifier = CrowdClassifier()
-            print("classifyPromise on")
             let output = try! classifier.prediction(image: buffer)
             return FriendlyClassification(classification: output.classLabel, probabilities: output.classLabelProbs)
         }
@@ -50,7 +50,8 @@ public class FriendlyPredictor {
 public struct FriendlyPrediction {
     public var name: String
     public var count: Double
-    public var density_map: MultiArray<Double>
+    public var densityMap: MultiArray<Double>
+    public var boundingBoxes: [CGRect]
     public var duration: Double
 }
 

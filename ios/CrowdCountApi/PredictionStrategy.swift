@@ -22,8 +22,9 @@ extension PredictionStrategy {
 }
 
 public struct PredictionStrategyOutput {
-    var density_map: MultiArray<Double>
+    var densityMap: MultiArray<Double>
     var count: Double
+    var boundingBoxes: [CGRect]
 }
 
 public class SinglesPredictionStrategy: PredictionStrategy {
@@ -36,8 +37,9 @@ public class SinglesPredictionStrategy: PredictionStrategy {
         let persons = output.filter { $0.classIndex == personClassIndex }
         let emptyShape = [1, FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]
         return PredictionStrategyOutput(
-            density_map: MultiArray<Double>(shape: emptyShape),
-            count: Double(persons.count)
+            densityMap: MultiArray<Double>(shape: emptyShape),
+            count: Double(persons.count),
+            boundingBoxes: persons.map { $0.rect }
         )
     }
 }
@@ -48,7 +50,7 @@ public class TensPredictionStrategy: PredictionStrategy {
     public func predict(_ buffer: CVPixelBuffer) -> PredictionStrategyOutput {
         let input = TensPredictorInput(input_1: buffer)
         let output = try! self.predictor.prediction(input: input)
-        return generateOutput(output.density_map)
+        return generateDensityMapOutput(output.density_map)
     }
 }
 
@@ -58,13 +60,13 @@ public class HundredsPredictionStrategy: PredictionStrategy {
     public func predict(_ buffer: CVPixelBuffer) -> PredictionStrategyOutput {
         let input = HundredsPredictorInput(input_1: buffer)
         let output = try! self.predictor.prediction(input: input)
-        return generateOutput(output.density_map)
+        return generateDensityMapOutput(output.density_map)
     }
 }
 
-func generateOutput(_ density_map: MLMultiArray) -> PredictionStrategyOutput {
-    let ma = MultiArray<Double>(density_map)
-    return PredictionStrategyOutput(density_map: ma, count: sum(ma))
+func generateDensityMapOutput(_ densityMap: MLMultiArray) -> PredictionStrategyOutput {
+    let ma = MultiArray<Double>(densityMap)
+    return PredictionStrategyOutput(densityMap: ma, count: sum(ma), boundingBoxes: [CGRect]())
 }
 
 func sum(_ multiarray: MultiArray<Double>) -> Double {

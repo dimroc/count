@@ -6,6 +6,7 @@ import CrowdCountApi
 import PlaygroundSupport
 import Promises
 
+
 let nibFile = NSNib.Name("MyView")
 var topLevelObjects : NSArray?
 
@@ -37,10 +38,26 @@ func nslabel(_ label: String) -> NSTextField { return NSTextField(labelWithStrin
 func nsimage(_ prediction: FriendlyPrediction) -> NSView {
     var image: NSImage? = nil
     Duration.measure("multiarray to grayscale") {
-        image = prediction.density_map.copy().normalize().image(offset: 0, scale: 255)
+        image = prediction.densityMap.copy().normalize().image(offset: 0, scale: 255)
+        drawBoundingBoxes(image!, prediction.boundingBoxes)
     }
     
     return NSImageView(image: image!.flipVertically())
+}
+
+func drawBoundingBoxes(_ image: NSImage, _ boundingBoxes: [CGRect]) {
+    // YOLO has input hardcoded to 416x416
+    // Use that to calculate offset for bounding boxes that must translate
+    // to density map dimensions 225 x 168
+    let xfactor = CGFloat(225.0/416.0)
+    let yfactor = CGFloat(168.0/416.0)
+    image.lockFocus()
+    NSColor.white.set()
+    for bb in boundingBoxes {
+        let rect = NSMakeRect(bb.minX * xfactor, bb.minY*yfactor, (bb.maxX-bb.minX)*xfactor, (bb.maxY-bb.minY)*yfactor)
+        __NSFrameRectWithWidth(rect, 2)
+    }
+    image.unlockFocus()
 }
 
 func generatePredictionGrid(_ predictions: [FriendlyPrediction]) -> NSGridView {
