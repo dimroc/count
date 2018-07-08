@@ -1,10 +1,16 @@
-# Backend of Count
+# Machine Learning (ML) Backend of Count
 
 Houses all data science, image manipulation, and machine learning software.
 
 Used with [Floyd Hub](https://www.floydhub.com/).
 
-Setup:
+![Shake Shack Count](readmeimages/ShakeShackCount.jpg)
+
+![UcfConcertCrowd](readmeimages/UcfConcertCrowd.jpg)
+
+Detailed explanation [here](http://blog.dimroc.com/2017/11/19/counting-crowds-and-lines/).
+
+## Setup:
 
 ```
 # Install docker
@@ -32,6 +38,7 @@ conda-env create -f environment.yml # or something like this
     train_linecount
     turk_to_annotations
     upload_image
+    convert_to_coreml
 ```
 
 ### Running with Rails application

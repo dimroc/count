@@ -1,10 +1,11 @@
 # Overview
 
-Rails application that interacts with a crowd counting python machine learning service via gRPC.
+1. Rails application that interacts with a crowd counting python machine learning service via gRPC.
+2. iOS app and macOS Playground that uses a CoreML pipeline to count the number of people in an image.
 
 Click on the individual folders for README's specific to each section.
 
-For an overview of the application and implementation, please visit [this blog post](http://blog.dimroc.com/2017/11/19/counting-crowds-and-lines/).
+For an overview of the machine learning and Rails application, please visit [this blog post](http://blog.dimroc.com/2017/11/19/counting-crowds-and-lines/).
 
 # Checkout with git-lfs
 
