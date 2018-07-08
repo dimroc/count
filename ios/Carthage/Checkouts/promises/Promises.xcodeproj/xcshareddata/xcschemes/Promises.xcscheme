@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1000"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,38 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5E3F316420ED3F23008B5C1B"
-               BuildableName = "CrowdCountApiMac.framework"
-               BlueprintName = "CrowdCountApiMac"
-               ReferencedContainer = "container:CrowdCount.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "Promises::Promises"
                BuildableName = "Promises.framework"
                BlueprintName = "Promises"
-               ReferencedContainer = "container:Carthage/Checkouts/promises/Promises.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "54F6A837195C20C100313D24"
-               BuildableName = "Cartography.framework"
-               BlueprintName = "Cartography-Mac"
-               ReferencedContainer = "container:Carthage/Checkouts/Cartography/Cartography.xcodeproj">
+               ReferencedContainer = "container:Promises.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -56,14 +28,44 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Promises::PromisesInteroperabilityTests"
+               BuildableName = "PromisesInteroperabilityTests.xctest"
+               BlueprintName = "PromisesInteroperabilityTests"
+               ReferencedContainer = "container:Promises.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Promises::PromisesPerformanceTests"
+               BuildableName = "PromisesPerformanceTests.xctest"
+               BlueprintName = "PromisesPerformanceTests"
+               ReferencedContainer = "container:Promises.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Promises::PromisesTests"
+               BuildableName = "PromisesTests.xctest"
+               BlueprintName = "PromisesTests"
+               ReferencedContainer = "container:Promises.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5E3F316420ED3F23008B5C1B"
-            BuildableName = "CrowdCountApiMac.framework"
-            BlueprintName = "CrowdCountApiMac"
-            ReferencedContainer = "container:CrowdCount.xcodeproj">
+            BlueprintIdentifier = "Promises::Promises"
+            BuildableName = "Promises.framework"
+            BlueprintName = "Promises"
+            ReferencedContainer = "container:Promises.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -82,10 +84,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5E3F316420ED3F23008B5C1B"
-            BuildableName = "CrowdCountApiMac.framework"
-            BlueprintName = "CrowdCountApiMac"
-            ReferencedContainer = "container:CrowdCount.xcodeproj">
+            BlueprintIdentifier = "Promises::Promises"
+            BuildableName = "Promises.framework"
+            BlueprintName = "Promises"
+            ReferencedContainer = "container:Promises.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -100,10 +102,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5E3F316420ED3F23008B5C1B"
-            BuildableName = "CrowdCountApiMac.framework"
-            BlueprintName = "CrowdCountApiMac"
-            ReferencedContainer = "container:CrowdCount.xcodeproj">
+            BlueprintIdentifier = "Promises::Promises"
+            BuildableName = "Promises.framework"
+            BlueprintName = "Promises"
+            ReferencedContainer = "container:Promises.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

@@ -120,7 +120,7 @@
 		5E1AAA5A20EE9B8800098F1D /* FriendlyPredictor+ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+ios.swift"; sourceTree = "<group>"; };
 		5E1AAA5C20EE9BCA00098F1D /* FriendlyPredictor+macos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+macos.swift"; sourceTree = "<group>"; };
 		5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+resize.swift"; sourceTree = "<group>"; };
-		5E3F316520ED3F23008B5C1B /* CrowdCountApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrowdCountApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E3F316520ED3F23008B5C1B /* CrowdCountApiMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrowdCountApiMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4DFE6E20F0122700CD07FF /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4DFE7020F0123C00CD07FF /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4DFE7220F0154300CD07FF /* MultiArray+NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiArray+NSImage.swift"; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 				5EA217FA20E40CEC0061F7FF /* CrowdCountUITests.xctest */,
 				5EA2190920E41D380061F7FF /* CrowdCountApi.framework */,
 				5EA2191120E41D390061F7FF /* CrowdCountApiTests.xctest */,
-				5E3F316520ED3F23008B5C1B /* CrowdCountApi.framework */,
+				5E3F316520ED3F23008B5C1B /* CrowdCountApiMac.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -397,7 +397,7 @@
 			);
 			name = CrowdCountApiMac;
 			productName = CrowdCountApiMac;
-			productReference = 5E3F316520ED3F23008B5C1B /* CrowdCountApi.framework */;
+			productReference = 5E3F316520ED3F23008B5C1B /* CrowdCountApiMac.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		5EA217D620E40CEA0061F7FF /* CrowdCount */ = {
@@ -789,7 +789,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimroc.CrowdCountApiMac;
-				PRODUCT_NAME = CrowdCountApi;
+				PRODUCT_NAME = CrowdCountApiMac;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -825,7 +825,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimroc.CrowdCountApiMac;
-				PRODUCT_NAME = CrowdCountApi;
+				PRODUCT_NAME = CrowdCountApiMac;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;

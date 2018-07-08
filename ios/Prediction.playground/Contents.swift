@@ -2,7 +2,7 @@
 
 import AppKit
 import Cartography
-import CrowdCountApi
+import CrowdCountApiMac
 import PlaygroundSupport
 import Promises
 
