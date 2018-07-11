@@ -33,9 +33,6 @@
 		5E67669820E9A420002A4E0D /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67669720E9A41F002A4E0D /* UIImage+resize.swift */; };
 		5E67669A20E9A549002A4E0D /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67669920E9A549002A4E0D /* Duration.swift */; };
 		5EA217DB20E40CEA0061F7FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA217DA20E40CEA0061F7FF /* AppDelegate.swift */; };
-		5EA217DD20E40CEA0061F7FF /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA217DC20E40CEA0061F7FF /* RootViewController.swift */; };
-		5EA217DF20E40CEA0061F7FF /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA217DE20E40CEA0061F7FF /* DataViewController.swift */; };
-		5EA217E120E40CEA0061F7FF /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA217E020E40CEA0061F7FF /* ModelController.swift */; };
 		5EA217E420E40CEA0061F7FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EA217E220E40CEA0061F7FF /* Main.storyboard */; };
 		5EA217E620E40CEC0061F7FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EA217E520E40CEC0061F7FF /* Assets.xcassets */; };
 		5EA217E920E40CEC0061F7FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EA217E720E40CEC0061F7FF /* LaunchScreen.storyboard */; };
@@ -61,6 +58,12 @@
 		5EB7F3FC20EFC60F00CBE024 /* PredictionStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */; };
 		5EB7F3FD20EFC60F00CBE024 /* PredictionStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */; };
 		5ED4789C20EEA5250000B09D /* MultiArray+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */; };
+		5EE985C920FA6D9C0047FC4F /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */; };
+		5EE985CB20FA84110047FC4F /* CrowdCountApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2190920E41D380061F7FF /* CrowdCountApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5EE985D420FA851F0047FC4F /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5C796E20EFF40200EDC113 /* Promises.framework */; };
+		5EE985D520FA85500047FC4F /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5C797020EFF4C700EDC113 /* FBLPromises.framework */; };
+		5EE985D820FA8A5D0047FC4F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE985D720FA8A5D0047FC4F /* CameraViewController.swift */; };
+		5EE985D920FA8B420047FC4F /* CrowdClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1520F1579E00114EDA /* CrowdClassifier.mlmodel */; };
 		5EF94FE520F1B888002E01CC /* FaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF94FE420F1B888002E01CC /* FaceDetector.swift */; };
 		5EF94FE620F1B888002E01CC /* FaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF94FE420F1B888002E01CC /* FaceDetector.swift */; };
 /* End PBXBuildFile section */
@@ -110,6 +113,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				5EE985CB20FA84110047FC4F /* CrowdCountApi.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,9 +143,6 @@
 		5E67669920E9A549002A4E0D /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		5EA217D720E40CEA0061F7FF /* CrowdCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrowdCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EA217DA20E40CEA0061F7FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5EA217DC20E40CEA0061F7FF /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		5EA217DE20E40CEA0061F7FF /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
-		5EA217E020E40CEA0061F7FF /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
 		5EA217E320E40CEA0061F7FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5EA217E520E40CEC0061F7FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EA217E820E40CEC0061F7FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -169,6 +170,8 @@
 		5EB6BB1820F1579E00114EDA /* TinyYOLO.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TinyYOLO.mlmodel; sourceTree = "<group>"; };
 		5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionStrategy.swift; sourceTree = "<group>"; };
 		5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiArray+UIImage.swift"; sourceTree = "<group>"; };
+		5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
+		5EE985D720FA8A5D0047FC4F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		5EF94FE420F1B888002E01CC /* FaceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,6 +188,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EE985D520FA85500047FC4F /* FBLPromises.framework in Frameworks */,
+				5EE985D420FA851F0047FC4F /* Promises.framework in Frameworks */,
 				5EA2191E20E41D390061F7FF /* CrowdCountApi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,13 +283,12 @@
 			isa = PBXGroup;
 			children = (
 				5EA217DA20E40CEA0061F7FF /* AppDelegate.swift */,
-				5EA217DC20E40CEA0061F7FF /* RootViewController.swift */,
-				5EA217DE20E40CEA0061F7FF /* DataViewController.swift */,
-				5EA217E020E40CEA0061F7FF /* ModelController.swift */,
 				5EA217E220E40CEA0061F7FF /* Main.storyboard */,
 				5EA217E520E40CEC0061F7FF /* Assets.xcassets */,
 				5EA217E720E40CEC0061F7FF /* LaunchScreen.storyboard */,
 				5EA217EA20E40CEC0061F7FF /* Info.plist */,
+				5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */,
+				5EE985D720FA8A5D0047FC4F /* CameraViewController.swift */,
 			);
 			path = CrowdCount;
 			sourceTree = "<group>";
@@ -608,12 +612,14 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Cartography.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Promises.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBLPromises.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Cartography.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Promises.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FBLPromises.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -652,10 +658,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EA217DD20E40CEA0061F7FF /* RootViewController.swift in Sources */,
-				5EA217E120E40CEA0061F7FF /* ModelController.swift in Sources */,
-				5EA217DF20E40CEA0061F7FF /* DataViewController.swift in Sources */,
+				5EE985C920FA6D9C0047FC4F /* SwipeViewController.swift in Sources */,
 				5EA217DB20E40CEA0061F7FF /* AppDelegate.swift in Sources */,
+				5EE985D820FA8A5D0047FC4F /* CameraViewController.swift in Sources */,
+				5EE985D920FA8B420047FC4F /* CrowdClassifier.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,6 +966,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = CrowdCount/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -983,6 +990,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = CrowdCount/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1094,6 +1102,7 @@
 				);
 				INFOPLIST_FILE = CrowdCountApi/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1127,6 +1136,7 @@
 				);
 				INFOPLIST_FILE = CrowdCountApi/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
