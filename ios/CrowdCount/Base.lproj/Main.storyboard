@@ -12,11 +12,11 @@
         <!--Camera View Controller-->
         <scene sceneID="v2S-E9-3o9">
             <objects>
-                <viewController storyboardIdentifier="sbBlue" id="zPI-ID-1E1" customClass="CameraViewController" customModule="CrowdCount" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="sbCamera" id="zPI-ID-1E1" customClass="CameraViewController" customModule="CrowdCount" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HVi-8P-52s">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.067953254668845275" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Tdl-6H-8LL"/>
                     </view>
                 </viewController>
@@ -35,11 +35,11 @@
         <!--View Controller-->
         <scene sceneID="gGC-IB-Cru">
             <objects>
-                <viewController storyboardIdentifier="sbRed" id="yU5-Yc-5aX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="sbPredictionsIndex" id="yU5-Yc-5aX" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2BL-9r-xWh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.011644906383057818" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="nuk-Q4-Sux"/>
                     </view>
                 </viewController>

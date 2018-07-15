@@ -11,8 +11,8 @@ import UIKit
 class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
     lazy var orderedViewControllers: [UIViewController] = {
-        return [self.newVc(viewController: "sbBlue"),
-                self.newVc(viewController: "sbRed")]
+        return [self.newVc(viewController: "sbCamera"),
+                self.newVc(viewController: "sbPredictionsIndex")]
     }()
 
     // MARK: - View Loading
