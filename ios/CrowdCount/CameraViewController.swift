@@ -9,7 +9,16 @@
 import CrowdCountApi
 import UIKit
 
-class CameraViewController: UIViewController {
+class CameraViewController: UIViewController, FrameExtractorDelegate {
+    var frameExtractor: CameraFrameExtractor!
+    @IBOutlet var imageView: UIImageView!
     override func viewDidLoad() {
+        super.viewDidLoad()
+        frameExtractor = CameraFrameExtractor()
+        frameExtractor.delegate = self
+    }
+    
+    func captured(image: UIImage) {
+        imageView.image = image
     }
 }

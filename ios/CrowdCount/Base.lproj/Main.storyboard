@@ -13,12 +13,14 @@
         <scene sceneID="v2S-E9-3o9">
             <objects>
                 <viewController storyboardIdentifier="sbCamera" id="zPI-ID-1E1" customClass="CameraViewController" customModule="CrowdCount" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HVi-8P-52s">
+                    <view key="view" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" id="HVi-8P-52s" customClass="UIImageView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Tdl-6H-8LL"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="HVi-8P-52s" id="hR5-YT-yJB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f9d-bY-xGG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
