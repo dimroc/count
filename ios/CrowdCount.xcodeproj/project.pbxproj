@@ -68,6 +68,7 @@
 		5EF94FE620F1B888002E01CC /* FaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF94FE420F1B888002E01CC /* FaceDetector.swift */; };
 		5EFFC4DC20FDFC4A00E75C38 /* CameraFrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFC4DB20FDFC4A00E75C38 /* CameraFrameExtractor.swift */; };
 		5EFFC4DE20FE004D00E75C38 /* FrameExtractorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFC4DD20FE004D00E75C38 /* FrameExtractorDelegate.swift */; };
+		5EFFC4E120FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFC4E020FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +178,7 @@
 		5EF94FE420F1B888002E01CC /* FaceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetector.swift; sourceTree = "<group>"; };
 		5EFFC4DB20FDFC4A00E75C38 /* CameraFrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFrameExtractor.swift; sourceTree = "<group>"; };
 		5EFFC4DD20FE004D00E75C38 /* FrameExtractorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameExtractorDelegate.swift; sourceTree = "<group>"; };
+		5EFFC4E020FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVCaptureVideoOrientation+description.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +288,7 @@
 		5EA217D920E40CEA0061F7FF /* CrowdCount */ = {
 			isa = PBXGroup;
 			children = (
+				5EFFC4DF20FE0D4D00E75C38 /* Helpers */,
 				5EFFC4DA20FDFA4900E75C38 /* FrameExtractor */,
 				5EA217DA20E40CEA0061F7FF /* AppDelegate.swift */,
 				5EA217E220E40CEA0061F7FF /* Main.storyboard */,
@@ -377,6 +380,14 @@
 				5EFFC4DD20FE004D00E75C38 /* FrameExtractorDelegate.swift */,
 			);
 			path = FrameExtractor;
+			sourceTree = "<group>";
+		};
+		5EFFC4DF20FE0D4D00E75C38 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5EFFC4E020FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -674,6 +685,7 @@
 			files = (
 				5EE985C920FA6D9C0047FC4F /* SwipeViewController.swift in Sources */,
 				5EFFC4DE20FE004D00E75C38 /* FrameExtractorDelegate.swift in Sources */,
+				5EFFC4E120FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift in Sources */,
 				5EA217DB20E40CEA0061F7FF /* AppDelegate.swift in Sources */,
 				5EE985D820FA8A5D0047FC4F /* CameraViewController.swift in Sources */,
 				5EE985D920FA8B420047FC4F /* CrowdClassifier.mlmodel in Sources */,
