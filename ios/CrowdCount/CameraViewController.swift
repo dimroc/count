@@ -9,19 +9,25 @@
 import CrowdCountApi
 import UIKit
 import AVFoundation
+import RxCocoa
+import RxSwift
 
-class CameraViewController: UIViewController, FrameExtractorDelegate {
+class CameraViewController: UIViewController {
     var frameExtractor: FrameExtractor!
     @IBOutlet var imageView: UIImageView!
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         frameExtractor = CameraFrameExtractor()
-        frameExtractor.delegate = self
+        driveFrames()
     }
     
-    func captured(image: UIImage) {
-        imageView.image = image
+    private func driveFrames() {
+        frameExtractor.frame
+            .asDriver(onErrorJustReturn: UIImage())
+            .drive(imageView.rx.image)
+            .disposed(by: disposeBag)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

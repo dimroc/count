@@ -12,6 +12,8 @@
 		5E1AAA5F20EE9C9100098F1D /* FriendlyPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */; };
 		5E1AAA6020EE9D7E00098F1D /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668B20E73C8F002A4E0D /* MultiArray.swift */; };
 		5E1AAA6220EEA05300098F1D /* NSImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */; };
+		5E3A6BAE20FF55EC00877086 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAC20FF55EC00877086 /* RxSwift.framework */; };
+		5E3A6BAF20FF55EC00877086 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */; };
 		5E3F317320ED4140008B5C1B /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67669920E9A549002A4E0D /* Duration.swift */; };
 		5E3F317420ED41A3008B5C1B /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668720E73C8F002A4E0D /* Math.swift */; };
 		5E3F317620ED41A3008B5C1B /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668920E73C8F002A4E0D /* Array.swift */; };
@@ -67,7 +69,6 @@
 		5EF94FE520F1B888002E01CC /* FaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF94FE420F1B888002E01CC /* FaceDetector.swift */; };
 		5EF94FE620F1B888002E01CC /* FaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF94FE420F1B888002E01CC /* FaceDetector.swift */; };
 		5EFFC4DC20FDFC4A00E75C38 /* CameraFrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFC4DB20FDFC4A00E75C38 /* CameraFrameExtractor.swift */; };
-		5EFFC4DE20FE004D00E75C38 /* FrameExtractorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFC4DD20FE004D00E75C38 /* FrameExtractorDelegate.swift */; };
 		5EFFC4E120FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFC4E020FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +128,8 @@
 		5E1AAA5A20EE9B8800098F1D /* FriendlyPredictor+ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+ios.swift"; sourceTree = "<group>"; };
 		5E1AAA5C20EE9BCA00098F1D /* FriendlyPredictor+macos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+macos.swift"; sourceTree = "<group>"; };
 		5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+resize.swift"; sourceTree = "<group>"; };
+		5E3A6BAC20FF55EC00877086 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		5E3F316520ED3F23008B5C1B /* CrowdCountApiMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrowdCountApiMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4DFE6E20F0122700CD07FF /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4DFE7020F0123C00CD07FF /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,7 +180,6 @@
 		5EE985D720FA8A5D0047FC4F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		5EF94FE420F1B888002E01CC /* FaceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetector.swift; sourceTree = "<group>"; };
 		5EFFC4DB20FDFC4A00E75C38 /* CameraFrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFrameExtractor.swift; sourceTree = "<group>"; };
-		5EFFC4DD20FE004D00E75C38 /* FrameExtractorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameExtractorDelegate.swift; sourceTree = "<group>"; };
 		5EFFC4E020FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVCaptureVideoOrientation+description.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,6 +196,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E3A6BAE20FF55EC00877086 /* RxSwift.framework in Frameworks */,
+				5E3A6BAF20FF55EC00877086 /* RxCocoa.framework in Frameworks */,
 				5EE985D520FA85500047FC4F /* FBLPromises.framework in Frameworks */,
 				5EE985D420FA851F0047FC4F /* Promises.framework in Frameworks */,
 				5EA2191E20E41D390061F7FF /* CrowdCountApi.framework in Frameworks */,
@@ -352,6 +356,8 @@
 		5EB25CF720EF0C84006FA509 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */,
+				5E3A6BAC20FF55EC00877086 /* RxSwift.framework */,
 				5E4DFE7020F0123C00CD07FF /* Promises.framework */,
 				5E4DFE6E20F0122700CD07FF /* Promises.framework */,
 				5E5C797020EFF4C700EDC113 /* FBLPromises.framework */,
@@ -377,7 +383,6 @@
 			isa = PBXGroup;
 			children = (
 				5EFFC4DB20FDFC4A00E75C38 /* CameraFrameExtractor.swift */,
-				5EFFC4DD20FE004D00E75C38 /* FrameExtractorDelegate.swift */,
 			);
 			path = FrameExtractor;
 			sourceTree = "<group>";
@@ -638,6 +643,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Cartography.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Promises.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/FBLPromises.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -645,6 +652,8 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Cartography.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Promises.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FBLPromises.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -684,7 +693,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EE985C920FA6D9C0047FC4F /* SwipeViewController.swift in Sources */,
-				5EFFC4DE20FE004D00E75C38 /* FrameExtractorDelegate.swift in Sources */,
 				5EFFC4E120FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift in Sources */,
 				5EA217DB20E40CEA0061F7FF /* AppDelegate.swift in Sources */,
 				5EE985D820FA8A5D0047FC4F /* CameraViewController.swift in Sources */,

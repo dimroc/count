@@ -7,16 +7,21 @@
 
 import UIKit
 import AVFoundation
+import RxSwift
+import RxCocoa
 
 protocol FrameExtractor {
     var orientation: AVCaptureVideoOrientation { get set }
-    var delegate: FrameExtractorDelegate? { get set }
+    var frame: Observable<UIImage> { get }
 }
 
 class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSampleBufferDelegate {
+    var orientation: AVCaptureVideoOrientation = AVCaptureVideoOrientation.portrait
+    let frame: Observable<UIImage>
+    
+    private let subject = PublishSubject<UIImage>()
     private let position = AVCaptureDevice.Position.back
     private let quality = AVCaptureSession.Preset.hd1280x720
-    var orientation: AVCaptureVideoOrientation = AVCaptureVideoOrientation.portrait
     
     private var permissionGranted = false
     private let captureSession = AVCaptureSession()
@@ -25,9 +30,8 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
     private let sessionQueue = DispatchQueue(label: "CameraFrameExtractor session queue")
     private let sampleBufferCallbackQueue = DispatchQueue(label: "CameraFrameExtractor sample buffer")
     
-    weak var delegate: FrameExtractorDelegate?
-    
     override init() {
+        frame = subject
         super.init()
         checkPermission()
         sessionQueue.async { [unowned self] in
@@ -91,8 +95,6 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         connection.videoOrientation = orientation
         guard let uiImage = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
-        DispatchQueue.main.async { [unowned self] in
-            self.delegate?.captured(image: uiImage)
-        }
+        subject.onNext(uiImage)
     }
 }
