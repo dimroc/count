@@ -46,19 +46,13 @@
 		5EA2191920E41D390061F7FF /* CrowdCountApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA2191820E41D390061F7FF /* CrowdCountApiTests.swift */; };
 		5EA2191B20E41D390061F7FF /* CrowdCountApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EA2190B20E41D380061F7FF /* CrowdCountApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5EA2191E20E41D390061F7FF /* CrowdCountApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2190920E41D380061F7FF /* CrowdCountApi.framework */; };
-		5EB6BB0B20F152CD00114EDA /* YOLO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB0A20F152CD00114EDA /* YOLO.swift */; };
-		5EB6BB0C20F152CD00114EDA /* YOLO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB0A20F152CD00114EDA /* YOLO.swift */; };
 		5EB6BB0E20F1533A00114EDA /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB0D20F1533A00114EDA /* BoundingBox.swift */; };
-		5EB6BB1120F154B900114EDA /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1020F154B900114EDA /* Helpers.swift */; };
-		5EB6BB1220F154B900114EDA /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1020F154B900114EDA /* Helpers.swift */; };
 		5EB6BB1920F1579F00114EDA /* CrowdClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1520F1579E00114EDA /* CrowdClassifier.mlmodel */; };
 		5EB6BB1A20F1579F00114EDA /* CrowdClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1520F1579E00114EDA /* CrowdClassifier.mlmodel */; };
 		5EB6BB1B20F1579F00114EDA /* TensPredictor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1620F1579E00114EDA /* TensPredictor.mlmodel */; };
 		5EB6BB1C20F1579F00114EDA /* TensPredictor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1620F1579E00114EDA /* TensPredictor.mlmodel */; };
 		5EB6BB1D20F1579F00114EDA /* HundredsPredictor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1720F1579E00114EDA /* HundredsPredictor.mlmodel */; };
 		5EB6BB1E20F1579F00114EDA /* HundredsPredictor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1720F1579E00114EDA /* HundredsPredictor.mlmodel */; };
-		5EB6BB1F20F1579F00114EDA /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1820F1579E00114EDA /* TinyYOLO.mlmodel */; };
-		5EB6BB2020F1579F00114EDA /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1820F1579E00114EDA /* TinyYOLO.mlmodel */; };
 		5EB7F3FC20EFC60F00CBE024 /* PredictionStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */; };
 		5EB7F3FD20EFC60F00CBE024 /* PredictionStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */; };
 		5ED4789C20EEA5250000B09D /* MultiArray+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */; };
@@ -171,13 +165,10 @@
 		5EA2191A20E41D390061F7FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EB25CF820EF0C84006FA509 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/Mac/Cartography.framework; sourceTree = "<group>"; };
 		5EB25CFA20EF0C9A006FA509 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
-		5EB6BB0A20F152CD00114EDA /* YOLO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YOLO.swift; sourceTree = "<group>"; };
 		5EB6BB0D20F1533A00114EDA /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
-		5EB6BB1020F154B900114EDA /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		5EB6BB1520F1579E00114EDA /* CrowdClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CrowdClassifier.mlmodel; sourceTree = "<group>"; };
 		5EB6BB1620F1579E00114EDA /* TensPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TensPredictor.mlmodel; sourceTree = "<group>"; };
 		5EB6BB1720F1579E00114EDA /* HundredsPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HundredsPredictor.mlmodel; sourceTree = "<group>"; };
-		5EB6BB1820F1579E00114EDA /* TinyYOLO.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TinyYOLO.mlmodel; sourceTree = "<group>"; };
 		5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionStrategy.swift; sourceTree = "<group>"; };
 		5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiArray+UIImage.swift"; sourceTree = "<group>"; };
 		5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
@@ -261,7 +252,6 @@
 				5E67668C20E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift */,
 				5E67668D20E73C8F002A4E0D /* NonMaxSuppression.swift */,
 				5E67668E20E73C8F002A4E0D /* MLMultiArray+UIImage.swift */,
-				5EB6BB1020F154B900114EDA /* Helpers.swift */,
 			);
 			path = CoreMLHelpers;
 			sourceTree = "<group>";
@@ -342,7 +332,6 @@
 				5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */,
 				5E67669920E9A549002A4E0D /* Duration.swift */,
 				5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */,
-				5EB6BB0A20F152CD00114EDA /* YOLO.swift */,
 				5EB6BB0D20F1533A00114EDA /* BoundingBox.swift */,
 				5EF94FE420F1B888002E01CC /* FaceDetector.swift */,
 				5E93CCE321026B0D00461138 /* CGImagePropertyOrientation+UIImageOrientation.swift */,
@@ -380,7 +369,6 @@
 				5EB6BB1520F1579E00114EDA /* CrowdClassifier.mlmodel */,
 				5EB6BB1620F1579E00114EDA /* TensPredictor.mlmodel */,
 				5EB6BB1720F1579E00114EDA /* HundredsPredictor.mlmodel */,
-				5EB6BB1820F1579E00114EDA /* TinyYOLO.mlmodel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -676,7 +664,6 @@
 				5E3F317920ED41A3008B5C1B /* CVPixelBuffer+Helpers.swift in Sources */,
 				5EB7F3FD20EFC60F00CBE024 /* PredictionStrategy.swift in Sources */,
 				5EB6BB1C20F1579F00114EDA /* TensPredictor.mlmodel in Sources */,
-				5EB6BB0C20F152CD00114EDA /* YOLO.swift in Sources */,
 				5E1AAA6020EE9D7E00098F1D /* MultiArray.swift in Sources */,
 				5EB6BB1E20F1579F00114EDA /* HundredsPredictor.mlmodel in Sources */,
 				5EB6BB1A20F1579F00114EDA /* CrowdClassifier.mlmodel in Sources */,
@@ -687,8 +674,6 @@
 				5E1AAA5F20EE9C9100098F1D /* FriendlyPredictor.swift in Sources */,
 				5E3F317720ED41A3008B5C1B /* Predictions.swift in Sources */,
 				5E4DFE7320F0154300CD07FF /* MultiArray+NSImage.swift in Sources */,
-				5EB6BB1220F154B900114EDA /* Helpers.swift in Sources */,
-				5EB6BB2020F1579F00114EDA /* TinyYOLO.mlmodel in Sources */,
 				5E3F317420ED41A3008B5C1B /* Math.swift in Sources */,
 				5E1AAA5D20EE9BCB00098F1D /* FriendlyPredictor+macos.swift in Sources */,
 			);
@@ -729,15 +714,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E67669620E73C8F002A4E0D /* MLMultiArray+UIImage.swift in Sources */,
-				5EB6BB1120F154B900114EDA /* Helpers.swift in Sources */,
 				5E67669420E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift in Sources */,
 				5EB6BB1B20F1579F00114EDA /* TensPredictor.mlmodel in Sources */,
 				5E67669A20E9A549002A4E0D /* Duration.swift in Sources */,
 				5E1AAA5E20EE9BD400098F1D /* FriendlyPredictor+ios.swift in Sources */,
 				5E67669120E73C8F002A4E0D /* Array.swift in Sources */,
-				5EB6BB0B20F152CD00114EDA /* YOLO.swift in Sources */,
 				5E67667D20E72E9B002A4E0D /* FriendlyPredictor.swift in Sources */,
-				5EB6BB1F20F1579F00114EDA /* TinyYOLO.mlmodel in Sources */,
 				5E67669320E73C8F002A4E0D /* MultiArray.swift in Sources */,
 				5E93CCE421026B0D00461138 /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */,
 				5E67668F20E73C8F002A4E0D /* Math.swift in Sources */,

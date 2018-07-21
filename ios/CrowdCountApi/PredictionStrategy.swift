@@ -30,7 +30,6 @@ public struct PredictionStrategyOutput {
 }
 
 public class SinglesPredictionStrategy: PredictionStrategy {
-    let predictor = YOLO()
     let personClassIndex = 14
     public init() {}
     public func predict(_ buffer: CVPixelBuffer) -> PredictionStrategyOutput {
