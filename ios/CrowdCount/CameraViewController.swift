@@ -14,19 +14,32 @@ import RxSwift
 
 class CameraViewController: UIViewController {
     var frameExtractor: FrameExtractor!
+    let predictor = FriendlyPredictor()
+    var classificationVM: ClassificationViewModel!
+    
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet weak var classificationLabel: UILabel!
+    
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         frameExtractor = CameraFrameExtractor()
+        classificationVM = ClassificationViewModel(frames: frameExtractor.frames)
         driveFrames()
+        driveClassification()
     }
     
     private func driveFrames() {
-        frameExtractor.frame
+        frameExtractor.frames
             .asDriver(onErrorJustReturn: UIImage())
             .drive(imageView.rx.image)
+            .disposed(by: disposeBag)
+    }
+    
+    private func driveClassification() {
+        classificationVM.classifications
+            .drive(classificationLabel.rx.text)
             .disposed(by: disposeBag)
     }
     
@@ -38,7 +51,7 @@ class CameraViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
     }
     
-    func transformOrientation(_ orientation: UIDeviceOrientation) -> AVCaptureVideoOrientation {
+    private func transformOrientation(_ orientation: UIDeviceOrientation) -> AVCaptureVideoOrientation {
         switch orientation {
         case .landscapeLeft:
             return .landscapeRight // Deliberately the opposite. Why? Not sure.

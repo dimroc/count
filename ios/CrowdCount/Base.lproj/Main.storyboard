@@ -16,9 +16,25 @@
                     <view key="view" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" id="HVi-8P-52s" customClass="UIImageView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unknown" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZR3-Nh-UwG" userLabel="ClassificationLabel">
+                                <rect key="frame" x="137.66666666666666" y="44" width="99.666666666666657" height="28.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="1" height="-1"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZR3-Nh-UwG" firstAttribute="top" secondItem="EB5-Nx-jTh" secondAttribute="top" id="PUb-Ug-bbC"/>
+                            <constraint firstItem="ZR3-Nh-UwG" firstAttribute="centerX" secondItem="HVi-8P-52s" secondAttribute="centerX" id="hxU-w4-Ym5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EB5-Nx-jTh"/>
                     </view>
                     <connections>
+                        <outlet property="classificationLabel" destination="ZR3-Nh-UwG" id="nfu-0c-aMC"/>
                         <outlet property="imageView" destination="HVi-8P-52s" id="hR5-YT-yJB"/>
                     </connections>
                 </viewController>

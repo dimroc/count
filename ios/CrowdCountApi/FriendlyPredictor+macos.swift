@@ -31,7 +31,8 @@ extension FriendlyPredictor {
     }
     
     public func classifyPromise(image: NSImage, on: DispatchQueue) -> Promise<FriendlyClassification> {
-        return classifyPromise(buffer: imageToBuffer(image, width: 299, height: 299)!, on: on)
+        let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+        return classifyPromise(image: cgImage, orientation: CGImagePropertyOrientation.right, on: on)
     }
     
     func imageToBuffer(_ image: NSImage, width: Int, height: Int) -> CVPixelBuffer? {

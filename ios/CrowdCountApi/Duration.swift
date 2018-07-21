@@ -139,6 +139,13 @@ public class Duration{
         return stopMeasurement()
     }
     
+    public static func measureAndReturn<T>(_ name: String, block: ()->T) -> T {
+        startMeasurement(name)
+        let rval: T = block()
+        _ = stopMeasurement()
+        return rval
+    }
+    
     ///
     /// Calls a particular block the specified number of times, returning the average
     /// number of seconds it took to complete the code. The time

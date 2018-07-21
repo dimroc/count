@@ -9,6 +9,7 @@
 import CoreML
 import Foundation
 import Promises
+import Vision
 
 public class FriendlyPredictor {
     public static let ImageWidth: Double = 900
@@ -16,6 +17,8 @@ public class FriendlyPredictor {
     
     public static let DensityMapWidth: Int = 225
     public static let DensityMapHeight: Int = 168
+    
+    private let classifier = CrowdClassifier()
     
     public init() {}
 
@@ -38,11 +41,23 @@ public class FriendlyPredictor {
         }
     }
     
-    public func classifyPromise(buffer: CVPixelBuffer, on: DispatchQueue) -> Promise<FriendlyClassification> {
-        return Promise(on: on) { () -> FriendlyClassification in
-            let classifier = CrowdClassifier()
-            let output = try! classifier.prediction(image: buffer)
-            return FriendlyClassification(classification: output.classLabel, probabilities: output.classLabelProbs)
+    public func classify(image: CGImage, orientation: CGImagePropertyOrientation) -> FriendlyClassification {
+        return Duration.measureAndReturn("classify") {
+            let model = try! VNCoreMLModel(for: classifier.model)
+            let request = VNCoreMLRequest(model: model)
+            request.imageCropAndScaleOption = .scaleFill
+            
+            let handler = VNImageRequestHandler(cgImage: image, orientation: orientation)
+            try! handler.perform([request])
+            let classifications = request.results as! [VNClassificationObservation]
+            
+            return FriendlyClassification.from(classifications)
+        }
+    }
+    
+    public func classifyPromise(image: CGImage, orientation: CGImagePropertyOrientation, on: DispatchQueue) -> Promise<FriendlyClassification> {
+        return Promise(on: on) {
+            self.classify(image: image, orientation: orientation)
         }
     }
 }
@@ -57,5 +72,16 @@ public struct FriendlyPrediction {
 
 public struct FriendlyClassification {
     public var classification: String
-    public var probabilities: [String: Double]
+    public var probabilities: [String: VNConfidence]
+    
+    public static func from(_ observations: [VNClassificationObservation]) -> FriendlyClassification {
+        let probabilities = observations.reduce(into: [String:VNConfidence]()) { dict, o in
+            dict[o.identifier] = o.confidence
+        }
+        return FriendlyClassification(
+            classification: observations[0].identifier,
+            probabilities: probabilities
+        )
+    
+    }
 }

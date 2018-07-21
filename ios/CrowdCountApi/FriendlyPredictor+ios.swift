@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Promises
+import Vision
 
 extension FriendlyPredictor {
     public func predict(image: UIImage, strategy: PredictionStrategy) -> FriendlyPrediction {
@@ -24,5 +25,10 @@ extension FriendlyPredictor {
         return Promise {
             return self.predict(image: image, strategy: strategy)
         }
+    }
+    
+    public func classify(image: UIImage) -> FriendlyClassification {
+        let orientation = CGImagePropertyOrientation(image.imageOrientation)
+        return classify(image: image.cgImage!, orientation: orientation)
     }
 }

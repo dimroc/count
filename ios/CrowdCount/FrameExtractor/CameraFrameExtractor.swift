@@ -12,12 +12,12 @@ import RxCocoa
 
 protocol FrameExtractor {
     var orientation: AVCaptureVideoOrientation { get set }
-    var frame: Observable<UIImage> { get }
+    var frames: Observable<UIImage> { get }
 }
 
 class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSampleBufferDelegate {
     var orientation: AVCaptureVideoOrientation = AVCaptureVideoOrientation.portrait
-    let frame: Observable<UIImage>
+    let frames: Observable<UIImage>
     
     private let subject = PublishSubject<UIImage>()
     private let position = AVCaptureDevice.Position.back
@@ -31,7 +31,7 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
     private let sampleBufferCallbackQueue = DispatchQueue(label: "CameraFrameExtractor sample buffer")
     
     override init() {
-        frame = subject
+        frames = subject
         super.init()
         checkPermission()
         sessionQueue.async { [unowned self] in
