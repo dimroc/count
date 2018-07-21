@@ -30,6 +30,14 @@ class CameraViewController: UIViewController {
         driveClassification()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        frameExtractor.isEnabled = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        frameExtractor.isEnabled = true
+    }
+    
     private func driveFrames() {
         frameExtractor.frames
             .asDriver(onErrorJustReturn: UIImage())

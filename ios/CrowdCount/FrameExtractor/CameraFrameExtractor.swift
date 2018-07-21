@@ -8,16 +8,18 @@
 import UIKit
 import AVFoundation
 import RxSwift
-import RxCocoa
-
-protocol FrameExtractor {
-    var orientation: AVCaptureVideoOrientation { get set }
-    var frames: Observable<UIImage> { get }
-}
 
 class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSampleBufferDelegate {
     var orientation: AVCaptureVideoOrientation = AVCaptureVideoOrientation.portrait
     let frames: Observable<UIImage>
+    var isEnabled: Bool {
+        get {
+            return connection?.isEnabled == true
+        }
+        set(isEnabled) {
+            connection?.isEnabled = isEnabled
+        }
+    }
     
     private let subject = PublishSubject<UIImage>()
     private let position = AVCaptureDevice.Position.back
@@ -26,6 +28,7 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
     private var permissionGranted = false
     private let captureSession = AVCaptureSession()
     private let context = CIContext()
+    private var connection: AVCaptureConnection?
     
     private let sessionQueue = DispatchQueue(label: "CameraFrameExtractor session queue")
     private let sampleBufferCallbackQueue = DispatchQueue(label: "CameraFrameExtractor sample buffer")
@@ -77,6 +80,7 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
         guard connection.isVideoMirroringSupported else { return }
         connection.videoOrientation = orientation
         connection.isVideoMirrored = position == .front
+        self.connection = connection
     }
     
     private func selectCaptureDevice() -> AVCaptureDevice? {

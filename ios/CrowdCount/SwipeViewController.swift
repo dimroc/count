@@ -21,7 +21,6 @@ class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, U
 
         self.dataSource = self
         
-        // This sets up the first view that will show up on our page control
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
                                direction: .forward,
@@ -54,8 +53,6 @@ class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, U
             contentView.bringSubviewToFront(pageControl!)
         }
     }
-
-    
 
     /*
     // MARK: - Navigation

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E0EFF8F2103861E00D19EFF /* FrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0EFF8E2103861E00D19EFF /* FrameExtractor.swift */; };
 		5E1AAA5D20EE9BCB00098F1D /* FriendlyPredictor+macos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AAA5C20EE9BCA00098F1D /* FriendlyPredictor+macos.swift */; };
 		5E1AAA5E20EE9BD400098F1D /* FriendlyPredictor+ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AAA5A20EE9B8800098F1D /* FriendlyPredictor+ios.swift */; };
 		5E1AAA5F20EE9C9100098F1D /* FriendlyPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */; };
@@ -121,6 +122,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E0EFF8E2103861E00D19EFF /* FrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameExtractor.swift; sourceTree = "<group>"; };
 		5E1AAA5A20EE9B8800098F1D /* FriendlyPredictor+ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+ios.swift"; sourceTree = "<group>"; };
 		5E1AAA5C20EE9BCA00098F1D /* FriendlyPredictor+macos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+macos.swift"; sourceTree = "<group>"; };
 		5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+resize.swift"; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				5EFFC4DB20FDFC4A00E75C38 /* CameraFrameExtractor.swift */,
+				5E0EFF8E2103861E00D19EFF /* FrameExtractor.swift */,
 			);
 			path = FrameExtractor;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				5EA217DB20E40CEA0061F7FF /* AppDelegate.swift in Sources */,
 				5EE985D820FA8A5D0047FC4F /* CameraViewController.swift in Sources */,
 				5EE985D920FA8B420047FC4F /* CrowdClassifier.mlmodel in Sources */,
+				5E0EFF8F2103861E00D19EFF /* FrameExtractor.swift in Sources */,
 				5EFFC4DC20FDFC4A00E75C38 /* CameraFrameExtractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
