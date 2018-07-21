@@ -24,7 +24,8 @@ class CameraViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        frameExtractor = CameraFrameExtractor()
+//        frameExtractor = CameraFrameExtractor()
+        frameExtractor = ImageFrameExtractor()
         classificationVM = ClassificationViewModel(frames: frameExtractor.frames)
         driveFrames()
         driveClassification()

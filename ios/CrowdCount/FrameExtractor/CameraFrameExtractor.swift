@@ -2,6 +2,7 @@
 //  CameraFrameExtractor.swift
 //  CrowdCount
 //
+//  Created by Dimitri Roche on 7/21/18.
 //  Inspired by https://medium.com/ios-os-x-development/ios-camera-frames-extraction-d2c0f80ed05a
 //
 
@@ -11,7 +12,9 @@ import RxSwift
 
 class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSampleBufferDelegate {
     var orientation: AVCaptureVideoOrientation = AVCaptureVideoOrientation.portrait
-    let frames: Observable<UIImage>
+    var frames: Observable<UIImage> {
+        return subject
+    }
     var isEnabled: Bool {
         get {
             return connection?.isEnabled == true
@@ -34,7 +37,6 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
     private let sampleBufferCallbackQueue = DispatchQueue(label: "CameraFrameExtractor sample buffer")
     
     override init() {
-        frames = subject
         super.init()
         checkPermission()
         sessionQueue.async { [unowned self] in
