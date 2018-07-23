@@ -14,6 +14,8 @@
 		5E1AAA5F20EE9C9100098F1D /* FriendlyPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */; };
 		5E1AAA6020EE9D7E00098F1D /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668B20E73C8F002A4E0D /* MultiArray.swift */; };
 		5E1AAA6220EEA05300098F1D /* NSImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */; };
+		5E1F99EF2105E78E008FB712 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F99EE2105E78E008FB712 /* Platform.swift */; };
+		5E1F99F02105E78E008FB712 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F99EE2105E78E008FB712 /* Platform.swift */; };
 		5E2FBF982100C2580006A125 /* ClassificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2FBF972100C2580006A125 /* ClassificationViewModel.swift */; };
 		5E3A6BAE20FF55EC00877086 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAC20FF55EC00877086 /* RxSwift.framework */; };
 		5E3A6BAF20FF55EC00877086 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */; };
@@ -128,6 +130,7 @@
 		5E1AAA5A20EE9B8800098F1D /* FriendlyPredictor+ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+ios.swift"; sourceTree = "<group>"; };
 		5E1AAA5C20EE9BCA00098F1D /* FriendlyPredictor+macos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+macos.swift"; sourceTree = "<group>"; };
 		5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+resize.swift"; sourceTree = "<group>"; };
+		5E1F99EE2105E78E008FB712 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		5E2FBF972100C2580006A125 /* ClassificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationViewModel.swift; sourceTree = "<group>"; };
 		5E3A6BAC20FF55EC00877086 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -339,6 +342,7 @@
 				5EB6BB0D20F1533A00114EDA /* BoundingBox.swift */,
 				5EF94FE420F1B888002E01CC /* FaceDetector.swift */,
 				5E93CCE321026B0D00461138 /* CGImagePropertyOrientation+UIImageOrientation.swift */,
+				5E1F99EE2105E78E008FB712 /* Platform.swift */,
 			);
 			path = CrowdCountApi;
 			sourceTree = "<group>";
@@ -669,6 +673,7 @@
 				5E3F317620ED41A3008B5C1B /* Array.swift in Sources */,
 				5E3F317920ED41A3008B5C1B /* CVPixelBuffer+Helpers.swift in Sources */,
 				5EB7F3FD20EFC60F00CBE024 /* PredictionStrategy.swift in Sources */,
+				5E1F99F02105E78E008FB712 /* Platform.swift in Sources */,
 				5EB6BB1C20F1579F00114EDA /* TensPredictor.mlmodel in Sources */,
 				5E1AAA6020EE9D7E00098F1D /* MultiArray.swift in Sources */,
 				5EB6BB1E20F1579F00114EDA /* HundredsPredictor.mlmodel in Sources */,
@@ -721,6 +726,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E1F99EF2105E78E008FB712 /* Platform.swift in Sources */,
 				5E67669620E73C8F002A4E0D /* MLMultiArray+UIImage.swift in Sources */,
 				5E67669420E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift in Sources */,
 				5EB6BB1B20F1579F00114EDA /* TensPredictor.mlmodel in Sources */,

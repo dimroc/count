@@ -45,6 +45,11 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
         }
     }
 
+    convenience init(orientation: AVCaptureVideoOrientation) {
+        self.init()
+        self.orientation = orientation
+    }
+
     // MARK: AVSession configuration
     private func checkPermission() {
         switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
