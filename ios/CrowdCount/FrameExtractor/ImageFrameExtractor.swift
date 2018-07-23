@@ -17,10 +17,10 @@ class ImageFrameExtractor: FrameExtractor {
     }
     var orientation: AVCaptureVideoOrientation = AVCaptureVideoOrientation.landscapeLeft
     var isEnabled: Bool = true
-    
+
     private let subject = PublishSubject<UIImage>()
     private let disposeBag = DisposeBag()
-    
+
     private let availableImages = [
         "audience-crowd-fans",
         "bavaria-beer-fest"
@@ -29,7 +29,7 @@ class ImageFrameExtractor: FrameExtractor {
     init() {
         startPushingImage(availableImages[0])
     }
-    
+
     private func startPushingImage(_ imageName: String) {
         let image = UIImage(named: imageName, in: Bundle.main, compatibleWith: nil)!
         Observable<Int>

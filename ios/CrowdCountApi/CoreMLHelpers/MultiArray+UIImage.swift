@@ -29,7 +29,7 @@ extension MultiArray {
             return nil
         }
     }
-    
+
     /**
      Converts a single channel from the multi-array to a grayscale UIImage.
      
@@ -45,7 +45,7 @@ extension MultiArray {
             print("Channel must be between 0 and \(shape[0] - 1)")
             return nil
         }
-        
+
         let height = shape[1]
         let width = shape[2]
         var a = MultiArray<T>(shape: [height, width])

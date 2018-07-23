@@ -140,18 +140,18 @@ public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) 
     var destWidth = sourceHeight
     var destHeight = sourceWidth
     var color = UInt8(0)
-    
+
     if factor % 2 == 0 {
         destWidth = sourceWidth
         destHeight = sourceHeight
     }
-    
+
     let srcBytesPerRow = CVPixelBufferGetBytesPerRow(srcPixelBuffer)
     var srcBuffer = vImage_Buffer(data: srcData,
                                   height: vImagePixelCount(sourceHeight),
                                   width: vImagePixelCount(sourceWidth),
                                   rowBytes: srcBytesPerRow)
-    
+
     let destBytesPerRow = destWidth*4
     guard let destData = malloc(destHeight*destBytesPerRow) else {
         print("Error: out of memory")
@@ -161,22 +161,22 @@ public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) 
                                    height: vImagePixelCount(destHeight),
                                    width: vImagePixelCount(destWidth),
                                    rowBytes: destBytesPerRow)
-    
+
     let error = vImageRotate90_ARGB8888(&srcBuffer, &destBuffer, factor, &color, vImage_Flags(0))
-    
+
     CVPixelBufferUnlockBaseAddress(srcPixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
     if error != kvImageNoError {
         print("Error:", error)
         free(destData)
         return nil
     }
-    
+
     let releaseCallback: CVPixelBufferReleaseBytesCallback = { _, ptr in
         if let ptr = ptr {
             free(UnsafeMutableRawPointer(mutating: ptr))
         }
     }
-    
+
     let pixelFormat = CVPixelBufferGetPixelFormatType(srcPixelBuffer)
     var dstPixelBuffer: CVPixelBuffer?
     let status = CVPixelBufferCreateWithBytes(nil, destWidth, destHeight,

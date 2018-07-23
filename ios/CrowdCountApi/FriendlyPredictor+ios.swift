@@ -20,13 +20,13 @@ extension FriendlyPredictor {
         )
         return predict(buffer: buffer!, strategy: strategy)
     }
-    
+
     public func predictPromise(image: UIImage, strategy: PredictionStrategy) -> Promise<FriendlyPrediction> {
         return Promise {
             return self.predict(image: image, strategy: strategy)
         }
     }
-    
+
     public func classify(image: UIImage) -> FriendlyClassification {
         let orientation = CGImagePropertyOrientation(image.imageOrientation)
         return classify(image: image.cgImage!, orientation: orientation)

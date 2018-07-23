@@ -75,9 +75,9 @@ func generateDensityMapOutput(_ densityMap: MLMultiArray) -> PredictionStrategyO
 func sum(_ multiarray: MultiArray<Double>) -> Double {
     let rows = FriendlyPredictor.DensityMapHeight
     let cols = FriendlyPredictor.DensityMapWidth
-    
+
     assert(multiarray.shape == [1, rows, cols])
-    
+
     var sum: Double = 0
     for row in 0..<rows {
         for col in 0..<cols {

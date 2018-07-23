@@ -23,19 +23,19 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
             connection?.isEnabled = isEnabled
         }
     }
-    
+
     private let subject = PublishSubject<UIImage>()
     private let position = AVCaptureDevice.Position.back
     private let quality = AVCaptureSession.Preset.hd1280x720
-    
+
     private var permissionGranted = false
     private let captureSession = AVCaptureSession()
     private let context = CIContext()
     private var connection: AVCaptureConnection?
-    
+
     private let sessionQueue = DispatchQueue(label: "CameraFrameExtractor session queue")
     private let sampleBufferCallbackQueue = DispatchQueue(label: "CameraFrameExtractor sample buffer")
-    
+
     override init() {
         super.init()
         checkPermission()
@@ -44,7 +44,7 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
             self.captureSession.startRunning()
         }
     }
-    
+
     // MARK: AVSession configuration
     private func checkPermission() {
         switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
@@ -56,7 +56,7 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
             permissionGranted = false
         }
     }
-    
+
     private func requestPermission() {
         sessionQueue.suspend()
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { [unowned self] granted in
@@ -64,7 +64,7 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
             self.sessionQueue.resume()
         }
     }
-    
+
     private func configureSession() {
         guard permissionGranted else { return }
         captureSession.sessionPreset = quality
@@ -84,11 +84,11 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
         connection.isVideoMirrored = position == .front
         self.connection = connection
     }
-    
+
     private func selectCaptureDevice() -> AVCaptureDevice? {
         return AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: position)
     }
-    
+
     // MARK: Sample buffer to UIImage conversion
     private func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
@@ -96,7 +96,7 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
         guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return nil }
         return UIImage(cgImage: cgImage)
     }
-    
+
     // MARK: AVCaptureVideoDataOutputSampleBufferDelegate
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         connection.videoOrientation = orientation

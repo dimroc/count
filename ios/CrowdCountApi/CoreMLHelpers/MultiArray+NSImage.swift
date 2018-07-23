@@ -25,7 +25,7 @@ extension MultiArray {
         print("converting from multiarray to nsimage with min", self.min(), " max", self.max(), " and dimensions", w, h)
         return imageFromPixels(size: NSSize(width: w, height: h), pixels: b, width: w, height: h)
     }
-    
+
     /**
      Converts a single channel from the multi-array to a grayscale UIImage.
      
@@ -41,7 +41,7 @@ extension MultiArray {
             print("Channel must be between 0 and \(shape[0] - 1)")
             return nil
         }
-        
+
         let height = shape[1]
         let width = shape[2]
         var a = MultiArray<T>(shape: [height, width])
@@ -52,8 +52,8 @@ extension MultiArray {
         }
         return a.image(offset: offset, scale: scale)
     }
-    
-    func imageFromPixels(size: NSSize, pixels: UnsafePointer<UInt8>, width: Int, height: Int)-> NSImage {
+
+    func imageFromPixels(size: NSSize, pixels: UnsafePointer<UInt8>, width: Int, height: Int) -> NSImage {
         let colorSpace = CGColorSpaceCreateDeviceGray()
         let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue)
         let bitsPerComponent = 8 //number of bits in UInt8
@@ -62,7 +62,7 @@ extension MultiArray {
         let providerRef = CGDataProvider(
             data: NSData(bytes: pixels, length: height * bytesPerRow)
         )
-        
+
         let cgim = CGImage(
             width: width,
             height: height,

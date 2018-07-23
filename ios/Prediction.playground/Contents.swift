@@ -6,13 +6,12 @@ import CrowdCountApiMac
 import PlaygroundSupport
 import Promises
 
-
 let nibFile = NSNib.Name("MyView")
-var topLevelObjects : NSArray?
+var topLevelObjects: NSArray?
 
-Bundle.main.loadNibNamed(nibFile, owner:nil, topLevelObjects: &topLevelObjects)
+Bundle.main.loadNibNamed(nibFile, owner: nil, topLevelObjects: &topLevelObjects)
 
-let views = (topLevelObjects as! Array<Any>).filter { $0 is NSView }
+let views = (topLevelObjects as! [Any]).filter { $0 is NSView }
 let topView = views[0] as! NSView
 
 // Hardcoded to match MyView.xib
@@ -22,12 +21,12 @@ let predictionLabel = stackView.subviews[2] as! NSTextField
 
 typealias ObserverCallback = (NSImage) -> Void
 class ImageObserver: NSObject {
-    var callback: ObserverCallback    
+    var callback: ObserverCallback
     init(_ callback: @escaping ObserverCallback) {
         self.callback = callback
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         let newImage = change![NSKeyValueChangeKey.newKey] as! NSImage
         self.callback(newImage)
     }
@@ -36,12 +35,12 @@ class ImageObserver: NSObject {
 func nslabel(_ label: String) -> NSTextField { return NSTextField(labelWithString: label) }
 
 func nsimage(_ prediction: FriendlyPrediction) -> NSView {
-    var image: NSImage? = nil
+    var image: NSImage?
     Duration.measure("multiarray to grayscale") {
         image = prediction.densityMap.copy().normalize().image(offset: 0, scale: 255)
         drawBoundingBoxes(image!, prediction.boundingBoxes)
     }
-    
+
     return NSImageView(image: image!.flipVertically())
 }
 
@@ -52,7 +51,7 @@ func drawBoundingBoxes(_ image: NSImage, _ boundingBoxes: [CGRect]) {
     image.lockFocus()
     NSColor.white.set()
     for bb in boundingBoxes {
-        let rect = NSMakeRect(bb.minX * xfactor, bb.minY*yfactor, (bb.maxX-bb.minX)*xfactor, (bb.maxY-bb.minY)*yfactor)
+        let rect = NSRect(x: bb.minX * xfactor, y: bb.minY*yfactor, width: (bb.maxX-bb.minX)*xfactor, height: (bb.maxY-bb.minY)*yfactor)
         __NSFrameRectWithWidth(rect, 2)
     }
     image.unlockFocus()
@@ -66,7 +65,7 @@ func generatePredictionGrid(_ predictions: [FriendlyPrediction]) -> NSGridView {
         let count = nslabel(String.init(format: "%f", prediction.count))
         return [label, duration, count]
     }
-    
+
     let images = predictions.map { prediction -> [NSView] in
         print("mounting image for...", prediction.name)
         return [nsimage(prediction)]
@@ -102,7 +101,7 @@ func generateClassificationGrid(_ classification: FriendlyClassification) -> NSG
     gridView.translatesAutoresizingMaskIntoConstraints = false
     gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .horizontal)
     gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .vertical)
-    
+
     stackView.addArrangedSubview(gridView)
     constrain(gridView) { gv in
         align(leading: gv, gv.superview!)
@@ -118,13 +117,13 @@ func removeFromPlayground(_ view: NSView?) {
     }
 }
 
-var predictionGrid: NSGridView?, classificationGrid: NSGridView? = nil
+var predictionGrid: NSGridView?, classificationGrid: NSGridView?
 let predictor = FriendlyPredictor()
 let observer = ImageObserver({ image in
     predictionLabel.stringValue = "Predicting..."
     removeFromPlayground(predictionGrid)
     removeFromPlayground(classificationGrid)
-    
+
     all(
         predictor.predictAllPromise(image: image, on: .global()),
         predictor.classifyPromise(image: image, on: .global())
@@ -134,6 +133,7 @@ let observer = ImageObserver({ image in
         topView.updateConstraintsForSubtreeIfNeeded()
     }
 })
+
 imageWell.addObserver(observer, forKeyPath: "image", options: NSKeyValueObservingOptions.new, context: nil)
 
 // Present the view in Playground

@@ -167,27 +167,23 @@ public struct MultiArray<T: MultiArrayType> {
 
     return MultiArray(array, dimensions, newStrides)
   }
-    
+
     public func max() -> T {
         var m: T = T.init(0)
-        for i in 0..<count {
-            if pointer[i] > m {
-                m = pointer[i]
-            }
+        for i in 0..<count where pointer[i] > m {
+            m = pointer[i]
         }
         return m
     }
-    
+
     public func min() -> T {
         var m: T = T.init(Int.max)
-        for i in 0..<count {
-            if pointer[i] < m {
-                m = pointer[i]
-            }
+        for i in 0..<count where  pointer[i] < m {
+            m = pointer[i]
         }
         return m
     }
-    
+
     public func copy() -> MultiArray {
         let copy = MultiArray(shape: shape)
         for i in 0..<count {
@@ -195,23 +191,23 @@ public struct MultiArray<T: MultiArrayType> {
         }
         return copy
     }
-    
+
     public func normalize() -> MultiArray {
         let max = self.max()
         let min = self.min()
         if max - min == T.init(0) {
             return self
         }
-        
+
         let multiplier = T.init(1)/(max-min)
         print("normalizing with min max multiplier", min, max, multiplier)
-        
+
         for i in 0..<count {
             pointer[i] = (pointer[i] - min) * multiplier
         }
         return self
     }
-    
+
     public func multiply(_ factor: T) -> MultiArray {
         for i in 0..<count {
             pointer[i] = pointer[i] * factor
@@ -329,23 +325,21 @@ extension MultiArray {
     return (bytes, width, height)
   }
 
-    
     func getCGImageForRGBAData(width: Int, height: Int, data: NSData) -> CGImage {
         let pixelData = data.bytes
-        let bytesPerPixel:Int = 4
+        let bytesPerPixel: Int = 4
         let scanWidth = bytesPerPixel * width
-        
-        let provider = CGDataProvider(dataInfo: nil, data: pixelData, size: height * scanWidth, releaseData: {_,_,_ in })!
-        
+
+        let provider = CGDataProvider(dataInfo: nil, data: pixelData, size: height * scanWidth, releaseData: {_, _, _ in })!
+
         let colorSpaceRef = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.last.rawValue)
-        let renderingIntent = CGColorRenderingIntent.defaultIntent;
-        
-        return CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: bytesPerPixel * 8, bytesPerRow: scanWidth, space: colorSpaceRef, bitmapInfo: bitmapInfo, provider: provider, decode: nil, shouldInterpolate: false, intent: renderingIntent)!;
+        let renderingIntent = CGColorRenderingIntent.defaultIntent
+
+        return CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: bytesPerPixel * 8, bytesPerRow: scanWidth, space: colorSpaceRef, bitmapInfo: bitmapInfo, provider: provider, decode: nil, shouldInterpolate: false, intent: renderingIntent)!
     }
-    
-    func getCGImageforGrayscaleData(width: Int, height: Int, data: [UInt8]?) ->  CGImage?
-    {
+
+    func getCGImageforGrayscaleData(width: Int, height: Int, data: [UInt8]?) -> CGImage? {
         var imageRef: CGImage?
         if let data = data {
             let bitsPerComponent = 8
@@ -353,10 +347,10 @@ extension MultiArray {
             let bitsPerPixel = bytesPerPixel * bitsPerComponent
             let bytesPerRow = bytesPerPixel * width
             let totalBytes = height * bytesPerRow
-            let providerRef = CGDataProvider(dataInfo: nil, data: data, size: totalBytes, releaseData: {_,_,_ in })!
+            let providerRef = CGDataProvider(dataInfo: nil, data: data, size: totalBytes, releaseData: {_, _, _ in })!
 
 //            let providerRef = CGDataProviderCreateWithData(nil, data, totalBytes, nil)
-            
+
             let colorSpaceRef = CGColorSpaceCreateDeviceGray()
             let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue)
             imageRef = CGImage.init(width: width,
@@ -371,10 +365,10 @@ extension MultiArray {
                                     shouldInterpolate: false,
                                     intent: CGColorRenderingIntent.defaultIntent)
         }
-        
+
         return imageRef
     }
-    
+
     public func cgimage(offset: T, scale: T) -> CGImage? {
         print("cgimaging", shape)
         if shape.count == 3, let (b, w, h) = toRawBytesRGBA(offset: offset, scale: scale) {
