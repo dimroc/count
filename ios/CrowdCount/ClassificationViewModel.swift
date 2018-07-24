@@ -20,7 +20,7 @@ class ClassificationViewModel {
     private let predictor = FriendlyPredictor()
     private let semaphore = DispatchSemaphore(value: 1)
     private let subject = PublishSubject<String>()
-    private let classificationQueue = DispatchQueue(label: "classifier", qos: .background)
+    private let classificationQueue = DispatchQueue(label: "classifier", qos: .utility)
     private let disposeBag = DisposeBag()
 
     init(frames: Observable<UIImage>) {
