@@ -28,7 +28,7 @@ public class FriendlyPredictor {
             output = strategy.predict(buffer)
         }
         return FriendlyPrediction(
-            name: strategy.FriendlyName(),
+            name: strategy.friendlyName,
             count: output!.count,
             densityMap: output!.densityMap.reshaped([FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]),
             boundingBoxes: output!.boundingBoxes,

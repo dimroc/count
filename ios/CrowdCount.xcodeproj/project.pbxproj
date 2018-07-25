@@ -62,6 +62,7 @@
 		5EB7F3FC20EFC60F00CBE024 /* PredictionStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */; };
 		5EB7F3FD20EFC60F00CBE024 /* PredictionStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */; };
 		5ED4789C20EEA5250000B09D /* MultiArray+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */; };
+		5ED8A35E2108976C00D6DD38 /* CountingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8A35D2108976C00D6DD38 /* CountingViewModel.swift */; };
 		5EE985C920FA6D9C0047FC4F /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */; };
 		5EE985CB20FA84110047FC4F /* CrowdCountApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2190920E41D380061F7FF /* CrowdCountApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5EE985D420FA851F0047FC4F /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5C796E20EFF40200EDC113 /* Promises.framework */; };
@@ -181,6 +182,7 @@
 		5EB6BB1720F1579E00114EDA /* HundredsPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HundredsPredictor.mlmodel; sourceTree = "<group>"; };
 		5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionStrategy.swift; sourceTree = "<group>"; };
 		5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiArray+UIImage.swift"; sourceTree = "<group>"; };
+		5ED8A35D2108976C00D6DD38 /* CountingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingViewModel.swift; sourceTree = "<group>"; };
 		5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		5EE985D720FA8A5D0047FC4F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		5EF94FE420F1B888002E01CC /* FaceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetector.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */,
 				5EE985D720FA8A5D0047FC4F /* CameraViewController.swift */,
 				5E2FBF972100C2580006A125 /* ClassificationViewModel.swift */,
+				5ED8A35D2108976C00D6DD38 /* CountingViewModel.swift */,
 			);
 			path = CrowdCount;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				5EFFC4E120FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift in Sources */,
 				5E2FBF982100C2580006A125 /* ClassificationViewModel.swift in Sources */,
 				5E0EFF9121038B8300D19EFF /* ImageFrameExtractor.swift in Sources */,
+				5ED8A35E2108976C00D6DD38 /* CountingViewModel.swift in Sources */,
 				5EA217DB20E40CEA0061F7FF /* AppDelegate.swift in Sources */,
 				5EE985D820FA8A5D0047FC4F /* CameraViewController.swift in Sources */,
 				5E7717CD210687A600504A5A /* CyclingReplayProxy.swift in Sources */,

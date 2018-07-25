@@ -16,10 +16,25 @@ public protocol PredictionStrategy {
 }
 
 extension PredictionStrategy {
-    func FriendlyName() -> String {
+    public var friendlyName: String {
         return String(describing: self)
             .replacingOccurrences(of: "CrowdCountApi.", with: "")
             .replacingOccurrences(of: "PredictionStrategy", with: "")
+    }
+}
+
+public class PredictionStrategyFactory {
+    public static func from(classification: String) -> PredictionStrategy? {
+        switch classification {
+        case "singles":
+            return SinglesPredictionStrategy()
+        case "tens":
+            return TensPredictionStrategy()
+        case "hundreds_plus":
+            return HundredsPredictionStrategy()
+        default:
+            return nil
+        }
     }
 }
 

@@ -6,15 +6,14 @@
 //  Copyright © 2018 Dimitri Roche. All rights reserved.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
 import UIKit
 import CrowdCountApi
 
 class ClassificationViewModel {
-    var classifications: Driver<String> {
-        return subject.asDriver(onErrorJustReturn: "Unknown")
+    var classifications: Observable<String> {
+        return subject
     }
 
     private let predictor = FriendlyPredictor()
