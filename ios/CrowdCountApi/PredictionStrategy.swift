@@ -51,8 +51,6 @@ public class SinglesPredictionStrategy: PredictionStrategy {
         var cgImage: CGImage?
         VTCreateCGImageFromCVPixelBuffer(buffer, options: nil, imageOut: &cgImage)
         let boundingBoxes = FaceDetector.detect(within: cgImage!)
-        print("singles prediction bbs: ", boundingBoxes)
-        print(String.init(describing: boundingBoxes))
         let emptyShape = [1, FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]
         return PredictionStrategyOutput(
             densityMap: MultiArray<Double>(shape: emptyShape),

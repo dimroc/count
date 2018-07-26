@@ -81,7 +81,7 @@ class CameraViewController: UIViewController {
     private func transformOrientation(_ orientation: UIDeviceOrientation) -> AVCaptureVideoOrientation {
         switch orientation {
         case .landscapeLeft:
-            return .landscapeRight // Deliberately the opposite. Why? Not sure.
+            return .landscapeRight // TODO: Deliberately the opposite. Why? Not sure.
         case .landscapeRight:
             return .landscapeLeft
         case .portraitUpsideDown:
