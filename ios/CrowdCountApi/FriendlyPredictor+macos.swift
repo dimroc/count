@@ -13,7 +13,8 @@ import Promises
 
 extension FriendlyPredictor {
     public func predict(image: NSImage, strategy: PredictionStrategy) -> FriendlyPrediction {
-        return predict(buffer: imageToBuffer(image, width: Int(FriendlyPredictor.ImageWidth), height: Int(FriendlyPredictor.ImageHeight))!, strategy: strategy)
+        let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+        return predict(cgImage: cgImage, orientation: CGImagePropertyOrientation.right, strategy: strategy)
     }
 
     public func predictPromise(image: NSImage, strategy: PredictionStrategy) -> Promise<FriendlyPrediction> {

@@ -11,9 +11,9 @@ import Vision
 import Promises
 
 class FaceDetector {
-    public static func detect(within cgimage: CGImage) -> [CGRect] {
+    public static func detect(within cgimage: CGImage, orientation: CGImagePropertyOrientation) -> [CGRect] {
         let request = VNDetectFaceRectanglesRequest()
-        let handler = VNImageRequestHandler(cgImage: cgimage, options: [:])
+        let handler = VNImageRequestHandler(cgImage: cgimage, orientation: orientation)
         do {
             try handler.perform([request])
         } catch let err as NSError {

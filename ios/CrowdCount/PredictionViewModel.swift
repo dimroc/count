@@ -20,6 +20,7 @@ class PredictionViewModel {
     private let semaphore = DispatchSemaphore(value: 1)
     private let subject = PublishSubject<FriendlyPrediction>()
     private let countingQueue = DispatchQueue(label: "prediction", qos: .userInitiated)
+    private var threadUnsafeStrategyMap = [String: PredictionStrategy]()
     private let disposeBag = DisposeBag()
 
     init(frames: Observable<UIImage>, classifications: Observable<String>) {
@@ -36,14 +37,25 @@ class PredictionViewModel {
 
     private func skippingCounter(image: UIImage, classification: String) {
         if semaphore.wait(timeout: .now()) == .success {
-            countingQueue.async {
+            countingQueue.async { [unowned self] in
                 defer { self.semaphore.signal() }
-                guard let strategy = PredictionStrategyFactory.from(classification: classification) else {
+                guard let strategy = self.cachedStrategyFor(classification: classification) else {
+                    print("Unable to discern strategy from \(classification)")
                     return
                 }
                 let prediction = self.predictor.predict(image: image, strategy: strategy)
                 self.subject.onNext(prediction)
             }
+        }
+    }
+
+    private func cachedStrategyFor(classification: String) -> PredictionStrategy? {
+        if let strategy = threadUnsafeStrategyMap[classification] {
+            return strategy
+        } else {
+            let strategy = PredictionStrategyFactory.from(classification: classification)
+            threadUnsafeStrategyMap[classification] = strategy
+            return strategy
         }
     }
 }

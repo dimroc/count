@@ -12,7 +12,7 @@ import Vision
 import VideoToolbox
 
 public protocol PredictionStrategy {
-    func predict(_ buffer: CVPixelBuffer) -> PredictionStrategyOutput
+    func predict(_ cgImage: CGImage, orientation: CGImagePropertyOrientation) -> PredictionStrategyOutput
 }
 
 extension PredictionStrategy {
@@ -20,6 +20,18 @@ extension PredictionStrategy {
         return String(describing: self)
             .replacingOccurrences(of: "CrowdCountApi.", with: "")
             .replacingOccurrences(of: "PredictionStrategy", with: "")
+    }
+
+    fileprivate func predictWith(model: VNCoreMLModel, cgImage: CGImage, orientation: CGImagePropertyOrientation) -> PredictionStrategyOutput {
+        let request = VNCoreMLRequest(model: model)
+        request.imageCropAndScaleOption = .scaleFill
+
+        let handler = VNImageRequestHandler(cgImage: cgImage, orientation: orientation)
+        try! handler.perform([request])
+
+        let observations = request.results as! [VNCoreMLFeatureValueObservation]
+        guard let obs = observations.first else { return PredictionStrategyOutput.Empty() }
+        return generateDensityMapOutput(obs.featureValue.multiArrayValue!)
     }
 }
 
@@ -44,13 +56,21 @@ public struct PredictionStrategyOutput {
     var boundingBoxes: [CGRect]
 }
 
+extension PredictionStrategyOutput {
+    public static func Empty() -> PredictionStrategyOutput {
+        return PredictionStrategyOutput(
+            densityMap: MultiArray<Double>(shape: [1, FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]),
+            count: 0,
+            boundingBoxes: [CGRect]()
+        )
+    }
+}
+
 public class SinglesPredictionStrategy: PredictionStrategy {
     let personClassIndex = 14
     public init() {}
-    public func predict(_ buffer: CVPixelBuffer) -> PredictionStrategyOutput {
-        var cgImage: CGImage?
-        VTCreateCGImageFromCVPixelBuffer(buffer, options: nil, imageOut: &cgImage)
-        let boundingBoxes = FaceDetector.detect(within: cgImage!)
+    public func predict(_ cgImage: CGImage, orientation: CGImagePropertyOrientation) -> PredictionStrategyOutput {
+        let boundingBoxes = FaceDetector.detect(within: cgImage, orientation: orientation)
         let emptyShape = [1, FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]
         return PredictionStrategyOutput(
             densityMap: MultiArray<Double>(shape: emptyShape),
@@ -62,21 +82,25 @@ public class SinglesPredictionStrategy: PredictionStrategy {
 
 public class TensPredictionStrategy: PredictionStrategy {
     let predictor = TensPredictor()
-    public init() {}
-    public func predict(_ buffer: CVPixelBuffer) -> PredictionStrategyOutput {
-        let input = TensPredictorInput(input_1: buffer)
-        let output = try! self.predictor.prediction(input: input)
-        return generateDensityMapOutput(output.density_map)
+    let model: VNCoreMLModel
+    public init() {
+        model = try! VNCoreMLModel(for: predictor.model)
+    }
+
+    public func predict(_ cgImage: CGImage, orientation: CGImagePropertyOrientation) -> PredictionStrategyOutput {
+        return self.predictWith(model: model, cgImage: cgImage, orientation: orientation)
     }
 }
 
 public class HundredsPredictionStrategy: PredictionStrategy {
     let predictor = HundredsPredictor()
-    public init() {}
-    public func predict(_ buffer: CVPixelBuffer) -> PredictionStrategyOutput {
-        let input = HundredsPredictorInput(input_1: buffer)
-        let output = try! self.predictor.prediction(input: input)
-        return generateDensityMapOutput(output.density_map)
+    let model: VNCoreMLModel
+    public init() {
+        model = try! VNCoreMLModel(for: predictor.model)
+    }
+
+    public func predict(_ cgImage: CGImage, orientation: CGImagePropertyOrientation) -> PredictionStrategyOutput {
+        return self.predictWith(model: model, cgImage: cgImage, orientation: orientation)
     }
 }
 
@@ -99,3 +123,5 @@ func sum(_ multiarray: MultiArray<Double>) -> Double {
     }
     return sum
 }
+
+

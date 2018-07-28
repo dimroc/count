@@ -19,13 +19,16 @@ public class FriendlyPredictor {
     public static let DensityMapHeight: Int = 168
 
     private let classifier = CrowdClassifier()
+    private let classifierModel: VNCoreMLModel
 
-    public init() {}
+    public init() {
+        classifierModel = try! VNCoreMLModel(for: classifier.model)
+    }
 
-    public func predict(buffer: CVPixelBuffer, strategy: PredictionStrategy) -> FriendlyPrediction {
+    public func predict(cgImage: CGImage, orientation: CGImagePropertyOrientation, strategy: PredictionStrategy) -> FriendlyPrediction {
         var output: PredictionStrategyOutput?
         let duration = Duration.measure(String(describing: strategy)) {
-            output = strategy.predict(buffer)
+            output = strategy.predict(cgImage, orientation: orientation)
         }
         return FriendlyPrediction(
             name: strategy.friendlyName,
@@ -35,16 +38,15 @@ public class FriendlyPredictor {
             duration: duration)
     }
 
-    public func predictPromise(buffer: CVPixelBuffer, strategy: PredictionStrategy) -> Promise<FriendlyPrediction> {
+    public func predictPromise(cgImage: CGImage, orientation: CGImagePropertyOrientation, strategy: PredictionStrategy) -> Promise<FriendlyPrediction> {
         return Promise {
-            self.predict(buffer: buffer, strategy: strategy)
+            self.predict(cgImage: cgImage, orientation: orientation, strategy: strategy)
         }
     }
 
     public func classify(image: CGImage, orientation: CGImagePropertyOrientation) -> FriendlyClassification {
         return Duration.measureAndReturn("classify") {
-            let model = try! VNCoreMLModel(for: classifier.model)
-            let request = VNCoreMLRequest(model: model)
+            let request = VNCoreMLRequest(model: classifierModel)
             request.imageCropAndScaleOption = .scaleFill
 
             let handler = VNImageRequestHandler(cgImage: image, orientation: orientation)
