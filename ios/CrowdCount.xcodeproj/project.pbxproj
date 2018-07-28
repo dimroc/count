@@ -31,6 +31,7 @@
 		5E4DFE7320F0154300CD07FF /* MultiArray+NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4DFE7220F0154300CD07FF /* MultiArray+NSImage.swift */; };
 		5E55C74E210CBB7400614463 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55C74C210CBB7400614463 /* PreviewViewController.swift */; };
 		5E55C751210CC45900614463 /* UIViewController+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55C750210CC45900614463 /* UIViewController+helpers.swift */; };
+		5E55C753210CE9B000614463 /* CircularFifoQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55C752210CE9B000614463 /* CircularFifoQueue.swift */; };
 		5E67667D20E72E9B002A4E0D /* FriendlyPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */; };
 		5E67668F20E73C8F002A4E0D /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668720E73C8F002A4E0D /* Math.swift */; };
 		5E67669020E73C8F002A4E0D /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668820E73C8F002A4E0D /* UIImage+CVPixelBuffer.swift */; };
@@ -145,6 +146,7 @@
 		5E4DFE7220F0154300CD07FF /* MultiArray+NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiArray+NSImage.swift"; sourceTree = "<group>"; };
 		5E55C74C210CBB7400614463 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		5E55C750210CC45900614463 /* UIViewController+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+helpers.swift"; sourceTree = "<group>"; };
+		5E55C752210CE9B000614463 /* CircularFifoQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularFifoQueue.swift; sourceTree = "<group>"; };
 		5E5C796E20EFF40200EDC113 /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E5C797020EFF4C700EDC113 /* FBLPromises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBLPromises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyPredictor.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				5EF94FE420F1B888002E01CC /* FaceDetector.swift */,
 				5E93CCE321026B0D00461138 /* CGImagePropertyOrientation+UIImageOrientation.swift */,
 				5E1F99EE2105E78E008FB712 /* Platform.swift */,
+				5E55C752210CE9B000614463 /* CircularFifoQueue.swift */,
 			);
 			path = CrowdCountApi;
 			sourceTree = "<group>";
@@ -744,6 +747,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E55C753210CE9B000614463 /* CircularFifoQueue.swift in Sources */,
 				5E1F99EF2105E78E008FB712 /* Platform.swift in Sources */,
 				5E67669620E73C8F002A4E0D /* MLMultiArray+UIImage.swift in Sources */,
 				5E67669420E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift in Sources */,
