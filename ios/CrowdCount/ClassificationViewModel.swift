@@ -19,7 +19,7 @@ class ClassificationViewModel {
     private let predictor = FriendlyPredictor()
     private let semaphore = DispatchSemaphore(value: 1)
     private let subject = PublishSubject<String>()
-    private let classificationQueue = DispatchQueue(label: "classifier", qos: .utility)
+    private let classificationQueue = DispatchQueue(label: "classifier", qos: .background)
     private let disposeBag = DisposeBag()
 
     init(frames: Observable<UIImage>) {
@@ -36,9 +36,9 @@ class ClassificationViewModel {
 
     private func skippingClassifier(image: UIImage) {
         if semaphore.wait(timeout: .now()) == .success {
-            classificationQueue.async {
+            classificationQueue.async { [unowned self] in
+                defer { self.semaphore.signal() }
                 let classification = self.predictor.classify(image: image).classification
-                self.semaphore.signal()
                 self.subject.onNext(classification)
             }
         }
