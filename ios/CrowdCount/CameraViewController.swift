@@ -19,8 +19,6 @@ class CameraViewController: UIViewController {
     var countVM: CountViewModel!
 
     @IBOutlet var imageView: UIImageView!
-    @IBOutlet weak var classificationLabel: UILabel!
-    @IBOutlet weak var countLabel: UILabel!
 
     let disposeBag = DisposeBag()
 
@@ -35,9 +33,12 @@ class CameraViewController: UIViewController {
         frameExtractor.orientation = self.transformOrientation(UIDevice.current.orientation)
         classificationVM = ClassificationViewModel(frames: frameExtractor.frames)
         countVM = CountViewModel(frames: frameExtractor.frames, classifications: classificationVM.classifications)
+
         driveFrames()
-        driveClassification()
-        driveCount()
+
+        let preview = PreviewViewController()
+        addViewableChild(childController: preview)
+        preview.drive(classifications: classificationVM.classifications, counts: countVM.counts)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -52,21 +53,6 @@ class CameraViewController: UIViewController {
         frameExtractor.frames
             .asDriver(onErrorJustReturn: UIImage())
             .drive(imageView.rx.image)
-            .disposed(by: disposeBag)
-    }
-
-    private func driveClassification() {
-        classificationVM.classifications
-            .asDriver(onErrorJustReturn: "Unknown")
-            .drive(classificationLabel.rx.text)
-            .disposed(by: disposeBag)
-    }
-
-    private func driveCount() {
-        countVM.counts
-            .map { String(format: "%.2f", $0) }
-            .asDriver(onErrorJustReturn: "--")
-            .drive(countLabel.rx.text)
             .disposed(by: disposeBag)
     }
 

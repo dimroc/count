@@ -28,7 +28,8 @@ class ClassificationViewModel {
 
     private func startClassifying(frames: Observable<UIImage>) {
         frames
-            .throttle(1, scheduler: SerialDispatchQueueScheduler(internalSerialQueueName: "rx.classifier"))
+            .observeOn(SerialDispatchQueueScheduler(qos: .utility))
+            .throttle(1, scheduler: SerialDispatchQueueScheduler(qos: .utility))
             .subscribe(onNext: { self.skippingClassifier(image: $0) })
             .disposed(by: disposeBag)
     }

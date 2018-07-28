@@ -28,6 +28,7 @@ class CountViewModel {
 
     private func startCounting(frames: Observable<UIImage>, classifications: Observable<String>) {
         classifications
+            .observeOn(SerialDispatchQueueScheduler(qos: .utility))
             .withLatestFrom(frames) { classification, image in return (classification, image) }
             .subscribe(onNext: { classification, image in self.skippingCounter(image: image, classification: classification) })
             .disposed(by: disposeBag)
