@@ -17,19 +17,28 @@ class PreviewViewController: UIViewController {
     var countLabel: UILabel!
     var durationLabel: UILabel!
 
+    var prevClassificationLabel: UILabel!
+    var prevCountLabel: UILabel!
+    var prevDurationLabel: UILabel!
+
+    let previousPredictions = CircularFifoQueue<FriendlyPrediction>(capacity: 2)
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
 
+        createCurrentPreview()
+        createPreviousPreview()
+    }
+
+    private func createCurrentPreview() {
         classificationLabel = createLabel()
-        view.addSubview(classificationLabel)
-
         countLabel = createLabel()
-        view.addSubview(countLabel)
-
         durationLabel = createLabel()
+
+        view.addSubview(classificationLabel)
+        view.addSubview(countLabel)
         view.addSubview(durationLabel)
 
         classificationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -51,21 +60,39 @@ class PreviewViewController: UIViewController {
         }
     }
 
+    private func createPreviousPreview() {
+        prevClassificationLabel = createSubtleLabel()
+        prevCountLabel = createSubtleLabel()
+        prevDurationLabel = createSubtleLabel()
+
+        view.addSubview(prevClassificationLabel)
+        view.addSubview(prevCountLabel)
+        view.addSubview(prevDurationLabel)
+
+        prevClassificationLabel.translatesAutoresizingMaskIntoConstraints = false
+        constrain(prevClassificationLabel) { cl in
+            cl.top == cl.superview!.safeAreaLayoutGuide.top
+            cl.left == cl.superview!.safeAreaLayoutGuide.left
+        }
+
+        prevCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        constrain(prevCountLabel, prevClassificationLabel) { count, classification in
+            count.top == classification.bottom
+            count.left == count.superview!.safeAreaLayoutGuide.left
+        }
+
+        prevDurationLabel.translatesAutoresizingMaskIntoConstraints = false
+        constrain(prevDurationLabel, prevCountLabel) { duration, count in
+            duration.top == count.bottom
+            duration.left == duration.superview!.safeAreaLayoutGuide.left
+        }
+    }
+
     func drive(classifications: Observable<String>, predictions: Observable<FriendlyPrediction>) {
         driveClassifications(classifications)
         driveCounts(predictions)
         driveDurations(predictions)
-    }
-
-    private func createLabel() -> UILabel {
-        let label = UILabel()
-        label.text = "--"
-        label.font = UIFont(name: "System", size: 24)
-        label.textColor = .white
-        label.shadowColor = UIColor.darkGray
-        label.shadowOffset = CGSize(width: 1, height: 1)
-        label.textAlignment = .center
-        return label
+        drivePreviousPrediction(predictions)
     }
 
     private func driveClassifications(_ classifications: Observable<String>) {
@@ -90,5 +117,47 @@ class PreviewViewController: UIViewController {
             .asDriver(onErrorJustReturn: "--")
             .drive(durationLabel.rx.text)
             .disposed(by: disposeBag)
+    }
+
+    private func drivePreviousPrediction(_ predictions: Observable<FriendlyPrediction>) {
+        predictions
+            .map { Optional($0) }
+            .asDriver(onErrorJustReturn: nil)
+            .drive(onNext: { prediction in
+                self.drivePreviousPrediction(prediction)
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func drivePreviousPrediction(_ optionalPrediction: FriendlyPrediction?) {
+        guard let newPrediction = optionalPrediction else { return }
+        previousPredictions.push(newPrediction)
+        guard let prevPrediction = previousPredictions[1] else { return }
+
+        prevClassificationLabel.text = prevPrediction.name
+        prevCountLabel.text = String(format: "%.0f", prevPrediction.count)
+        prevDurationLabel.text = String(format: "%.1fs", prevPrediction.duration)
+    }
+
+    private func createLabel() -> UILabel {
+        let label = UILabel()
+        label.text = "--"
+        label.font = UIFont(name: "System", size: 24)
+        label.textColor = .white
+        label.shadowColor = UIColor.darkGray
+        label.shadowOffset = CGSize(width: 1, height: 1)
+        label.textAlignment = .center
+        return label
+    }
+
+    private func createSubtleLabel() -> UILabel {
+        let label = UILabel()
+        label.text = ""
+        label.font = UIFont(name: "System", size: 18)
+        label.textColor = UIColor(white: 0.85, alpha: 1)
+        label.shadowColor = .darkGray
+        label.shadowOffset = CGSize(width: 1, height: 1)
+        label.textAlignment = .center
+        return label
     }
 }
