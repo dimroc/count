@@ -11,22 +11,22 @@ import RxCocoa
 import UIKit
 import CrowdCountApi
 
-class CountViewModel {
-    var counts: Observable<Double> {
+class PredictionViewModel {
+    var predictions: Observable<FriendlyPrediction> {
         return subject
     }
 
     private let predictor = FriendlyPredictor()
     private let semaphore = DispatchSemaphore(value: 1)
-    private let subject = PublishSubject<Double>()
-    private let countingQueue = DispatchQueue(label: "count", qos: .userInitiated)
+    private let subject = PublishSubject<FriendlyPrediction>()
+    private let countingQueue = DispatchQueue(label: "prediction", qos: .userInitiated)
     private let disposeBag = DisposeBag()
 
     init(frames: Observable<UIImage>, classifications: Observable<String>) {
-        startCounting(frames: frames, classifications: classifications)
+        startPredicting(frames: frames, classifications: classifications)
     }
 
-    private func startCounting(frames: Observable<UIImage>, classifications: Observable<String>) {
+    private func startPredicting(frames: Observable<UIImage>, classifications: Observable<String>) {
         classifications
             .observeOn(SerialDispatchQueueScheduler(qos: .utility))
             .withLatestFrom(frames) { classification, image in return (classification, image) }
@@ -42,7 +42,7 @@ class CountViewModel {
                     return
                 }
                 let prediction = self.predictor.predict(image: image, strategy: strategy)
-                self.subject.onNext(prediction.count)
+                self.subject.onNext(prediction)
             }
         }
     }
