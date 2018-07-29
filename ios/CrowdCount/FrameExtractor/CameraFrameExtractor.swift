@@ -30,7 +30,7 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
 
     private var permissionGranted = false
     private let captureSession = AVCaptureSession()
-    private let context = CIContext()
+    private let context = CIContext(mtlDevice: MTLCreateSystemDefaultDevice()!)
     private var connection: AVCaptureConnection?
 
     private let sessionQueue = DispatchQueue(label: "CameraFrameExtractor session queue")

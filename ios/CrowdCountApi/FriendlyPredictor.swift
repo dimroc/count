@@ -20,6 +20,7 @@ public class FriendlyPredictor {
 
     private let classifier = CrowdClassifier()
     private let classifierModel: VNCoreMLModel
+    private let classifierContext = CIContext(options: [CIContextOption.priorityRequestLow: true])
 
     public init() {
         classifierModel = try! VNCoreMLModel(for: classifier.model)
@@ -49,7 +50,11 @@ public class FriendlyPredictor {
             let request = VNCoreMLRequest(model: classifierModel)
             request.imageCropAndScaleOption = .scaleFill
 
-            let handler = VNImageRequestHandler(cgImage: image, orientation: orientation)
+            let handler = VNImageRequestHandler(
+                cgImage: image,
+                orientation: orientation,
+                options: [VNImageOption.ciContext: classifierContext]
+            )
             try! handler.perform([request])
             let classifications = request.results as! [VNClassificationObservation]
 

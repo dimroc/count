@@ -27,9 +27,9 @@ Coming soon.
 - [x] Redo Duration to be thread safe
 - [x] Add duration to the classification and count labels
 - [x] Have previous classification and count to the left in gray to show that it’s working over time. (Just have a second set of labels in gray to the left)
-- [x] clean up **FriendlyPredictor** to only use Apple VN libraries instead of hand rolled image manipulators (look for speed increase) (**VNCoreMLFeatureRequest**)
+- [x] clean up **FriendlyPredictor** to only use Apple VN libraries instead of hand rolled image manipulators (look for speed increase) (**VNCoreMLFeatureValueObservation**)
 - [x] Have to stop initializing predictors in strategies every prediction as optimization
-- [ ] Investigate why classification causes camera jitters (Thanks Create ML?)
+- [x] Investigate why classification causes camera jitters (Contention for GPU. Thanks Create ML?)
 - [ ] ability to take photo, trigger prediction and segue to show page (WITH BUTTON)
 - [ ] ability to see list of predictions
 - [ ] Upload photo/prediction if it was wrong
