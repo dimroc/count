@@ -123,5 +123,3 @@ func sum(_ multiarray: MultiArray<Double>) -> Double {
     }
     return sum
 }
-
-

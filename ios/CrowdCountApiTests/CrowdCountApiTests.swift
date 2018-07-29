@@ -28,7 +28,7 @@ class CrowdCountApiTests: XCTestCase {
         queue.push(3)
         queue.push(4)
 
-        XCTAssertEqual([4,3,2], queue.asList(), "Should be equal")
+        XCTAssertEqual([4, 3, 2], queue.asList(), "Should be equal")
     }
 
 }
