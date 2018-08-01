@@ -16,7 +16,7 @@ class CameraViewController: UIViewController {
     var frameExtractor: FrameExtractor!
     let predictor = FriendlyPredictor()
     var classificationVM: ClassificationViewModel!
-    var predictionVM: PredictionViewModel!
+    var previewVM: PreviewViewModel!
 
     @IBOutlet var imageView: UIImageView!
 
@@ -32,13 +32,17 @@ class CameraViewController: UIViewController {
 
         frameExtractor.orientation = self.transformOrientation(UIDevice.current.orientation)
         classificationVM = ClassificationViewModel(frames: frameExtractor.frames)
-        predictionVM = PredictionViewModel(frames: frameExtractor.frames, classifications: classificationVM.classifications)
+        previewVM = PreviewViewModel(frames: frameExtractor.frames, classifications: classificationVM.classifications)
 
         driveFrames()
 
-        let preview = PreviewViewController()
-        addViewableChild(childController: preview)
-        preview.drive(classifications: classificationVM.classifications, predictions: predictionVM.predictions)
+        let previewVC = PreviewViewController()
+        addViewableChild(childController: previewVC)
+        previewVC.drive(classifications: classificationVM.classifications, predictions: previewVM.predictions)
+
+        let cameraButtonsVC = CameraButtonsViewController()
+        addViewableChild(childController: cameraButtonsVC)
+        cameraButtonsVC.drive(frames: frameExtractor.frames)
     }
 
     override func viewWillDisappear(_ animated: Bool) {

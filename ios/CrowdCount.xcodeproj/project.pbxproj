@@ -43,16 +43,22 @@
 		5E67669620E73C8F002A4E0D /* MLMultiArray+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668E20E73C8F002A4E0D /* MLMultiArray+UIImage.swift */; };
 		5E67669820E9A420002A4E0D /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67669720E9A41F002A4E0D /* UIImage+resize.swift */; };
 		5E67669A20E9A549002A4E0D /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67669920E9A549002A4E0D /* Duration.swift */; };
-		5E7717CD210687A600504A5A /* CyclingReplayProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7717CC210687A600504A5A /* CyclingReplayProxy.swift */; };
+		5E89E65A2111D9240039EF79 /* ClassificationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E89E6592111D9240039EF79 /* ClassificationViewModelTests.swift */; };
+		5E89E65B2111DBF80039EF79 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */; };
+		5E89E65C2111DBF80039EF79 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAC20FF55EC00877086 /* RxSwift.framework */; };
+		5E89E65D2111DBF80039EF79 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB25CFA20EF0C9A006FA509 /* Cartography.framework */; };
+		5E89E6602111F3990039EF79 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAC20FF55EC00877086 /* RxSwift.framework */; };
+		5E89E6622111F3AB0039EF79 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E89E6612111F3AB0039EF79 /* RxSwift.framework */; };
+		5E89E6632111F4000039EF79 /* CyclingReplayProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E89E65E2111EBEE0039EF79 /* CyclingReplayProxyTests.swift */; };
+		5E89E6642111F4080039EF79 /* CyclingReplayProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7717CC210687A600504A5A /* CyclingReplayProxy.swift */; };
+		5E89E6652111F5620039EF79 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAC20FF55EC00877086 /* RxSwift.framework */; };
 		5E93CCE421026B0D00461138 /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93CCE321026B0D00461138 /* CGImagePropertyOrientation+UIImageOrientation.swift */; };
 		5EA217DB20E40CEA0061F7FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA217DA20E40CEA0061F7FF /* AppDelegate.swift */; };
 		5EA217E420E40CEA0061F7FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EA217E220E40CEA0061F7FF /* Main.storyboard */; };
 		5EA217E620E40CEC0061F7FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EA217E520E40CEC0061F7FF /* Assets.xcassets */; };
 		5EA217E920E40CEC0061F7FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EA217E720E40CEC0061F7FF /* LaunchScreen.storyboard */; };
-		5EA217F420E40CEC0061F7FF /* CrowdCountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA217F320E40CEC0061F7FF /* CrowdCountTests.swift */; };
-		5EA217FF20E40CED0061F7FF /* CrowdCountUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA217FE20E40CED0061F7FF /* CrowdCountUITests.swift */; };
 		5EA2191220E41D390061F7FF /* CrowdCountApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2190920E41D380061F7FF /* CrowdCountApi.framework */; };
-		5EA2191920E41D390061F7FF /* CrowdCountApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA2191820E41D390061F7FF /* CrowdCountApiTests.swift */; };
+		5EA2191920E41D390061F7FF /* CircularFifoQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA2191820E41D390061F7FF /* CircularFifoQueueTests.swift */; };
 		5EA2191B20E41D390061F7FF /* CrowdCountApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EA2190B20E41D380061F7FF /* CrowdCountApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5EA2191E20E41D390061F7FF /* CrowdCountApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2190920E41D380061F7FF /* CrowdCountApi.framework */; };
 		5EB6BB0E20F1533A00114EDA /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB0D20F1533A00114EDA /* BoundingBox.swift */; };
@@ -64,8 +70,10 @@
 		5EB6BB1E20F1579F00114EDA /* HundredsPredictor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6BB1720F1579E00114EDA /* HundredsPredictor.mlmodel */; };
 		5EB7F3FC20EFC60F00CBE024 /* PredictionStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */; };
 		5EB7F3FD20EFC60F00CBE024 /* PredictionStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */; };
+		5EC6D3FE210E353000DB1A5F /* CameraButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6D3FC210E353000DB1A5F /* CameraButtonsViewController.swift */; };
+		5EC6D403210E37C700DB1A5F /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6D402210E37C700DB1A5F /* ShutterButton.swift */; };
 		5ED4789C20EEA5250000B09D /* MultiArray+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */; };
-		5ED8A35E2108976C00D6DD38 /* PredictionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8A35D2108976C00D6DD38 /* PredictionViewModel.swift */; };
+		5ED8A35E2108976C00D6DD38 /* PreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8A35D2108976C00D6DD38 /* PreviewViewModel.swift */; };
 		5EE985C920FA6D9C0047FC4F /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */; };
 		5EE985CB20FA84110047FC4F /* CrowdCountApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2190920E41D380061F7FF /* CrowdCountApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5EE985D420FA851F0047FC4F /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5C796E20EFF40200EDC113 /* Promises.framework */; };
@@ -85,26 +93,12 @@
 			remoteGlobalIDString = 5EA217D620E40CEA0061F7FF;
 			remoteInfo = CrowdCount;
 		};
-		5EA217FB20E40CED0061F7FF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5EA217CF20E40CEA0061F7FF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5EA217D620E40CEA0061F7FF;
-			remoteInfo = CrowdCount;
-		};
 		5EA2191320E41D390061F7FF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5EA217CF20E40CEA0061F7FF /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 5EA2190820E41D380061F7FF;
 			remoteInfo = CrowdCountApi;
-		};
-		5EA2191520E41D390061F7FF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5EA217CF20E40CEA0061F7FF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5EA217D620E40CEA0061F7FF;
-			remoteInfo = CrowdCount;
 		};
 		5EA2191C20E41D390061F7FF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -161,6 +155,9 @@
 		5E67669720E9A41F002A4E0D /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		5E67669920E9A549002A4E0D /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		5E7717CC210687A600504A5A /* CyclingReplayProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyclingReplayProxy.swift; sourceTree = "<group>"; };
+		5E89E6592111D9240039EF79 /* ClassificationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationViewModelTests.swift; sourceTree = "<group>"; };
+		5E89E65E2111EBEE0039EF79 /* CyclingReplayProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyclingReplayProxyTests.swift; sourceTree = "<group>"; };
+		5E89E6612111F3AB0039EF79 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
 		5E93CCE321026B0D00461138 /* CGImagePropertyOrientation+UIImageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImagePropertyOrientation+UIImageOrientation.swift"; sourceTree = "<group>"; };
 		5EA217D720E40CEA0061F7FF /* CrowdCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrowdCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EA217DA20E40CEA0061F7FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -169,17 +166,11 @@
 		5EA217E820E40CEC0061F7FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EA217EA20E40CEC0061F7FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EA217EF20E40CEC0061F7FF /* CrowdCountTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrowdCountTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EA217F320E40CEC0061F7FF /* CrowdCountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrowdCountTests.swift; sourceTree = "<group>"; };
-		5EA217F520E40CEC0061F7FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5EA217FA20E40CEC0061F7FF /* CrowdCountUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrowdCountUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EA217FE20E40CED0061F7FF /* CrowdCountUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrowdCountUITests.swift; sourceTree = "<group>"; };
-		5EA2180020E40CED0061F7FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EA2190920E41D380061F7FF /* CrowdCountApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrowdCountApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EA2190B20E41D380061F7FF /* CrowdCountApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrowdCountApi.h; sourceTree = "<group>"; };
 		5EA2190C20E41D380061F7FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EA2191120E41D390061F7FF /* CrowdCountApiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrowdCountApiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EA2191820E41D390061F7FF /* CrowdCountApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrowdCountApiTests.swift; sourceTree = "<group>"; };
-		5EA2191A20E41D390061F7FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EA2191820E41D390061F7FF /* CircularFifoQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularFifoQueueTests.swift; sourceTree = "<group>"; };
 		5EB25CF820EF0C84006FA509 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/Mac/Cartography.framework; sourceTree = "<group>"; };
 		5EB25CFA20EF0C9A006FA509 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
 		5EB6BB0D20F1533A00114EDA /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
@@ -187,8 +178,10 @@
 		5EB6BB1620F1579E00114EDA /* TensPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TensPredictor.mlmodel; sourceTree = "<group>"; };
 		5EB6BB1720F1579E00114EDA /* HundredsPredictor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HundredsPredictor.mlmodel; sourceTree = "<group>"; };
 		5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionStrategy.swift; sourceTree = "<group>"; };
+		5EC6D3FC210E353000DB1A5F /* CameraButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonsViewController.swift; sourceTree = "<group>"; };
+		5EC6D402210E37C700DB1A5F /* ShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
 		5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiArray+UIImage.swift"; sourceTree = "<group>"; };
-		5ED8A35D2108976C00D6DD38 /* PredictionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionViewModel.swift; sourceTree = "<group>"; };
+		5ED8A35D2108976C00D6DD38 /* PreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewModel.swift; sourceTree = "<group>"; };
 		5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		5EE985D720FA8A5D0047FC4F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		5EF94FE420F1B888002E01CC /* FaceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetector.swift; sourceTree = "<group>"; };
@@ -201,6 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E89E6622111F3AB0039EF79 /* RxSwift.framework in Frameworks */,
 				5E4DFE6F20F0122700CD07FF /* Promises.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,13 +215,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5EA217F720E40CEC0061F7FF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				5E89E65B2111DBF80039EF79 /* RxCocoa.framework in Frameworks */,
+				5E89E65C2111DBF80039EF79 /* RxSwift.framework in Frameworks */,
+				5E89E65D2111DBF80039EF79 /* Cartography.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E89E6602111F3990039EF79 /* RxSwift.framework in Frameworks */,
 				5E4DFE7120F0123C00CD07FF /* Promises.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,6 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E89E6652111F5620039EF79 /* RxSwift.framework in Frameworks */,
 				5EA2191220E41D390061F7FF /* CrowdCountApi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,10 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				5EA217D920E40CEA0061F7FF /* CrowdCount */,
-				5EA217F220E40CEC0061F7FF /* CrowdCountTests */,
-				5EA217FD20E40CED0061F7FF /* CrowdCountUITests */,
 				5EA2190A20E41D380061F7FF /* CrowdCountApi */,
-				5EA2191720E41D390061F7FF /* CrowdCountApiTests */,
 				5E3F316620ED3F23008B5C1B /* CrowdCountApiMac */,
 				5EA217D820E40CEA0061F7FF /* Products */,
 				5EB25CF720EF0C84006FA509 /* Frameworks */,
@@ -293,7 +282,6 @@
 			children = (
 				5EA217D720E40CEA0061F7FF /* CrowdCount.app */,
 				5EA217EF20E40CEC0061F7FF /* CrowdCountTests.xctest */,
-				5EA217FA20E40CEC0061F7FF /* CrowdCountUITests.xctest */,
 				5EA2190920E41D380061F7FF /* CrowdCountApi.framework */,
 				5EA2191120E41D390061F7FF /* CrowdCountApiTests.xctest */,
 				5E3F316520ED3F23008B5C1B /* CrowdCountApiMac.framework */,
@@ -315,27 +303,12 @@
 				5EE985D720FA8A5D0047FC4F /* CameraViewController.swift */,
 				5E55C74C210CBB7400614463 /* PreviewViewController.swift */,
 				5E2FBF972100C2580006A125 /* ClassificationViewModel.swift */,
-				5ED8A35D2108976C00D6DD38 /* PredictionViewModel.swift */,
+				5E89E6592111D9240039EF79 /* ClassificationViewModelTests.swift */,
+				5ED8A35D2108976C00D6DD38 /* PreviewViewModel.swift */,
+				5EC6D3FC210E353000DB1A5F /* CameraButtonsViewController.swift */,
+				5EC6D402210E37C700DB1A5F /* ShutterButton.swift */,
 			);
 			path = CrowdCount;
-			sourceTree = "<group>";
-		};
-		5EA217F220E40CEC0061F7FF /* CrowdCountTests */ = {
-			isa = PBXGroup;
-			children = (
-				5EA217F320E40CEC0061F7FF /* CrowdCountTests.swift */,
-				5EA217F520E40CEC0061F7FF /* Info.plist */,
-			);
-			path = CrowdCountTests;
-			sourceTree = "<group>";
-		};
-		5EA217FD20E40CED0061F7FF /* CrowdCountUITests */ = {
-			isa = PBXGroup;
-			children = (
-				5EA217FE20E40CED0061F7FF /* CrowdCountUITests.swift */,
-				5EA2180020E40CED0061F7FF /* Info.plist */,
-			);
-			path = CrowdCountUITests;
 			sourceTree = "<group>";
 		};
 		5EA2190A20E41D380061F7FF /* CrowdCountApi */ = {
@@ -357,22 +330,17 @@
 				5E93CCE321026B0D00461138 /* CGImagePropertyOrientation+UIImageOrientation.swift */,
 				5E1F99EE2105E78E008FB712 /* Platform.swift */,
 				5E55C752210CE9B000614463 /* CircularFifoQueue.swift */,
+				5EA2191820E41D390061F7FF /* CircularFifoQueueTests.swift */,
+				5E7717CC210687A600504A5A /* CyclingReplayProxy.swift */,
+				5E89E65E2111EBEE0039EF79 /* CyclingReplayProxyTests.swift */,
 			);
 			path = CrowdCountApi;
-			sourceTree = "<group>";
-		};
-		5EA2191720E41D390061F7FF /* CrowdCountApiTests */ = {
-			isa = PBXGroup;
-			children = (
-				5EA2191820E41D390061F7FF /* CrowdCountApiTests.swift */,
-				5EA2191A20E41D390061F7FF /* Info.plist */,
-			);
-			path = CrowdCountApiTests;
 			sourceTree = "<group>";
 		};
 		5EB25CF720EF0C84006FA509 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E89E6612111F3AB0039EF79 /* RxSwift.framework */,
 				5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */,
 				5E3A6BAC20FF55EC00877086 /* RxSwift.framework */,
 				5E4DFE7020F0123C00CD07FF /* Promises.framework */,
@@ -410,7 +378,6 @@
 			isa = PBXGroup;
 			children = (
 				5EFFC4E020FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift */,
-				5E7717CC210687A600504A5A /* CyclingReplayProxy.swift */,
 				5E55C750210CC45900614463 /* UIViewController+helpers.swift */,
 			);
 			path = Helpers;
@@ -493,24 +460,6 @@
 			productReference = 5EA217EF20E40CEC0061F7FF /* CrowdCountTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		5EA217F920E40CEC0061F7FF /* CrowdCountUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5EA2180920E40CED0061F7FF /* Build configuration list for PBXNativeTarget "CrowdCountUITests" */;
-			buildPhases = (
-				5EA217F620E40CEC0061F7FF /* Sources */,
-				5EA217F720E40CEC0061F7FF /* Frameworks */,
-				5EA217F820E40CEC0061F7FF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5EA217FC20E40CED0061F7FF /* PBXTargetDependency */,
-			);
-			name = CrowdCountUITests;
-			productName = CrowdCountUITests;
-			productReference = 5EA217FA20E40CEC0061F7FF /* CrowdCountUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		5EA2190820E41D380061F7FF /* CrowdCountApi */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5EA2192020E41D390061F7FF /* Build configuration list for PBXNativeTarget "CrowdCountApi" */;
@@ -536,12 +485,12 @@
 				5EA2190D20E41D390061F7FF /* Sources */,
 				5EA2190E20E41D390061F7FF /* Frameworks */,
 				5EA2190F20E41D390061F7FF /* Resources */,
+				5E89E6662111F64A0039EF79 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				5EA2191420E41D390061F7FF /* PBXTargetDependency */,
-				5EA2191620E41D390061F7FF /* PBXTargetDependency */,
 			);
 			name = CrowdCountApiTests;
 			productName = CrowdCountApiTests;
@@ -566,10 +515,7 @@
 					};
 					5EA217EE20E40CEC0061F7FF = {
 						CreatedOnToolsVersion = 10.0;
-						TestTargetID = 5EA217D620E40CEA0061F7FF;
-					};
-					5EA217F920E40CEC0061F7FF = {
-						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 						TestTargetID = 5EA217D620E40CEA0061F7FF;
 					};
 					5EA2190820E41D380061F7FF = {
@@ -577,7 +523,6 @@
 					};
 					5EA2191020E41D390061F7FF = {
 						CreatedOnToolsVersion = 10.0;
-						TestTargetID = 5EA217D620E40CEA0061F7FF;
 					};
 				};
 			};
@@ -596,7 +541,6 @@
 			targets = (
 				5EA217D620E40CEA0061F7FF /* CrowdCount */,
 				5EA217EE20E40CEC0061F7FF /* CrowdCountTests */,
-				5EA217F920E40CEC0061F7FF /* CrowdCountUITests */,
 				5EA2190820E41D380061F7FF /* CrowdCountApi */,
 				5EA2191020E41D390061F7FF /* CrowdCountApiTests */,
 				5E3F316420ED3F23008B5C1B /* CrowdCountApiMac */,
@@ -629,13 +573,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5EA217F820E40CEC0061F7FF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5EA2190720E41D380061F7FF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -653,6 +590,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5E89E6662111F64A0039EF79 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
 		5EB25CFD20EF0CF2006FA509 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -716,13 +672,14 @@
 				5E2FBF982100C2580006A125 /* ClassificationViewModel.swift in Sources */,
 				5E55C751210CC45900614463 /* UIViewController+helpers.swift in Sources */,
 				5E0EFF9121038B8300D19EFF /* ImageFrameExtractor.swift in Sources */,
-				5ED8A35E2108976C00D6DD38 /* PredictionViewModel.swift in Sources */,
+				5ED8A35E2108976C00D6DD38 /* PreviewViewModel.swift in Sources */,
+				5EC6D403210E37C700DB1A5F /* ShutterButton.swift in Sources */,
 				5EA217DB20E40CEA0061F7FF /* AppDelegate.swift in Sources */,
 				5EE985D820FA8A5D0047FC4F /* CameraViewController.swift in Sources */,
-				5E7717CD210687A600504A5A /* CyclingReplayProxy.swift in Sources */,
 				5E1F99F22105F2E2008FB712 /* VideoFrameExtractor.swift in Sources */,
 				5E0EFF8F2103861E00D19EFF /* FrameExtractor.swift in Sources */,
 				5EFFC4DC20FDFC4A00E75C38 /* CameraFrameExtractor.swift in Sources */,
+				5EC6D3FE210E353000DB1A5F /* CameraButtonsViewController.swift in Sources */,
 				5E55C74E210CBB7400614463 /* PreviewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -731,15 +688,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EA217F420E40CEC0061F7FF /* CrowdCountTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5EA217F620E40CEC0061F7FF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5EA217FF20E40CED0061F7FF /* CrowdCountUITests.swift in Sources */,
+				5E89E65A2111D9240039EF79 /* ClassificationViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,6 +715,7 @@
 				5EB6BB1D20F1579F00114EDA /* HundredsPredictor.mlmodel in Sources */,
 				5EB6BB0E20F1533A00114EDA /* BoundingBox.swift in Sources */,
 				5E67669520E73C8F002A4E0D /* NonMaxSuppression.swift in Sources */,
+				5E89E6642111F4080039EF79 /* CyclingReplayProxy.swift in Sources */,
 				5EB7F3FC20EFC60F00CBE024 /* PredictionStrategy.swift in Sources */,
 				5ED4789C20EEA5250000B09D /* MultiArray+UIImage.swift in Sources */,
 				5E67669020E73C8F002A4E0D /* UIImage+CVPixelBuffer.swift in Sources */,
@@ -776,7 +726,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EA2191920E41D390061F7FF /* CrowdCountApiTests.swift in Sources */,
+				5EA2191920E41D390061F7FF /* CircularFifoQueueTests.swift in Sources */,
+				5E89E6632111F4000039EF79 /* CyclingReplayProxyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,20 +739,10 @@
 			target = 5EA217D620E40CEA0061F7FF /* CrowdCount */;
 			targetProxy = 5EA217F020E40CEC0061F7FF /* PBXContainerItemProxy */;
 		};
-		5EA217FC20E40CED0061F7FF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5EA217D620E40CEA0061F7FF /* CrowdCount */;
-			targetProxy = 5EA217FB20E40CED0061F7FF /* PBXContainerItemProxy */;
-		};
 		5EA2191420E41D390061F7FF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5EA2190820E41D380061F7FF /* CrowdCountApi */;
 			targetProxy = 5EA2191320E41D390061F7FF /* PBXContainerItemProxy */;
-		};
-		5EA2191620E41D390061F7FF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5EA217D620E40CEA0061F7FF /* CrowdCount */;
-			targetProxy = 5EA2191520E41D390061F7FF /* PBXContainerItemProxy */;
 		};
 		5EA2191D20E41D390061F7FF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1069,9 +1010,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5R23V2RJ26;
-				INFOPLIST_FILE = CrowdCountTests/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = CrowdCount/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1079,6 +1025,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimroc.CrowdCountTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CrowdCount.app/CrowdCount";
@@ -1090,9 +1037,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5R23V2RJ26;
-				INFOPLIST_FILE = CrowdCountTests/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = CrowdCount/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1103,46 +1055,6 @@
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CrowdCount.app/CrowdCount";
-			};
-			name = Release;
-		};
-		5EA2180A20E40CED0061F7FF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5R23V2RJ26;
-				INFOPLIST_FILE = CrowdCountUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dimroc.CrowdCountUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CrowdCount;
-			};
-			name = Debug;
-		};
-		5EA2180B20E40CED0061F7FF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5R23V2RJ26;
-				INFOPLIST_FILE = CrowdCountUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dimroc.CrowdCountUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CrowdCount;
 			};
 			name = Release;
 		};
@@ -1218,9 +1130,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5R23V2RJ26;
-				INFOPLIST_FILE = CrowdCountApiTests/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = CrowdCountApi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1228,9 +1144,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimroc.CrowdCountApiTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CrowdCount.app/CrowdCount";
 			};
 			name = Debug;
 		};
@@ -1238,9 +1154,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5R23V2RJ26;
-				INFOPLIST_FILE = CrowdCountApiTests/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = CrowdCountApi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1248,9 +1168,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimroc.CrowdCountApiTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CrowdCount.app/CrowdCount";
 			};
 			name = Release;
 		};
@@ -1289,15 +1209,6 @@
 			buildConfigurations = (
 				5EA2180720E40CED0061F7FF /* Debug */,
 				5EA2180820E40CED0061F7FF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5EA2180920E40CED0061F7FF /* Build configuration list for PBXNativeTarget "CrowdCountUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5EA2180A20E40CED0061F7FF /* Debug */,
-				5EA2180B20E40CED0061F7FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

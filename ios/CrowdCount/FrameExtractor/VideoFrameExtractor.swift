@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import RxSwift
 import RxCocoa
+import CrowdCountApi
 
 class VideoFrameExtractor: FrameExtractor {
     var frames: Observable<UIImage> {
@@ -71,7 +72,11 @@ class VideoFrameExtractor: FrameExtractor {
             }
         }
 
-        cyclingProxy = CyclingReplayProxy(observable: decoded, period: 1.0/fps, samples: Int(fps*5))
+        let interval = Observable<Int>
+            .interval(1.0/fps, scheduler: SerialDispatchQueueScheduler(qos: .utility))
+            .subscribeOn(SerialDispatchQueueScheduler(qos: .utility))
+
+        cyclingProxy = CyclingReplayProxy(observable: decoded, pace: interval, samples: Int(fps*5))
         cyclingProxy!.observable.bind(to: self.subject).disposed(by: disposeBag)
     }
 }

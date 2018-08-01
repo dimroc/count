@@ -11,7 +11,7 @@ import RxCocoa
 import UIKit
 import CrowdCountApi
 
-class PredictionViewModel {
+class PreviewViewModel {
     var predictions: Observable<FriendlyPrediction> {
         return subject
     }

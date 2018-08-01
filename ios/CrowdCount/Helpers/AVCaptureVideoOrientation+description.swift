@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 extension AVCaptureVideoOrientation {
     public var description: String {
@@ -16,6 +17,20 @@ extension AVCaptureVideoOrientation {
         case .landscapeRight: return "landscapeRight"
         case .portrait: return "portrait"
         case .portraitUpsideDown: return "portraitUpsideDown"
+        }
+    }
+}
+
+extension UIDeviceOrientation {
+    public var description: String {
+        switch UIDevice.current.orientation {
+        case .portrait: return "Portrait"
+        case .portraitUpsideDown: return "PortraitUpsideDown"
+        case .landscapeLeft: return "LandscapeLeft"
+        case .landscapeRight: return "LandscapeRight"
+        case .faceUp: return "FaceUp"
+        case .faceDown: return "FaceDown"
+        case .unknown: return "Unknown"
         }
     }
 }

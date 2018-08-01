@@ -9,9 +9,8 @@
 import Foundation
 
 public class CircularFifoQueue<T> {
-    private let capacity: Int
+    public let capacity: Int
     private var list: [T?]
-    private var readIndex = 0
     private var writeIndex = 0
 
     public init(capacity: Int) {
@@ -19,6 +18,7 @@ public class CircularFifoQueue<T> {
         list = [T?](repeating: nil, count: capacity)
     }
 
+    // Pushes a new element to the front of the queue.
     public func push(_ t: T) {
         list[writeIndex % capacity] = t
         // Yes, I know it can overflow in hundreds of millions of years if run every ms.
@@ -26,13 +26,11 @@ public class CircularFifoQueue<T> {
     }
 
     public subscript(index: Int) -> T? {
-        get {
-            let reversedIndex = (writeIndex - index - 1) % capacity
-            if reversedIndex < 0 || reversedIndex >= capacity {
-                return nil
-            }
-            return list[reversedIndex]
+        let readIndex = (writeIndex - index - 1) % capacity
+        if readIndex < 0 || readIndex >= capacity {
+            return nil
         }
+        return list[readIndex]
     }
 
     public func asList() -> [T?] {
