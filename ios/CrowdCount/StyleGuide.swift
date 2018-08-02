@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+class StyleGuide {
+    static var thumbnailSize: CGSize {
+        return CGSize(width: 360, height: 360)
+    }
+}
+
 extension UILabel {
     @discardableResult
     func h1() -> UILabel {

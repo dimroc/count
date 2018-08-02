@@ -32,35 +32,36 @@ struct PredictionRowViewModel {
             probability: Double(confidence),
             duration: prediction.duration,
             count: prediction.count,
-            insight: generateInsight(prediction.densityMap, prediction.boundingBoxes, prediction.name))
+            insight: generateInsight(prediction))
     }
 }
 
-private func generateInsight(_ densityMap: MultiArray<Double>, _ boundingBoxes: [CGRect], _ name: String) -> UIImage? {
-    if name == "Singles" {
-        return drawBoundingBoxes(densityMap, boundingBoxes, name)
+private func generateInsight(_ prediction: FriendlyPrediction) -> UIImage? {
+    if prediction.name == "Singles" {
+        return drawBoundingBoxes(prediction)
     }
 
-    return densityMap.copy().normalize().image(offset: 0, scale: 255)
+    return prediction.densityMap.copy().normalize().image(offset: 0, scale: 255)
 }
 
-private func drawBoundingBoxes(_ densityMap: MultiArray<Double>, _ boundingBoxes: [CGRect], _ name: String) -> UIImage? {
-    let size = CGSize(width: FriendlyPredictor.DensityMapWidth, height: FriendlyPredictor.DensityMapWidth)
-    let xfactor = CGFloat(FriendlyPredictor.DensityMapWidth)
-    let yfactor = CGFloat(FriendlyPredictor.DensityMapHeight)
+private func drawBoundingBoxes(_ prediction: FriendlyPrediction) -> UIImage? {
+    guard let image = UIImage(cgImage: prediction.source).resizeImageFit(StyleGuide.thumbnailSize) else {
+        print("Unable to create thumbnail for bounding boxes")
+        return nil
+    }
 
-    let image = UIImage()
+    let size = image.size
+    let xfactor = size.width
+    let yfactor = size.height
 
     UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
     image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
 
     let c = UIGraphicsGetCurrentContext()!
-    c.setFillColor(UIColor.black.cgColor)
-    c.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
-    c.setStrokeColor(UIColor.white.cgColor)
+    c.setStrokeColor(UIColor.green.cgColor)
     c.setLineWidth(0.01 * size.width)
 
-    for bb in boundingBoxes {
+    for bb in prediction.boundingBoxes {
         let rect = CGRect(x: bb.minX * xfactor, y: size.height - bb.minY*yfactor, width: (bb.maxX-bb.minX)*xfactor, height: (bb.maxY-bb.minY) * -yfactor)
         c.stroke(rect)
     }

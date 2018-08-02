@@ -40,6 +40,7 @@ class PredictionRowView: UIStackView {
         addArrangedSubview(durationLabel)
 
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.image = viewModel.insight
         addArrangedSubview(imageView)
     }

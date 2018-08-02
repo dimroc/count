@@ -36,7 +36,10 @@ public class FriendlyPredictor {
             count: output!.count,
             densityMap: output!.densityMap.reshaped([FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]),
             boundingBoxes: output!.boundingBoxes,
-            duration: duration)
+            duration: duration,
+            source: cgImage,
+            orientation: orientation
+        )
     }
 
     public func predictPromise(cgImage: CGImage, orientation: CGImagePropertyOrientation, strategy: PredictionStrategy) -> Promise<FriendlyPrediction> {
@@ -75,6 +78,8 @@ public struct FriendlyPrediction {
     public var densityMap: MultiArray<Double>
     public var boundingBoxes: [CGRect]
     public var duration: Double
+    public var source: CGImage
+    public var orientation: CGImagePropertyOrientation
 }
 
 public struct FriendlyClassification {

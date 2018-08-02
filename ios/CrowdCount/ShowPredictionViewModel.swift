@@ -14,7 +14,6 @@ import CrowdCountApi
 
 class ShowPredictionViewModel {
     let image: UIImage
-    let frameSize: CGSize
     let predictor = FriendlyPredictor()
 
     private let predictionsSubject = PublishSubject<PredictionRowViewModel>()
@@ -27,9 +26,8 @@ class ShowPredictionViewModel {
         return thumbnailSubject.asDriver(onErrorJustReturn: UIImage())
     }
 
-    init(_ image: UIImage, size: CGSize) {
+    init(_ image: UIImage) {
         self.image = image
-        self.frameSize = size
     }
 
     func start() {
@@ -69,7 +67,7 @@ class ShowPredictionViewModel {
 
     private func generateThumbnail() {
         DispatchQueue.global().async {
-            guard let thumbnail = self.image.resizeImageFit(self.frameSize) else {
+            guard let thumbnail = self.image.resizeImageFit(StyleGuide.thumbnailSize) else {
                 print("Unable to generate thumbnail")
                 self.thumbnailSubject.onError(CCError.runtimeError("Unable to generate thumbnail"))
                 return

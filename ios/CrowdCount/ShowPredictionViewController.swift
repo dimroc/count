@@ -55,7 +55,7 @@ class ShowPredictionViewController: UIViewController {
     func predict(_ image: UIImage) {
         topStackView.removeAllArrangedSubviews(from: 2)
 
-        let vm = ShowPredictionViewModel(image, size: view.frame.size)
+        let vm = ShowPredictionViewModel(image)
         vm.thumbnail.drive(thumbnailImageView.rx.image).disposed(by: disposeBag)
         vm.predictions.drive(rx.predictions).disposed(by: disposeBag)
 
