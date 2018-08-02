@@ -29,7 +29,11 @@ extension FriendlyPredictor {
     public func classify(image: UIImage) -> FriendlyClassification {
         let orientation = CGImagePropertyOrientation(image.imageOrientation)
         guard let cgImage = image.cgImage else {
-            return FriendlyClassification(classification: "unknown", probabilities: [:])
+            return FriendlyClassification(
+                classification: "unknown",
+                probabilities: [:],
+                observations: []
+            )
         }
         return classify(image: cgImage, orientation: orientation)
     }

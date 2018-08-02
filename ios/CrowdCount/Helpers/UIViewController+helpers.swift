@@ -12,6 +12,7 @@ import UIKit
 extension UIViewController {
     func addViewableChild(childController: UIViewController) {
         addChild(childController)
+        childController.view.frame = self.view.bounds
         view.addSubview(childController.view)
         childController.didMove(toParent: self)
     }

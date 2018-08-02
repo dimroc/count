@@ -18,12 +18,12 @@ class VideoFrameExtractor: FrameExtractor {
     }
     var orientation: AVCaptureVideoOrientation = AVCaptureVideoOrientation.landscapeLeft
     var isEnabled: Bool {
-        get { return cyclingProxy?.isEnabled == true }
-        set(isEnabled) { cyclingProxy?.isEnabled = isEnabled }
+        get { return cyclingProxy.isEnabled == true }
+        set(isEnabled) { cyclingProxy.isEnabled = isEnabled }
     }
 
     private let subject = PublishSubject<UIImage>()
-    private var cyclingProxy: CyclingReplayProxy<UIImage>?
+    private var cyclingProxy: CyclingReplayProxy<UIImage>!
     private let disposeBag = DisposeBag()
 
     private let availableVideos = [
@@ -77,6 +77,6 @@ class VideoFrameExtractor: FrameExtractor {
             .subscribeOn(SerialDispatchQueueScheduler(qos: .utility))
 
         cyclingProxy = CyclingReplayProxy(observable: decoded, pace: interval, samples: Int(fps*5))
-        cyclingProxy!.observable.bind(to: self.subject).disposed(by: disposeBag)
+        cyclingProxy.observable.bind(to: self.subject).disposed(by: disposeBag)
     }
 }

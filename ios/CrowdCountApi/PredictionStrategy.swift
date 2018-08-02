@@ -30,7 +30,7 @@ extension PredictionStrategy {
         try! handler.perform([request])
 
         let observations = request.results as! [VNCoreMLFeatureValueObservation]
-        guard let obs = observations.first else { return PredictionStrategyOutput.Empty() }
+        guard let obs = observations.first else { return PredictionStrategyOutput.empty }
         return generateDensityMapOutput(obs.featureValue.multiArrayValue!)
     }
 }
@@ -38,11 +38,11 @@ extension PredictionStrategy {
 public class PredictionStrategyFactory {
     public static func from(classification: String) -> PredictionStrategy? {
         switch classification {
-        case "singles":
+        case "Singles":
             return SinglesPredictionStrategy()
-        case "tens":
+        case "Tens":
             return TensPredictionStrategy()
-        case "hundreds_plus":
+        case "Hundreds":
             return HundredsPredictionStrategy()
         default:
             return nil
@@ -57,7 +57,7 @@ public struct PredictionStrategyOutput {
 }
 
 extension PredictionStrategyOutput {
-    public static func Empty() -> PredictionStrategyOutput {
+    public static var empty: PredictionStrategyOutput {
         return PredictionStrategyOutput(
             densityMap: MultiArray<Double>(shape: [1, FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]),
             count: 0,

@@ -16,12 +16,8 @@ class CameraFrameExtractor: NSObject, FrameExtractor, AVCaptureVideoDataOutputSa
         return subject
     }
     var isEnabled: Bool {
-        get {
-            return connection?.isEnabled == true
-        }
-        set(isEnabled) {
-            connection?.isEnabled = isEnabled
-        }
+        get { return connection?.isEnabled == true }
+        set(isEnabled) { connection?.isEnabled = isEnabled }
     }
 
     private let subject = PublishSubject<UIImage>()

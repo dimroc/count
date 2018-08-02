@@ -31,5 +31,9 @@ class CyclingReplayProxyTests: XCTestCase {
         pace.onNext(1)
         pace.onNext(1)
         XCTAssertEqual(["one", "two", "three", "two", "three", "two"], actual)
+
+        crp.isEnabled = false
+        pace.onNext(1)
+        XCTAssertEqual(["one", "two", "three", "two", "three", "two"], actual)
     }
 }

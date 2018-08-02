@@ -10,9 +10,16 @@ import UIKit
 
 class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
 
+    var showPredictionVC: ShowPredictionViewController!
+    let showPredictionIndex = 2
+    var currentIndex = 0
+
     lazy var orderedViewControllers: [UIViewController] = {
-        return [self.newVc(viewController: "sbCamera"),
-                self.newVc(viewController: "sbPredictionsIndex")]
+        return [
+            newVc(viewController: "sbCamera"),
+            newVc(viewController: "sbPredictionsIndex"),
+            showPredictionVC
+        ]
     }()
 
     // MARK: - View Loading
@@ -21,12 +28,31 @@ class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, U
 
         self.dataSource = self
 
+        showPredictionVC = (newVc(viewController: "sbShowPrediction") as! ShowPredictionViewController)
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
                                direction: .forward,
                                animated: true,
                                completion: nil)
         }
+
+        NotificationCenter.default.addObserver(forName: .navigateToShowPrediction, object: nil, queue: OperationQueue.main, using: navigateToShowPrediction)
+    }
+
+    private func navigateToShowPrediction(notification: Notification) {
+        guard let image = notification.object as? UIImage else {
+            print("Unable to navigate to show prediction page with object", notification.object ?? "nil")
+            return
+        }
+
+        currentIndex = showPredictionIndex
+        showPredictionVC.showLoading()
+        setViewControllers([showPredictionVC],
+                           direction: .forward,
+                           animated: true,
+                           completion: { _ in
+            self.showPredictionVC.predict(image)
+        })
     }
 
     override func viewDidLayoutSubviews() {
@@ -34,7 +60,7 @@ class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, U
         super.viewDidLayoutSubviews()
     }
 
-    func makePageControlTransparent() {
+    private func makePageControlTransparent() {
         let contentView = self.view!
         var scrollView: UIScrollView?
         var pageControl: UIPageControl?
@@ -59,11 +85,20 @@ class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, U
     }
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return 0
+        return currentIndex
     }
 
     func newVc(viewController: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewController)
+    }
+
+    // MARK: Delegate functions.
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard completed else { return }
+        guard let newIndex = orderedViewControllers.index(of: pageViewController) else {
+            return
+        }
+        currentIndex = newIndex
     }
 
     // MARK: Data source functions.
@@ -73,15 +108,8 @@ class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, U
         }
 
         let previousIndex = viewControllerIndex - 1
-
-        // User is on the first view controller and swiped left to loop to
-        // the last view controller.
         guard previousIndex >= 0 else {
              return nil
-        }
-
-        guard orderedViewControllers.count > previousIndex else {
-            return nil
         }
 
         return orderedViewControllers[previousIndex]
@@ -93,19 +121,10 @@ class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, U
         }
 
         let nextIndex = viewControllerIndex + 1
-        let orderedViewControllersCount = orderedViewControllers.count
-
-        // User is on the last view controller and swiped right to loop to
-        // the first view controller.
-        guard orderedViewControllersCount != nextIndex else {
+        guard nextIndex < orderedViewControllers.count else {
              return nil
-        }
-
-        guard orderedViewControllersCount > nextIndex else {
-            return nil
         }
 
         return orderedViewControllers[nextIndex]
     }
-
 }

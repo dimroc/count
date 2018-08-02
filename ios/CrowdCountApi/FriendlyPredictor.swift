@@ -80,6 +80,7 @@ public struct FriendlyPrediction {
 public struct FriendlyClassification {
     public var classification: String
     public var probabilities: [String: VNConfidence]
+    public var observations: [VNClassificationObservation]
 
     public static func from(_ observations: [VNClassificationObservation]) -> FriendlyClassification {
         let probabilities = observations.reduce(into: [String: VNConfidence]()) { dict, o in
@@ -87,7 +88,8 @@ public struct FriendlyClassification {
         }
         return FriendlyClassification(
             classification: observations[0].identifier,
-            probabilities: probabilities
+            probabilities: probabilities,
+            observations: observations
         )
 
     }

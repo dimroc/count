@@ -25,7 +25,7 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if Platform.isSimulator {
-            frameExtractor = VideoFrameExtractor()
+            frameExtractor = ImageFrameExtractor()
         } else {
             frameExtractor = CameraFrameExtractor()
         }

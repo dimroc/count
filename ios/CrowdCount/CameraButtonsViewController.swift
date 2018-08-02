@@ -26,9 +26,8 @@ class CameraButtonsViewController: UIViewController {
     func drive(frames: Observable<UIImage>) {
         shutterButton.rx.tap
             .withLatestFrom(frames) { _, frame in return frame }
-            .observeOn(SerialDispatchQueueScheduler(qos: .utility))
             .subscribe(onNext: { image in
-                print("here we start the full prediction and trigger segue", image)
+                NotificationCenter.default.post(name: .navigateToShowPrediction, object: image)
             })
             .disposed(by: disposeBag)
     }
@@ -50,15 +49,4 @@ class CameraButtonsViewController: UIViewController {
             }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

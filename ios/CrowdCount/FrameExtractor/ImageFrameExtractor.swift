@@ -34,6 +34,7 @@ class ImageFrameExtractor: FrameExtractor {
         let image = UIImage(named: imageName, in: Bundle.main, compatibleWith: nil)!
         Observable<Int>
             .interval(1, scheduler: SerialDispatchQueueScheduler(qos: .utility))
+            .filter { _ in self.isEnabled }
             .subscribe { _ in self.subject.onNext(image) }
             .disposed(by: self.disposeBag)
     }

@@ -33,6 +33,6 @@ class ClassificationViewModelTests: XCTestCase {
         group.enter()
         frames.onNext(UIImage(named: "audience-crowd-fans", in: Bundle.main, compatibleWith: nil)!)
         XCTAssertTrue(group.wait(timeout: .now() + 5) == .success, "Classification should have completed")
-        XCTAssertEqual(["unknown", "hundreds_plus"], receivedClassifications)
+        XCTAssertEqual(["unknown", "Hundreds"], receivedClassifications)
     }
 }

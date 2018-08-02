@@ -142,22 +142,14 @@ class PreviewViewController: UIViewController {
     private func createLabel() -> UILabel {
         let label = UILabel()
         label.text = "--"
-        label.font = UIFont(name: "System", size: 24)
-        label.textColor = .white
-        label.shadowColor = UIColor.darkGray
-        label.shadowOffset = CGSize(width: 1, height: 1)
-        label.textAlignment = .center
+        label.h3().centerTextAlignment()
         return label
     }
 
     private func createSubtleLabel() -> UILabel {
         let label = UILabel()
         label.text = ""
-        label.font = UIFont(name: "System", size: 18)
-        label.textColor = UIColor(white: 0.85, alpha: 1)
-        label.shadowColor = .darkGray
-        label.shadowOffset = CGSize(width: 1, height: 1)
-        label.textAlignment = .center
+        label.h4().centerTextAlignment()
         return label
     }
 }
