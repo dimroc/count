@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E02F77A2113D0150095191C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E02F7782113D0150095191C /* Realm.framework */; };
+		5E02F77B2113D0150095191C /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E02F7792113D0150095191C /* RealmSwift.framework */; };
 		5E0EFF8F2103861E00D19EFF /* FrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0EFF8E2103861E00D19EFF /* FrameExtractor.swift */; };
 		5E0EFF9121038B8300D19EFF /* ImageFrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0EFF9021038B8300D19EFF /* ImageFrameExtractor.swift */; };
 		5E1AAA5D20EE9BCB00098F1D /* FriendlyPredictor+macos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AAA5C20EE9BCA00098F1D /* FriendlyPredictor+macos.swift */; };
@@ -135,6 +137,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E02F7782113D0150095191C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		5E02F7792113D0150095191C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		5E0EFF8E2103861E00D19EFF /* FrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameExtractor.swift; sourceTree = "<group>"; };
 		5E0EFF9021038B8300D19EFF /* ImageFrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFrameExtractor.swift; sourceTree = "<group>"; };
 		5E1AAA5A20EE9B8800098F1D /* FriendlyPredictor+ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendlyPredictor+ios.swift"; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E02F77A2113D0150095191C /* Realm.framework in Frameworks */,
+				5E02F77B2113D0150095191C /* RealmSwift.framework in Frameworks */,
 				5E3A6BAE20FF55EC00877086 /* RxSwift.framework in Frameworks */,
 				5E3A6BAF20FF55EC00877086 /* RxCocoa.framework in Frameworks */,
 				5EE985D520FA85500047FC4F /* FBLPromises.framework in Frameworks */,
@@ -370,6 +376,8 @@
 		5EB25CF720EF0C84006FA509 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E02F7782113D0150095191C /* Realm.framework */,
+				5E02F7792113D0150095191C /* RealmSwift.framework */,
 				5E89E6612111F3AB0039EF79 /* RxSwift.framework */,
 				5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */,
 				5E3A6BAC20FF55EC00877086 /* RxSwift.framework */,
@@ -655,6 +663,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/FBLPromises.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -664,6 +674,8 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FBLPromises.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Realm.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
