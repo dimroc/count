@@ -17,7 +17,7 @@ class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, U
     lazy var orderedViewControllers: [UIViewController] = {
         return [
             newVc(viewController: "sbCamera"),
-            newVc(viewController: "sbPredictionsIndex"),
+            newVc(viewController: "sbListPredictions"),
             showPredictionVC
         ]
     }()

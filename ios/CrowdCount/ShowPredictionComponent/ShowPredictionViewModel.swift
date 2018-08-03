@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import Promises
 import CrowdCountApi
+import RealmSwift
 
 class ShowPredictionViewModel {
     let image: UIImage
@@ -59,10 +60,19 @@ class ShowPredictionViewModel {
             return PredictionRowViewModel.from(prediction, obs.confidence)
         }
 
-        sortedPredictions
-            .filter { $0 != nil }
-            .forEach { predictionsSubject.onNext($0!) }
+        let filteredPredictions = sortedPredictions.filter { $0 != nil } as! [PredictionRowViewModel]
+        filteredPredictions.forEach { predictionsSubject.onNext($0) }
         predictionsSubject.onCompleted()
+        savePrediction(filteredPredictions)
+    }
+
+    private func savePrediction(_ predictions: [PredictionRowViewModel]) {
+        let predictionModel = PredictionModel.from(image, predictions: predictions)
+        let realm = try! Realm()
+        print("Saving prediction model")
+        try! realm.write {
+            realm.add(predictionModel)
+        }
     }
 
     private func generateThumbnail() {

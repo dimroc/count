@@ -19,6 +19,9 @@
 		5E1F99EF2105E78E008FB712 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F99EE2105E78E008FB712 /* Platform.swift */; };
 		5E1F99F02105E78E008FB712 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F99EE2105E78E008FB712 /* Platform.swift */; };
 		5E1F99F22105F2E2008FB712 /* VideoFrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F99F12105F2E2008FB712 /* VideoFrameExtractor.swift */; };
+		5E226D912114915100B31700 /* ListPredictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E226D902114915100B31700 /* ListPredictionViewController.swift */; };
+		5E226D93211491BA00B31700 /* PredictionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E226D92211491BA00B31700 /* PredictionModel.swift */; };
+		5E226D952114A23600B31700 /* Realm.Configuration+migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E226D942114A23600B31700 /* Realm.Configuration+migrations.swift */; };
 		5E2FBF982100C2580006A125 /* ClassificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2FBF972100C2580006A125 /* ClassificationViewModel.swift */; };
 		5E3A6BAE20FF55EC00877086 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAC20FF55EC00877086 /* RxSwift.framework */; };
 		5E3A6BAF20FF55EC00877086 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */; };
@@ -146,6 +149,9 @@
 		5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+resize.swift"; sourceTree = "<group>"; };
 		5E1F99EE2105E78E008FB712 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		5E1F99F12105F2E2008FB712 /* VideoFrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFrameExtractor.swift; sourceTree = "<group>"; };
+		5E226D902114915100B31700 /* ListPredictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPredictionViewController.swift; sourceTree = "<group>"; };
+		5E226D92211491BA00B31700 /* PredictionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionModel.swift; sourceTree = "<group>"; };
+		5E226D942114A23600B31700 /* Realm.Configuration+migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm.Configuration+migrations.swift"; sourceTree = "<group>"; };
 		5E2FBF972100C2580006A125 /* ClassificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationViewModel.swift; sourceTree = "<group>"; };
 		5E3A6BAC20FF55EC00877086 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -316,6 +322,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		5E226D8F211490FC00B31700 /* ListPredictionComponent */ = {
+			isa = PBXGroup;
+			children = (
+				5E226D902114915100B31700 /* ListPredictionViewController.swift */,
+			);
+			path = ListPredictionComponent;
+			sourceTree = "<group>";
+		};
 		5E3F316620ED3F23008B5C1B /* CrowdCountApiMac */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +386,7 @@
 			children = (
 				5EFFC4DF20FE0D4D00E75C38 /* Helpers */,
 				5EA217DA20E40CEA0061F7FF /* AppDelegate.swift */,
+				5E226D942114A23600B31700 /* Realm.Configuration+migrations.swift */,
 				5E5ED1642112AC470087876C /* StyleGuide.swift */,
 				5EA217E220E40CEA0061F7FF /* Main.storyboard */,
 				5EA217E520E40CEC0061F7FF /* Assets.xcassets */,
@@ -379,8 +394,10 @@
 				5EA217EA20E40CEC0061F7FF /* Info.plist */,
 				5E5ED16221121C910087876C /* Notification+names.swift */,
 				5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */,
+				5E226D92211491BA00B31700 /* PredictionModel.swift */,
 				5EFFC4DA20FDFA4900E75C38 /* FrameExtractor */,
 				5E02F77C2113D1EA0095191C /* CameraComponent */,
+				5E226D8F211490FC00B31700 /* ListPredictionComponent */,
 				5E02F7872113D2410095191C /* ShowPredictionComponent */,
 				5E02F7882113D3C80095191C /* SharedViews */,
 			);
@@ -748,8 +765,11 @@
 				5E5ED16F2113500C0087876C /* PredictionRowViewModel.swift in Sources */,
 				5E5ED161211208380087876C /* ShowPredictionViewController.swift in Sources */,
 				5EE985C920FA6D9C0047FC4F /* SwipeViewController.swift in Sources */,
+				5E226D93211491BA00B31700 /* PredictionModel.swift in Sources */,
 				5EFFC4E120FE0D7000E75C38 /* AVCaptureVideoOrientation+description.swift in Sources */,
 				5E2FBF982100C2580006A125 /* ClassificationViewModel.swift in Sources */,
+				5E226D912114915100B31700 /* ListPredictionViewController.swift in Sources */,
+				5E226D952114A23600B31700 /* Realm.Configuration+migrations.swift in Sources */,
 				5E5ED16921131D430087876C /* HairlineView.swift in Sources */,
 				5E5ED1672112B78F0087876C /* UIImage+fixOrientation.swift in Sources */,
 				5E55C751210CC45900614463 /* UIViewController+helpers.swift in Sources */,
