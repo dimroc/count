@@ -58,7 +58,6 @@ class ShowPredictionViewController: UIViewController {
         let vm = ShowPredictionViewModel(image)
         vm.thumbnail.drive(thumbnailImageView.rx.image).disposed(by: disposeBag)
         vm.predictions.drive(rx.predictions).disposed(by: disposeBag)
-
         vm.predictions.drive(onCompleted: {
             self.topStackView.isHidden = false
             self.loadingView.stopAnimating()

@@ -67,7 +67,6 @@ extension PredictionStrategyOutput {
 }
 
 public class SinglesPredictionStrategy: PredictionStrategy {
-    let personClassIndex = 14
     public init() {}
     public func predict(_ cgImage: CGImage, orientation: CGImagePropertyOrientation) -> PredictionStrategyOutput {
         let boundingBoxes = FaceDetector.detect(within: cgImage, orientation: orientation)

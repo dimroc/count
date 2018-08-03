@@ -14,7 +14,6 @@ import RxSwift
 
 class CameraViewController: UIViewController {
     var frameExtractor: FrameExtractor!
-    let predictor = FriendlyPredictor()
     var classificationVM: ClassificationViewModel!
     var previewVM: PreviewViewModel!
 

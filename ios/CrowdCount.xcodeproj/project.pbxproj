@@ -36,7 +36,7 @@
 		5E55C753210CE9B000614463 /* CircularFifoQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55C752210CE9B000614463 /* CircularFifoQueue.swift */; };
 		5E5ED155211206930087876C /* ShowPredictionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ED154211206930087876C /* ShowPredictionViewModel.swift */; };
 		5E5ED161211208380087876C /* ShowPredictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ED160211208380087876C /* ShowPredictionViewController.swift */; };
-		5E5ED16321121C910087876C /* Notification+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ED16221121C910087876C /* Notification+helpers.swift */; };
+		5E5ED16321121C910087876C /* Notification+names.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ED16221121C910087876C /* Notification+names.swift */; };
 		5E5ED1652112AC470087876C /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ED1642112AC470087876C /* StyleGuide.swift */; };
 		5E5ED1672112B78F0087876C /* UIImage+fixOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ED1662112B78F0087876C /* UIImage+fixOrientation.swift */; };
 		5E5ED16921131D430087876C /* HairlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ED16821131D430087876C /* HairlineView.swift */; };
@@ -160,7 +160,7 @@
 		5E5C797020EFF4C700EDC113 /* FBLPromises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBLPromises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E5ED154211206930087876C /* ShowPredictionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPredictionViewModel.swift; sourceTree = "<group>"; };
 		5E5ED160211208380087876C /* ShowPredictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPredictionViewController.swift; sourceTree = "<group>"; };
-		5E5ED16221121C910087876C /* Notification+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+helpers.swift"; sourceTree = "<group>"; };
+		5E5ED16221121C910087876C /* Notification+names.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+names.swift"; sourceTree = "<group>"; };
 		5E5ED1642112AC470087876C /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
 		5E5ED1662112B78F0087876C /* UIImage+fixOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+fixOrientation.swift"; sourceTree = "<group>"; };
 		5E5ED16821131D430087876C /* HairlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairlineView.swift; sourceTree = "<group>"; };
@@ -270,6 +270,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E02F77C2113D1EA0095191C /* CameraComponent */ = {
+			isa = PBXGroup;
+			children = (
+				5EE985D720FA8A5D0047FC4F /* CameraViewController.swift */,
+				5E55C74C210CBB7400614463 /* PreviewViewController.swift */,
+				5E2FBF972100C2580006A125 /* ClassificationViewModel.swift */,
+				5E89E6592111D9240039EF79 /* ClassificationViewModelTests.swift */,
+				5ED8A35D2108976C00D6DD38 /* PreviewViewModel.swift */,
+				5EC6D3FC210E353000DB1A5F /* CameraButtonsViewController.swift */,
+				5EC6D402210E37C700DB1A5F /* ShutterButton.swift */,
+			);
+			path = CameraComponent;
+			sourceTree = "<group>";
+		};
+		5E02F7872113D2410095191C /* ShowPredictionComponent */ = {
+			isa = PBXGroup;
+			children = (
+				5E5ED154211206930087876C /* ShowPredictionViewModel.swift */,
+				5E5ED160211208380087876C /* ShowPredictionViewController.swift */,
+				5E5ED16A21132EEC0087876C /* PredictionRowView.swift */,
+				5E5ED16E2113500C0087876C /* PredictionRowViewModel.swift */,
+			);
+			path = ShowPredictionComponent;
+			sourceTree = "<group>";
+		};
+		5E02F7882113D3C80095191C /* SharedViews */ = {
+			isa = PBXGroup;
+			children = (
+				5E5ED16821131D430087876C /* HairlineView.swift */,
+			);
+			path = SharedViews;
+			sourceTree = "<group>";
+		};
+		5E02F7892113D9610095191C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5E67669920E9A549002A4E0D /* Duration.swift */,
+				5E1F99EE2105E78E008FB712 /* Platform.swift */,
+				5E55C752210CE9B000614463 /* CircularFifoQueue.swift */,
+				5EA2191820E41D390061F7FF /* CircularFifoQueueTests.swift */,
+				5E7717CC210687A600504A5A /* CyclingReplayProxy.swift */,
+				5E89E65E2111EBEE0039EF79 /* CyclingReplayProxyTests.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		5E3F316620ED3F23008B5C1B /* CrowdCountApiMac */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,9 +323,10 @@
 			path = CrowdCountApiMac;
 			sourceTree = "<group>";
 		};
-		5E67668620E73C8F002A4E0D /* CoreMLHelpers */ = {
+		5E67668620E73C8F002A4E0D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				5EB6BB0D20F1533A00114EDA /* BoundingBox.swift */,
 				5E67668720E73C8F002A4E0D /* Math.swift */,
 				5E67668820E73C8F002A4E0D /* UIImage+CVPixelBuffer.swift */,
 				5E67668920E73C8F002A4E0D /* Array.swift */,
@@ -290,8 +337,11 @@
 				5E67668C20E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift */,
 				5E67668D20E73C8F002A4E0D /* NonMaxSuppression.swift */,
 				5E67668E20E73C8F002A4E0D /* MLMultiArray+UIImage.swift */,
+				5E93CCE321026B0D00461138 /* CGImagePropertyOrientation+UIImageOrientation.swift */,
+				5E67669720E9A41F002A4E0D /* UIImage+resize.swift */,
+				5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */,
 			);
-			path = CoreMLHelpers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		5EA217CE20E40CEA0061F7FF = {
@@ -321,27 +371,18 @@
 			isa = PBXGroup;
 			children = (
 				5EFFC4DF20FE0D4D00E75C38 /* Helpers */,
-				5EFFC4DA20FDFA4900E75C38 /* FrameExtractor */,
 				5EA217DA20E40CEA0061F7FF /* AppDelegate.swift */,
+				5E5ED1642112AC470087876C /* StyleGuide.swift */,
 				5EA217E220E40CEA0061F7FF /* Main.storyboard */,
 				5EA217E520E40CEC0061F7FF /* Assets.xcassets */,
 				5EA217E720E40CEC0061F7FF /* LaunchScreen.storyboard */,
 				5EA217EA20E40CEC0061F7FF /* Info.plist */,
+				5E5ED16221121C910087876C /* Notification+names.swift */,
 				5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */,
-				5E5ED16221121C910087876C /* Notification+helpers.swift */,
-				5EE985D720FA8A5D0047FC4F /* CameraViewController.swift */,
-				5E55C74C210CBB7400614463 /* PreviewViewController.swift */,
-				5E2FBF972100C2580006A125 /* ClassificationViewModel.swift */,
-				5E89E6592111D9240039EF79 /* ClassificationViewModelTests.swift */,
-				5ED8A35D2108976C00D6DD38 /* PreviewViewModel.swift */,
-				5EC6D3FC210E353000DB1A5F /* CameraButtonsViewController.swift */,
-				5EC6D402210E37C700DB1A5F /* ShutterButton.swift */,
-				5E5ED154211206930087876C /* ShowPredictionViewModel.swift */,
-				5E5ED160211208380087876C /* ShowPredictionViewController.swift */,
-				5E5ED16A21132EEC0087876C /* PredictionRowView.swift */,
-				5E5ED16E2113500C0087876C /* PredictionRowViewModel.swift */,
-				5E5ED16821131D430087876C /* HairlineView.swift */,
-				5E5ED1642112AC470087876C /* StyleGuide.swift */,
+				5EFFC4DA20FDFA4900E75C38 /* FrameExtractor */,
+				5E02F77C2113D1EA0095191C /* CameraComponent */,
+				5E02F7872113D2410095191C /* ShowPredictionComponent */,
+				5E02F7882113D3C80095191C /* SharedViews */,
 			);
 			path = CrowdCount;
 			sourceTree = "<group>";
@@ -350,24 +391,15 @@
 			isa = PBXGroup;
 			children = (
 				5EB6BB1420F1579E00114EDA /* Models */,
-				5E67668620E73C8F002A4E0D /* CoreMLHelpers */,
+				5E67668620E73C8F002A4E0D /* Helpers */,
+				5E02F7892113D9610095191C /* Utils */,
 				5EA2190B20E41D380061F7FF /* CrowdCountApi.h */,
 				5EA2190C20E41D380061F7FF /* Info.plist */,
 				5E67667C20E72E9B002A4E0D /* FriendlyPredictor.swift */,
 				5E1AAA5C20EE9BCA00098F1D /* FriendlyPredictor+macos.swift */,
 				5E1AAA5A20EE9B8800098F1D /* FriendlyPredictor+ios.swift */,
-				5E67669720E9A41F002A4E0D /* UIImage+resize.swift */,
-				5E1AAA6120EEA05300098F1D /* NSImage+resize.swift */,
-				5E67669920E9A549002A4E0D /* Duration.swift */,
 				5EB7F3FB20EFC60F00CBE024 /* PredictionStrategy.swift */,
-				5EB6BB0D20F1533A00114EDA /* BoundingBox.swift */,
 				5EF94FE420F1B888002E01CC /* FaceDetector.swift */,
-				5E93CCE321026B0D00461138 /* CGImagePropertyOrientation+UIImageOrientation.swift */,
-				5E1F99EE2105E78E008FB712 /* Platform.swift */,
-				5E55C752210CE9B000614463 /* CircularFifoQueue.swift */,
-				5EA2191820E41D390061F7FF /* CircularFifoQueueTests.swift */,
-				5E7717CC210687A600504A5A /* CyclingReplayProxy.swift */,
-				5E89E65E2111EBEE0039EF79 /* CyclingReplayProxyTests.swift */,
 				5E5ED172211363930087876C /* CCError.swift */,
 			);
 			path = CrowdCountApi;
@@ -404,8 +436,8 @@
 		5EFFC4DA20FDFA4900E75C38 /* FrameExtractor */ = {
 			isa = PBXGroup;
 			children = (
-				5EFFC4DB20FDFC4A00E75C38 /* CameraFrameExtractor.swift */,
 				5E0EFF8E2103861E00D19EFF /* FrameExtractor.swift */,
+				5EFFC4DB20FDFC4A00E75C38 /* CameraFrameExtractor.swift */,
 				5E0EFF9021038B8300D19EFF /* ImageFrameExtractor.swift */,
 				5E1F99F12105F2E2008FB712 /* VideoFrameExtractor.swift */,
 			);
@@ -730,7 +762,7 @@
 				5E5ED16D211333430087876C /* UIView+helpers.swift in Sources */,
 				5EE985D820FA8A5D0047FC4F /* CameraViewController.swift in Sources */,
 				5E5ED1712113614A0087876C /* UIStackView+helpers.swift in Sources */,
-				5E5ED16321121C910087876C /* Notification+helpers.swift in Sources */,
+				5E5ED16321121C910087876C /* Notification+names.swift in Sources */,
 				5E1F99F22105F2E2008FB712 /* VideoFrameExtractor.swift in Sources */,
 				5E0EFF8F2103861E00D19EFF /* FrameExtractor.swift in Sources */,
 				5EFFC4DC20FDFC4A00E75C38 /* CameraFrameExtractor.swift in Sources */,

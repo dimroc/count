@@ -17,14 +17,12 @@ struct PredictionRowViewModel {
     var count: Double
     var insight: UIImage?
 
-    static var empty: PredictionRowViewModel {
-        return PredictionRowViewModel(
+    static let empty = PredictionRowViewModel(
             classification: "unknown",
             probability: 0,
             duration: 0,
             count: 0,
             insight: nil)
-    }
 
     static func from(_ prediction: FriendlyPrediction, _ confidence: VNConfidence) -> PredictionRowViewModel {
         return PredictionRowViewModel(
