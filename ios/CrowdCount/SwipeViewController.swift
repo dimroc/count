@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
 
@@ -36,22 +37,46 @@ class SwipeViewController: UIPageViewController, UIPageViewControllerDelegate, U
                                completion: nil)
         }
 
-        NotificationCenter.default.addObserver(forName: .navigateToShowPrediction, object: nil, queue: OperationQueue.main, using: navigateToShowPrediction)
+        NotificationCenter.default.addObserver(forName: .calculatePrediction, object: nil, queue: OperationQueue.main, using: navigateToCalculatePrediction)
+        NotificationCenter.default.addObserver(forName: .hydratePrediction, object: nil, queue: OperationQueue.main, using: navigateToHydratePrediction)
     }
 
-    private func navigateToShowPrediction(notification: Notification) {
+    // MARK: Navigation
+    private func navigateToCalculatePrediction(notification: Notification) {
         guard let image = notification.object as? UIImage else {
-            print("Unable to navigate to show prediction page with object", notification.object ?? "nil")
+            print("Unable to navigateToCalculatePrediction with object", notification.object ?? "nil")
             return
         }
 
+        navigateToShowPredictionVC {
+            self.showPredictionVC.predict(image)
+        }
+    }
+
+    private func navigateToHydratePrediction(notification: Notification) {
+        guard let threadSafeAnalysis = notification.object as? ThreadSafeReference<PredictionAnalysisModel> else {
+            print("Unable to navigateToHydratePrediction with object", notification.object ?? "nil")
+            return
+        }
+
+        navigateToShowPredictionVC {
+            let realm = try! Realm()
+            guard let analysis = realm.resolve(threadSafeAnalysis) else {
+                print("Unable to resolve thread safe reference to analysis")
+                return
+            }
+            self.showPredictionVC.hydrate(analysis)
+        }
+    }
+
+    private func navigateToShowPredictionVC(completion: @escaping () -> Void) {
         currentIndex = showPredictionIndex
         showPredictionVC.showLoading()
         setViewControllers([showPredictionVC],
                            direction: .forward,
                            animated: true,
-                           completion: { _ in
-            self.showPredictionVC.predict(image)
+                           completion: { success in
+                            if success { completion() }
         })
     }
 

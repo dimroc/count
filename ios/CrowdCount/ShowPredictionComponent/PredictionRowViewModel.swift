@@ -32,6 +32,15 @@ struct PredictionRowViewModel {
             count: prediction.count,
             insight: generateInsight(prediction))
     }
+
+    static func from(realm: PredictionModel, insight: UIImage?) -> PredictionRowViewModel {
+        return PredictionRowViewModel(
+            classification: realm.classification,
+            probability: realm.probability,
+            duration: realm.duration,
+            count: realm.count,
+            insight: insight)
+    }
 }
 
 private func generateInsight(_ prediction: FriendlyPrediction) -> UIImage? {

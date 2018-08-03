@@ -27,7 +27,7 @@ class CameraButtonsViewController: UIViewController {
         shutterButton.rx.tap
             .withLatestFrom(frames) { _, frame in return frame }
             .subscribe(onNext: { image in
-                NotificationCenter.default.post(name: .navigateToShowPrediction, object: image)
+                NotificationCenter.default.post(name: .calculatePrediction, object: image)
             })
             .disposed(by: disposeBag)
     }

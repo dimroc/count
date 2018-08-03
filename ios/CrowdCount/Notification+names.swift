@@ -9,5 +9,6 @@
 import Foundation
 
 extension Notification.Name {
-    static let navigateToShowPrediction = Notification.Name("navigateToFullPrediction")
+    static let calculatePrediction = Notification.Name("calculatePrediction")
+    static let hydratePrediction = Notification.Name("hydratePrediction")
 }

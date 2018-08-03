@@ -54,20 +54,29 @@ class ShowPredictionViewController: UIViewController {
 
     func predict(_ image: UIImage) {
         topStackView.removeAllArrangedSubviews(from: 2)
+        let vm = ShowPredictionViewModel(image: image)
+        drive(vm)
+        vm.calculate()
+    }
 
-        let vm = ShowPredictionViewModel(image)
+    func hydrate(_ analysis: PredictionAnalysisModel) {
+        topStackView.removeAllArrangedSubviews(from: 2)
+        let vm = ShowPredictionViewModel(analysis: analysis)
+        drive(vm)
+    }
+
+    func showLoading() {
+        loadingView.startAnimating()
+        topStackView.isHidden = true
+    }
+
+    private func drive(_ vm: ShowPredictionViewModel) {
         vm.thumbnail.drive(thumbnailImageView.rx.image).disposed(by: disposeBag)
         vm.predictions.drive(rx.predictions).disposed(by: disposeBag)
         vm.predictions.drive(onCompleted: {
             self.topStackView.isHidden = false
             self.loadingView.stopAnimating()
         }).disposed(by: disposeBag)
-        vm.start()
-    }
-
-    func showLoading() {
-        loadingView.startAnimating()
-        topStackView.isHidden = true
     }
 }
 

@@ -17,21 +17,39 @@ class ShowPredictionViewModel {
     let image: UIImage
     let predictor = FriendlyPredictor()
 
-    private let predictionsSubject = PublishSubject<PredictionRowViewModel>()
+    private let predictionsSubject = ReplaySubject<PredictionRowViewModel>.createUnbounded()
     var predictions: Driver<PredictionRowViewModel> {
         return predictionsSubject.asDriver(onErrorJustReturn: PredictionRowViewModel.empty)
     }
 
-    private let thumbnailSubject = PublishSubject<UIImage>()
+    private let thumbnailSubject = ReplaySubject<UIImage>.createUnbounded()
     var thumbnail: Driver<UIImage> {
         return thumbnailSubject.asDriver(onErrorJustReturn: UIImage())
     }
 
-    init(_ image: UIImage) {
+    init(image: UIImage) {
         self.image = image
     }
 
-    func start() {
+    init(analysis: PredictionAnalysisModel) {
+        image = analysis.image(for: .original)!
+        let predictions: [PredictionRowViewModel?] = analysis.predictions.map { pm in
+            guard let label = PredictionAnalysisModel.ImageLabel(rawValue: pm.classification) else {
+                print("Unable generate prediction to retrieve label for \(pm.classification) on \(analysis.id)")
+                return nil
+            }
+            let insight = analysis.image(for: label)
+            return PredictionRowViewModel.from(realm: pm, insight: insight)
+        }
+
+        generateThumbnail()
+        predictions
+            .filter { $0 != nil }
+            .forEach { predictionsSubject.onNext($0!) }
+        predictionsSubject.onCompleted()
+    }
+
+    func calculate() {
         generateThumbnail()
 
         let classificationPromise = Promise<FriendlyClassification> {
@@ -63,10 +81,10 @@ class ShowPredictionViewModel {
         let filteredPredictions = sortedPredictions.filter { $0 != nil } as! [PredictionRowViewModel]
         filteredPredictions.forEach { predictionsSubject.onNext($0) }
         predictionsSubject.onCompleted()
-        savePrediction(filteredPredictions)
+        savePredictions(filteredPredictions)
     }
 
-    private func savePrediction(_ predictions: [PredictionRowViewModel]) {
+    private func savePredictions(_ predictions: [PredictionRowViewModel]) {
         let predictionModel = PredictionAnalysisModel.from(image, predictions: predictions)
         let realm = try! Realm()
         print("Saving prediction model to realm")

@@ -24,8 +24,7 @@ extension Realm.Configuration {
         })
     }
 
-    private static let migrations: [ShortMigrationBlock] = [
-        { migration in
+    private static let migrations: [ShortMigrationBlock] = [ { migration in
             migration.enumerateObjects(ofType: PredictionAnalysisModel.className()) { (_, new) in
                 new?["id"] = UUID().uuidString
             }
