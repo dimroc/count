@@ -67,9 +67,9 @@ class ShowPredictionViewModel {
     }
 
     private func savePrediction(_ predictions: [PredictionRowViewModel]) {
-        let predictionModel = PredictionModel.from(image, predictions: predictions)
+        let predictionModel = PredictionAnalysisModel.from(image, predictions: predictions)
         let realm = try! Realm()
-        print("Saving prediction model")
+        print("Saving prediction model to realm")
         try! realm.write {
             realm.add(predictionModel)
         }
