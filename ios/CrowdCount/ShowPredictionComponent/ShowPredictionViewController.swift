@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 
 class ShowPredictionViewController: UIViewController {
+    let uploadButton = UIButton(type: UIButton.ButtonType.system)
     let thumbnailImageView = UIImageView()
     let topStackView = UIStackView()
     let loadingView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
@@ -19,6 +20,9 @@ class ShowPredictionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        uploadButton.setTitle("Upload", for: UIControl.State.normal)
+        uploadButton.isUserInteractionEnabled = true
 
         thumbnailImageView.contentMode = .scaleAspectFit
 
@@ -38,6 +42,7 @@ class ShowPredictionViewController: UIViewController {
         topStackView.addArrangedSubview(thumbnailImageView)
 
         let scrollView = UIScrollView()
+        scrollView.addSubview(uploadButton)
         scrollView.addSubview(topStackView)
 
         view.addSubview(loadingView)
@@ -49,6 +54,11 @@ class ShowPredictionViewController: UIViewController {
         constrain(topStackView, scrollView) { stack, scroll in
             stack.edges == scroll.edges
             stack.width == scroll.width
+        }
+
+        constrain(uploadButton) { b in
+            b.trailing == b.superview!.safeAreaLayoutGuide.trailing - 10
+            b.top == b.superview!.safeAreaLayoutGuide.top - 4
         }
     }
 
@@ -68,12 +78,14 @@ class ShowPredictionViewController: UIViewController {
     func showLoading() {
         loadingView.startAnimating()
         topStackView.isHidden = true
+        uploadButton.isHidden = true
     }
 
     private func drive(_ vm: ShowPredictionViewModel) {
         vm.thumbnail.drive(thumbnailImageView.rx.image).disposed(by: disposeBag)
         vm.predictions.drive(rx.predictions).disposed(by: disposeBag)
         vm.predictions.drive(onCompleted: {
+            self.uploadButton.isHidden = false
             self.topStackView.isHidden = false
             self.loadingView.stopAnimating()
         }).disposed(by: disposeBag)
