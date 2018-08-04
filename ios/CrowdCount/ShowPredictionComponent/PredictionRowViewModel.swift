@@ -9,6 +9,7 @@
 import UIKit
 import Vision
 import CrowdCountApi
+import FirebaseStorage
 
 struct PredictionRowViewModel {
     var classification: String
@@ -40,6 +41,25 @@ struct PredictionRowViewModel {
             duration: realm.duration,
             count: realm.count,
             insight: insight)
+    }
+
+    func upload(_ storageRef: StorageReference) {
+        let imageRef = storageRef.child("\(classification).jpg")
+
+        guard let data = insight?.jpegData(compressionQuality: 1) else {
+            print("Unable to retrieve image data for upload")
+            return
+        }
+
+        let metadata = StorageMetadata()
+        metadata.customMetadata = [
+            "classification": String(classification),
+            "probability": String(probability),
+            "duration": String(duration),
+            "count": String(count),
+        ]
+
+        imageRef.putData(data, metadata: metadata)
     }
 }
 

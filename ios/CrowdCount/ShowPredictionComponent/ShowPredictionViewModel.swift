@@ -12,10 +12,13 @@ import RxCocoa
 import Promises
 import CrowdCountApi
 import RealmSwift
+import FirebaseStorage
 
 class ShowPredictionViewModel {
     let image: UIImage
     let predictor = FriendlyPredictor()
+    var analysisId: String!
+    var cachedPredictions: [PredictionRowViewModel]!
 
     private let predictionsSubject = ReplaySubject<PredictionRowViewModel>.createUnbounded()
     var predictions: Driver<PredictionRowViewModel> {
@@ -32,6 +35,7 @@ class ShowPredictionViewModel {
     }
 
     init(analysis: PredictionAnalysisModel) {
+        analysisId = analysis.id
         image = analysis.image(for: .original)!
         let predictions: [PredictionRowViewModel?] = analysis.predictions.map { pm in
             guard let label = PredictionAnalysisModel.ImageLabel(rawValue: pm.classification) else {
@@ -43,9 +47,8 @@ class ShowPredictionViewModel {
         }
 
         generateThumbnail()
-        predictions
-            .filter { $0 != nil }
-            .forEach { predictionsSubject.onNext($0!) }
+        cachedPredictions = predictions.filter { $0 != nil } as! [PredictionRowViewModel]
+        cachedPredictions.forEach { predictionsSubject.onNext($0) }
         predictionsSubject.onCompleted()
     }
 
@@ -78,18 +81,46 @@ class ShowPredictionViewModel {
             return PredictionRowViewModel.from(prediction, obs.confidence)
         }
 
-        let filteredPredictions = sortedPredictions.filter { $0 != nil } as! [PredictionRowViewModel]
-        filteredPredictions.forEach { predictionsSubject.onNext($0) }
+        cachedPredictions = sortedPredictions.filter { $0 != nil } as! [PredictionRowViewModel]
+        cachedPredictions.forEach { predictionsSubject.onNext($0) }
         predictionsSubject.onCompleted()
-        savePredictions(filteredPredictions)
+        savePredictions(cachedPredictions)
     }
 
     private func savePredictions(_ predictions: [PredictionRowViewModel]) {
         let predictionModel = PredictionAnalysisModel.from(image, predictions: predictions)
+        analysisId = predictionModel.id
         let realm = try! Realm()
         print("Saving prediction model to realm")
         try! realm.write {
             realm.add(predictionModel)
+        }
+    }
+
+    func upload() {
+        let storage = Storage.storage()
+        let storageRef = storage.reference().child("\(analysisId!)/")
+
+        uploadImage(storageRef, "Original", image)
+        cachedPredictions.forEach { $0.upload(storageRef) }
+    }
+
+    func uploadImage(_ storageRef: StorageReference, _ label: String, _ image: UIImage) {
+        let imageRef = storageRef.child("\(label).jpg")
+
+        guard let data = image.jpegData(compressionQuality: 1) else {
+            print("Unable to retrieve image data for upload")
+            return
+        }
+
+        _ = imageRef.putData(data, metadata: nil) { (metadata, error) in
+            imageRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    print("Unable to retrieve image download url", error)
+                    return
+                }
+                print("Image uploaded to \(downloadURL)")
+            }
         }
     }
 

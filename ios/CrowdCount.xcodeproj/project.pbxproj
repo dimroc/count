@@ -22,6 +22,12 @@
 		5E226D912114915100B31700 /* ListPredictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E226D902114915100B31700 /* ListPredictionViewController.swift */; };
 		5E226D93211491BA00B31700 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E226D92211491BA00B31700 /* Models.swift */; };
 		5E226D952114A23600B31700 /* Realm.Configuration+migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E226D942114A23600B31700 /* Realm.Configuration+migrations.swift */; };
+		5E295348211606A3002430AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E295347211606A3002430AF /* GoogleService-Info.plist */; };
+		5E2BED9E21160FD7008A3210 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2BED9D21160FD7008A3210 /* libicucore.tbd */; };
+		5E2BEDA02116103D008A3210 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2BED9F2116103D008A3210 /* StoreKit.framework */; };
+		5E2BEDA2211610CA008A3210 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2BEDA1211610C9008A3210 /* GTMSessionFetcher.framework */; };
+		5E2BEDA621161134008A3210 /* FirebaseNanoPB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2BEDA421161133008A3210 /* FirebaseNanoPB.framework */; };
+		5E2BEDA721161134008A3210 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2BEDA521161134008A3210 /* nanopb.framework */; };
 		5E2FBF982100C2580006A125 /* ClassificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2FBF972100C2580006A125 /* ClassificationViewModel.swift */; };
 		5E3A6BAE20FF55EC00877086 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAC20FF55EC00877086 /* RxSwift.framework */; };
 		5E3A6BAF20FF55EC00877086 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */; };
@@ -90,6 +96,11 @@
 		5EC6D403210E37C700DB1A5F /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6D402210E37C700DB1A5F /* ShutterButton.swift */; };
 		5ED4789C20EEA5250000B09D /* MultiArray+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */; };
 		5ED8A35E2108976C00D6DD38 /* PreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8A35D2108976C00D6DD38 /* PreviewViewModel.swift */; };
+		5EDE6C4E21160D8D00B6B53F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E295347211606A3002430AF /* GoogleService-Info.plist */; };
+		5EDE6C5221160F6C00B6B53F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EDE6C5121160F6C00B6B53F /* libc++.tbd */; };
+		5EDE6C5421160F7700B6B53F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EDE6C5321160F7700B6B53F /* libsqlite3.tbd */; };
+		5EDE6C5521160F9A00B6B53F /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EDE6C482116095000B6B53F /* FirebaseCore.framework */; };
+		5EDE6C5621160F9A00B6B53F /* FirebaseStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EDE6C44211607E300B6B53F /* FirebaseStorage.framework */; };
 		5EE985C920FA6D9C0047FC4F /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */; };
 		5EE985CB20FA84110047FC4F /* CrowdCountApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2190920E41D380061F7FF /* CrowdCountApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5EE985D420FA851F0047FC4F /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5C796E20EFF40200EDC113 /* Promises.framework */; };
@@ -152,6 +163,12 @@
 		5E226D902114915100B31700 /* ListPredictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPredictionViewController.swift; sourceTree = "<group>"; };
 		5E226D92211491BA00B31700 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		5E226D942114A23600B31700 /* Realm.Configuration+migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm.Configuration+migrations.swift"; sourceTree = "<group>"; };
+		5E295347211606A3002430AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5E2BED9D21160FD7008A3210 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		5E2BED9F2116103D008A3210 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		5E2BEDA1211610C9008A3210 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = Carthage/Build/iOS/GTMSessionFetcher.framework; sourceTree = "<group>"; };
+		5E2BEDA421161133008A3210 /* FirebaseNanoPB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseNanoPB.framework; path = Carthage/Build/iOS/FirebaseNanoPB.framework; sourceTree = "<group>"; };
+		5E2BEDA521161134008A3210 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Carthage/Build/iOS/nanopb.framework; sourceTree = "<group>"; };
 		5E2FBF972100C2580006A125 /* ClassificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationViewModel.swift; sourceTree = "<group>"; };
 		5E3A6BAC20FF55EC00877086 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -214,6 +231,12 @@
 		5EC6D402210E37C700DB1A5F /* ShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
 		5ED4789B20EEA5250000B09D /* MultiArray+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiArray+UIImage.swift"; sourceTree = "<group>"; };
 		5ED8A35D2108976C00D6DD38 /* PreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewModel.swift; sourceTree = "<group>"; };
+		5EDE6C44211607E300B6B53F /* FirebaseStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseStorage.framework; path = Carthage/Build/iOS/FirebaseStorage.framework; sourceTree = "<group>"; };
+		5EDE6C462116095000B6B53F /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = Carthage/Build/iOS/Firebase.framework; sourceTree = "<group>"; };
+		5EDE6C472116095000B6B53F /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Carthage/Build/iOS/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		5EDE6C482116095000B6B53F /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Carthage/Build/iOS/FirebaseCore.framework; sourceTree = "<group>"; };
+		5EDE6C5121160F6C00B6B53F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		5EDE6C5321160F7700B6B53F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		5EE985D720FA8A5D0047FC4F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		5EF94FE420F1B888002E01CC /* FaceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetector.swift; sourceTree = "<group>"; };
@@ -235,6 +258,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E2BEDA621161134008A3210 /* FirebaseNanoPB.framework in Frameworks */,
+				5E2BEDA721161134008A3210 /* nanopb.framework in Frameworks */,
+				5E2BEDA2211610CA008A3210 /* GTMSessionFetcher.framework in Frameworks */,
+				5E2BEDA02116103D008A3210 /* StoreKit.framework in Frameworks */,
+				5E2BED9E21160FD7008A3210 /* libicucore.tbd in Frameworks */,
+				5EDE6C5521160F9A00B6B53F /* FirebaseCore.framework in Frameworks */,
+				5EDE6C5621160F9A00B6B53F /* FirebaseStorage.framework in Frameworks */,
+				5EDE6C5421160F7700B6B53F /* libsqlite3.tbd in Frameworks */,
+				5EDE6C5221160F6C00B6B53F /* libc++.tbd in Frameworks */,
 				5E02F77A2113D0150095191C /* Realm.framework in Frameworks */,
 				5E02F77B2113D0150095191C /* RealmSwift.framework in Frameworks */,
 				5E3A6BAE20FF55EC00877086 /* RxSwift.framework in Frameworks */,
@@ -392,6 +424,7 @@
 				5EA217E520E40CEC0061F7FF /* Assets.xcassets */,
 				5EA217E720E40CEC0061F7FF /* LaunchScreen.storyboard */,
 				5EA217EA20E40CEC0061F7FF /* Info.plist */,
+				5E295347211606A3002430AF /* GoogleService-Info.plist */,
 				5E5ED16221121C910087876C /* Notification+names.swift */,
 				5EE985C820FA6D9C0047FC4F /* SwipeViewController.swift */,
 				5E226D92211491BA00B31700 /* Models.swift */,
@@ -425,6 +458,17 @@
 		5EB25CF720EF0C84006FA509 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E2BEDA421161133008A3210 /* FirebaseNanoPB.framework */,
+				5E2BEDA521161134008A3210 /* nanopb.framework */,
+				5E2BEDA1211610C9008A3210 /* GTMSessionFetcher.framework */,
+				5E2BED9F2116103D008A3210 /* StoreKit.framework */,
+				5E2BED9D21160FD7008A3210 /* libicucore.tbd */,
+				5EDE6C5321160F7700B6B53F /* libsqlite3.tbd */,
+				5EDE6C5121160F6C00B6B53F /* libc++.tbd */,
+				5EDE6C462116095000B6B53F /* Firebase.framework */,
+				5EDE6C472116095000B6B53F /* FirebaseAnalytics.framework */,
+				5EDE6C482116095000B6B53F /* FirebaseCore.framework */,
+				5EDE6C44211607E300B6B53F /* FirebaseStorage.framework */,
 				5E02F7782113D0150095191C /* Realm.framework */,
 				5E02F7792113D0150095191C /* RealmSwift.framework */,
 				5E89E6612111F3AB0039EF79 /* RxSwift.framework */,
@@ -651,6 +695,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EA217E920E40CEC0061F7FF /* LaunchScreen.storyboard in Resources */,
+				5E295348211606A3002430AF /* GoogleService-Info.plist in Resources */,
 				5EA217E620E40CEC0061F7FF /* Assets.xcassets in Resources */,
 				5EA217E420E40CEA0061F7FF /* Main.storyboard in Resources */,
 			);
@@ -667,6 +712,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EDE6C4E21160D8D00B6B53F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1082,6 +1128,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimroc.CrowdCount;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1106,6 +1153,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimroc.CrowdCount;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
