@@ -40,7 +40,7 @@ class ListPredictionViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "analysisCell", for: indexPath)
-        let analysis: PredictionAnalysisModel = dbPredictions[dbPredictions.count - 1 - indexPath.row] // desc order
+        let analysis: PredictionAnalysisModel = predictionAt(indexPath.row)
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm:ssa yyyy-MM-dd"
         cell.textLabel?.text = formatter.string(from: analysis.createdAt!)
@@ -49,11 +49,15 @@ class ListPredictionViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let analysis = ThreadSafeReference(to: dbPredictions[indexPath.row])
+        let analysis = ThreadSafeReference(to: predictionAt(indexPath.row))
         NotificationCenter.default.post(name: .hydratePrediction, object: analysis)
     }
 
     private var dbPredictions: Results<PredictionAnalysisModel> {
         return realm.objects(PredictionAnalysisModel.self)
+    }
+
+    private func predictionAt(_ row: Int) -> PredictionAnalysisModel {
+        return dbPredictions[dbPredictions.count - 1 - row] // desc order
     }
 }
