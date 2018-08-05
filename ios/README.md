@@ -30,11 +30,13 @@ Coming soon.
 - [x] clean up **FriendlyPredictor** to only use Apple VN libraries instead of hand rolled image manipulators (look for speed increase) (**VNCoreMLFeatureValueObservation**)
 - [x] Have to stop initializing predictors in strategies every prediction as optimization
 - [x] Investigate why classification causes camera jitters (Contention for GPU. Thanks Create ML?)
-- [ ] ability to take photo, trigger prediction and segue to show page (WITH BUTTON)
-- [ ] ability to see list of predictions
-- [ ] Upload photo/prediction if it was wrong
+- [x] ability to take photo to trigger prediction and segue to show page (WITH BUTTON)
+- [x] ability to see list of predictions (using realm)
+- [x] Upload photo/prediction if it was wrong
 - [x] Add some tests
-- [ ] Release v0.1?
+- [x] selection index from list predictions isn’t inversed 
+- [x] Release v0.1
+- [ ] Allow users to select correct classification to help model training
 - [ ] Ability to select a photo from the library and segue to show page
 - [ ] Have previous prediction preview and count “roll” to the left to imply that it’s working over time. (ANIMATION)
 
