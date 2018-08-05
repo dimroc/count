@@ -9,40 +9,65 @@
 import CoreML
 import Foundation
 import Promises
+import Vision
 
 public class FriendlyPredictor {
     public static let ImageWidth: Double = 900
     public static let ImageHeight: Double = 675
-    
+
     public static let DensityMapWidth: Int = 225
     public static let DensityMapHeight: Int = 168
-    
-    public init() {}
 
-    public func predict(buffer: CVPixelBuffer, strategy: PredictionStrategy) -> FriendlyPrediction {
-        var output: PredictionStrategyOutput? = nil
+    private let classifier = CrowdClassifier()
+    private let classifierModel: VNCoreMLModel
+    private let classifierContext = CIContext(options: [CIContextOption.priorityRequestLow: true])
+
+    public init() {
+        classifierModel = try! VNCoreMLModel(for: classifier.model)
+    }
+
+    public func predict(cgImage: CGImage, orientation: CGImagePropertyOrientation, strategy: PredictionStrategy) -> FriendlyPrediction {
+        var output: PredictionStrategyOutput?
         let duration = Duration.measure(String(describing: strategy)) {
-            output = strategy.predict(buffer)
+            output = strategy.predict(cgImage, orientation: orientation)
         }
         return FriendlyPrediction(
-            name: strategy.FriendlyName(),
+            name: strategy.friendlyName,
             count: output!.count,
             densityMap: output!.densityMap.reshaped([FriendlyPredictor.DensityMapHeight, FriendlyPredictor.DensityMapWidth]),
             boundingBoxes: output!.boundingBoxes,
-            duration: duration)
+            duration: duration,
+            source: cgImage,
+            orientation: orientation
+        )
     }
-    
-    public func predictPromise(buffer: CVPixelBuffer, strategy: PredictionStrategy) -> Promise<FriendlyPrediction> {
+
+    public func predictPromise(cgImage: CGImage, orientation: CGImagePropertyOrientation, strategy: PredictionStrategy) -> Promise<FriendlyPrediction> {
         return Promise {
-            self.predict(buffer: buffer, strategy: strategy)
+            self.predict(cgImage: cgImage, orientation: orientation, strategy: strategy)
         }
     }
-    
-    public func classifyPromise(buffer: CVPixelBuffer, on: DispatchQueue) -> Promise<FriendlyClassification> {
-        return Promise(on: on) { () -> FriendlyClassification in
-            let classifier = CrowdClassifier()
-            let output = try! classifier.prediction(image: buffer)
-            return FriendlyClassification(classification: output.classLabel, probabilities: output.classLabelProbs)
+
+    public func classify(image: CGImage, orientation: CGImagePropertyOrientation) -> FriendlyClassification {
+        return Duration.measureAndReturn("classify") {
+            let request = VNCoreMLRequest(model: classifierModel)
+            request.imageCropAndScaleOption = .scaleFill
+
+            let handler = VNImageRequestHandler(
+                cgImage: image,
+                orientation: orientation,
+                options: [VNImageOption.ciContext: classifierContext]
+            )
+            try! handler.perform([request])
+            let classifications = request.results as! [VNClassificationObservation]
+
+            return FriendlyClassification.from(classifications)
+        }
+    }
+
+    public func classifyPromise(image: CGImage, orientation: CGImagePropertyOrientation, on: DispatchQueue) -> Promise<FriendlyClassification> {
+        return Promise(on: on) {
+            self.classify(image: image, orientation: orientation)
         }
     }
 }
@@ -53,9 +78,24 @@ public struct FriendlyPrediction {
     public var densityMap: MultiArray<Double>
     public var boundingBoxes: [CGRect]
     public var duration: Double
+    public var source: CGImage
+    public var orientation: CGImagePropertyOrientation
 }
 
 public struct FriendlyClassification {
     public var classification: String
-    public var probabilities: [String: Double]
+    public var probabilities: [String: VNConfidence]
+    public var observations: [VNClassificationObservation]
+
+    public static func from(_ observations: [VNClassificationObservation]) -> FriendlyClassification {
+        let probabilities = observations.reduce(into: [String: VNConfidence]()) { dict, o in
+            dict[o.identifier] = o.confidence
+        }
+        return FriendlyClassification(
+            classification: observations[0].identifier,
+            probabilities: probabilities,
+            observations: observations
+        )
+
+    }
 }

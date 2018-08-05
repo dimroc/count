@@ -15,6 +15,31 @@ Ability to drag and drop an image to see the results of different prediction str
 
 Coming soon.
 
+![iOS Development](readmeimages/CountiOsDevelopment.jpg)
+
+### iOS todo
+
+- [x] pause frame extraction when swiping off the camera VC
+- [x] Make image frame extractor for simulator
+- [x] Make video frame extractor for simulator
+- [x] send correct orientation. I hardcode to .portrait
+- [x] add swiftlinter and run autolint
+- [x] Redo Duration to be thread safe
+- [x] Add duration to the classification and count labels
+- [x] Have previous classification and count to the left in gray to show that it’s working over time. (Just have a second set of labels in gray to the left)
+- [x] clean up **FriendlyPredictor** to only use Apple VN libraries instead of hand rolled image manipulators (look for speed increase) (**VNCoreMLFeatureValueObservation**)
+- [x] Have to stop initializing predictors in strategies every prediction as optimization
+- [x] Investigate why classification causes camera jitters (Contention for GPU. Thanks Create ML?)
+- [x] ability to take photo to trigger prediction and segue to show page (WITH BUTTON)
+- [x] ability to see list of predictions (using realm)
+- [x] Upload photo/prediction if it was wrong
+- [x] Add some tests
+- [x] selection index from list predictions isn’t inversed 
+- [x] Release v0.1
+- [ ] Allow users to select correct classification to help model training
+- [ ] Ability to select a photo from the library and segue to show page
+- [ ] Have previous prediction preview and count “roll” to the left to imply that it’s working over time. (ANIMATION)
+
 ## Setup
 
 1. Use Xcode 10+

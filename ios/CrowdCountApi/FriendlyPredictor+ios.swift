@@ -9,20 +9,32 @@
 import Foundation
 import UIKit
 import Promises
+import Vision
 
 extension FriendlyPredictor {
     public func predict(image: UIImage, strategy: PredictionStrategy) -> FriendlyPrediction {
-        let resized = image.resizeImage(CGSize(width: FriendlyPredictor.ImageWidth, height: FriendlyPredictor.ImageHeight))!
-        let buffer = resized.pixelBuffer(
-            width: Int(FriendlyPredictor.ImageWidth),
-            height: Int(FriendlyPredictor.ImageHeight)
+        return predict(
+            cgImage: image.cgImage!,
+            orientation: CGImagePropertyOrientation(image.imageOrientation),
+            strategy: strategy
         )
-        return predict(buffer: buffer!, strategy: strategy)
     }
-    
+
     public func predictPromise(image: UIImage, strategy: PredictionStrategy) -> Promise<FriendlyPrediction> {
         return Promise {
             return self.predict(image: image, strategy: strategy)
         }
+    }
+
+    public func classify(image: UIImage) -> FriendlyClassification {
+        let orientation = CGImagePropertyOrientation(image.imageOrientation)
+        guard let cgImage = image.cgImage else {
+            return FriendlyClassification(
+                classification: "unknown",
+                probabilities: [:],
+                observations: []
+            )
+        }
+        return classify(image: cgImage, orientation: orientation)
     }
 }

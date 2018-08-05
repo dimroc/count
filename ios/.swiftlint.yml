@@ -1,0 +1,36 @@
+disabled_rules:
+  - identifier_name
+  - line_length
+opt_in_rules: # some rules are only opt-in
+  - empty_count
+  - contains_over_first_not_nil
+  - empty_string
+  - first_where
+  - sorted_first_last
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+  - Prediction.playground
+
+# configurable rules can be customized from this configuration file
+# binary rules can set their severity level
+force_cast: warning # implicitly
+force_try:
+  severity: warning # explicitly
+# they can set both implicitly with an array
+type_body_length:
+  - 300 # warning
+  - 400 # error
+# or they can set both explicitly
+file_length:
+  warning: 500
+  error: 1200
+# naming rules can set warnings/errors for min_length and max_length
+# additionally they can set excluded names
+type_name:
+  min_length: 4 # only warning
+  max_length: # warning and error
+    warning: 40
+    error: 50
+  excluded: iPhone # excluded via string
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
