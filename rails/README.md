@@ -10,8 +10,10 @@ in Madison Square Park, and plots the number of people in line.
 Usual rails setup:
 
 ```bash
+brew install graphicsmagick postgresql redis
 yarn install
 bundle
+export RAILS_ENV=development
 rake db:create db:migrate
 rails s
 ```
@@ -23,6 +25,15 @@ $ cat .envrc
 export CLOUDSDK_PYTHON=/Users/dimroc/.pyenv/versions/miniconda2-4.1.11/bin/python2
 export GOOGLE_APPLICATION_CREDENTIALS=../secrets/gcloudstorage.development.json
 gcloud config set project counting-company-production
+```
+
+### testing
+
+Run the [setup for the /ml portion](../ml/README.md) of crowd count for integration tests against
+python machine learning.
+
+```bash
+rake # Runs all tests including integration tests w ml
 ```
 
 ### Available Tasks

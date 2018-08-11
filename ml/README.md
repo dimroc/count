@@ -13,9 +13,11 @@ Detailed explanation [here](http://blog.dimroc.com/2017/11/19/counting-crowds-an
 ## Setup:
 
 ```
-# Install docker
-pyenv install conda # or wtever u do to get conda going
-conda-env create -f environment.yml # or something like this
+# Install docker, pyenv and pyenv-virtualenv
+pyenv install miniconda3-4.3.11
+conda-env create -f environment.yml
+pip install -e .
+git lfs pull # ensure you have large binaries downloaded
 
 ./manage.py --help
 ```
