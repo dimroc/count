@@ -1,6 +1,6 @@
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" "5.4.0"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseStorageBinary.json" "5.4.0"
-github "ReactiveX/RxSwift" "faeb158ce76d355f3f9242fdd0258a9face62f37"
+github "ReactiveX/RxSwift" "4.2.0"
 github "google/promises" "1.2.3"
 github "realm/realm-cocoa" "v3.7.5"
 github "taoyuxuan/Cartography" "b34c645097cd115c19b834ab1b58c851ab23b8b0"
