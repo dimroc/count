@@ -25,6 +25,7 @@ class CameraViewController: UIViewController {
         super.viewDidLoad()
         if Platform.isSimulator {
             frameExtractor = ImageFrameExtractor()
+//            frameExtractor = VideoFrameExtractor() // Use either image or video in simulator to mock camera.
         } else {
             frameExtractor = CameraFrameExtractor()
         }
