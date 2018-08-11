@@ -12,13 +12,3 @@
 
     .col-sm-8
       video src="https://dimroc-public.s3.amazonaws.com/mallcount.mp4" controls="true" type="video/mp4" style="max-width:600px;width:100%"
-
-  .row.justify-content-center.mt-3
-    .col-md-8.img-iterate
-      - @frames.each do |frame|
-        .linedbox
-          p.pc
-            = frame.predictions[1].decorate.crowd_count 
-            span  Predicted Crowd
-          = frame.predictions[1].decorate.density_map_tag
-          = frame.image_tag
