@@ -13,9 +13,9 @@ Ability to drag and drop an image to see the results of different prediction str
 
 ## iOS Crowd Counting
 
-Coming soon.
-
 ![iOS Development](readmeimages/CountiOsDevelopment.jpg)
+
+![iOS App In Action](readmeimages/CrowdCountiOS.gif)
 
 ### iOS todo
 
@@ -34,7 +34,6 @@ Coming soon.
 - [x] ability to see list of predictions (using realm)
 - [x] Upload photo/prediction if it was wrong
 - [x] Add some tests
-- [x] selection index from list predictions isn’t inversed 
 - [x] Release v0.1
 - [ ] Allow users to select correct classification to help model training
 - [ ] Ability to select a photo from the library and segue to show page
@@ -42,7 +41,9 @@ Coming soon.
 
 ## Setup
 
-1. Use Xcode 10+
-2. Install carthage
-3. carthage bootstrap
-4. Build every target, including CrowdCountApi and CrowdCountApiMac
+1. Use Xcode 10+ for Swift 4.2, and macOS Mojave for Core ML 2 and Create ML.
+2. Install carthage.
+3. `carthage update --platform ios,macos` or `carthage bootstrap`.
+4. Build CrowdCount. For Prediction.playground, explicitly build the libraries CrowdCountApi and CrowdCountApiMac.
+5. For iOS app, use [Google Firebase](https://firebase.google.com/) to create a standard bare bones `GoogleService-Info.plist`
+or just delete the file `GoogleService-Info.plist` from Xcode. Used for image upload on request.
