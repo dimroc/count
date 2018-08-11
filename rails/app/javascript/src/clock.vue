@@ -1,6 +1,7 @@
 <template>
   <section>
-    <a v-if="today" :href="yesterdays_path">Yesterday</a>
+    <a v-if="today" :href="day_before_path">Yesterday</a>
+    <a v-if="!today" :href="day_before_path">Day Before</a>
     <small>{{time}}</small>
     <a v-if="!today" :href="todays_path">Now</a>
   </section>
@@ -19,8 +20,8 @@ export default {
     time: function() {
       return moment(this.current.created_at).format(MOMENT_FORMAT)
     },
-    yesterdays_path: function() {
-      return `/dates/${moment().add(-1, 'days').format(this.dateFormat)}`
+    day_before_path: function() {
+      return `/dates/${moment(this.date).add(-1, 'days').format(this.dateFormat)}`
     },
     todays_path: function() {
       return `/`
