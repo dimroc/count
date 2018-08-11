@@ -10,6 +10,7 @@ in Madison Square Park, and plots the number of people in line.
 Usual rails setup:
 
 ```bash
+brew install graphicsmagick postgresql redis
 yarn install
 bundle
 rake db:create db:migrate
