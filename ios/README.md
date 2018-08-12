@@ -3,7 +3,7 @@
 The Apple CoreML can be divided into two implementations:
 
 1. iOS Crowd Counting Application
-2. macOS App (Ported from Prediction.playground because it was too fickle)
+2. macOS App (Ported from Prediction.playground because playgrounds are too fickle)
 
 ## iOS Crowd Counting
 
@@ -11,7 +11,7 @@ The Apple CoreML can be divided into two implementations:
 
 ![iOS Development](readmeimages/CountiOsDevelopment.jpg)
 
-## macOS Prediction Playground
+## macOS
 
 ![MacOS App](readmeimages/CrowdCountMac.jpg)
 
