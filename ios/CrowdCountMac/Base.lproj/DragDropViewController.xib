@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.3.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="DragDropViewController" customModule="Crowd_Count" customModuleProvider="target">
+            <connections>
+                <outlet property="imageWell" destination="tmM-56-WMo" id="FSD-w9-Q8d"/>
+                <outlet property="predictionLabel" destination="for-DB-XJS" id="aXl-64-5ke"/>
+                <outlet property="stackView" destination="ZgG-JC-WHg" id="KPO-sN-qh5"/>
+                <outlet property="view" destination="c22-O7-iKe" id="Tih-bX-s0g"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="475"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7e-VA-Hkc">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="475"/>
+                    <clipView key="contentView" id="PEj-yI-RqR">
+                        <rect key="frame" x="1" y="1" width="598" height="473"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView distribution="fillProportionally" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZgG-JC-WHg">
+                                <rect key="frame" x="0.0" y="-2" width="598" height="475"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="IDJ-z3-Nuh">
+                                        <rect key="frame" x="116" y="416" width="366" height="39"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="Z7z-a6-UOs"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Drag in an image of a crowd" id="M7n-nN-27S">
+                                            <font key="font" metaFont="systemUltraLight" size="32"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="tmM-56-WMo">
+                                        <rect key="frame" x="74" y="61" width="450" height="338"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="444" id="lX5-rT-MFp"/>
+                                            <constraint firstAttribute="height" constant="332" id="vPX-Mc-68A"/>
+                                        </constraints>
+                                        <imageCell key="cell" selectable="YES" editable="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="ZzE-tp-Vg1"/>
+                                    </imageView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="for-DB-XJS">
+                                        <rect key="frame" x="219" y="20" width="161" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="jlF-8x-hc0"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Pending Prediction" placeholderString="Pending Prediction" id="Nvr-56-Phb">
+                                            <font key="font" metaFont="systemUltraLight" size="20"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <edgeInsets key="edgeInsets" left="0.0" right="0.0" top="20" bottom="20"/>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ZgG-JC-WHg" firstAttribute="top" secondItem="PEj-yI-RqR" secondAttribute="top" id="7Af-uz-aMi"/>
+                            <constraint firstItem="ZgG-JC-WHg" firstAttribute="leading" secondItem="PEj-yI-RqR" secondAttribute="leading" id="FtZ-3c-S7X"/>
+                            <constraint firstItem="ZgG-JC-WHg" firstAttribute="width" secondItem="PEj-yI-RqR" secondAttribute="width" id="LfP-IO-XrI"/>
+                        </constraints>
+                    </clipView>
+                    <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="pK8-I7-7nX">
+                        <rect key="frame" x="1" y="458" width="598" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="oJV-K4-ewE">
+                        <rect key="frame" x="583" y="1" width="16" height="473"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="q7e-VA-Hkc" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="07R-kP-oTx"/>
+                <constraint firstAttribute="trailing" secondItem="q7e-VA-Hkc" secondAttribute="trailing" id="0hh-Go-EMX"/>
+                <constraint firstItem="q7e-VA-Hkc" firstAttribute="width" secondItem="c22-O7-iKe" secondAttribute="width" id="47P-4Q-lK3"/>
+                <constraint firstItem="q7e-VA-Hkc" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="g9P-Df-0ux"/>
+                <constraint firstAttribute="bottom" secondItem="q7e-VA-Hkc" secondAttribute="bottom" id="qza-iQ-MA0"/>
+            </constraints>
+            <point key="canvasLocation" x="222" y="667.5"/>
+        </customView>
+        <userDefaultsController representsSharedInstance="YES" id="6y6-34-9ce"/>
+    </objects>
+</document>

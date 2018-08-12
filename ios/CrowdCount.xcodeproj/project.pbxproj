@@ -37,6 +37,7 @@
 		5E3F317720ED41A3008B5C1B /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668A20E73C8F002A4E0D /* Predictions.swift */; };
 		5E3F317920ED41A3008B5C1B /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668C20E73C8F002A4E0D /* CVPixelBuffer+Helpers.swift */; };
 		5E3F317A20ED41A3008B5C1B /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668D20E73C8F002A4E0D /* NonMaxSuppression.swift */; };
+		5E46E75921206D8800766CD6 /* CrowdCountApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EA2190B20E41D380061F7FF /* CrowdCountApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E4DFE6F20F0122700CD07FF /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4DFE6E20F0122700CD07FF /* Promises.framework */; };
 		5E4DFE7120F0123C00CD07FF /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4DFE7020F0123C00CD07FF /* Promises.framework */; };
 		5E4DFE7320F0154300CD07FF /* MultiArray+NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4DFE7220F0154300CD07FF /* MultiArray+NSImage.swift */; };
@@ -65,6 +66,20 @@
 		5E67669620E73C8F002A4E0D /* MLMultiArray+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67668E20E73C8F002A4E0D /* MLMultiArray+UIImage.swift */; };
 		5E67669820E9A420002A4E0D /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67669720E9A41F002A4E0D /* UIImage+resize.swift */; };
 		5E67669A20E9A549002A4E0D /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E67669920E9A549002A4E0D /* Duration.swift */; };
+		5E896BBE2120B7CA00E133AE /* CircularFifoQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55C752210CE9B000614463 /* CircularFifoQueue.swift */; };
+		5E896BBF2120B7D200E133AE /* CyclingReplayProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7717CC210687A600504A5A /* CyclingReplayProxy.swift */; };
+		5E896BC72120B93D00E133AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E896BC62120B93D00E133AE /* AppDelegate.swift */; };
+		5E896BC92120B93E00E133AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E896BC82120B93E00E133AE /* Assets.xcassets */; };
+		5E896BCC2120B93E00E133AE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E896BCA2120B93E00E133AE /* MainMenu.xib */; };
+		5E896BD52120B9F600E133AE /* CrowdCountApiMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3F316520ED3F23008B5C1B /* CrowdCountApiMac.framework */; };
+		5E896BD62120B9F600E133AE /* CrowdCountApiMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3F316520ED3F23008B5C1B /* CrowdCountApiMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5E896BD82120BA2300E133AE /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB25CF820EF0C84006FA509 /* Cartography.framework */; };
+		5E896BD92120BA2300E133AE /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E89E6612111F3AB0039EF79 /* RxSwift.framework */; };
+		5E896BDD2120BA2300E133AE /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E896BDA2120BA2300E133AE /* FBLPromises.framework */; };
+		5E896BDE2120BA2300E133AE /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E896BDB2120BA2300E133AE /* RxCocoa.framework */; };
+		5E896BDF2120BA2300E133AE /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E896BDC2120BA2300E133AE /* Promises.framework */; };
+		5E896BE32120BDBF00E133AE /* DragDropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E896BE12120BDBF00E133AE /* DragDropViewController.xib */; };
+		5E896BE52120BE1100E133AE /* DragDropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E896BE42120BE1100E133AE /* DragDropViewController.swift */; };
 		5E89E65A2111D9240039EF79 /* ClassificationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E89E6592111D9240039EF79 /* ClassificationViewModelTests.swift */; };
 		5E89E65B2111DBF80039EF79 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAD20FF55EC00877086 /* RxCocoa.framework */; };
 		5E89E65C2111DBF80039EF79 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3A6BAC20FF55EC00877086 /* RxSwift.framework */; };
@@ -113,6 +128,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5E896BD22120B99900E133AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EA217CF20E40CEA0061F7FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E3F316420ED3F23008B5C1B;
+			remoteInfo = CrowdCountApiMac;
+		};
 		5EA217F020E40CEC0061F7FF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5EA217CF20E40CEA0061F7FF /* Project object */;
@@ -137,6 +159,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		5E896BD72120B9F600E133AE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5E896BD62120B9F600E133AE /* CrowdCountApiMac.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5EA218FF20E41BFF0061F7FF /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -204,6 +237,17 @@
 		5E67669720E9A41F002A4E0D /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		5E67669920E9A549002A4E0D /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		5E7717CC210687A600504A5A /* CyclingReplayProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyclingReplayProxy.swift; sourceTree = "<group>"; };
+		5E896BC42120B93D00E133AE /* Crowd Count.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crowd Count.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E896BC62120B93D00E133AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5E896BC82120B93E00E133AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5E896BCB2120B93E00E133AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5E896BCD2120B93E00E133AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E896BCE2120B93E00E133AE /* CrowdCountMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CrowdCountMac.entitlements; sourceTree = "<group>"; };
+		5E896BDA2120BA2300E133AE /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/Mac/FBLPromises.framework; sourceTree = "<group>"; };
+		5E896BDB2120BA2300E133AE /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
+		5E896BDC2120BA2300E133AE /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/Mac/Promises.framework; sourceTree = "<group>"; };
+		5E896BE22120BDBF00E133AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DragDropViewController.xib; sourceTree = "<group>"; };
+		5E896BE42120BE1100E133AE /* DragDropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDropViewController.swift; sourceTree = "<group>"; };
 		5E89E6592111D9240039EF79 /* ClassificationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationViewModelTests.swift; sourceTree = "<group>"; };
 		5E89E65E2111EBEE0039EF79 /* CyclingReplayProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyclingReplayProxyTests.swift; sourceTree = "<group>"; };
 		5E89E6612111F3AB0039EF79 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
@@ -251,6 +295,19 @@
 			files = (
 				5E89E6622111F3AB0039EF79 /* RxSwift.framework in Frameworks */,
 				5E4DFE6F20F0122700CD07FF /* Promises.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E896BC12120B93D00E133AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E896BDD2120BA2300E133AE /* FBLPromises.framework in Frameworks */,
+				5E896BDF2120BA2300E133AE /* Promises.framework in Frameworks */,
+				5E896BD82120BA2300E133AE /* Cartography.framework in Frameworks */,
+				5E896BD92120BA2300E133AE /* RxSwift.framework in Frameworks */,
+				5E896BDE2120BA2300E133AE /* RxCocoa.framework in Frameworks */,
+				5E896BD52120B9F600E133AE /* CrowdCountApiMac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,10 +447,25 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		5E896BC52120B93D00E133AE /* CrowdCountMac */ = {
+			isa = PBXGroup;
+			children = (
+				5E896BC62120B93D00E133AE /* AppDelegate.swift */,
+				5E896BC82120B93E00E133AE /* Assets.xcassets */,
+				5E896BCA2120B93E00E133AE /* MainMenu.xib */,
+				5E896BE12120BDBF00E133AE /* DragDropViewController.xib */,
+				5E896BCD2120B93E00E133AE /* Info.plist */,
+				5E896BCE2120B93E00E133AE /* CrowdCountMac.entitlements */,
+				5E896BE42120BE1100E133AE /* DragDropViewController.swift */,
+			);
+			path = CrowdCountMac;
+			sourceTree = "<group>";
+		};
 		5EA217CE20E40CEA0061F7FF = {
 			isa = PBXGroup;
 			children = (
 				5EA217D920E40CEA0061F7FF /* CrowdCount */,
+				5E896BC52120B93D00E133AE /* CrowdCountMac */,
 				5EA2190A20E41D380061F7FF /* CrowdCountApi */,
 				5E3F316620ED3F23008B5C1B /* CrowdCountApiMac */,
 				5EA217D820E40CEA0061F7FF /* Products */,
@@ -409,6 +481,7 @@
 				5EA2190920E41D380061F7FF /* CrowdCountApi.framework */,
 				5EA2191120E41D390061F7FF /* CrowdCountApiTests.xctest */,
 				5E3F316520ED3F23008B5C1B /* CrowdCountApiMac.framework */,
+				5E896BC42120B93D00E133AE /* Crowd Count.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -458,6 +531,9 @@
 		5EB25CF720EF0C84006FA509 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E896BDA2120BA2300E133AE /* FBLPromises.framework */,
+				5E896BDC2120BA2300E133AE /* Promises.framework */,
+				5E896BDB2120BA2300E133AE /* RxCocoa.framework */,
 				5E2BEDA421161133008A3210 /* FirebaseNanoPB.framework */,
 				5E2BEDA521161134008A3210 /* nanopb.framework */,
 				5E2BEDA1211610C9008A3210 /* GTMSessionFetcher.framework */,
@@ -524,6 +600,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E46E75921206D8800766CD6 /* CrowdCountApi.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +632,26 @@
 			productName = CrowdCountApiMac;
 			productReference = 5E3F316520ED3F23008B5C1B /* CrowdCountApiMac.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		5E896BC32120B93D00E133AE /* CrowdCountMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E896BCF2120B93E00E133AE /* Build configuration list for PBXNativeTarget "CrowdCountMac" */;
+			buildPhases = (
+				5E896BC02120B93D00E133AE /* Sources */,
+				5E896BC12120B93D00E133AE /* Frameworks */,
+				5E896BC22120B93D00E133AE /* Resources */,
+				5E896BD72120B9F600E133AE /* Embed Frameworks */,
+				5E896BE02120BB8600E133AE /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E896BD32120B99900E133AE /* PBXTargetDependency */,
+			);
+			name = CrowdCountMac;
+			productName = CrowdCountMac;
+			productReference = 5E896BC42120B93D00E133AE /* Crowd Count.app */;
+			productType = "com.apple.product-type.application";
 		};
 		5EA217D620E40CEA0061F7FF /* CrowdCount */ = {
 			isa = PBXNativeTarget;
@@ -644,6 +741,9 @@
 					5E3F316420ED3F23008B5C1B = {
 						CreatedOnToolsVersion = 10.0;
 					};
+					5E896BC32120B93D00E133AE = {
+						CreatedOnToolsVersion = 10.0;
+					};
 					5EA217D620E40CEA0061F7FF = {
 						CreatedOnToolsVersion = 10.0;
 					};
@@ -674,6 +774,7 @@
 			projectRoot = "";
 			targets = (
 				5EA217D620E40CEA0061F7FF /* CrowdCount */,
+				5E896BC32120B93D00E133AE /* CrowdCountMac */,
 				5EA217EE20E40CEC0061F7FF /* CrowdCountTests */,
 				5EA2190820E41D380061F7FF /* CrowdCountApi */,
 				5EA2191020E41D390061F7FF /* CrowdCountApiTests */,
@@ -687,6 +788,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E896BC22120B93D00E133AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E896BE32120BDBF00E133AE /* DragDropViewController.xib in Resources */,
+				5E896BC92120B93E00E133AE /* Assets.xcassets in Resources */,
+				5E896BCC2120B93E00E133AE /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,6 +837,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5E896BE02120BB8600E133AE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/Cartography.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Promises.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/RxCocoa.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Cartography.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
 		5E89E6662111F64A0039EF79 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -795,11 +929,22 @@
 				5E1AAA6220EEA05300098F1D /* NSImage+resize.swift in Sources */,
 				5E3F317320ED4140008B5C1B /* Duration.swift in Sources */,
 				5E3F317A20ED41A3008B5C1B /* NonMaxSuppression.swift in Sources */,
+				5E896BBE2120B7CA00E133AE /* CircularFifoQueue.swift in Sources */,
 				5E1AAA5F20EE9C9100098F1D /* FriendlyPredictor.swift in Sources */,
+				5E896BBF2120B7D200E133AE /* CyclingReplayProxy.swift in Sources */,
 				5E3F317720ED41A3008B5C1B /* Predictions.swift in Sources */,
 				5E4DFE7320F0154300CD07FF /* MultiArray+NSImage.swift in Sources */,
 				5E3F317420ED41A3008B5C1B /* Math.swift in Sources */,
 				5E1AAA5D20EE9BCB00098F1D /* FriendlyPredictor+macos.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E896BC02120B93D00E133AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E896BE52120BE1100E133AE /* DragDropViewController.swift in Sources */,
+				5E896BC72120B93D00E133AE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,6 +1033,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5E896BD32120B99900E133AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5E3F316420ED3F23008B5C1B /* CrowdCountApiMac */;
+			targetProxy = 5E896BD22120B99900E133AE /* PBXContainerItemProxy */;
+		};
 		5EA217F120E40CEC0061F7FF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5EA217D620E40CEA0061F7FF /* CrowdCount */;
@@ -906,6 +1056,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5E896BCA2120B93E00E133AE /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E896BCB2120B93E00E133AE /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		5E896BE12120BDBF00E133AE /* DragDropViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E896BE22120BDBF00E133AE /* Base */,
+			);
+			name = DragDropViewController.xib;
+			sourceTree = "<group>";
+		};
 		5EA217E220E40CEA0061F7FF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -994,6 +1160,62 @@
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5E896BD02120B93E00E133AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CrowdCountMac/CrowdCountMac.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5R23V2RJ26;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = CrowdCountMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dimroc.CrowdCountMac;
+				PRODUCT_NAME = "Crowd Count";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		5E896BD12120B93E00E133AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CrowdCountMac/CrowdCountMac.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5R23V2RJ26;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = CrowdCountMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dimroc.CrowdCountMac;
+				PRODUCT_NAME = "Crowd Count";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1338,6 +1560,15 @@
 			buildConfigurations = (
 				5E3F316A20ED3F23008B5C1B /* Debug */,
 				5E3F316B20ED3F23008B5C1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E896BCF2120B93E00E133AE /* Build configuration list for PBXNativeTarget "CrowdCountMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E896BD02120B93E00E133AE /* Debug */,
+				5E896BD12120B93E00E133AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

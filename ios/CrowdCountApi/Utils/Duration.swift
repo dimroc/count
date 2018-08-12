@@ -4,6 +4,7 @@ public class Duration {
     private let depth: Int
     private var timingStack = [(startTime:Double, name:String, reported:Bool)]()
 
+    @discardableResult
     public static func measure(_ name: String, depth: Int = 0, block: () -> Void) -> Double {
         let duration = Duration(depth)
         duration.startMeasurement(name)
@@ -11,6 +12,7 @@ public class Duration {
         return duration.stopMeasurement()
     }
 
+    @discardableResult
     public static func measureAndReturn<T>(_ name: String, depth: Int = 0, block: () -> T) -> T {
         let duration = Duration(depth)
         duration.startMeasurement(name)

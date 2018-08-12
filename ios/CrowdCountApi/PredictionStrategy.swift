@@ -19,6 +19,7 @@ extension PredictionStrategy {
     public var friendlyName: String {
         return String(describing: self)
             .replacingOccurrences(of: "CrowdCountApi.", with: "")
+            .replacingOccurrences(of: "CrowdCountApiMac.", with: "")
             .replacingOccurrences(of: "PredictionStrategy", with: "")
     }
 
