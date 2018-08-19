@@ -7,9 +7,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DragDropViewController" customModule="Crowd_Count" customModuleProvider="target">
             <connections>
+                <outlet property="horizontalStackView" destination="ZgG-JC-WHg" id="Z4J-BX-vsh"/>
                 <outlet property="imageWell" destination="tmM-56-WMo" id="FSD-w9-Q8d"/>
                 <outlet property="predictionLabel" destination="for-DB-XJS" id="aXl-64-5ke"/>
-                <outlet property="stackView" destination="ZgG-JC-WHg" id="KPO-sN-qh5"/>
+                <outlet property="scrollView" destination="q7e-VA-Hkc" id="DJM-07-bxS"/>
+                <outlet property="verticalStackView" destination="H9u-o3-seF" id="5TQ-35-MqK"/>
                 <outlet property="view" destination="c22-O7-iKe" id="Tih-bX-s0g"/>
             </connections>
         </customObject>
@@ -25,49 +27,60 @@
                         <rect key="frame" x="1" y="1" width="598" height="473"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView distribution="fillProportionally" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZgG-JC-WHg">
+                            <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZgG-JC-WHg">
                                 <rect key="frame" x="0.0" y="-2" width="598" height="475"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="IDJ-z3-Nuh">
-                                        <rect key="frame" x="116" y="416" width="366" height="39"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="39" id="Z7z-a6-UOs"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Drag in an image of a crowd" id="M7n-nN-27S">
-                                            <font key="font" metaFont="systemUltraLight" size="32"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="tmM-56-WMo">
-                                        <rect key="frame" x="74" y="61" width="450" height="338"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="444" id="lX5-rT-MFp"/>
-                                            <constraint firstAttribute="height" constant="332" id="vPX-Mc-68A"/>
-                                        </constraints>
-                                        <imageCell key="cell" selectable="YES" editable="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="ZzE-tp-Vg1"/>
-                                    </imageView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="for-DB-XJS">
-                                        <rect key="frame" x="219" y="20" width="161" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="jlF-8x-hc0"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Pending Prediction" placeholderString="Pending Prediction" id="Nvr-56-Phb">
-                                            <font key="font" metaFont="systemUltraLight" size="20"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
+                                    <stackView distribution="fillProportionally" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9u-o3-seF">
+                                        <rect key="frame" x="0.0" y="20" width="598" height="435"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="IDJ-z3-Nuh">
+                                                <rect key="frame" x="116" y="396" width="366" height="39"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="39" id="Z7z-a6-UOs"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Drag in an image of a crowd" id="M7n-nN-27S">
+                                                    <font key="font" metaFont="systemUltraLight" size="32"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="tmM-56-WMo">
+                                                <rect key="frame" x="74" y="41" width="450" height="338"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="444" id="lX5-rT-MFp"/>
+                                                    <constraint firstAttribute="height" constant="332" id="vPX-Mc-68A"/>
+                                                </constraints>
+                                                <imageCell key="cell" selectable="YES" editable="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="ZzE-tp-Vg1"/>
+                                            </imageView>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="for-DB-XJS">
+                                                <rect key="frame" x="219" y="0.0" width="161" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="jlF-8x-hc0"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Pending Prediction" placeholderString="Pending Prediction" id="Nvr-56-Phb">
+                                                    <font key="font" metaFont="systemUltraLight" size="20"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="0.0" right="0.0" top="20" bottom="20"/>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
