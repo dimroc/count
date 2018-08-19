@@ -19,22 +19,22 @@ class DragDropViewController: NSViewController {
     @IBOutlet weak var verticalStackView: NSStackView!
     @IBOutlet weak var imageWell: NSImageView!
     @IBOutlet weak var predictionLabel: NSTextField!
-    
+
     let predictor = FriendlyPredictor()
     var predictionGrid: NSGridView?
     var classificationGrid: NSGridView?
     let scrollViewGroup = ConstraintGroup()
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         imageWell.addObserver(self, forKeyPath: "image", options: NSKeyValueObservingOptions.new, context: nil)
     }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         predictionLabel.stringValue = "Predicting..."
         removeFromPlayground(predictionGrid, stackView: horizontalStackView)
         removeFromPlayground(classificationGrid, stackView: verticalStackView)
-        
+
         let image = change![NSKeyValueChangeKey.newKey] as! NSImage
         all(
             predictor.predictAllPromise(image: image, on: .global()),
@@ -44,7 +44,7 @@ class DragDropViewController: NSViewController {
                 self.predictionGrid = self.generatePredictionGrid(predictions)
                 self.view.updateConstraintsForSubtreeIfNeeded()
         }    }
-    
+
     private func generatePredictionGrid(_ predictions: [FriendlyPrediction]) -> NSGridView {
         let headers: [[NSView]] = [[nslabel("Strategy"), nslabel("Duration (s)"), nslabel("Count")]]
         let labels = predictions.map { prediction -> [NSView] in
@@ -53,35 +53,35 @@ class DragDropViewController: NSViewController {
             let count = nslabel(String.init(format: "%f", prediction.count))
             return [label, duration, count]
         }
-        
+
         let images = predictions.map { prediction -> [NSView] in
             print("mounting image for...", prediction.name)
             return [nsimage(prediction)]
         }
-        
+
         let zipped = zip(labels, images)
         let reduced: [[NSView]] = zipped.reduce([[NSView]]()) { acc, entry in
             acc + [entry.0, entry.1]    // convert from tuples to array
         }
-        
+
         let gridView = NSGridView(views: headers + reduced)
         gridView.translatesAutoresizingMaskIntoConstraints = false
         gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .horizontal)
         gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .vertical)
-        
+
         horizontalStackView.addArrangedSubview(gridView)
         constrain(gridView) { gv in
             gv.top == gv.superview!.top + 40
             gv.bottom == gv.superview!.bottom - 40
         }
-        
+
         constrain(scrollView, replace: scrollViewGroup) { scroll in
             scroll.width == CGFloat(1000)
             scroll.height == CGFloat(700)
         }
         return gridView
     }
-    
+
     private func generateClassificationGrid(_ classification: FriendlyClassification) -> NSGridView {
         predictionLabel.stringValue = "Winning Classification: " + classification.classification
         print("Probabilities", classification.probabilities)
@@ -93,11 +93,11 @@ class DragDropViewController: NSViewController {
         gridView.translatesAutoresizingMaskIntoConstraints = false
         gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .horizontal)
         gridView.setContentHuggingPriority(NSLayoutConstraint.Priority(600), for: .vertical)
-        
+
         verticalStackView.addArrangedSubview(gridView)
         return gridView
     }
-    
+
     private func removeFromPlayground(_ view: NSView?, stackView: NSStackView) {
         if view != nil {
             stackView.removeArrangedSubview(view!)
@@ -114,7 +114,7 @@ func nsimage(_ prediction: FriendlyPrediction) -> NSView {
         image = prediction.densityMap.copy().normalize().image(offset: 0, scale: 255)
         drawBoundingBoxes(image!, prediction.boundingBoxes)
     }
-    
+
     return NSImageView(image: image!.flipVertically())
 }
 

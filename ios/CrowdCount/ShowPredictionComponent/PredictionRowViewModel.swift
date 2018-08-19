@@ -56,7 +56,7 @@ struct PredictionRowViewModel {
             "classification": String(classification),
             "probability": String(probability),
             "duration": String(duration),
-            "count": String(count),
+            "count": String(count)
         ]
 
         imageRef.putData(data, metadata: metadata)

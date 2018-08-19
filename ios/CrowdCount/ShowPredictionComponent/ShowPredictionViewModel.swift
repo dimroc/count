@@ -113,7 +113,7 @@ class ShowPredictionViewModel {
             return
         }
 
-        _ = imageRef.putData(data, metadata: nil) { (metadata, error) in
+        _ = imageRef.putData(data, metadata: nil) { (_, error) in
             imageRef.downloadURL { (url, error) in
                 guard let downloadURL = url else {
                     print("Unable to retrieve image download url", error)
