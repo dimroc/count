@@ -1,0 +1,7 @@
+machine: gpu
+env: keras
+input:
+  - source: dimroc/datasets/crowdcount/5
+    destination: data
+description: MSB densitymap adam msb_init lr=1e-5 decay=5e-5
+command: FLOYD=true python manage.py train_density
