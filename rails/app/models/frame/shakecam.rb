@@ -7,7 +7,10 @@ class Frame::Shakecam < Frame
   class << self
     def predict!
       url = prescrapeShakeshackdotcom
-      frame = create!(raw: open(url), created_at: DateTime.now)
+      raw = open(url)
+      Rails.logger.info "Saving shakecam frame #{url}, data present? #{raw.present?}"
+      puts "Saving shakecam frame #{url}, data present? #{raw.present?}"
+      frame = create!(raw: raw, created_at: DateTime.now)
       frame.predict!(version: 1)
       frame.predict!(version: 2)
       frame
