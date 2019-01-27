@@ -6,7 +6,7 @@ class ShakecamsController < ApplicationController
         serialize(Frame::Shakecam.v2.asc.day(date_param - 1.day)),
         serialize(Frame::Shakecam.v2.asc.day(date_param - 2.days)),
         serialize(Frame::Shakecam.v2.asc.day(date_param - 3.days)),
-      ]
+      ].compact
     }
   end
 
@@ -22,7 +22,7 @@ class ShakecamsController < ApplicationController
 
   def with_closed_frame(relation)
     if relation.blank?
-      [Frame::Shakecam.v2.asc.last]
+      [Frame::Shakecam.v2.asc.last].compact
     else
       relation
     end

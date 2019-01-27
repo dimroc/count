@@ -39,6 +39,10 @@ export default {
   },
   computed: {
     lineMessage: function() {
+      if (!this.current) {
+        return "No frames to count"
+      }
+
       let lc = Math.round(this.current.line_count || 0)
       if(this.current.closed) {
         return "No one in line (closed)"
