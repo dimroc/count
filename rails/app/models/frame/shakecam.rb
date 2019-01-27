@@ -6,15 +6,21 @@ class Frame::Shakecam < Frame
 
   class << self
     def predict!
-      now = DateTime.now
-      url = "https://cdn.shakeshack.com/camera.jpg?#{now.to_i}"
-      frame = create!(raw: open(url), created_at: now)
+      url = prescrapeShakeshackdotcom
+      frame = create!(raw: open(url), created_at: DateTime.now)
       frame.predict!(version: 1)
       frame.predict!(version: 2)
       frame
     rescue StandardError, RuntimeError, Google::Apis::ServerError
       frame.destroy if frame.present? and !frame.destroyed?
       raise
+    end
+
+    def prescrapeShakeshackdotcom
+      url = "https://www.shakeshack.com/location/madison-square-park/"
+      page = Nokogiri::HTML(open(url))
+      img = page.css("img#shack-cam-image")
+      img && img.first && img.first['src']
     end
 
     def working_hours(day)
