@@ -13,11 +13,11 @@
 export default {
   props: ['current'],
   mounted: function() {
-    imgix.init({ host: 'countingcompany.imgix.net' });
+    imgix.init({ host: 'count-dimroc.imgix.net' });
   },
   watch: {
     current: function() {
-      this.$nextTick(() => imgix.init({ host: 'countingcompany.imgix.net', force: true }))
+      this.$nextTick(() => imgix.init({ host: 'count-dimroc.imgix.net', force: true }))
     }
   }
 }
