@@ -5,10 +5,7 @@ metadata:
 spec:
   replicas: 1
   strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
-    type: RollingUpdate
+    type: Recreate
   selector:
     matchLabels:
       app: rails
