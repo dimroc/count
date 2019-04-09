@@ -23,14 +23,14 @@ export default {
       }
     },
     frames: function(newValue) {
-      this.redrawToday(newValue[0])
+      this.redrawGoldenDay(newValue[0])
     }
   },
 
   methods: {
-    redrawToday: function(frames) {
+    redrawGoldenDay: function(frames) {
       this.frames[0] = frames
-      this.todaysPath
+      this.goldenDaysPath
         .data([frames])
         .attr('d', this.line.curve(CurveNMoveAge.N(3)))
     },
@@ -89,8 +89,8 @@ export default {
           .attr('d', line.curve(CurveNMoveAge.N(3)))
       });
 
-      // Draw today
-     this.todaysPath = svg.append('path')
+      // Draw goldenDay
+     this.goldenDaysPath = svg.append('path')
        .data([daysData[0]])
        .attr("stroke-width", 2)
        .attr("stroke", "#0bf6bb")
@@ -137,15 +137,15 @@ export default {
 
       let bisectDate = d3.bisector((d, x) => d.created_at - x).left;
       function mouseToFrame(mouse) {
-        let todaysData = generateData(that.frames[0]);
+        let goldenDaysData = generateData(that.frames[0]);
         let mouseDate = x.invert(d3.mouse(mouse)[0])
-        return bisectDate(todaysData, mouseDate, 0, todaysData.length-1)
+        return bisectDate(goldenDaysData, mouseDate, 0, goldenDaysData.length-1)
       }
 
       function mousemove() {
-        let todaysData = generateData(that.frames[0]);
+        let goldenDaysData = generateData(that.frames[0]);
         let frame = mouseToFrame(this)
-        let d = Object.assign({}, todaysData[frame])
+        let d = Object.assign({}, goldenDaysData[frame])
         d.display = Math.round(d.line_count)
         d.line_count = that.movingLineCountAverageAt(frame)
         focus.attr("transform", "translate(" + x(d.created_at) + "," + y(d.line_count) + ")");

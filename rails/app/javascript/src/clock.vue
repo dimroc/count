@@ -1,9 +1,8 @@
 <template>
   <section>
-    <a v-if="today" :href="day_before_path">Yesterday</a>
-    <a v-if="!today" :href="day_before_path">Day Before</a>
+    <a :href="day_before_path">Day Before</a>
     <small>{{time}}</small>
-    <a v-if="!today" :href="todays_path">Now</a>
+    <a v-if="!goldenDay" :href="goldenDays_path">Jun 7</a>
   </section>
 </template>
 
@@ -23,11 +22,11 @@ export default {
     day_before_path: function() {
       return `/dates/${moment(this.date).add(-1, 'days').format(this.dateFormat)}`
     },
-    todays_path: function() {
+    goldenDays_path: function() {
       return `/`
     },
-    today: function() {
-      return moment(this.date).format(this.dateFormat) == moment().format(this.dateFormat)
+    goldenDay: function() {
+      return moment(this.date).format(this.dateFormat) == this.goldenDate
     }
   }
 }
