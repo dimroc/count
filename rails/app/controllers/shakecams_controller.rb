@@ -1,13 +1,17 @@
 class ShakecamsController < ApplicationController
   def index
-    render json: {
-      frames: [
-        serialize(with_closed_frame(Frame::Shakecam.v2.asc.day(date_param))),
-        serialize(Frame::Shakecam.v2.asc.day(date_param - 1.day)),
-        serialize(Frame::Shakecam.v2.asc.day(date_param - 2.days)),
-        serialize(Frame::Shakecam.v2.asc.day(date_param - 3.days)),
-      ].compact
-    }
+    json = Rails.cache.fetch(date_param) do
+      {
+        frames: [
+          serialize(with_closed_frame(Frame::Shakecam.v2.asc.day(date_param))),
+          serialize(Frame::Shakecam.v2.asc.day(date_param - 1.day)),
+          serialize(Frame::Shakecam.v2.asc.day(date_param - 2.days)),
+          serialize(Frame::Shakecam.v2.asc.day(date_param - 3.days)),
+        ].compact
+      }.to_json
+    end
+
+    render json: json
   end
 
   private
