@@ -8,7 +8,22 @@ div
   section#shakecam
 .row.justify-content-center.mt-5
   .col-sm-7
-    = link_to "View an Interior Mall Video (CUHK Mall Dataset)", malls_path, class: "hp-cta-btn-blue-sm"
+    hr
+    .container
+      .row.justify-content-center.mt-3
+        .col-sm-8.my-4
+          h2
+            Indoor Mall Camera
+          small
+            | Courtesy of the non-commercial 
+            = link_to "CUHK Mall Dataset", "http://personal.ie.cuhk.edu.hk/~ccloy/downloads_mall_dataset.html"
+            | . Technical details can be found 
+            = link_to "here", "http://blog.dimroc.com/2017/11/19/counting-crowds-and-lines/"
+            | .
+
+        .col-sm-8
+          video src="https://dimroc-public.s3.amazonaws.com/mallcount.mp4" controls="true" type="video/mp4" style="max-width:600px;width:100%"
+
 .container
   .row.justify-content-center.mt-3
     .col-sm-5.col-md-4.my-4.text-center
