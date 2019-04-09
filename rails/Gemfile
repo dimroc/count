@@ -47,6 +47,7 @@ gem 'webpacker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rb-readline'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'foreman'
