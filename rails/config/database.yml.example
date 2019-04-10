@@ -14,3 +14,6 @@ test:
 production:
   <<: *default
   database: counting_company_production
+  host: /cloudsql/counting-company-production:us-east1:counting-company-production
+  username:
+  password:

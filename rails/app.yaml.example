@@ -1,0 +1,25 @@
+runtime: custom
+env: flex
+
+# This sample incurs costs to run on the App Engine flexible environment.
+# The settings below are to reduce costs during testing and are not appropriate
+# for production use. For more information, see:
+# https://cloud.google.com/appengine/docs/flexible/ruby/configuring-your-app-with-app-yaml
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
+beta_settings:
+  cloud_sql_instances: counting-company-production:us-east1:counting-company-production
+env_variables:
+  BUGSNAG_API_KEY:
+  ML_DOMAIN:
+  RACK_ENV: production
+  RAILS_ENV: production
+  REDIS_URL:
+  SECRET_KEY_BASE:
+  MEMCACHE_URL:
+  MEMCACHE_USERNAME:
+  MEMCACHE_PASSWORD:

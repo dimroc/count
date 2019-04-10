@@ -21,3 +21,5 @@
 /public/packs-test
 /node_modules
 /storage
+app.yaml
+config/database.yml
