@@ -7,7 +7,18 @@
 <script>
 import CurveNMoveAge from './d3.nmoveavg'
 import helper_mixin from './helper_mixin'
+import moment from 'moment-timezone'
+moment.tz.setDefault('America/New_York')
 const d3 = require('d3');
+
+const nycHourOffset = 4
+const localHourOffset = (new Date().getTimezoneOffset())/60
+const hourOffset = localHourOffset - nycHourOffset
+
+const normalizeTime = function(createdAt) {
+  // adjust Date object to be new york time, despite timezone adjustment
+  return moment(createdAt).add(hourOffset, 'hours').toDate()
+}
 
 export default {
   mixins: [helper_mixin],
@@ -46,7 +57,7 @@ export default {
 
       let generateData = function(daysData, dayOffset=0) {
         return daysData.map(function(f) {
-          let tweakedDate = new Date(f.created_at)
+          let tweakedDate = normalizeTime(f.created_at)
           tweakedDate.setDate(tweakedDate.getDate() + dayOffset)
           return {
             created_at: tweakedDate,
@@ -164,7 +175,7 @@ export default {
     },
     getCurrentPoint: function() {
       return {
-        x: this.x(new Date(this.current.created_at)),
+        x: this.x(normalizeTime(this.current.created_at)),
         y: this.y(this.movingLineCountAverageAt(this.currentFrameIndex)),
         display: Math.round(this.current.line_count)
       }
