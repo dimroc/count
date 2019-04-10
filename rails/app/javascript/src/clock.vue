@@ -10,7 +10,7 @@
 import helper_mixin from './helper_mixin'
 import moment from 'moment-timezone'
 moment.tz.setDefault('America/New_York')
-const MOMENT_FORMAT = 'MMM D LT'
+const MOMENT_FORMAT = 'LT MMM D \'YY'
 
 export default {
   mixins: [helper_mixin],
