@@ -26,6 +26,7 @@ export default {
 <style scoped lang="scss">
 .crowdmap {
   margin: auto;
+  text-align: center;
   img {
     width: 170px;
     border-radius: 2px;
