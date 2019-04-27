@@ -2,3 +2,4 @@
 /log
 /storage
 /node_modules
+/public/packs*
