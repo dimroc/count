@@ -11,16 +11,20 @@ class FrameSerializer < ActiveModel::Serializer
   end
 
   def density_map_url
-    h.ix_image_url object.v2_predictions.last.density_map.url
+    h.ix_image_url path_for(object.v2_predictions.last.density_map.url)
   end
 
   def image_url
-    h.ix_image_url object.image.url
+    h.ix_image_url path_for(object.image.url)
   end
 
   private
 
   def h
     ActionController::Base.helpers
+  end
+
+  def path_for(url)
+    URI::parse(url).path
   end
 end

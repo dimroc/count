@@ -39,8 +39,7 @@ module CountingCompany
     config.eager_load = true
 
     config.imgix = {
-      source: "count-dimroc.imgix.net",
-      hostname_to_replace: 'storage.googleapis.com'
+      source: "count-dimroc.imgix.net"
     }
   end
 end

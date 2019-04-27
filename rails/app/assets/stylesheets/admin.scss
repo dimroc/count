@@ -9,6 +9,16 @@ body.admin {
 
   table.admin-predictions {
     .frame {
+      td img {
+        width: 180px
+      }
+
+      td.original {
+        img {
+          display: block;
+        }
+      }
+
       td.prediction {
         img {
           display: block;

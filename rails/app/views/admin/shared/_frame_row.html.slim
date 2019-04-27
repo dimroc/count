@@ -7,7 +7,7 @@ tr class="frame frame-#{frame.id}"
         .icon-holder = fa_icon "thumbs-down"
       - else
         .icon-holder = fa_icon "thumbs-o-down"
-  td = frame.image_tag
+  td.original = frame.image_tag
   - frame.predictions.each do |prediction|
     td.prediction
       = prediction.decorate.admin_cell if prediction
